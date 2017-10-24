@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "4346874985",
+    "firebase_url": "https://staffiomobile.firebaseio.com",
+    "project_id": "staffiomobile",
+    "storage_bucket": "staffiomobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4346874985:android:b48ae8cf86bfc22c",
+        "android_client_info": {
+          "package_name": "com.gable.mobilestaffio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4346874985-it1a1q319i4gi6rcfrsu0u3jpc4sr0dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxLPZQGLFR1O2HejYhgbOLQ7rUSuqR0dg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

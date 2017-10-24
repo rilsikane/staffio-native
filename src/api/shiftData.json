@@ -1,0 +1,27 @@
+{
+ "shiftData": {
+   "empCode": "004910",
+   "position": null,
+   "server_time": "2017-09-20T08:33:56.9498111",
+   "msec": 1505896436949,
+   "branch_name": "บริษัท ทีเอฟเอส (ไทยแลนด์) จำกัด",
+   "shift_name": "100",
+   "lastTimeRecordType": null,
+   "lastTimeRecord": null,
+   "PATTERN_ID": 13,
+   "ORG_CODE": "TFS000",
+   "OrganizationNameTH": "บริษัท ทีเอฟเอส (ไทยแลนด์) จำกัด",
+   "PROJECT_CODE": "INNO_VIPHA",
+   "BRANCH_CODE": "B001",
+   "SHFT_CODE": "NGDAY1",
+   "WORK_START_TM": "08:00:00.0000000",
+   "WORK_END_TM": "17:00:00.0000000",
+   "DAY_DATE": "2017-09-20",
+   "LocationLat": "14.849231",
+   "LocationLong": "6.855469",
+   "Accuracy": "20"
+ },
+ "Success": true,
+ "Msg": null,
+ "Data": null
+}

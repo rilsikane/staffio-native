@@ -1,0 +1,37 @@
+{
+   "ResultDatas": [
+       {
+           "organizationnameth": null,
+           "shft_name_th": "100",
+           "work_start_tm": "08:00:00.0000000",
+           "work_end_tm": "17:00:00.0000000",
+           "temp_mobile_id": "1053",
+           "emp_code": "004910",
+           "shift_code": "NGDAY1",
+           "date_record": "2017-09-18",
+           "branch_id": "B001",
+           "time_in": "10:39:00.0000000",
+           "status_in": "LT",
+           "remark_in": "testremark",
+           "area_flag_in": "Y",
+           "comment_in": null,
+           "comment_by_in": null,
+           "image_path_in": "D:\\Optimus\\visualStudio\\OMS-HR.WEB\\OMS-HR.API\\Attachments\\TimeRecord\\images\\20170918_103942_004910.jpg",
+           "time_out": "10:40:00.0000000",
+           "status_out": "EL",
+           "remark_out": "testremark",
+           "area_flag_out": "Y",
+           "comment_out": null,
+           "comment_by_out": null,
+           "image_path_out": "D:\\Optimus\\visualStudio\\OMS-HR.WEB\\OMS-HR.API\\Attachments\\TimeRecord\\images\\20170918_104034_004910.jpg",
+           "emp_full_name": "ณัชชา จารุบุณย์",
+           "position_name": "Project Leader",
+           "timerecordType": null,
+           "date": "2017-09-18T00:00:00"
+       }
+   ],
+   "total": 1,
+   "Success": true,
+   "Msg": null,
+   "Data": null
+}
