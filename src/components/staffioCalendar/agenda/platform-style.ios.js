@@ -15,7 +15,7 @@ export default function platformStyles(appStyle) {
       top: 0,
       flexDirection: 'row',
       justifyContent: 'space-around',
-      paddingTop: responsiveHeight(3.5),
+      paddingTop: responsiveHeight(3),
       paddingBottom: 7,
       backgroundColor: "#f58020",
       shadowOpacity: 0.75,

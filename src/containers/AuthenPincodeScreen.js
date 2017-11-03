@@ -20,7 +20,6 @@ export default class AuthenPincodeScreen extends Component {
       super(props);
       this.onDonePress = this.onDonePress.bind(this);
 	  this.state = {pincode:"",loading:false};
-	  this.init = this.init.bind(this);
 	  this.init();
  	}
 

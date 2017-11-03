@@ -147,17 +147,17 @@ export default class PincodePress extends React.Component {
       </View >
         <View style={styles.passText}>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText1}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText1 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText2}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText2 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText3}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText3 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText4}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText4 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText5}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText5 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
         </View>
       <Grid style={styles.gridStyles}>
       <Row >

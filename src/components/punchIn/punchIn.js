@@ -112,7 +112,7 @@ class PunchIn extends React.Component {
             punchOutTime =`${tmp[0]}:${tmp[1]}`
             this.setState({updateShift:""});
           }else{
-            punchOutTime = null;
+           this.setState({updateShift:"O"});
           }
      }
       

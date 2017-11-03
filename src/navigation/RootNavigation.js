@@ -150,11 +150,12 @@ export default class RootNavigator extends React.Component {
              if (userData !== null) {
                 this.setState({isPincodeAuthen:true});
                 this.setState({firstTime:false});
+                isCount = true;
               }else{
                 this.setState({isPincodeAuthen:false});
               }
             
-          }, 40000);
+          }, 10000);
               
           }
       if(!isCount){

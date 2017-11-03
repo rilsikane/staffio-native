@@ -19,6 +19,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 
 import Home from '../../home'
 
+
 const HEADER_HEIGHT = responsiveHeight(15);
 const KNOB_HEIGHT = responsiveHeight(4);
 

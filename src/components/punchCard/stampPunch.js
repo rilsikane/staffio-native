@@ -67,7 +67,7 @@ class StampPunch extends React.Component {
 
       this.setState({DateTime:tempD.split(' '),punchInTime: `${h}:${m}`,timeCount:d.getTime(),work_tm:work_tm[0]+":"+work_tm[1]})
 
-
+      this.refs.scroll.scrollToEnd({animated: true});
       //   this.forceUpdate()
        
     }
@@ -117,7 +117,7 @@ class StampPunch extends React.Component {
             style={{ backgroundColor: Colors.backgroundColor }}
             resetScrollToCoords={{ x: 0, y: 0 }}
             scrollEnabled={true}>
-            <ScrollView behavior='padding' style={styles.ViewStyle}>
+            <ScrollView ref="scroll" behavior='padding' style={styles.ViewStyle} scrollToEnd={true}>
                 <View style={styles.workShiftContainerStyle}>
                         <Image source={{uri:`data:image/jpeg;base64,${this.props.imgPath}`}} style={{width: responsiveWidth(60),height:responsiveHeight(45)}} />
                 </View>

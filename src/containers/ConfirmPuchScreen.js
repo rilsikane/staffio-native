@@ -144,7 +144,7 @@ export default class ConfirmPunchScreen extends React.Component {
      TempMobile.UPDATED_BY = userData.UserName;
      TempMobile.latRecord = this.state.latRecord;
      TempMobile.longRecord = this.state.longRecord;
-     TempMobile.OrganizationCode = this.state.shiftData.ORG_CODE;
+     TempMobile.orgCode = this.state.shiftData.ORG_CODE;
      TempMobile.stringBase64 = this.props.punchStore.selfiePath;
      if(this.state.showRemark){
        TempMobile.area_flag = "N"
