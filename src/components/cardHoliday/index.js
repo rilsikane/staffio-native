@@ -22,9 +22,7 @@ export default class CardHoliday extends React.Component {
                         </Body>
                     </Left>                            
                     <Right style={{flexDirection:"row",justifyContent:"flex-end",alignItems:"center"}}>
-                     {/* <Body style={{justifyContent:"flex-end"}}>   */}
                         <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(3),color: '#ffff'}}>รวม  </Text>
-                    {/* </Body>      */}
                         <Text allowFontScaling={false}style={styles.numberText}>{this.props.holiday.sum_holiday}</Text>
                         <Text allowFontScaling={false}style={styles.totalText}>วัน</Text>
                     </Right>
