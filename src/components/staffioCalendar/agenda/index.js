@@ -5,6 +5,7 @@ import {
   Dimensions,
   Animated,
   ViewPropTypes,
+  TouchableOpacity
 } from 'react-native';
 import XDate from 'xdate';
 
@@ -16,8 +17,10 @@ import styleConstructor from './style';
 import { VelocityTracker } from '../input';
 import {em} from '../../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import {Badge,Button} from 'native-base';
 import Home from '../../home'
+import Iocon from 'react-native-vector-icons/Ionicons';
+import colors from '../../../constants/Colors'
 
 
 const HEADER_HEIGHT = responsiveHeight(15);
@@ -25,6 +28,7 @@ const KNOB_HEIGHT = responsiveHeight(4);
 
 //Fallback when RN version is < 0.44
 const viewPropTypes = ViewPropTypes || View.propTypes;
+
 
 export default class AgendaView extends Component {
   
@@ -52,6 +56,7 @@ export default class AgendaView extends Component {
     this.onSnapAfterDrag = this.onSnapAfterDrag.bind(this);
     this.knobTracker = new VelocityTracker();
     this.state.scrollY.addListener(({value}) => this.knobTracker.add(value));
+    this.closeCalendar = this.closeCalendar.bind(this);
     console.log(this.props);
   }
 
@@ -216,6 +221,11 @@ export default class AgendaView extends Component {
       this.props.onDayChange(xdateToData(newDate));
     }
   }
+  closeCalendar() {
+        //this.setState({calendarScrollable:false});
+        //this.setScrollPadPosition(this.initialScrollPadPosition(), true);
+         this.chooseDay(null, !this.state.calendarScrollable);
+  }
 
   render() {
     const agendaHeight = Math.max(0, this.viewHeight - HEADER_HEIGHT);
@@ -275,12 +285,20 @@ export default class AgendaView extends Component {
         </View>
       );
     }
+    
    
     return (
       <View onLayout={this.onLayout} style={[this.props.style, {flex: 1, overflow: 'hidden'}]}>
         <View style={this.styles.reservations}>
           {this.renderReservations()}
         </View>
+         {this.state.calendarScrollable && <TouchableOpacity onPress={this.closeCalendar}
+         style={{ position: 'absolute',height: 50, top: this.viewHeight - 40, width: this.viewWidth,zIndex:99999,justifyContent:"center",alignItems:"center"}}>
+             <View style={{backgroundColor:"#f58020",height:responsiveHeight(1.5),borderRadius:responsiveHeight(2)
+              ,width:responsiveWidth(15),alignItems:"center"}}>
+                <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(1.2),backgroundColor:"transparent",color:"#fff",justifyContent:"center",alignItems:"center"}}>•••</Text>
+              </View>
+          </TouchableOpacity>}
         <Animated.View style={headerStyle}>
           <Animated.View style={{flex:1, transform: [{ translateY: contentTranslate }]}}>
             <CalendarList

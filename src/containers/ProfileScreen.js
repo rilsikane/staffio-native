@@ -3,11 +3,11 @@ import {
   Platform,
   StyleSheet,
   View,
-  Text
+  Text,Alert
 } from 'react-native';
 import HeaderStatus from '../components/from_profile/HeaderStatus';
 import BodyStatus from '../components/from_profile/BodyStatus';
-import {CardItem,Container,Card,Content} from 'native-base';
+import {CardItem,Container,Card,Content,Button} from 'native-base';
 import Colors from '../constants/Colors'
 import store from 'react-native-simple-store';
 import {post} from '../api';
@@ -17,11 +17,16 @@ var SpinnerKit = require('react-native-spinkit');
 import moment from 'moment';
 import {convertDate} from '../utils/staffioUtils';
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+import Iocon from 'react-native-vector-icons/Ionicons';
+import colors from '../constants/Colors'
+import { NavigationActions } from 'react-navigation'; 
+
 
 class ProfileScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {isLoading:true};
+    this.logOutPress = this.logOutPress.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -67,6 +72,11 @@ class ProfileScreen extends React.Component {
     return (
       <Container style={{backgroundColor:Colors.backgroundColor}}>
         <Content style={{marginTop:10}}>
+          <View style={{ alignSelf: 'flex-end',marginTop: -5,position: 'absolute',zIndex:9999}}>
+                <Button onPress={this.logOutPress} iconRight transparent style={{alignSelf:"flex-end",marginLeft:25,marginTop:10}}>
+                  <Iocon style={{color:colors.baseColor}}  name="ios-log-out-outline" size={30}/>
+                </Button>
+            </View>
           <Card style={{marginLeft:10,marginRight:10,marginTop:10}}>
             <CardItem style={{height:380}}>
               <HeaderStatus user={this.state.user} statusAmount={this.state.statusAmount}/>
@@ -91,6 +101,26 @@ class ProfileScreen extends React.Component {
            </View>
         </Spinner>);
   }
+  logOutPress(){
+     Alert.alert(
+        'คำเตือน',
+        'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+        [
+          {text: 'ยืนยัน', onPress: () => this.logOut()},
+          {text: 'ยกเลิก'},
+        ],
+        { cancelable: false }
+      )
+ }
+ logOut(){
+   this.setState({loading:true});
+   store.delete("USER");
+   const resetAction = NavigationActions.navigate({
+    routeName: 'Login'
+    })
+    this.props.navigation.dispatch(resetAction)
+    this.setState({loading:false});
+ }
 
 }
 

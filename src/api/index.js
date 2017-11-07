@@ -2,14 +2,14 @@ import axios from 'axios';
 
 //dev
 
-//const endpoint = "http://172.20.14.212/api_mobile/api/";
+const endpoint = "http://172.20.14.212/api_mobile/api/";
 
 
 //TFS
 //const endpoint = "http://45.116.216.94/Staffio_API/api/";
 
 //G-Able
-const endpoint = "http://45.116.216.94/Staffio_gable_api/api/";
+//const endpoint = "http://45.116.216.94/Staffio_gable_api/api/";
 
 import store from 'react-native-simple-store';
 import {
