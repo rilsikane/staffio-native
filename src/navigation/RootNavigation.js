@@ -18,9 +18,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
 var SpinnerKit = require('react-native-spinkit');
 import { updateFocus } from 'react-navigation-is-focused-hoc'
 
+
 //for Debug
 import InboxScreen from '../containers/InboxScreen';
 import FindFriendsScreen from '../containers/FindFriendsScreen';
+import ProfileScreen from '../containers/ProfileScreen';
 
 const MainStackNavigator = StackNavigator(
  
@@ -100,7 +102,7 @@ export default class RootNavigator extends React.Component {
 
      return <RootStackNavigator  screenProps={{authen:this.authen.bind(this),current: this.state.route_index}} 
      ref={nav => { this.navigator = nav; }}   onNavigationStateChange={this._onNavigationStateChange}/>
-    //return <Camera /> 
+     //return <InboxScreen /> 
   }
   
   

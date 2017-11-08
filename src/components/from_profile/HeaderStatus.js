@@ -2,7 +2,9 @@ import React from 'react';
 import {View,Text,Image} from 'react-native';
 import {Grid,Row,Col,Body,Button,Badge,CardItem} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import {em} from '../../constants/Layout' 
+
 const HeaderStatus = ({user,statusAmount}) => {
   console.log(user);
   const year = new Date().getFullYear()+543;
@@ -25,6 +27,7 @@ const HeaderStatus = ({user,statusAmount}) => {
                     <Badge style={styles.BadgeStyle0} ><Text allowFontScaling={false}style={styles.TextStyle}><Icon name="paint-brush"  color='white' size={23} /></Text></Badge>
                   </View>
               </View>*/}
+               
             </Col>
           </Row>
           <Row size={10} >
