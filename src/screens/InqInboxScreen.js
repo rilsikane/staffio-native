@@ -50,7 +50,7 @@ export default class InboxScreen extends React.Component {
      this.onLocationChange = this.onLocationChange.bind(this);
      this.cancelDialog = this.cancelDialog.bind(this);
      this.clearTags = this.clearTags.bind(this);
-    
+     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   static navigationOptions = {
     header: null,
@@ -115,6 +115,8 @@ export default class InboxScreen extends React.Component {
       if(locations.indexOf("99999")!=-1){
         area_flag = "N";
       }
+    }else{
+      locationSearch = locations;
     }
     
     params.SearchBy = user.EMP_CODE;
@@ -148,10 +150,15 @@ export default class InboxScreen extends React.Component {
   }
   onPressItem(data){
     this.props.punchStore.puchRecordData = data;
-    const resetAction = NavigationActions.navigate({
-		routeName: 'InboxDetailScreen',
-		})
-		this.props.navigation.dispatch(resetAction)
+    this.props.navigator.push({
+			screen: 'staffio.InboxDetailScreen', // unique ID registered with Navigation.registerScreen
+			title: undefined, // navigation bar title of the pushed screen (optional)
+			titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
+			passProps: {}, // Object that will be passed as props to the pushed screen (optional)
+			animated: false, // does the push have transition animation or does it happen immediately (optional)
+			backButtonTitle: undefined, // override the back button title (optional)
+			backButtonHidden: false, // hide the back button altogether (optional)
+		});
   }
   async _refresh(){
     this.setState({isLoading:true});
@@ -264,16 +271,21 @@ export default class InboxScreen extends React.Component {
   onEndReached(){
 
   }
-  // onLocationChange(locations){
-  //   this.setState({locationSearch:locations});
-  // }
+  onNavigatorEvent(event) {
+    // if (event.id === 'bottomTabSelected') {
+    //   this.componentWillMount();
+    // }
+    // if (event.id === 'bottomTabReselected') {
+    //   this.componentWillMount();
+    // }
+  }
 
   render() {
     return (
       <View  style={{backgroundColor:Colors.backgroundColor,flex:1}}>
        <CardHeader title="ประวัติ"/>
        <Loading visible={this.state.isLoading}/>
-           <View style={{height:responsiveHeight(10),flexDirection:"row",alignItems:"center",marginLeft:10}}>
+           <View style={{height:responsiveHeight(10),marginTop:5,flexDirection:"row",alignItems:"center",marginLeft:10}}>
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
                 value={this.state.tags} />
             </View>
@@ -294,7 +306,7 @@ export default class InboxScreen extends React.Component {
               <Icon name="trash" />
             </Button>
           </Fab>*/}
-            <ActionButton backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
+            <ActionButton size={45}  backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
             icon={<Icon name="filter" style={{color:"#ffff"}}/>} 
             backdrop={<AnimatedOverlay
               backgroundColor='#000'

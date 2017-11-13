@@ -3,7 +3,8 @@ import {
   Platform,
   StyleSheet,
   View,
-  Text
+  Text,
+  AppState,NativeAppEventEmitter,DeviceEventEmitter
 } from 'react-native';
 import {Agenda} from '../components/staffioCalendar';
 import { NavigationActions } from'react-navigation';
@@ -16,9 +17,11 @@ import moment from 'moment';
 import {convertDate} from '../utils/staffioUtils';
 import Loading from '../components/loading';
 import {LocaleConfig} from 'react-native-calendars';
-import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
+import app  from '../stores/app';
+import BackgroundTimer from 'react-native-background-timer';
 // const customData = require('../api/shiftData.json');
 // const customData2 = require('../api/shiftHistory.json');
+let intervalId = null;
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +38,8 @@ class HomeScreen extends React.Component {
     };
 
     LocaleConfig.defaultLocale = 'th';
+    this.app = app;
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   static navigationOptions = {
     header: null,
@@ -99,11 +104,16 @@ class HomeScreen extends React.Component {
     }
   }
   punchPress(){
-    this.props.navigation.navigate("Camera");
-		const navigateAction = NavigationActions.navigate({
-		routeName: 'Camera'
-		})
-		this.props.navigation.dispatch(navigateAction);
+    // this.props.navigator.resetTo({
+    //   screen: 'staffio.CameraScreen', // unique ID registered with Navigation.registerScreen
+    //   title: undefined, // navigation bar title of the pushed screen (optional)
+    //   passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
+    //   animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+    //   animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+    //   navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+    //   navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+    // });
+    this.app.punchIn();
   }
 
   renderItem(item) {
@@ -155,7 +165,7 @@ class HomeScreen extends React.Component {
           this.setState({isLoading:false});
        }
        //console.log(startOfWeek,endOfWeek);
-    
+       AppState.addEventListener('change', this._handleAppStateChange);
   }
   getShiftPatternByPersonal = async (user,startDate,endDate)=>{
     let params  = {};
@@ -191,10 +201,29 @@ class HomeScreen extends React.Component {
     // const response = customData2;
     return response;
   }
-   componentWillReceiveProps(nextProps) {
-    if(!this.props.isFocused){
+  
+  onNavigatorEvent(event) {
+    if (event.id === 'bottomTabSelected') {
       this.componentDidMount();
     }
+    if (event.id === 'willDisappear') {
+     console.log("willDisappear");
+    }
+    if (event.id === 'didDisappear') {
+     console.log("didDisappear");
+    }
+  }
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+   _handleAppStateChange = async (nextAppState) => {
+    console.log("_handleAppStateChange");
+     intervalId = BackgroundTimer.setTimeout(() => {
+          this.app.authePinCode();
+          BackgroundTimer.clearTimeout(intervalId);
+          intervalId = null;
+      }, 10000);
   }
 }
 
@@ -205,4 +234,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#D6EBD6',
   }
 });
-export default withNavigationFocus(HomeScreen, 'Home')
+export default HomeScreen

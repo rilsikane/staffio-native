@@ -164,7 +164,7 @@ class PunchIn extends React.Component {
  renderPunchButton(){
    if((this.state.timeRecordType=="I"&& this.props.shiftData.TimeRecordIn==null) || (this.state.timeRecordType=="O" && this.props.shiftData.TimeRecordOut==null))
    return (<Button transparent onPress={this.punchIn.bind(this)}>
-                    <IconTello style={{color:"#ffff"}} size={em(3)} name="icon-15" />
+                    <IconTello style={{color:"#ffff"}} size={em(3)} name="hhmm-14" />
                   </Button>)
  }
  renderPunchInfo(){

@@ -59,10 +59,17 @@ export default class LoginForm extends Component {
 		const response = await authen("checkLogin", user);
 		if(response){
 			 this.saveUser(response.data.userProfile);
-                const resetAction = NavigationActions.navigate({
-				routeName: 'Pincode'
-				})
-			this.props.navigation.dispatch(resetAction)
+               
+			this.props.navigator.push({
+				screen: 'staffio.PincodeScreen', // unique ID registered with Navigation.registerScreen
+				title: undefined, // navigation bar title of the pushed screen (optional)
+				titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
+				passProps: {}, // Object that will be passed as props to the pushed screen (optional)
+				animated: false, // does the push have transition animation or does it happen immediately (optional)
+				animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
+				backButtonTitle: undefined, // override the back button title (optional)
+				backButtonHidden: false, // hide the back button altogether (optional)
+			});
 		}
 		
 	}

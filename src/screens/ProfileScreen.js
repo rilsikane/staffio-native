@@ -20,13 +20,14 @@ import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import Iocon from 'react-native-vector-icons/Ionicons';
 import colors from '../constants/Colors'
 import { NavigationActions } from 'react-navigation'; 
-
+import app  from '../stores/app';
 
 class ProfileScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {isLoading:true};
     this.logOutPress = this.logOutPress.bind(this);
+    this.app = app;
   }
   static navigationOptions = {
     header: null,
@@ -115,11 +116,7 @@ class ProfileScreen extends React.Component {
  logOut(){
    this.setState({loading:true});
    store.delete("USER");
-   const resetAction = NavigationActions.navigate({
-    routeName: 'Login'
-    })
-    this.props.navigation.dispatch(resetAction)
-    this.setState({loading:false});
+   this.app.appInitialized();
  }
 
 }

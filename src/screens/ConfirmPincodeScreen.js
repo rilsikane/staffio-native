@@ -10,6 +10,7 @@ import {authen} from '../api';
 import DeviceInfo from 'react-native-device-info';
 import Loading from '../components/loading';
 import FCM from "react-native-fcm";
+import app  from '../stores/app';
 @inject('userStore')
 @observer
 export default class ConfirmPincodeScreen extends Component {
@@ -19,17 +20,13 @@ export default class ConfirmPincodeScreen extends Component {
       this.onDonePress = this.onDonePress.bind(this);
 	  this.reset = this.reset.bind(this);
       this.state = {loading:false};
+	  this.app = app;
  	}
 	reset(){
-		//this.props.navigation.goBack();
-		//this.props.navigation.navigate("Pincode");
-		const resetAction = NavigationActions.reset({
-		index: 0,
-		actions: [
-			NavigationActions.navigate({ routeName: 'Pincode'})
-		]
-		})
-		this.props.navigation.dispatch(resetAction)
+		this.props.navigator.pop({
+		animated: true, // does the pop have transition animation or does it happen immediately (optional)
+		animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+		});
 	}
 	async onDonePress () {
 		await this.updateUser();
@@ -52,11 +49,8 @@ export default class ConfirmPincodeScreen extends Component {
 		if(response){
 			
 			 await store.update('USER', {pincode: this.props.userStore.pincode});
-			 	const resetAction = NavigationActions.navigate({
-				routeName: 'Main'
-				})
-				this.props.navigation.dispatch(resetAction)
-				this.setState({loading:false});
+			 this.app.login();
+			 this.setState({loading:false});
 		}
 	}
 
@@ -65,7 +59,7 @@ export default class ConfirmPincodeScreen extends Component {
                 <View style={{flex:1,backgroundColor:"#ffff"}}>
 					{this.state.loading && <Loading visible={this.state.loading} mini={true}/>}
                     {!this.state.loading && <PincodePress pincode={this.props.userStore.pincode} reset={this.reset} 
-					navigation={this.props.navigation} isConfirm={true} titileTxt="ยืนยันรหัสผ่าน" 
+					navigation={this.props.navigator} isConfirm={true} titileTxt="ยืนยันรหัสผ่าน" 
 					onDonePress={this.onDonePress}/>}
                 </View>
 				
