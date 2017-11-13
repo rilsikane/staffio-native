@@ -23,6 +23,7 @@ import { updateFocus } from 'react-navigation-is-focused-hoc'
 import InboxScreen from '../containers/InboxScreen';
 import FindFriendsScreen from '../containers/FindFriendsScreen';
 import ProfileScreen from '../containers/ProfileScreen';
+import OverView from '../containers/Overview';
 
 const MainStackNavigator = StackNavigator(
  
@@ -102,7 +103,7 @@ export default class RootNavigator extends React.Component {
 
      return <RootStackNavigator  screenProps={{authen:this.authen.bind(this),current: this.state.route_index}} 
      ref={nav => { this.navigator = nav; }}   onNavigationStateChange={this._onNavigationStateChange}/>
-     //return <InboxScreen /> 
+     //return <OverView /> 
   }
   
   
