@@ -11,6 +11,7 @@ import Loading from '../components/loading';
 import TimerMixin from 'react-timer-mixin';
 import FCM from "react-native-fcm";
 import Constans from '../constants/Constants';
+import app  from '../stores/app';
 
 @inject('userStore')
 @observer
@@ -20,6 +21,7 @@ export default class AuthenPincodeScreen extends Component {
       super(props);
       this.onDonePress = this.onDonePress.bind(this);
 	  this.state = {pincode:"",loading:false};
+	  this.app = app;
 	  this.init();
  	}
 
@@ -53,7 +55,7 @@ export default class AuthenPincodeScreen extends Component {
 			response.data.userProfile.device_id = userData.deviceId;
 			response.data.userProfile.u_id = uuid;
 			await store.update('USER', response.data.userProfile);
-			this.props.screenProps.authen();
+			this.app.login();
 		}else{
 			 TimerMixin.setTimeout( () => { 
               this.setState({loading:false});
@@ -66,7 +68,7 @@ export default class AuthenPincodeScreen extends Component {
 		return (
                 <View style={{flex:1,backgroundColor:"#ffff"}}>
 					{this.state.loading && <Loading visible={this.state.loading} mini={true}/>}
-					{!this.state.loading && <PincodePress pincode={this.state.pincode}  navigation={this.props.navigation} 
+					{!this.state.loading && <PincodePress pincode={this.state.pincode}  navigation={this.props.navigator} 
 					isAuthen={true} titileTxt="กรอกรหัสผ่าน" onDonePress={this.onDonePress}/>}
                 </View>
 				

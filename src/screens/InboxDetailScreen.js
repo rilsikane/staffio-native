@@ -35,6 +35,7 @@ export default class InboxDetailScreen extends React.Component {
      this.onPressItem = this.onPressItem.bind(this);
      this.closeDialog =this.closeDialog.bind(this);
      this.commentComplete = this.commentComplete.bind(this);
+     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   static navigationOptions = {
     header: null,
@@ -46,7 +47,10 @@ export default class InboxDetailScreen extends React.Component {
     this.setState({modalVisible:false,selectItem:{}});
   }
   goBack(){
-		this.props.navigation.goBack();
+	  this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+    });
   }
   async commentComplete(){
      const response = await this.GetTimeRecordHistory(this.props.punchStore.puchRecordData);
@@ -85,6 +89,23 @@ export default class InboxDetailScreen extends React.Component {
     const response = await post("ESSServices/GetTimeRecordHistory",params);
     // const response = customData2;
     return response.ListTimeReocords;
+  }
+  onNavigatorEvent(event) {
+    if (event.id === 'bottomTabSelected') {
+       this.setState({isLoading:true})
+       this.props.navigator.push({
+        screen: 'staffio.InqInboxScreen', // unique ID registered with Navigation.registerScreen
+        title: undefined, // navigation bar title of the pushed screen (optional)
+        titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
+        passProps: {}, // Object that will be passed as props to the pushed screen (optional)
+        animated: false, // does the push have transition animation or does it happen immediately (optional)
+        backButtonTitle: undefined, // override the back button title (optional)
+        backButtonHidden: false, // hide the back button altogether (optional)
+      });
+    }
+    if (event.id === 'bottomTabReselected') {
+      //this.componentWillMount();
+    }
   }
 
   render() {

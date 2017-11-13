@@ -11,7 +11,7 @@ const IdName = ({record}) => {
   return(
     <View style={styles.workShiftContainerStyle}>
     <Grid style={{height:responsiveHeight(6.7)}}>
-        <Col size={20} style={{marginTop:-6}}>
+        <Col size={20} style={{marginTop:0}}>
            <Image  indicator={Progress.Circle}  source={{ uri: `${record.imagepath_personal}` }}
             indicatorProps={{
               size: 20,

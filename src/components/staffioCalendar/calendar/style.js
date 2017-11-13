@@ -6,7 +6,7 @@ import DeviceInfo from 'react-native-device-info';
 
 export default function getStyle(theme={}) {
   const model = DeviceInfo.getDeviceId();
-  const marginTop = model.indexOf("iPhone5")>=0 ? 2:1.1
+  const marginTop = model.indexOf("iPhone5")>=0 ? 2:1.5
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     container: {

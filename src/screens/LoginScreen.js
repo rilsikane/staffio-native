@@ -17,9 +17,8 @@ export default class LoginScreen extends Component {
 					<View style={{flex:1}}>
 					<Wallpaper bgSrc={bgSrc}>
 						<Logo />
-						<LoginForm navigation={this.props.navigation}/>
+						<LoginForm navigator={this.props.navigator}/>
 						{/*<SignupSection/>*/}
-						{/*<ButtonSubmit navigation={this.props.navigation}/>*/}
 					</Wallpaper>
 					</View>
 				</TouchableWithoutFeedback>

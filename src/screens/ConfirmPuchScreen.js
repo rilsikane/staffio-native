@@ -17,6 +17,7 @@ var SpinnerKit = require('react-native-spinkit');
 import store from 'react-native-simple-store';
 import {post} from '../api';
 import {convertDate} from '../utils/staffioUtils';
+import app  from '../stores/app';
 
 
 
@@ -32,6 +33,7 @@ export default class ConfirmPunchScreen extends React.Component {
       this.onChangeText = this.onChangeText.bind(this);
       this.cancel = this.cancel.bind(this);
       this.okPress = this.okPress.bind(this);
+      this.app = app;
  	}
   static navigationOptions = {
     header: null,
@@ -73,34 +75,24 @@ export default class ConfirmPunchScreen extends React.Component {
   // }
 
   goBack(){
-     this.setState({isLoading:true});    
-		//this.props.navigation.goBack();
-		//this.props.navigation.navigate("Pincode");
-    const resetAction = NavigationActions.reset({
-		index: 0,
-		actions: [
-			NavigationActions.navigate({ routeName: 'Camera'})
-		]
-		})
-		this.props.navigation.dispatch(resetAction)
-		// const resetAction = NavigationActions.navigate({
-		// routeName: 'Camera',
-		// })
-		// this.props.navigation.dispatch(resetAction)
+    this.setState({isLoading:true});    
+    this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+    });
+	
 	}
   cancel(){
-    this.setState({isLoading:true});
-    const resetAction = NavigationActions.reset({
-		index: 0,
-		actions: [
-			NavigationActions.navigate({ routeName: 'Main'})
-		]
-		})
-		this.props.navigation.dispatch(resetAction)
-    // const resetAction = NavigationActions.navigate({
-		// routeName: 'Main',
-		// })
-		// this.props.navigation.dispatch(resetAction)
+    // this.props.navigator.resetTo({
+    //   screen: 'staffio.HomeScreen', // unique ID registered with Navigation.registerScreen
+    //   title: undefined, // navigation bar title of the pushed screen (optional)
+    //   passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
+    //   animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+    //   animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+    //   navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+    //   navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+    // });
+    this.app.login();
   }
   onChangeText (value) {
    this.setState({remark:value});
@@ -171,21 +163,20 @@ export default class ConfirmPunchScreen extends React.Component {
       
          
      }
-    //  return response.shiftData;
-    // 	const resetAction = NavigationActions.navigate({
-    //   routeName: 'Main',
-    //   })
-    //   this.props.navigation.dispatch(resetAction)
+ 
   }
   success(){
    
-    const resetAction = NavigationActions.reset({
-		index: 0,
-		actions: [
-			NavigationActions.navigate({ routeName: 'Main'})
-		]
-		})
-		this.props.navigation.dispatch(resetAction)
+    // this.props.navigator.resetTo({
+    //   screen: 'staffio.HomeScreen', // unique ID registered with Navigation.registerScreen
+    //   title: undefined, // navigation bar title of the pushed screen (optional)
+    //   passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
+    //   animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+    //   animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+    //   navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+    //   navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+    // });
+    this.app.login();
   }
   getShiftForTimeRecord = async (user)=>{
     let params  = {};
