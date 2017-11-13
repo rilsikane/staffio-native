@@ -20,7 +20,7 @@ export default class CardTimeRecord extends React.Component {
                     <CardItem >
                     <View style={styles.card}>
                     <View style={styles.circle3}>
-                    <View style={styles.circle2}>   
+                   <View style={styles.circle2}>    
                     <View style={styles.circle}>
                          <Text allowFontScaling={false} style={styles.noteText2}>{amount_ab||0}</Text>
                          <Text allowFontScaling={false} style={styles.litelText}>ขาด  </Text>  
@@ -29,10 +29,10 @@ export default class CardTimeRecord extends React.Component {
                     </View>
                     <View style={styles.square}/>
                     <View style={styles.square2}/>
-                    </View>
+                   </View> 
                     <View style={styles.card}>
                     <View style={styles.circle3}>
-                    <View style={styles.circle2}>   
+                  <View style={styles.circle2}> 
                     <View style={styles.circle}>                                         
                          <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
                          <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
@@ -44,8 +44,8 @@ export default class CardTimeRecord extends React.Component {
                     </View>
                     <View style={styles.card}>
                     <View style={styles.circle3}>
-                    <View style={styles.circle2}>  
-                    <View style={styles.circle}>          
+                   <View style={styles.circle2}>
+                    <View  style={styles.circle}>          
                          <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
                          <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
                     </View>
@@ -119,25 +119,25 @@ const styles = StyleSheet.create({
     flex:null
 },
   square: {
-    height: 2,
-    width: 35,
+    height: responsiveHeight(0.5),
+    width:responsiveWidth(20),
     backgroundColor:'#ffff',
     alignItems: 'center',
     flex:null,
     justifyContent: 'center'
   },
   square2: {
-    height: 3,
-    width: 30,
+    height: responsiveHeight(0.5),
+    width: responsiveWidth(15),
     backgroundColor:'#E5E5E5',
     alignItems: 'center',
     flex:null,
     justifyContent: 'center'
   },
   circle: {
-    height: 70,
-    width: 70,
-    borderRadius: 70 / 2,
+    height:  responsiveHeight(10),
+    width: responsiveWidth(17),
+    borderRadius: responsiveWidth(17/2),
     backgroundColor:'#ffff',
     alignItems: 'center',
     flex:null,
@@ -145,9 +145,9 @@ const styles = StyleSheet.create({
     marginLeft:5,
   },
   circle2: {
-    height: 77,
-    width: 77,
-    borderRadius: 77 / 2,
+    height:   responsiveHeight(11),
+    width: responsiveWidth(19),
+    borderRadius:responsiveWidth(19/2),
     backgroundColor:'#F3F3F4',
     alignItems: 'center',
     flex:null,
@@ -156,9 +156,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   circle3: {
-    height: 82,
-    width: 82,
-    borderRadius: 82 / 2,
+    height: responsiveHeight(12),
+    width: responsiveWidth(20),
+    borderRadius: responsiveWidth(20/2),
     backgroundColor:'#E5E5E5',
     alignItems: 'center',
     flex:null,
