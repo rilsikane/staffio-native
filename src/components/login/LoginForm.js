@@ -56,9 +56,13 @@ export default class LoginForm extends Component {
       	user.password = this.props.userStore.userLogin.password;
 		user.tokenType = "M";
 		user.version = Constans.version;
+
+		await store.save('endpoint',this.props.userStore.userLogin.username.split("@")[1]);
+
 		const response = await authen("checkLogin", user);
 		if(response){
-			 this.saveUser(response.data.userProfile);
+
+			this.saveUser(response.data.userProfile);
                
 			this.props.navigator.push({
 				screen: 'staffio.PincodeScreen', // unique ID registered with Navigation.registerScreen

@@ -95,7 +95,7 @@ export default class PincodePress extends React.Component {
             const IconTello = createIconSetFromFontello(fontelloConfig);
             if(this.props.isAuthen){
                if(Platform.OS === 'ios' && this.state.touchSupport)
-               return <Button bordered style={styles.buttonView} onPress={this.onTouchId}><IconTello style={styles.iconStyleTouch} name="icon-15"/></Button>
+               return <Button bordered style={styles.buttonView} onPress={this.onTouchId}><IconTello style={styles.iconStyleTouch} name="hhmm-14"/></Button>
             }else{
                if(this.state.sampleText5!='')
                return <Button bordered style={styles.buttonView} onPress={this.onDonePress}><Text allowFontScaling={false}style={styles.textCaptionStyle}>OK</Text></Button>

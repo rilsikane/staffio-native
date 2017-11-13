@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //dev
 
-const endpoint = "http://172.20.14.212/api_mobile/api/";
+//const endpoint = "http://172.20.14.212/api_mobile/api/";
 
 
 //TFS
@@ -11,16 +11,26 @@ const endpoint = "http://172.20.14.212/api_mobile/api/";
 //G-Able
 //const endpoint = "http://45.116.216.94/Staffio_gable_api/api/";
 
+const endpoints ={"DEV":"http://172.20.14.212/api_mobile/api/"
+,"TFS":"http://45.116.216.94/Staffio_API/api/","G-ABLE":"http://45.116.216.94/Staffio_gable_api/api/",
+"G-ABLE":"http://45.116.216.94/Staffio_gable_api/api/","OMS":"http://45.116.216.94/Staffio_gable_api/api/"}
+
 import store from 'react-native-simple-store';
 import {
     Alert,Linking
 } from 'react-native';
 
-
+async function getEndpoint(){
+  const endpoint = await store.get("endpoint");
+  console.log(endpoint);
+  return endpoints[`${endpoint}`];
+}
 
 export async function authen(path,param){
   console.log("authen-----"+param);
+  const endpoint = await getEndpoint();
   let requestURL = `${endpoint}SecurityService/${path}`;
+  console.log("requestURL-----"+requestURL);
       try{
           const response = await  axios.post(requestURL, param);
           if(response.status=='200' && response.data.Success){
@@ -60,6 +70,7 @@ export async function authen(path,param){
 export async function post(path,param){
   console.log("param: "+JSON.stringify(param));
   const userData = await store.get("USER");
+  const endpoint = await getEndpoint();
   let requestURL = `${endpoint}${path}`;
       try{
           const response = await  axios.post(requestURL, param,{headers: {token:userData.token}});
