@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'black'
   },
   bottomOverlay: {
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'black',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -106,6 +107,7 @@ export default class Example extends React.Component {
     console.log(response);
     let base64Img = await RNFS.readFile(response, "base64")  
     this.props.punchStore.selfiePath = base64Img;
+    let success = await RNFS.unlink(path)
 
     this.props.navigator.push({
 			screen: 'staffio.ConfirmPunchScreen', // unique ID registered with Navigation.registerScreen
@@ -117,7 +119,7 @@ export default class Example extends React.Component {
 			backButtonHidden: false, // hide the back button altogether (optional)
 		});
           
-  }
+   }
   cancel(){
     //  const resetAction = NavigationActions.reset({
 		// index: 0,
@@ -215,7 +217,7 @@ export default class Example extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar
+        <StatusBar 
           animated
           hidden
         />
@@ -252,6 +254,12 @@ export default class Example extends React.Component {
               source={this.flashIcon}
             />
           </TouchableOpacity>
+          <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={(e) => this.takePicture(this.cancel)}
+            >
+             <Icon name="times"/>
+            </TouchableOpacity>
         </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
           {
@@ -266,14 +274,6 @@ export default class Example extends React.Component {
             ||
             null
           }
-        </View>
-        <View style={styles.bottomRightOverlay}>
-             <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={(e) => this.takePicture(this.cancel)}
-            >
-             <Icon name="times"/>
-            </TouchableOpacity>
         </View>
       </View>
     );
