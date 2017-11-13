@@ -14,16 +14,16 @@ export default class CardTimeRecord extends React.Component {
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
-                    <Text allowFontScaling={false}style={styles.titleText}>ประวัติการลงเวลา</Text>
-                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
+                    <Text allowFontScaling={false} style={styles.titleText}>ประวัติการลงเวลา</Text>
+                    <Text allowFontScaling={false} style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
                     </CardItem>
                     <CardItem >
                     <View style={styles.card}>
                     <View style={styles.circle3}>
                     <View style={styles.circle2}>   
                     <View style={styles.circle}>
-                         <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
-                         <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
+                         <Text allowFontScaling={false} style={styles.noteText2}>{amount_ab||0}</Text>
+                         <Text allowFontScaling={false} style={styles.litelText}>ขาด  </Text>  
                     </View>
                     </View>
                     </View>

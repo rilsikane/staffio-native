@@ -30,6 +30,9 @@ import PTRView from 'react-native-pull-to-refresh';
 import {convertDateDB,convertForTag} from '../utils/staffioUtils';
 import ActionButton from 'react-native-action-button';
 import AnimatedOverlay from 'react-native-animated-overlay';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../assets/fonts/config.json'
+const IconTello = createIconSetFromFontello(fontelloConfig);
 
 
 @inject('punchStore')
@@ -307,7 +310,7 @@ export default class InboxScreen extends React.Component {
             </Button>
           </Fab>*/}
             <ActionButton size={45}  backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
-            icon={<Icon name="filter" style={{color:"#ffff"}}/>} 
+            icon={<IconTello name="hhmm-29" style={{color:"#ffff"}}/>} 
             backdrop={<AnimatedOverlay
               backgroundColor='#000'
               opacity={0.8}

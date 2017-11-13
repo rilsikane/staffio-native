@@ -15,7 +15,10 @@ import { observer, inject } from 'mobx-react';
 import { NavigationActions } from'react-navigation';
 import RNFS from 'react-native-fs'
 import ImageResizer from 'react-native-image-resizer';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../../assets/fonts/config.json'
+const IconTello = createIconSetFromFontello(fontelloConfig);
+import app  from '../../stores/app';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,8 +52,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   captureButton: {
-    padding: 15,
-    backgroundColor: 'white',
+    paddingTop: 15,
+    backgroundColor: 'transparent',
     borderRadius: 40,
   },
   typeButton: {
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
   },
   cancelButton:{
     padding: 15,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     borderRadius: 40,
     right:0,
     justifyContent: 'flex-end',
@@ -87,6 +90,7 @@ export default class Example extends React.Component {
     super(props);
 
     this.camera = null;
+    this.app = app;
 
     this.state = {
       camera: {
@@ -127,10 +131,11 @@ export default class Example extends React.Component {
 		// 	NavigationActions.navigate({ routeName: 'Main'})
 		// ]
 		// })
-		this.props.navigator.pop({
-      animated: true, // does the pop have transition animation or does it happen immediately (optional)
-      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
-    });
+		// this.props.navigator.pop({
+    //   animated: true, // does the pop have transition animation or does it happen immediately (optional)
+    //   animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+    // });
+    this.app.login();
   }
 
   takePicture = (func) => {
@@ -242,9 +247,7 @@ export default class Example extends React.Component {
             style={styles.typeButton}
             onPress={this.switchType}
           >
-            <Image
-              source={this.typeIcon}
-            />
+            <IconTello style={{color:"#ffff"}} size={18} name="hhmm-30"/>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.flashButton}
@@ -256,9 +259,9 @@ export default class Example extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
                 style={styles.cancelButton}
-                onPress={(e) => this.takePicture(this.cancel)}
+                onPress={(e) => this.cancel()}
             >
-             <Icon name="times"/>
+             <IconTello style={{color:"#ffff"}} size={18} name="hhmm-26"/>
             </TouchableOpacity>
         </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
@@ -269,7 +272,7 @@ export default class Example extends React.Component {
                 style={styles.captureButton}
                 onPress={(e) => this.takePicture(this.gotoConfirm)}
             >
-             <Text>ลงเวลา</Text>
+             <IconTello style={{color:"#ffff"}} size={50} name="hhmm-14"/>
             </TouchableOpacity>
             ||
             null

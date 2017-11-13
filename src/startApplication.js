@@ -88,8 +88,8 @@ export default async function startApplication(root) {
             drawUnderNavBar: true,
             navBarTransparent: true,
             navBarHidden: true,
-           
-          }
+          },
+           animationType: 'fade'
         });
         return;
        case 'punch-in':
