@@ -17,7 +17,7 @@ export default class CardTimeRecord extends React.Component {
                     <Text allowFontScaling={false} style={styles.titleText}>ประวัติการลงเวลา</Text>
                     <Text allowFontScaling={false} style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
                     </CardItem>
-                    <CardItem >
+                    <CardItem style={styles.cardItem}>
                     <View style={styles.card}>
                     <View style={styles.circle3}>
                    <View style={styles.circle2}>    
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
       marginLeft:5,
       backgroundColor:'#ffff',
       height:responsiveHeight(21),
-      width:x-10,
+      width:responsiveWidth(97),
       flex:null
   },
   cardContainer2:{
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginLeft:5,
     backgroundColor:'#ffff',
     height:responsiveHeight(0),
-    width:x-10,
+    width: responsiveWidth(97),
     flex:null
 },
   square: {
@@ -171,8 +171,17 @@ const styles = StyleSheet.create({
     marginLeft:5,
     backgroundColor:'#ffff',
     height:responsiveHeight(13),
-    width:115,
+    width:responsiveWidth(27),
     flex:null,
     alignItems: 'center'
+},
+cardItem:{
+  marginRight:5,
+  marginLeft:5,
+  backgroundColor:'#ffff',
+  height:responsiveHeight(13),
+  width:responsiveHeight(97),
+  flex:null,
+  alignItems: 'center'
 },
 })
