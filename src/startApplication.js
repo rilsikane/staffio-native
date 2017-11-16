@@ -89,7 +89,8 @@ export default async function startApplication(root) {
             navBarTransparent: true,
             navBarHidden: true,
           },
-           animationType: 'fade'
+           animationType: 'fade',
+           lazyload:true
         });
         return;
        case 'punch-in':

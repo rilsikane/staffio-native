@@ -14,16 +14,16 @@ export default class CardTimeRecord extends React.Component {
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
-                    <Text allowFontScaling={false} style={styles.titleText}>ประวัติการลงเวลา</Text>
-                    <Text allowFontScaling={false} style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
+                    <Text allowFontScaling={false}style={styles.titleText}>ประวัติการลงเวลา</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
                     </CardItem>
-                    <CardItem style={styles.cardItem}>
+                    <CardItem style={styles.cardContainer3}>
                     <View style={styles.card}>
                     <View style={styles.circle3}>
                    <View style={styles.circle2}>    
                     <View style={styles.circle}>
-                         <Text allowFontScaling={false} style={styles.noteText2}>{amount_ab||0}</Text>
-                         <Text allowFontScaling={false} style={styles.litelText}>ขาด  </Text>  
+                         <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
+                         <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
                     </View>
                     </View>
                     </View>
@@ -94,9 +94,10 @@ const styles = StyleSheet.create({
   litelText: {
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(2),
-    paddingLeft:5,
+    paddingLeft:responsiveWidth(2),
     alignItems: 'center',
-    color :'#744C36'
+    color :'#744C36',
+    backgroundColor:'transparent'
    
   },
   content:{
@@ -115,12 +116,20 @@ const styles = StyleSheet.create({
     marginLeft:5,
     backgroundColor:'#ffff',
     height:responsiveHeight(0),
+    width:responsiveWidth(95),
+    flex:null
+},
+cardContainer3:{
+    marginRight:5,
+    marginLeft:5,
+    backgroundColor:'transparent',
+    width:responsiveWidth(97),
     width: responsiveWidth(97),
     flex:null
 },
   square: {
     height: responsiveHeight(0.5),
-    width:responsiveWidth(20),
+    width:responsiveWidth(21),
     backgroundColor:'#ffff',
     alignItems: 'center',
     flex:null,
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
   },
   square2: {
     height: responsiveHeight(0.5),
-    width: responsiveWidth(15),
+    width: responsiveWidth(16),
     backgroundColor:'#E5E5E5',
     alignItems: 'center',
     flex:null,
@@ -136,8 +145,8 @@ const styles = StyleSheet.create({
   },
   circle: {
     height:  responsiveHeight(10),
-    width: responsiveWidth(17),
-    borderRadius: responsiveWidth(17/2),
+    width: responsiveWidth(18),
+    borderRadius: responsiveWidth(18/2),
     backgroundColor:'#ffff',
     alignItems: 'center',
     flex:null,
@@ -146,8 +155,8 @@ const styles = StyleSheet.create({
   },
   circle2: {
     height:   responsiveHeight(11),
-    width: responsiveWidth(19),
-    borderRadius:responsiveWidth(19/2),
+    width: responsiveWidth(20),
+    borderRadius:responsiveWidth(20/2),
     backgroundColor:'#F3F3F4',
     alignItems: 'center',
     flex:null,
@@ -157,8 +166,8 @@ const styles = StyleSheet.create({
   },
   circle3: {
     height: responsiveHeight(12),
-    width: responsiveWidth(20),
-    borderRadius: responsiveWidth(20/2),
+    width: responsiveWidth(21),
+    borderRadius: responsiveWidth(21/2),
     backgroundColor:'#E5E5E5',
     alignItems: 'center',
     flex:null,
