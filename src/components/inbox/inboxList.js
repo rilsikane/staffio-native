@@ -47,7 +47,7 @@ export default class InboxList extends React.Component {
                     </CardPunchInfo>);
                 })}
             */}
-             <ListView
+             <SGListView
                   dataSource={this.getDataSource()} //data source
                   ref={'listview'}
                   initialListSize={100}

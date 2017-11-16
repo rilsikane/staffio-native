@@ -118,10 +118,9 @@ export default class InboxScreen extends React.Component {
     let locationSearch = undefined;
     let area_flag = undefined;
     if(locations && locations.length > 0){
+      locationSearch = locations;
       if(locations.indexOf("99999")!=-1){
         area_flag = "N";
-      }else{
-        locationSearch = locations;
       }
     }else{
       locationSearch = locations;

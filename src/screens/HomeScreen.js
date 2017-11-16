@@ -225,7 +225,7 @@ class HomeScreen extends React.Component {
             BackgroundTimer.clearTimeout(intervalId);
             intervalId = null;
              this.app.authePinCode();
-        }, 10000);
+        }, 40000);
     }
      
   }
