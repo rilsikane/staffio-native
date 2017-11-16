@@ -41,9 +41,9 @@ export default class InboxScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = {showCriteria:false,tags:["All"]
-    ,listTimeReocords:[],isLoading:false,users:[]
+    ,listTimeReocords:[],isLoading:true,users:[]
     ,modalVisible:false,locationSearch:[],locations:[],dateSearch:[]
-    ,locationSelect:[],statusSelect:[],dateSelect:[],empSelect:[]};
+    ,locationSelect:[],statusSelect:[],dateSelect:[],empSelect:[],page:0,total:0};
     this.toggleCriteria = this.toggleCriteria.bind(this);
      this.onCriteriaChange = this.onCriteriaChange.bind(this);
      this.onPressItem = this.onPressItem.bind(this);
@@ -53,6 +53,7 @@ export default class InboxScreen extends React.Component {
      this.onLocationChange = this.onLocationChange.bind(this);
      this.cancelDialog = this.cancelDialog.bind(this);
      this.clearTags = this.clearTags.bind(this);
+     this.onEndReached = this.onEndReached.bind(this)
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   static navigationOptions = {
@@ -60,14 +61,16 @@ export default class InboxScreen extends React.Component {
     
   };
   async componentWillMount(){
-    this.setState({isLoading:true});
+    //this.setState({isLoading:true});
+  }
+  async init(){
     const userData = await store.get("USER");
     const response = await this.GetTimeRecordHistory(userData);
     const master = await this.GetSearchCriteria(userData);
     this.setState({listTimeReocords:response,isLoading:false,locations:master.BranchMaster
       ,users:master.EmployeeList,statuses:master.StatusList})
-    
   }
+
   GetSearchCriteria = async(user)=>{
     let params  = {};
     params.SearchBy = user.EMP_CODE;
@@ -117,6 +120,8 @@ export default class InboxScreen extends React.Component {
     if(locations && locations.length > 0){
       if(locations.indexOf("99999")!=-1){
         area_flag = "N";
+      }else{
+        locationSearch = locations;
       }
     }else{
       locationSearch = locations;
@@ -128,9 +133,9 @@ export default class InboxScreen extends React.Component {
     params.location = locationSearch;
     params.status = statuses && statuses.length > 0 ? statuses : undefined;
     params.EmpCode = staffs&& staffs.length >0 ? staffs:undefined;
-    params.pagesize = 200;
+    params.pagesize = 100;
     params.areaFlag = area_flag;
-    params.page=1;
+    params.page=this.state.page;
     params.flag="m";
     const response = await post("ESSServices/GetTimeRecordHistory",params);
     // const response = customData2;
@@ -271,13 +276,29 @@ export default class InboxScreen extends React.Component {
     this.setState({locationSearch:locations});
   }
 
-  onEndReached(){
-
+  async onEndReached(){
+    if(this.state.total == 0 || this.state.listTimeReocords.length < this.state.total){
+      let startDate,endDate;
+      if(this.props.punchStore.dateSearch.length >0){
+        if(this.props.punchStore.dateSearch.length>1){
+          startDate = this.props.punchStore.dateSearch[0].timestamp;
+          endDate = this.props.punchStore.dateSearch[this.props.punchStore.dateSearch.length-1].timestamp;
+        }else{
+          startDate = this.props.punchStore.dateSearch[0].timestamp;
+          endDate = this.props.punchStore.dateSearch[0].timestamp;
+        }
+      }
+      const userData = await store.get("USER");
+      this.setState({page:this.state.page+1});
+      const response = await this.GetTimeRecordHistory(userData,startDate,endDate
+      ,this.props.punchStore.locationSearch,this.props.punchStore.statusSearch,this.props.punchStore.staffSearch);
+      this.setState({listTimeReocords:this.state.listTimeReocords.concat(response),totla:response.total});
+    }
   }
   onNavigatorEvent(event) {
-    // if (event.id === 'bottomTabSelected') {
-    //   this.componentWillMount();
-    // }
+    if (event.id === 'bottomTabSelected') {
+      this.init();
+    }
     // if (event.id === 'bottomTabReselected') {
     //   this.componentWillMount();
     // }
@@ -287,13 +308,13 @@ export default class InboxScreen extends React.Component {
     return (
       <View  style={{backgroundColor:Colors.backgroundColor,flex:1}}>
        <CardHeader title="ประวัติ"/>
-       <Loading visible={this.state.isLoading}/>
+           <Loading visible={this.state.isLoading}/>
            <View style={{height:responsiveHeight(10),marginTop:5,flexDirection:"row",alignItems:"center",marginLeft:10}}>
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
                 value={this.state.tags} />
             </View>
           <PTRView onRefresh={this._refresh} style={{marginTop:5}}>
-              <InboxList onPressItem={this.onPressItem} listTimeReocords={this.state.listTimeReocords}/>
+              <InboxList onEndReached={this.onEndReached} onPressItem={this.onPressItem} listTimeReocords={this.state.listTimeReocords}/>
          </PTRView>
          
          {/*<Fab

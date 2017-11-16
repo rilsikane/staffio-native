@@ -21,9 +21,16 @@ import {
 } from 'react-native';
 
 async function getEndpoint(){
+  let endpointtmp = "";
   const endpoint = await store.get("endpoint");
-  console.log(endpoint);
-  return endpoints[`${endpoint}`];
+  if(endpoint && endpoint!=null){
+    console.log(endpoint);
+    endpointtmp = endpoint;
+  }else{
+     const userData = await store.get("USER");
+     endpointtmp = userData.USER_NAME.split("@")[1];
+  }
+   return endpoints[`${endpointtmp.toUpperCase()}`];
 }
 
 export async function authen(path,param){

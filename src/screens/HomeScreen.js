@@ -219,11 +219,15 @@ class HomeScreen extends React.Component {
   }
    _handleAppStateChange = async (nextAppState) => {
     console.log("_handleAppStateChange");
-     intervalId = BackgroundTimer.setTimeout(() => {
-          this.app.authePinCode();
-          BackgroundTimer.clearTimeout(intervalId);
-          intervalId = null;
-      }, 10000);
+    if(intervalId==null){
+      intervalId = BackgroundTimer.setTimeout(() => {
+           
+            BackgroundTimer.clearTimeout(intervalId);
+            intervalId = null;
+             this.app.authePinCode();
+        }, 10000);
+    }
+     
   }
 }
 
