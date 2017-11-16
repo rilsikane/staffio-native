@@ -124,6 +124,7 @@ cardContainer3:{
     marginLeft:5,
     backgroundColor:'transparent',
     width:responsiveWidth(97),
+    width: responsiveWidth(97),
     flex:null
 },
   square: {
@@ -179,8 +180,17 @@ cardContainer3:{
     marginLeft:5,
     backgroundColor:'#ffff',
     height:responsiveHeight(13),
-    width:responsiveWidth(26),
+    width:responsiveWidth(27),
     flex:null,
     alignItems: 'center'
+},
+cardItem:{
+  marginRight:5,
+  marginLeft:5,
+  backgroundColor:'#ffff',
+  height:responsiveHeight(13),
+  width:responsiveHeight(97),
+  flex:null,
+  alignItems: 'center'
 },
 })
