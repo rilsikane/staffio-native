@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+  Modal,
   Platform,
   StyleSheet,
   View,
   Text,
-  AppState,NativeAppEventEmitter,DeviceEventEmitter
+  AppState,NativeAppEventEmitter,DeviceEventEmitter,ScrollView,Image
 } from 'react-native';
+import {Card,CardItem,Thumbnail,Button}from 'native-base'
 import {Agenda} from '../components/staffioCalendar';
 import { NavigationActions } from'react-navigation';
 import store from 'react-native-simple-store';
@@ -19,16 +21,20 @@ import Loading from '../components/loading';
 import {LocaleConfig} from 'react-native-calendars';
 import app  from '../stores/app';
 import BackgroundTimer from 'react-native-background-timer';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import Provacypolicy from '../components/privacypolicy';
 // const customData = require('../api/shiftData.json');
 // const customData2 = require('../api/shiftHistory.json');
 let intervalId = null;
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.closeDialog = this.closeDialog.bind(this);
     this.state = {
       items: {},
       user:{},
-      shiftData:{},isLoading:false
+      shiftData:{},isLoading:false,
+      agreen:true
     };
    LocaleConfig.locales['th'] = {
     monthNames: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
@@ -40,10 +46,33 @@ class HomeScreen extends React.Component {
     LocaleConfig.defaultLocale = 'th';
     this.app = app;
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.getagreen()
   }
   static navigationOptions = {
     header: null,
   };
+
+  async getagreen(){
+    const agreen = await store.get("agreen");
+    console.log('debugนะครัช' +  agreen );
+    if(agreen == 'Y' ){
+      console.log('debugนะครัช' +  agreen );
+      this.setState({agreen:false,selectItem:{}});
+    }else{
+      this.setState({agreen:true,selectItem:{}});
+    }
+  }
+  
+
+  async closeDialog(){
+    console.log('เข้าป่าวว่ะ1')
+    this.setState({agreen:false,selectItem:{}});
+    const agreen = await store.save('agreen','Y');
+    console.log('debugนะครัช');
+
+  }
+
+  
   
   render() {
     return (
@@ -68,7 +97,19 @@ class HomeScreen extends React.Component {
             // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
             //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           />}
+          
+          
+      
+         
+          <Modal animationType="slide"
+                transparent={false}
+                visible= {this.state.agreen}>
+                <Provacypolicy    close={this.closeDialog}  >);
+                </Provacypolicy>
+              </Modal>
       </View>
+     
+      
     )
    
   }
