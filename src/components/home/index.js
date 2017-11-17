@@ -34,7 +34,7 @@ export default class Home extends Component {
     if(this.state.isLoadCardPunch)
     return  (<ScrollView>
         <CardHoliday style={{marginTop:5}} holiday={this.props.holidays}/>
-        <CardTimeRecord style={{marginTop:2}} record={this.props.statusAmount}/>
+        <CardTimeRecord gotoInbox={this.props.gotoInbox} style={{marginTop:2}} record={this.props.statusAmount}/>
         { this.state.shiftList.map((val) => {
             if(val.time_out)
             return (<CardPunch key={val.temp_mobile_id} shift={val}/>);

@@ -1,11 +1,11 @@
 import React from 'react';
-import {View,Text,Image} from 'react-native';
+import {View,Text,Image,TouchableOpacity} from 'react-native';
 import {Grid,Row,Col,Body,Button,Badge,CardItem} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {em} from '../../constants/Layout' 
 
-const HeaderStatus = ({user,statusAmount}) => {
+const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
   console.log(user);
   const year = new Date().getFullYear()+543;
   return(
@@ -64,16 +64,22 @@ const HeaderStatus = ({user,statusAmount}) => {
           <Row size={15}>
               <Col size={2}/>
               <Col size={30} style={styles.ViewColStyle}>
-                <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_ab}</Text>
-                <Text allowFontScaling={false}style={styles.TextStyle8}>ขาด</Text>
+                <TouchableOpacity onPress={(e)=>gotoInbox("AB")}>
+                  <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_ab}</Text>
+                  <Text allowFontScaling={false}style={styles.TextStyle8}>ขาด</Text>
+                </TouchableOpacity>
               </Col>
               <Col size={30} style={styles.ViewColStyle}>
+                <TouchableOpacity onPress={(e)=>gotoInbox("LT")}>
                   <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_lt}</Text>
                   <Text allowFontScaling={false}style={styles.TextStyle8}>สาย</Text>
+                </TouchableOpacity>
               </Col>
               <Col size={30}>
-              <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_el}</Text>
-              <Text allowFontScaling={false}style={styles.TextStyle8}>กลับก่อน</Text>
+              <TouchableOpacity onPress={(e)=>gotoInbox("EL")}>
+                <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_el}</Text>
+                <Text allowFontScaling={false}style={styles.TextStyle8}>กลับก่อน</Text>
+              </TouchableOpacity>
               </Col>
               <Col size={2}/>
           </Row>

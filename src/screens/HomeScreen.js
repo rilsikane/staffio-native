@@ -29,7 +29,7 @@ let intervalId = null;
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.closeDialog = this.closeDialog.bind(this);
+   
     this.state = {
       items: {},
       user:{},
@@ -46,7 +46,9 @@ class HomeScreen extends React.Component {
     LocaleConfig.defaultLocale = 'th';
     this.app = app;
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-    this.getagreen()
+    this.closeDialog = this.closeDialog.bind(this);
+    this.gotoInbox = this.gotoInbox.bind(this);
+   
   }
   static navigationOptions = {
     header: null,
@@ -54,22 +56,46 @@ class HomeScreen extends React.Component {
 
   async getagreen(){
     const agreen = await store.get("agreen");
-    console.log('debugนะครัช' +  agreen );
-    if(agreen == 'Y' ){
-      console.log('debugนะครัช' +  agreen );
+    if(agreen && agreen == 'Y' ){
       this.setState({agreen:false,selectItem:{}});
     }else{
-      this.setState({agreen:true,selectItem:{}});
+     this.setState({agreen:true});
+     this.props.navigator.showModal({
+        screen: "staffio.PrivacyScreen", // unique ID registered with Navigation.registerScreen
+        title: "Modal", // title of the screen as appears in the nav bar (optional)
+        passProps: {close:this.closeDialog}, // simple serializable object that will pass as props to the modal (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+      });
     }
   }
   
 
   async closeDialog(){
-    console.log('เข้าป่าวว่ะ1')
     this.setState({agreen:false,selectItem:{}});
     const agreen = await store.save('agreen','Y');
-    console.log('debugนะครัช');
+    this.init();
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+    });
 
+  }
+  gotoInbox(status){
+    const startOfMonth = moment().startOf('month').toDate();
+    const endOfMonth = moment().endOf('month').toDate();
+    //  this.props.navigator.switchToTab({
+    //   tabIndex: 1 // (optional) if missing, this screen's tab will become selected
+    // });
+    this.props.navigator.push({
+			screen: 'staffio.InqInboxScreen', // unique ID registered with Navigation.registerScreen
+			title: undefined, // navigation bar title of the pushed screen (optional)
+			titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
+			passProps: {statusForm:status,startDateFrom:startOfMonth,endDateFrom:endOfMonth}, // Object that will be passed as props to the pushed screen (optional)
+			animated: false, // does the push have transition animation or does it happen immediately (optional)
+			backButtonTitle: undefined, // override the back button title (optional)
+			backButtonHidden: false, // hide the back button altogether (optional)
+		});
+   
   }
 
   
@@ -79,7 +105,7 @@ class HomeScreen extends React.Component {
        
        <View style={styles.container}>
          {this.state.isLoading && <Loading visible={true}/>}
-         {!this.state.isLoading && <Agenda
+         {(!this.state.isLoading && !this.state.agreen) && <Agenda
             items={this.state.items}
             loadItemsForMonth={this.loadItems.bind(this)}
             selected={moment().format().split('T')[0]}
@@ -93,20 +119,13 @@ class HomeScreen extends React.Component {
             holidays={this.state.holidays}
             statusAmount={this.state.statusAmount}
             hideCalendar={this.state.hideCalendar}
+            gotoInbox={this.gotoInbox}
             // monthFormat={'yyyy'}
             // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
             //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           />}
           
           
-      
-         
-          <Modal animationType="slide"
-                transparent={false}
-                visible= {this.state.agreen}>
-                <Provacypolicy    close={this.closeDialog}  >);
-                </Provacypolicy>
-              </Modal>
       </View>
      
       
@@ -114,13 +133,11 @@ class HomeScreen extends React.Component {
    
   }
   async loadItems(day) {
+
     const userData = await store.get("USER");
-
-
     const startOfMonth = moment(day.dateString).startOf('month').toDate();
     const endOfMonth = moment(day.dateString).endOf('month').toDate();
-   
-    const shiftPattern =  await this.getShiftPatternByPersonal( this.userData,startOfMonth,endOfMonth);
+    const shiftPattern =  await this.getShiftPatternByPersonal(userData,startOfMonth,endOfMonth);
     if(shiftPattern && shiftPattern.length>0){
        for (let i = 0; i < shiftPattern.length; i++) {
         let strTime = shiftPattern[i].DAY_DATE.split("T")[0];
@@ -143,6 +160,7 @@ class HomeScreen extends React.Component {
       });
       
     }
+
   }
   punchPress(){
     // this.props.navigator.resetTo({
@@ -178,15 +196,20 @@ class HomeScreen extends React.Component {
     return date.toISOString().split('T')[0];
   }
    async componentDidMount(){
+        await this.getagreen();
+        if(!this.state.agreen){
         this.setState({isLoading:true});
         this.userData = await store.get("USER");
         
         
         let shiftData =  await this.getShiftForTimeRecord( this.userData);
         
-        const startOfWeek = moment().subtract(7,'days').toDate();
-        const endOfWeek = moment().endOf('week').toDate();
-        const shiftHistory = await this.getShiftHistory( this.userData,startOfWeek,endOfWeek)
+        // const startOfWeek = moment().subtract(7,'days').toDate();
+        // const endOfWeek = moment().endOf('week').toDate();
+        const startOfMonth = moment().startOf('month').toDate();
+        const endOfMonth = moment().endOf('month').toDate();
+
+        const shiftHistory = await this.getShiftHistory( this.userData,startOfMonth,endOfMonth)
        
        if(!shiftData){
          shiftData = {};
@@ -205,8 +228,39 @@ class HomeScreen extends React.Component {
        }else{
           this.setState({isLoading:false});
        }
+      }
        //console.log(startOfWeek,endOfWeek);
        AppState.addEventListener('change', this._handleAppStateChange);
+  }
+  async init(){
+     this.setState({isLoading:true});
+        this.userData = await store.get("USER");
+        
+        
+        let shiftData =  await this.getShiftForTimeRecord( this.userData);
+        
+        const startOfMonth = moment().startOf('month').toDate();
+        const endOfMonth = moment().endOf('month').toDate();
+        const shiftHistory = await this.getShiftHistory( this.userData,startOfMonth,endOfMonth)
+       
+       if(!shiftData){
+         shiftData = {};
+       }
+       if(shiftHistory){
+       
+        const shiftList = shiftHistory.ResultDatas;
+        const holidays = shiftHistory.Holidays;
+        const statusAmount = shiftHistory.StatusAmount;
+        this.setState({ user: this.userData,shiftData:shiftData,shiftList:shiftList,holidays:holidays,statusAmount:statusAmount});
+        if(this.userData && shiftData && shiftList){ 
+          TimerMixin.setTimeout( () => { 
+              this.setState({isLoading:false});
+            }, 1000);
+        }
+       }else{
+          this.setState({isLoading:false});
+       }
+    
   }
   getShiftPatternByPersonal = async (user,startDate,endDate)=>{
     let params  = {};
@@ -244,8 +298,11 @@ class HomeScreen extends React.Component {
   }
   
   onNavigatorEvent(event) {
+    
     if (event.id === 'bottomTabSelected') {
-      this.componentDidMount();
+      if(!this.state.agreen){
+        this.init();
+      }
     }
     if (event.id === 'willDisappear') {
      console.log("willDisappear");

@@ -11,5 +11,9 @@ export default class PunchStore {
   @observable statusSearch = [];
   @observable dateSearch = [];
   @observable staffSearch = [];
+  @observable statusForm=undefined;
+  @observable startDateFrom={};
+  @observable endDateFrom={};
+
 
 }

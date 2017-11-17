@@ -65,8 +65,15 @@ export default class InboxScreen extends React.Component {
   }
   async init(){
     const userData = await store.get("USER");
-    const response = await this.GetTimeRecordHistory(userData);
+    let response = {};
     const master = await this.GetSearchCriteria(userData);
+    if(!this.props.statusForm){
+      response = await this.GetTimeRecordHistory(userData);
+    }else{
+      response = await this.GetTimeRecordHistory(userData,this.props.startDateFrom,this.props.endDateFrom
+      ,undefined,[this.props.statusForm],[userData.EMP_CODE]);
+        this.setState({tags:[master.StatusList[this.props.statusForm]]});
+    }
     this.setState({listTimeReocords:response,isLoading:false,locations:master.BranchMaster
       ,users:master.EmployeeList,statuses:master.StatusList})
   }
@@ -112,16 +119,40 @@ export default class InboxScreen extends React.Component {
     }
     return employees;
   }
+  removeA(arr) {
+    if(arr && arr.length > 0){
+      
+      var what, a = arguments, L = a.length, ax;
+      var result = [];
+      while (L > 1 && arr.length) {
+          what = a[--L];
+          while ((ax= arr.indexOf(what)) !== -1) {
+              arr.splice(ax, 1);
+          }
+      }
+      if(arr.length>0){
+        result = arr;
+      }
+      return result;
+    }else{
+      return [];
+    }
+    
+}
   GetTimeRecordHistory = async (user,startDate,endDate,locations,statuses,staffs)=>{
     let params  = {};
 
     let locationSearch = undefined;
     let area_flag = undefined;
     if(locations && locations.length > 0){
-      locationSearch = locations;
+      
       if(locations.indexOf("99999")!=-1){
         area_flag = "N";
+      }else{
+        area_flag = "Y"
       }
+      locationSearch = [...locations];
+      this.removeA(locationSearch,"99999");
     }else{
       locationSearch = locations;
     }
@@ -296,6 +327,9 @@ export default class InboxScreen extends React.Component {
   }
   onNavigatorEvent(event) {
     if (event.id === 'bottomTabSelected') {
+      this.init();
+    }
+    if (event.id === 'didAppear') {
       this.init();
     }
     // if (event.id === 'bottomTabReselected') {

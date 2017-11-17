@@ -18,15 +18,14 @@ import {
     }
   
     closeDialog(){
-        console.log('ถึงนี่ละ')
         this.props.close();
       }
     render() {
         return (
             <View style={{flex:1,backgroundColor:"#fee2c8",alignItems : 'center'}}>
-            <Card style={{ height: responsiveHeight(50),width: responsiveWidth(95),alignItems : 'center',backgroundColor:"orange"}}>
+            <Card style={{ height: responsiveHeight(50),width: responsiveWidth(100),alignItems : 'center',backgroundColor:"orange"}}>
            
-            <Card style={{ height: responsiveHeight(49),width: responsiveWidth(93),	alignItems: 'center',justifyContent : 'center'}}>
+            <Card style={{ height: responsiveHeight(49),width: responsiveWidth(98),	alignItems: 'center',justifyContent : 'center'}}>
             <View style={{height:responsiveHeight(5)}}/>
 
             <View 	style={{alignItems: 'center',justifyContent: 'center'}}>

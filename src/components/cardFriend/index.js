@@ -19,7 +19,9 @@ export default class CardFriend extends React.Component {
         <Col size={30} >
         <View style={{flex:1,alignItems: 'flex-start'}}>
         
-                <Image source={require('../../../img/employee.png')} style={ styles.imageHead }></Image>
+                {employee.IMAGE_PATH =="" && <Image source={require('../../../img/employee.png')} style={ styles.imageHead }></Image>}
+                {employee.IMAGE_PATH!="" && <Image source={{uri:employee.IMAGE_PATH}} style={ styles.imageHead }></Image>}
+                
         </View>
         </Col>
         <Col size={75} style>

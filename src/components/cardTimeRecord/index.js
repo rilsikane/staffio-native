@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image,Platform } from 'react-native';
+import { StyleSheet, View, Image,Platform,TouchableOpacity } from 'react-native';
 import { Container, Header, Content, Thumbnail, Text, Left, Right, Button, Icon, Title, Body, Card, CardItem,Badge} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import Dimensions from 'Dimensions';
@@ -8,7 +8,13 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 //import ProgressCircle from 'react-native-progress-circle'
 
 export default class CardTimeRecord extends React.Component {
-
+    constructor(props){
+      super(props);
+      this.onpressItem = this.onpressItem.bind(this);
+    }
+    onpressItem(status){
+      this.props.gotoInbox(status);
+    }
     render() {
         const {amount_ab,amount_lt,amount_el} = this.props.record;
         return(
@@ -18,42 +24,44 @@ export default class CardTimeRecord extends React.Component {
                     <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
                     </CardItem>
                     <CardItem style={styles.cardContainer3}>
-                    <View style={styles.card}>
-                    <View style={styles.circle3}>
-                   <View style={styles.circle2}>    
-                    <View style={styles.circle}>
-                         <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
-                         <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
-                    </View>
-                    </View>
-                    </View>
-                    <View style={styles.square}/>
-                    <View style={styles.square2}/>
-                   </View> 
-                    <View style={styles.card}>
-                    <View style={styles.circle3}>
-                  <View style={styles.circle2}> 
-                    <View style={styles.circle}>                                         
-                         <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
-                         <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
-                    </View>
-                    </View>
-                    </View>
-                    <View style={styles.square}/>
-                    <View style={styles.square2}/>
-                    </View>
-                    <View style={styles.card}>
-                    <View style={styles.circle3}>
-                   <View style={styles.circle2}>
-                    <View  style={styles.circle}>          
-                         <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
-                         <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
-                    </View>
-                    </View>
-                    </View>
-                    <View style={styles.square}/>
-                    <View style={styles.square2}/>
-                    </View>
+                    
+                    <TouchableOpacity style={styles.card} onPress={(e)=>this.onpressItem("AB")}>
+                        <View style={styles.circle3}>
+                      <View style={styles.circle2}>    
+                        <View style={styles.circle}>
+                            <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
+                            <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
+                        </View>
+                        </View>
+                        </View>
+                        <View style={styles.square}/>
+                        <View style={styles.square2}/>
+                    </TouchableOpacity> 
+
+                   <TouchableOpacity style={styles.card} onPress={(e)=>this.onpressItem("LT")}>
+                      <View style={styles.circle3}>
+                    <View style={styles.circle2}> 
+                      <View style={styles.circle}>                                         
+                          <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
+                          <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
+                      </View>
+                      </View>
+                      </View>
+                      <View style={styles.square}/>
+                      <View style={styles.square2}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.card} onPress={(e)=>this.onpressItem("EL")}>
+                      <View style={styles.circle3}>
+                    <View style={styles.circle2}>
+                      <View  style={styles.circle}>          
+                          <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
+                          <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
+                      </View>
+                      </View>
+                      </View>
+                      <View style={styles.square}/>
+                      <View style={styles.square2}/>
+                    </TouchableOpacity>
                     </CardItem>
                 </Card>
         )

@@ -27,6 +27,7 @@ class ProfileScreen extends React.Component {
     super(props);
     this.state = {isLoading:true};
     this.logOutPress = this.logOutPress.bind(this);
+    this.gotoInbox = this.gotoInbox.bind(this);
     this.app = app;
   }
   static navigationOptions = {
@@ -54,6 +55,23 @@ class ProfileScreen extends React.Component {
        }
       
   }
+  gotoInbox(status){
+    const startOfMonth = moment().startOf('year').toDate();
+    const endOfMonth = moment().endOf('month').toDate();
+    //  this.props.navigator.switchToTab({
+    //   tabIndex: 1 // (optional) if missing, this screen's tab will become selected
+    // });
+    this.props.navigator.push({
+			screen: 'staffio.InqInboxScreen', // unique ID registered with Navigation.registerScreen
+			title: undefined, // navigation bar title of the pushed screen (optional)
+			titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
+			passProps: {statusForm:status,startDateFrom:startOfMonth,endDateFrom:endOfMonth}, // Object that will be passed as props to the pushed screen (optional)
+			animated: false, // does the push have transition animation or does it happen immediately (optional)
+			backButtonTitle: undefined, // override the back button title (optional)
+			backButtonHidden: false, // hide the back button altogether (optional)
+		});
+   
+  }
   getShiftHistory = async (user,startDate,endDate)=>{
     let params  = {};
     params.empID = user.EMP_CODE;
@@ -80,7 +98,7 @@ class ProfileScreen extends React.Component {
             </View>
           <Card style={{marginLeft:10,marginRight:10,marginTop:10}}>
             <CardItem style={{height:380}}>
-              <HeaderStatus user={this.state.user} statusAmount={this.state.statusAmount}/>
+              <HeaderStatus user={this.state.user} statusAmount={this.state.statusAmount} gotoInbox={this.gotoInbox}/>
             </CardItem>
           </Card>
           {/*<Card style={{height:300,marginRight:10,marginLeft:10,marginTop:0}}>

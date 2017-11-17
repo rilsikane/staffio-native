@@ -203,7 +203,7 @@ export default class AgendaView extends Component {
 
   renderReservations() {
     return (
-       <Home punchPress={this.props.punchPress} 
+       <Home punchPress={this.props.punchPress} gotoInbox={this.props.gotoInbox}
        user={this.props.user} holidays={this.props.holidays} statusAmount={this.props.statusAmount}
        shiftData={this.props.shiftData} shiftList={this.props.shiftList}/>
     );
