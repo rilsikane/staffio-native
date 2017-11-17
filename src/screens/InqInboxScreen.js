@@ -12,10 +12,6 @@ import Colors from '../constants/Colors'
 import {em,window} from '../constants/Layout'
 import {Content,Tabs,Tab,TabHeading,Container,Footer} from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Location from '../components/inbox/location'
-import Status from '../components/inbox/status'
-import Staff from '../components/inbox/staff'
-import SearchDate from '../components/inbox/searchDate'
 import InboxList from '../components/inbox/inboxList'
 import * as Animatable from 'react-native-animatable';
 import TagInput from '../components/tagInput';
@@ -53,7 +49,8 @@ export default class InboxScreen extends React.Component {
      this.onLocationChange = this.onLocationChange.bind(this);
      this.cancelDialog = this.cancelDialog.bind(this);
      this.clearTags = this.clearTags.bind(this);
-     this.onEndReached = this.onEndReached.bind(this)
+     this.onEndReached = this.onEndReached.bind(this);
+     this.closeDialog = this.closeDialog.bind(this);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   static navigationOptions = {
@@ -211,7 +208,15 @@ export default class InboxScreen extends React.Component {
     //  setTimeout(()=>{
     //    this.setState({isLoading:false});
     //  },500);
-     this.setState({modalVisible:true});
+     //this.setState({modalVisible:true});
+      this.props.navigator.showModal({
+        screen: "staffio.InqInboxCriteria", // unique ID registered with Navigation.registerScreen
+        title: "Modal", // title of the screen as appears in the nav bar (optional)
+        passProps: {cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
+        locations:this.state.locations,statuses:this.state.statuses,users:this.state.staffs}, // simple serializable object that will pass as props to the modal (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+      });
   }
   onCriteriaChange(tag){
     console.log(tag);
@@ -266,7 +271,9 @@ export default class InboxScreen extends React.Component {
     this.props.punchStore.locationSearch = this.state.locationSelect;
     this.props.punchStore.staffSearch = this.state.empSelect;
     this.props.punchStore.dateSearch =  this.state.dateSelect;
-    this.setState({modalVisible:false,isLoading:false});
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+    });
   }
   async clearTags(){
     this.setState({isLoading:true});
@@ -280,8 +287,13 @@ export default class InboxScreen extends React.Component {
     const response = await this.GetTimeRecordHistory(userData);
     this.setState({listTimeReocords:response,isLoading:false,statusSelect:[],locationSelect:[],empSelect:[],dateSelect:[]});
   }
-  async onDoneDialog(){
+  closeDialog(){
+     this.props.navigator.dismissModal({
+      animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+    });
     this.setState({isLoading:true});
+  }
+  async onDoneDialog(){
     const userData = await store.get("USER");
     let startDate,endDate;
     if(this.props.punchStore.dateSearch.length >0){
@@ -301,6 +313,7 @@ export default class InboxScreen extends React.Component {
     
     this.setState({locationSelect:this.props.punchStore.locationSearch,statusSearch:this.props.punchStore.statusSearch,
     dateSelect:this.props.punchStore.dateSearch,empSelect: this.props.punchStore.staffSearch});
+    
   }
   onLocationChange(locations){
     this.setState({locationSearch:locations});
@@ -330,7 +343,9 @@ export default class InboxScreen extends React.Component {
       this.init();
     }
     if (event.id === 'didAppear') {
-      this.init();
+      if(this.props.statusForm){
+        this.init();
+      }
     }
     // if (event.id === 'bottomTabReselected') {
     //   this.componentWillMount();
@@ -379,42 +394,12 @@ export default class InboxScreen extends React.Component {
               </ActionButton.Item>
           </ActionButton>
            
-           <Modal animationType="slide"
+           {/*<Modal animationType="slide"
                 transparent={false}
                 visible={this.state.modalVisible}>
                 
-                <Container style={{paddingTop:22,flex:1,backgroundColor:Colors.backgroundColor}}>
-                 <Content>
-                    <Tabs   initialPage={0} tabBarUnderlineStyle={{backgroundColor:Colors.baseColor}}>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="map-marker" style={styles.tabIcon}/><Text style={styles.tabLabel}>  สถานที่</Text></TabHeading>}>
-                        <Location locations={this.state.locations} />
-                      </Tab>
-                      <Tab  heading={ <TabHeading style={styles.tabHeading}><Icon name="clock-o"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  สถานะ</Text></TabHeading>}>
-                        <Status statusList={this.state.statuses}/>
-                      </Tab>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="calendar"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  วันที่</Text></TabHeading>}>
-                        <SearchDate />
-                      </Tab>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="user"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  พนักงาน</Text></TabHeading>}>
-                          <Staff users={this.state.users}/>
-                      </Tab>
-                    
-                    </Tabs>
-                   </Content>
-                    <Footer style={{backgroundColor:"transparent",borderColor:"transparent"}}>
-                         <View>
-                          <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.onDoneDialog}>
-                            <Icon style={{color:"#ffff"}} name="search"/><Text style={{color:"#ffff"}}>  ค้นหา</Text>
-                          </Button>
-                        </View>
-                         <View style={{borderLeftColor:Colors.baseColor,marginLeft:5}}>
-                          <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.cancelDialog}>
-                            <Icon style={{color:"#ffff"}} name="times"/><Text style={{color:"#ffff"}}>  ยกเลิก</Text>
-                          </Button>
-                        </View>
-                    </Footer>
-                </Container>
-              </Modal>
+                
+              </Modal>*/}
       </View>
     );
   }
