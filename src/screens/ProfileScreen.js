@@ -86,7 +86,8 @@ class ProfileScreen extends React.Component {
 
   render() {
     if(this.state.isLoading)
-      return (<View style={styles.container}>{this.loading()}</View>)
+      //return (<View style={styles.container}>{this.loading()}</View>)
+      return null;
     else 
     return (
       <Container style={{backgroundColor:Colors.backgroundColor}}>

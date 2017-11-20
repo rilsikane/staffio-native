@@ -154,11 +154,11 @@ class StampPunch extends React.Component {
                          <Button transparent onPress={this.retry}>
                             <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>ถ่ายใหม่</Text>
                         </Button>
-                        <Button transparent onPress={this.ok}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>ตกลง</Text>
-                        </Button>
                         <Button transparent onPress={this.cancel}>
                             <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>ยกเลิก</Text>
+                        </Button>
+                        <Button transparent onPress={this.ok}>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>ตกลง</Text>
                         </Button>
                     </View>
                 </View>

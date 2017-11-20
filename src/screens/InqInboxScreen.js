@@ -37,7 +37,7 @@ export default class InboxScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = {showCriteria:false,tags:["All"]
-    ,listTimeReocords:[],isLoading:true,users:[]
+    ,listTimeReocords:[],isLoading:false,users:[]
     ,modalVisible:false,locationSearch:[],locations:[],dateSearch:[]
     ,locationSelect:[],statusSelect:[],dateSelect:[],empSelect:[],page:0,total:0};
     this.toggleCriteria = this.toggleCriteria.bind(this);
@@ -61,6 +61,7 @@ export default class InboxScreen extends React.Component {
     //this.setState({isLoading:true});
   }
   async init(){
+    this.setState({isLoading:true});
     const userData = await store.get("USER");
     let response = {};
     const master = await this.GetSearchCriteria(userData);
@@ -346,6 +347,27 @@ export default class InboxScreen extends React.Component {
       if(this.props.statusForm){
         this.init();
       }
+    }
+    if(event.selectedTabIndex!==undefined){
+      // switch(event.selectedTabIndex){
+      //   case 0 :{
+          
+      //     break;
+      //   }
+      //    case 3 :{
+      //     this.props.navigator.popToRoot({
+      //       animated: true, // does the popToRoot have transition animation or does it happen immediately (optional)
+      //       animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the popToRoot have different transition animation (optional)
+      //     });
+      //     break;
+      //   }
+
+        
+      // }
+      this.props.navigator.popToRoot({
+        animated: true, // does the popToRoot have transition animation or does it happen immediately (optional)
+        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the popToRoot have different transition animation (optional)
+      });
     }
     // if (event.id === 'bottomTabReselected') {
     //   this.componentWillMount();
