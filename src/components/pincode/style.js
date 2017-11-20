@@ -1,5 +1,6 @@
 import React from "react-native";
 import Dimensions from 'Dimensions';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 // Precalculate Device Dimensions for better performance
 const x = Dimensions.get('window').width;
@@ -22,14 +23,18 @@ function em(value) {
 export default  styles = {
   textHeader:{
      fontFamily:'Kanit',
-     fontSize: em(1.2),
+     fontSize: responsiveFontSize(3),
      color: "#545254"
   },
   pinCodeContainer:{
     backgroundColor:"#ffff"
   },
   rowStyle: {
-    marginTop:em(7)
+    marginTop:responsiveHeight(15),
+    
+  },
+  colStyle :{
+    alignItems: 'center',
   },
   viewStyle: {
     justifyContent: 'center',
@@ -38,55 +43,54 @@ export default  styles = {
   viewHeader:{
     justifyContent: 'center',
     alignItems: 'center',
-    height: em(4.5),
+    height: responsiveHeight(10),
   },
   textStyle: {
     fontFamily: "Kanit",
-    fontSize: em(2.5),
+    fontSize: responsiveFontSize(4),
     color: "#f58020",
     backgroundColor:'transparent',
-    textAlign: 'center',
-     marginLeft:em(0.5)
+    textAlign: 'center'
   },
   textCaptionStyle:{
-    width: em(2),
+    width: responsiveWidth(10),
     fontFamily: "Kanit",
-    fontSize: em(1.25),
+    fontSize: responsiveFontSize(3),
     backgroundColor:'transparent',
     color: "#f58020",
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:em(0.2)
+    marginLeft:responsiveWidth(3)
    
   },
   iconStyle:{
-    width: em(2),
+    width: responsiveWidth(10),
     fontFamily: "Kanit",
-    fontSize: em(1.5),
+    fontSize: responsiveFontSize(3),
     backgroundColor:'transparent',
     color: "#f58020",
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:em(0.4)
+    marginLeft:responsiveWidth(5)
    
   },
   iconStyleTouch:{
-    width: em(2),
+    width: responsiveWidth(10),
     fontFamily: "Kanit",
-    fontSize: em(1.8),
+    fontSize:responsiveFontSize(3),
     backgroundColor:'transparent',
     color: "#f58020",
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:em(0.4)
+    marginLeft:responsiveWidth(5)
    
   },
   buttonView:{
-    borderRadius: em(3.5),
+    borderRadius:responsiveWidth(18/2),
     marginRight: 0,
     marginLeft: 0,
-    height: em(4.5),
-    width: em(4.5),
+    height: responsiveHeight(10),
+    width: responsiveWidth(18),
     backgroundColor: "#f1f2f2",
     borderColor:"#f1f2f2",
     borderBottomWidth: 0,
@@ -94,13 +98,15 @@ export default  styles = {
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.6,
     shadowRadius: 1,
+    alignItems:'center',
+    justifyContent:'center'
   },
   TextPut:{
     //backgroundColor:"red",
-    marginLeft: em(0.7),
-    fontSize: em(2.5),
+    marginLeft: responsiveWidth(1),
+    fontSize: responsiveFontSize(5),
     // height: em(2.8),
-    width: em(2.2),
+    width: responsiveWidth(10),
     color:"#f58020",
     justifyContent:'center',
     alignItems:'center'
@@ -116,8 +122,11 @@ export default  styles = {
   },
   gridStyles:{
     flex:0,
-    marginTop:em(3),
-    marginLeft:em(3.5),
-    backgroundColor:"#ffff"
+    marginTop:responsiveHeight(7),
+    marginLeft:responsiveWidth(15),
+    backgroundColor:"#ffff",
+    justifyContent:'center',
+    alignItems:'center'
+
   }
 };
