@@ -9,11 +9,11 @@ import axios from 'axios';
 //const endpoint = "http://45.116.216.94/Staffio_API/api/";
 
 //G-Able
-//const endpoint = "http://45.116.216.94/Staffio_gable_api/api/";
+//const endpoint = "https://staffio.g-able.com/Staffio_gable_api/api/";
 
 const endpoints ={"DEV":"http://172.20.14.212/api_mobile/api/"
-,"TFS":"http://45.116.216.94/Staffio_API/api/","G-ABLE":"http://45.116.216.94/Staffio_gable_api/api/",
-"G-ABLE":"http://45.116.216.94/Staffio_gable_api/api/","OMS":"http://45.116.216.94/Staffio_gable_api/api/"}
+,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/",
+"G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
 
 import store from 'react-native-simple-store';
 import {

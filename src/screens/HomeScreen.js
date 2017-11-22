@@ -267,6 +267,7 @@ class HomeScreen extends React.Component {
     params.EmpCode = user.EMP_CODE;
     params.startDate = convertDate(startDate);
     params.endDate = convertDate(endDate);
+    params.orgCode = user.ORG_CODE;
     params.pagesize = 100;
     params.page=1;
     const response = await post("GetShiftPatternByPersonal",params);

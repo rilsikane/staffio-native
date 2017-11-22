@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 	Image,Keyboard,
 	TouchableWithoutFeedback,
-    Alert
+    Alert,Text
 } from 'react-native';
 
 import UserInput from '../UserInput';
@@ -26,6 +26,7 @@ import { NavigationActions } from'react-navigation';
 import store from 'react-native-simple-store';
 import {authen} from '../../api';
 import Constans from '../../constants/Constants';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 @inject('userStore')
 @observer
@@ -57,7 +58,12 @@ export default class LoginForm extends Component {
 		user.tokenType = "M";
 		user.version = Constans.version;
 
+		const orgTmp = this.props.userStore.userLogin.username.split("@");
+		if(orgTmp.length>1){
 		await store.save('endpoint',this.props.userStore.userLogin.username.split("@")[1]);
+		}else{
+		await store.save('endpoint',"OMS");	
+		}
 
 		const response = await authen("checkLogin", user);
 		if(response){
@@ -123,6 +129,11 @@ export default class LoginForm extends Component {
                         <View style={{marginTop:2,flex:1}}>
 						<ButtonSubmit onPress={this.onPress}/>
                         </View>
+						<View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
+							<Text style={{marginTop:responsiveHeight(10),color:"#F7BC65",backgroundColor:"transparent"}}>
+								{`V.0.1.0-R${Constans.version}`}
+							</Text>
+						</View>
 				</KeyboardAvoidingView>
 			
 		);

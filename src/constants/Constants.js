@@ -1,3 +1,6 @@
 export default {
-    version:"1.0.0.0"
+    //app_store
+    // version:"1"
+    //UAT
+    version:"0.0.0.9"
 }
