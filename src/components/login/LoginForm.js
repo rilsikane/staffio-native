@@ -130,7 +130,14 @@ export default class LoginForm extends Component {
 						<ButtonSubmit onPress={this.onPress}/>
                         </View>
 						<View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
-							<Text style={{marginTop:responsiveHeight(10),color:"#F7BC65",backgroundColor:"transparent"}}>
+							<Text style={{marginTop:responsiveHeight(10),color:"#FFFF",backgroundColor:"transparent"
+							,fontSize:responsiveFontSize(1.2)}}>
+								COPYRIGHT 2017 G-ABLE CO., LTD
+							</Text>
+						</View>
+						<View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
+							<Text style={{marginTop:responsiveHeight(0.1),color:"#FFFF"
+							,backgroundColor:"transparent",fontSize:responsiveFontSize(1.6)}}>
 								{`V.0.1.0-R${Constans.version}`}
 							</Text>
 						</View>
