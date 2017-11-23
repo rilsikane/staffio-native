@@ -88,6 +88,14 @@ export default async function startApplication(root) {
             drawUnderNavBar: true,
             navBarTransparent: true,
             navBarHidden: true,
+            tabBarButtonColor: '#d1c1a1', // change the color of the tab icons and text (also unselected)
+            tabBarSelectedButtonColor: '#f1d749', // change the color of the selected tab icon and text (only selected)
+            tabBarBackgroundColor: '#ffff', // change the background color of the tab bar
+            tabBarTranslucent: false, // change the translucent of the tab bar to false
+            tabBarTextFontFamily: 'Kanit', //change the tab font family
+            tabBarLabelColor: '#d1c1a1', // iOS only. change the color of tab text
+            tabBarSelectedLabelColor: '#f1d749', // iOS only. change the color of the selected tab text
+            forceTitlesDisplay: true // Android only. If true - Show all bottom tab labels. If false - only the selected tab's label is visible.
           },
            animationType: 'fade',
            lazyload:true

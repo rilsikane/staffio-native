@@ -317,7 +317,7 @@ class HomeScreen extends React.Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
    _handleAppStateChange = async (nextAppState) => {
-    console.log("_handleAppStateChange");
+    console.log("_handleAppStateChange",nextAppState);
     // if(intervalId==null){
     //   intervalId = BackgroundTimer.setTimeout(() => {
     //         BackgroundTimer.clearTimeout(intervalId);
@@ -325,7 +325,14 @@ class HomeScreen extends React.Component {
     //          this.app.authePinCode();
     //     }, 200000);
     // }
-     
+     if("background"==nextAppState){
+        intervalId = BackgroundTimer.setTimeout(() => {
+             this.app.authePinCode();
+        }, 10000);
+     }else if("active"==nextAppState){
+            BackgroundTimer.clearTimeout(intervalId);
+            intervalId = null;
+     }
   }
 }
 
