@@ -21,7 +21,7 @@ export default class CardTimeRecord extends React.Component {
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
                     <Text allowFontScaling={false}style={styles.titleText}>ประวัติการลงเวลา</Text>
-                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน กันยายน 2560)</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือนนี้)</Text>
                     </CardItem>
                     <CardItem style={styles.cardContainer3}>
                     

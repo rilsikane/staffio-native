@@ -29,12 +29,13 @@ import {
             <View style={{height:responsiveHeight(5)}}/>
 
             <View 	style={{alignItems: 'center',justifyContent: 'center'}}>
-            {/*<Image source={require('../../../img/1510652332811.jpg')}/>*/}
+            <Image source={require('../../img/1510652332811.jpg')}/>
            <Text style={{color :'orange', fontSize: responsiveFontSize(3), fontFamily: 'Kanit', alignItems: 'center'}}>privacy policy</Text>
            </View>
        
        
               <ScrollView>
+              <View style={{paddingLeft : (5),paddingRight : (5)}}>
               <Text style={{color : 'black', fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit'}}>This privacy policy has been compiled to better serve those who are concerned with how their ‘Personally Identifiable Information’ (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.</Text>
               <Text/>
               <Text/>
@@ -61,13 +62,12 @@ We use regular Malware Scanning.
 Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.
 We implement a variety of security measures when a user enters, submits, or accesses their information to maintain the safety of your personal information.
 All transactions are processed through a gateway provider and are not stored or processed on our servers.</Text>
-
+                </View>
               </ScrollView>
-
-              
+            
                 <View 	style={{alignItems: 'center',justifyContent: 'center'}}>
               <Button  onPress={this.closeDialog}  style={{backgroundColor:"orange",justifyContent: 'center',alignItems : 'center',width : responsiveWidth(50),height : responsiveHeight(6) ,borderRadius: responsiveWidth(50/2)}}>
-              <Text style={{color : 'white'}}> ยอมรับ </Text>
+              <Text style={{color : 'white'}}> accept </Text>
              </Button>
              </View>
              </Card>

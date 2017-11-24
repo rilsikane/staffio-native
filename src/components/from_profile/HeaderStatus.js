@@ -2,6 +2,7 @@ import React from 'react';
 import {View,Text,Image,TouchableOpacity} from 'react-native';
 import {Grid,Row,Col,Body,Button,Badge,CardItem} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 import {em} from '../../constants/Layout' 
 
@@ -61,26 +62,50 @@ const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
               <Text allowFontScaling={false}style={styles.TextStyle6}>{`สรุปสถานะการมาทำงาน ${year}`}</Text>
             </View>
           </Row>
-          <Row size={15}>
-              <Col size={2}/>
-              <Col size={30} style={styles.ViewColStyle}>
-                <TouchableOpacity onPress={(e)=>gotoInbox("AB")}>
+          <Row size={15} style={{alignItems: 'center',justifyContent: 'center'}}>
+              <Col size={2} style={{alignItems: 'center',justifyContent: 'center'}}/>
+              
+                <TouchableOpacity onPress={(e)=>gotoInbox("AB")} style={{alignItems: 'center',justifyContent: 'center'}}>
+                  <View style={styles.circle3}>
+                  <View style={styles.circle2}>    
+                  <View style={styles.circle}>
                   <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_ab}</Text>
                   <Text allowFontScaling={false}style={styles.TextStyle8}>ขาด</Text>
+                  </View>
+                  </View>
+                  </View>
+                  <View style={styles.square}/>
+                  <View style={styles.square2}/>
                 </TouchableOpacity>
-              </Col>
-              <Col size={30} style={styles.ViewColStyle}>
-                <TouchableOpacity onPress={(e)=>gotoInbox("LT")}>
+        
+             
+                <TouchableOpacity onPress={(e)=>gotoInbox("LT")} style={{alignItems: 'center',justifyContent: 'center'}}>
+                <View style={styles.circle3}>
+                  <View style={styles.circle2}>    
+                  <View style={styles.circle}>
                   <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_lt}</Text>
                   <Text allowFontScaling={false}style={styles.TextStyle8}>สาย</Text>
+                  </View>
+                  </View>
+                  </View>
+                  <View style={styles.square}/>
+                  <View style={styles.square2}/>
                 </TouchableOpacity>
-              </Col>
-              <Col size={30}>
-              <TouchableOpacity onPress={(e)=>gotoInbox("EL")}>
+              
+           
+              <TouchableOpacity onPress={(e)=>gotoInbox("EL")} style={{alignItems: 'center',justifyContent: 'center'}}>
+              <View style={styles.circle3}>
+                  <View style={styles.circle2}>    
+                  <View style={styles.circle}>
                 <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_el}</Text>
                 <Text allowFontScaling={false}style={styles.TextStyle8}>กลับก่อน</Text>
+                </View>
+                  </View>
+                  </View>
+                  <View style={styles.square}/>
+                  <View style={styles.square2}/>
               </TouchableOpacity>
-              </Col>
+             
               <Col size={2}/>
           </Row>
           <Row size={2} />
@@ -215,6 +240,54 @@ const styles={
   ViewColStyle:{
     borderRightWidth:1,
     borderColor:'#a9a9a9'
+  },
+  circle: {
+    height:  responsiveHeight(12),
+    width: responsiveWidth(21),
+    borderRadius: responsiveWidth(21/2),
+    backgroundColor:'#ffff',
+    alignItems: 'center',
+    flex:null,
+    marginRight:5,
+    marginLeft:5,
+  },
+  circle2: {
+    height:   responsiveHeight(13),
+    width: responsiveWidth(22),
+    borderRadius:responsiveWidth(22/2),
+    backgroundColor:'#F3F3F4',
+    alignItems: 'center',
+    flex:null,
+    marginRight:5,
+    marginLeft:5,
+    justifyContent: 'center'
+  },
+  circle3: {
+    height: responsiveHeight(14),
+    width: responsiveWidth(23),
+    borderRadius: responsiveWidth(23/2),
+    backgroundColor:'#E5E5E5',
+    alignItems: 'center',
+    flex:null,
+    marginRight:5,
+    marginLeft:5,
+    justifyContent: 'center'
+  },
+  square: {
+    height: responsiveHeight(0.5),
+    width:responsiveWidth(21),
+    backgroundColor:'#ffff',
+    alignItems: 'center',
+    flex:null,
+    justifyContent: 'center'
+  },
+  square2: {
+    height: responsiveHeight(0.5),
+    width: responsiveWidth(16),
+    backgroundColor:'#E5E5E5',
+    alignItems: 'center',
+    flex:null,
+    justifyContent: 'center'
   }
 }
 export default HeaderStatus;
