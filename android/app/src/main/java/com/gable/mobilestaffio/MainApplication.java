@@ -3,13 +3,14 @@ package com.gable.mobilestaffio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rnfs.RNFSPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
-import com.cboy.rn.splashscreen.SplashScreenReactPackage;
+
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,13 +32,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new ImageResizerPackage(),
             new BackgroundTimerPackage(),
             new RNDeviceInfo(),
             new RNFSPackage(),
             new RCTCameraPackage(),
             new RNSpinkitPackage(),
-            new SplashScreenReactPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage()
       );
