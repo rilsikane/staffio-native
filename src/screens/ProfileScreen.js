@@ -93,11 +93,12 @@ class ProfileScreen extends React.Component {
       <Container style={{backgroundColor:Colors.backgroundColor}}>
         <Content style={{marginTop:10}}>
           <View style={{ alignSelf: 'flex-end',marginTop: -5,position: 'absolute',zIndex:9999}}>
-                <Button onPress={this.logOutPress} iconRight transparent style={{alignSelf:"flex-end",marginLeft:25,marginTop:10}}>
-                  <Iocon style={{color:colors.baseColor}}  name="ios-log-out-outline" size={30}/>
-                </Button>
+                
             </View>
           <Card style={{marginLeft:10,marginRight:10,marginTop:10}}>
+            <Button onPress={this.logOutPress} iconRight transparent style={{alignSelf:"flex-end",marginLeft:25,marginTop:10}}>
+                  <Iocon style={{color:colors.baseColor}}  name="ios-log-out-outline" size={30}/>
+              </Button>
             <CardItem style={{height:380}}>
               <HeaderStatus user={this.state.user} statusAmount={this.state.statusAmount} gotoInbox={this.gotoInbox}/>
             </CardItem>

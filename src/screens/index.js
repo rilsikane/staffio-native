@@ -16,7 +16,7 @@ import FindFriendScreen from './FindFriendsScreen'
 import FriendListScreen from './FriendListScreen'
 import PrivacyScreen from './PrivacyScreen'
 import InqInboxCriteria from './InqInboxCriteria'
-
+//import Overview from'./Overview';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -34,6 +34,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.FriendListScreen', () => FriendListScreen, Store, Provider);
   Navigation.registerComponent('staffio.PrivacyScreen', () => PrivacyScreen, Store, Provider);
   Navigation.registerComponent('staffio.InqInboxCriteria', () => InqInboxCriteria, Store, Provider);
+  //Navigation.registerComponent('staffio.Overview', () => Overview, Store, Provider);
 
 }
 export function registerScreenVisibilityListener() {
