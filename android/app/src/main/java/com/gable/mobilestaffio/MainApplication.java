@@ -84,6 +84,7 @@ public class MainApplication extends NavigationApplication  {
             new RNFSPackage(),
             new RCTCameraPackage(),
             new RNSpinkitPackage(),
+            new SplashScreenReactPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage()
         );
