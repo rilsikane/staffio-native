@@ -90,8 +90,10 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+//    compileSdkVersion 23
+//    buildToolsVersion '26.0.2'
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.gable.mobilestaffio"
         minSdkVersion 16
@@ -160,8 +162,9 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.0.4'
     //this decides your firebase SDK version
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.facebook.react:react-native:+'
+    compile project(':react-native-navigation')
 }
 
 // Run this once to be able to run the application with BUCK
