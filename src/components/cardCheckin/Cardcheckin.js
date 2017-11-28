@@ -21,16 +21,14 @@ export default class Checkin extends React.Component {
         this.props.onContactSelected(url);
       }
 
-    //   changcolorborder(checkin){
-    //     if(checkin == 'true'){
-    //          borderTopColor = 'green'
-    //          return borderTopColor
-    //     }else {
-    //         borderTopColor = 'red'
-    //         return borderTopColor
-    //     }
+      changcolorborder(checkin){
+        if(checkin == 'true'){
+             return  {borderTopColor : 'green'} 
+        }else {
+            return  {borderTopColor : 'red'}
+        }
        
-    //   }
+      }
 
 
     render() {
@@ -44,17 +42,7 @@ export default class Checkin extends React.Component {
                 
             
                 <CardItem>
-                <View style={{ position: 'absolute',
-        top : 0,
-        left : 0,
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderRightWidth: responsiveWidth(8),
-        borderTopWidth: responsiveWidth(8),
-        borderRightColor: 'transparent',
-        borderTopColor : 'green'}}/>
+                <View style={[styles.box1,this.changcolorborder(this.props.data.checkin)]}/>
                     <Left style ={{left : responsiveWidth(3), top : responsiveWidth(0)}}>
                     <Image source={require('../../../img/1510652332811.jpg')} style={{height: responsiveHeight(8), width:  responsiveWidth(10) }}/>
                     </Left>
@@ -131,8 +119,7 @@ const styles = ({
         borderStyle: 'solid',
         borderRightWidth: responsiveWidth(8),
         borderTopWidth: responsiveWidth(8),
-        borderRightColor: 'transparent',
-        borderTopColor : 'green'
+        borderRightColor: 'transparent'
       },
       container: {
         flex: 1

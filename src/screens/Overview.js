@@ -47,7 +47,7 @@ export default class Overview extends React.Component {
         {name : 'Sittichok  Boom', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
         {name : 'Kritsada  DJ', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}]
         this.onContactSelected = this.onContactSelected.bind(this);
-        // this.changcolorborder = this.changcolorborder.bind(this);
+        
     }
 
 

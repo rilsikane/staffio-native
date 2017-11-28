@@ -5,6 +5,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import Dimensions from 'Dimensions';
 import {em,x} from '../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {getmonth,getyear} from '../../utils/staffioUtils';
 //import ProgressCircle from 'react-native-progress-circle'
 
 export default class CardTimeRecord extends React.Component {
@@ -12,6 +13,8 @@ export default class CardTimeRecord extends React.Component {
       super(props);
       this.onpressItem = this.onpressItem.bind(this);
     }
+
+    
     onpressItem(status){
       this.props.gotoInbox(status);
     }
@@ -21,7 +24,9 @@ export default class CardTimeRecord extends React.Component {
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
                     <Text allowFontScaling={false}style={styles.titleText}>ประวัติการลงเวลา</Text>
-                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือนนี้)</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}> {getmonth()}</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}> {getyear()} )</Text>
                     </CardItem>
                     <CardItem style={styles.cardContainer3}>
                     
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(1.5),
     backgroundColor:'transparent',
-    color: '#E5E5E5',
+    color: '#666600',
   },
   noteText2: {
     fontFamily:"Kanit",
