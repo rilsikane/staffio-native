@@ -29,6 +29,16 @@ switch(status){
     
  }
 }
+
+function changcolorborder (flag) {
+  if (flag == 'Y'){
+    return {color:'#ff7f50'}
+  }else {
+    return {color : 'red'}
+  }
+  }
+
+
 const TimeIn =({record,punchRecord,onPressItem}) => {
   return(
       <TouchableOpacity onPress={()=> onPressItem(record)}>
@@ -40,9 +50,10 @@ const TimeIn =({record,punchRecord,onPressItem}) => {
             <Col size={27} style={styles.center}>
               <View style={{ flexDirection: 'row',alignItems:"center",justifyContent:"center"}}>
                   <Icon name='location-arrow' size={responsiveFontSize(1.5)} color='red'/>
-                  <Text allowFontScaling={false}style={styles.TextColor1} numberOfLines={1}> 
-                    {'Y'==record.area_flag ? record.branchName : "ลงเวลานอกสถานที่"} 
+                    <Text allowFontScaling={false} style={[styles.TextColor1,changcolorborder(record.area_flag)]} numberOfLines={1}> 
+                    {record.branchName}
                     </Text>
+
               </View>
             </Col>
             <Col size={15} style={{justifyContent:"center",alignItems:"center"}}>
@@ -101,7 +112,7 @@ const styles={
   },
   TextColor1:{
     fontSize:responsiveFontSize(1.4),
-    color:'#ff7f50',
+    //color:'#ff7f50',
     fontFamily:'Kanit'
   },
   TextColor2:{
