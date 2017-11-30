@@ -41,6 +41,15 @@ function renderFormStatus(status){
     
  }
 }
+
+function changcolorborder(flagin,flagout) {
+  if (flagin == 'Y' && flagout == 'Y') {
+    return { color: '#ff8c00' }
+  } else {
+    return { color: 'red' }
+  }
+}
+
 const TimeInOut =(shift) => {
 
   
@@ -58,9 +67,8 @@ const TimeInOut =(shift) => {
                 </Row><Row style={styles.RowStyle2}>
                     <View style={styles.ViewStyle2}>
                         <Icon name='location-arrow' size={responsiveFontSize(2)} color='red'/>
-                        <Text allowFontScaling={false}style={styles.TextColor1} numberOfLines={1}> 
-                          {("Y"== shift.shift.area_flag_in && "Y"== shift.shift.area_flag_out) 
-                          ? shift.shift.branch_name : "ลงเวลานอกสถานที่"} 
+                        <Text allowFontScaling={false}style={[styles.TextColor1,changcolorborder(shift.shift.area_flag_in,shift.shift.area_flag_out)]} numberOfLines={1}> 
+                          {shift.shift.branch_name} 
                         </Text>
                     </View>
                 </Row>
@@ -237,7 +245,7 @@ const styles={
   },
   TextColor1:{
     fontSize:responsiveFontSize(1.5),
-    color:'#f58020'
+    //color:'#f58020'
   },
   TextColor2:{
     fontSize:responsiveFontSize(2),
