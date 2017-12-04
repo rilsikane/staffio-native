@@ -1,12 +1,12 @@
 package com.gable.mobilestaffio;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
+import com.reactnativenavigation.NavigationApplication;
 import com.facebook.react.ReactApplication;
 //import com.cmcewen.blurview.BlurViewPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.reactnativenavigation.NavigationApplication;
-
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -67,7 +67,7 @@ import java.util.List;
 //}
 
 
-public class MainApplication extends NavigationApplication  {
+public class MainApplication extends NavigationApplication {
 
     @Override
     public boolean isDebug() {
@@ -75,6 +75,13 @@ public class MainApplication extends NavigationApplication  {
         return BuildConfig.DEBUG;
     }
 
+    @Nullable
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return null;
+    }
+
+    //@Override
     protected List<ReactPackage> getPackages() {
 
         return Arrays.<ReactPackage>asList(
@@ -89,13 +96,20 @@ public class MainApplication extends NavigationApplication  {
             new RNSpinkitPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage()
-        );
+      );
     }
 
-    @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
-        return getPackages();
-    }
+
+//  @Override
+//  public ReactNativeHost getReactNativeHost() {
+//    return mReactNativeHost;
+//  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
 }
 
 
