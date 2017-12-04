@@ -54,7 +54,7 @@ export default class CardFriend extends React.Component {
 
             <Col size={15} style={{ marginTop:25 }} >
         {/*<Badge info style={{height:35,width:35,borderRadius: 17}} ><Text allowFontScaling={false}><Icon  name="linkedin" color='white'/></Text></Badge>*/}
-            {employee.MOBILE_PHONE && <TouchableOpacity onPress={() => Communications.phonecall(employee.MOBILE_PHONE.replace(/-/g,""), true)}>
+            {(employee.MOBILE_PHONE && employee.MOBILE_PHONE!="") && <TouchableOpacity onPress={() => Communications.phonecall(employee.MOBILE_PHONE.replace(/-/g,""), true)}>
             <Badge primary style={{height:em(1.8),width:em(1.8),borderRadius: em(1.3)}} ><Text allowFontScaling={false}style={{marginTop:-em(0.2),backgroundColor:"transparent"}}><Icon name="phone" color='white'/></Text></Badge>
           </TouchableOpacity>}
         </Col>

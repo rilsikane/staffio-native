@@ -3,6 +3,7 @@ package com.gable.mobilestaffio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+//import com.cmcewen.blurview.BlurViewPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 
@@ -38,6 +39,7 @@ import java.util.List;
 //    protected List<ReactPackage> getPackages() {
 //      return Arrays.<ReactPackage>asList(
 //          new MainReactPackage(),
+          
 //            new NavigationReactPackage(),
 //            new ImageResizerPackage(),
 //            new BackgroundTimerPackage(),
@@ -78,13 +80,13 @@ public class MainApplication extends NavigationApplication  {
         return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new SplashScreenReactPackage(),
+            //new BlurViewPackage(),
             new ImageResizerPackage(),
             new BackgroundTimerPackage(),
             new RNDeviceInfo(),
             new RNFSPackage(),
             new RCTCameraPackage(),
             new RNSpinkitPackage(),
-            new SplashScreenReactPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage()
         );

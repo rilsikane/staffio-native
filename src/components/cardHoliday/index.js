@@ -22,9 +22,9 @@ export default class CardHoliday extends React.Component {
                         </Body>
                     </Left>                            
                     <Right style={{flexDirection:"row",justifyContent:"flex-end",alignItems:"center"}}>
-                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(3),color: '#ffff'}}>รวม  </Text>
+                        <Text allowFontScaling={false}style={styles.totalText}>รวม  </Text>
                         <Text allowFontScaling={false}style={styles.numberText}>{this.props.holiday.sum_holiday}</Text>
-                        <Text allowFontScaling={false}style={styles.totalText}>วัน</Text>
+                        <Text allowFontScaling={false}style={styles.totalText}> วัน</Text>
                     </Right>
                 </CardItem>
             </Card>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
       paddingLeft:responsiveWidth(1),
       fontSize:responsiveFontSize(2),
       color:"#ffff",
+      fontFamily:"Kanit",
       backgroundColor:"transparent",
       width:responsiveWidth(40)
   },
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   totalText: {
     fontFamily:"Kanit",
-    fontSize: responsiveFontSize(4),
+    fontSize: responsiveFontSize(3),
     color: '#ffff',
   },
   titleText: {
