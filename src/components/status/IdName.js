@@ -23,7 +23,7 @@ const IdName = ({record}) => {
         </Col>
         <Col size={80} style={{marginTop:-6}}>
           <Row size={40}>
-              <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(1.6),fontFamily:'Kanit',marginTop:1}}>{record.fullNameTH}</Text>
+              <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(1.6),fontFamily:'Kanit',marginTop:1,backgroundColor:'transparent'}}>{record.fullNameTH}</Text>
           </Row>
            <Row size={30}>
             <Col size={100}>
@@ -59,7 +59,8 @@ const styles={
   TextStyle:{
     fontSize:responsiveFontSize(1.5),
     color:'#a9a9a9',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   }
 }
 export default IdName;

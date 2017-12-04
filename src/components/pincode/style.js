@@ -24,7 +24,8 @@ export default  styles = {
   textHeader:{
      fontFamily:'Kanit',
      fontSize: responsiveFontSize(3),
-     color: "#545254"
+     color: "#545254",
+     backgroundColor:"transparent"
   },
   pinCodeContainer:{
     backgroundColor:"#ffff"
@@ -44,6 +45,7 @@ export default  styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: responsiveHeight(10),
+    backgroundColor:'transparent'
   },
   textStyle: {
     fontFamily: "Kanit",

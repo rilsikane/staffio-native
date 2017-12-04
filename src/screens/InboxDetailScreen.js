@@ -151,7 +151,8 @@ export default class InboxDetailScreen extends React.Component {
 const styles={
   HeaderFont:{
     color:"#FFFF",
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+    backgroundColor:'transparent'
   },
   ViewStyle:{
     marginTop:responsiveHeight(1),
@@ -166,7 +167,8 @@ const styles={
     color:'#ff7f50',
     fontSize: responsiveFontSize(2.5),
     fontWeight:"bold",
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:'transparent'
   },
 }
 

@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
   titleText: {
     fontFamily:"Kanit",
     color: '#663300',
-    fontSize: responsiveFontSize(2)
+    fontSize: responsiveFontSize(2),
+    backgroundColor:'transparent'
   },
   noteText: {
     fontFamily:"Kanit",

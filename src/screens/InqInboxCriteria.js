@@ -56,12 +56,12 @@ import Colors from '../constants/Colors'
                     <Footer style={{backgroundColor:"transparent",borderColor:"transparent"}}>
                          <View>
                           <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.onDoneDialog}>
-                            <Icon style={{color:"#ffff"}} name="search"/><Text style={{color:"#ffff"}}>  ค้นหา</Text>
+                            <Icon style={{color:"#ffff", backgroundColor:"transparent"}} name="search"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ค้นหา</Text>
                           </Button>
                         </View>
                          <View style={{borderLeftColor:Colors.baseColor,marginLeft:5}}>
                           <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.cancelDialog}>
-                            <Icon style={{color:"#ffff"}} name="times"/><Text style={{color:"#ffff"}}>  ยกเลิก</Text>
+                            <Icon style={{color:"#ffff",backgroundColor:"transparent"}} name="times"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ยกเลิก</Text>
                           </Button>
                         </View>
                     </Footer>
@@ -73,12 +73,14 @@ import Colors from '../constants/Colors'
 const styles = StyleSheet.create({
   tabIcon:{
     color:Colors.baseColor,
-    fontSize:responsiveFontSize(2)
+    fontSize:responsiveFontSize(2),
+    backgroundColor:"transparent"
   },
   tabLabel:{
     color:Colors.baseColor,
     fontFamily:'Kanit',
-    fontSize:responsiveFontSize(1.5)
+    fontSize:responsiveFontSize(1.5),
+    backgroundColor:"transparent"
   },
   tabHeading:{
     borderRightWidth: 1,
@@ -87,7 +89,8 @@ const styles = StyleSheet.create({
   HeaderFont:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2)
+    fontSize:responsiveFontSize(2),
+    backgroundColor:'transparent'
   },
   buttonStyle: {
     position: "absolute",

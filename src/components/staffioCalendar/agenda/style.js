@@ -39,7 +39,8 @@ export default function styleConstructor(theme = {}) {
       textAlign: 'center',
       fontSize: responsiveFontSize(1.7),
       color: "#ffff",
-      fontFamily:'Kanit'
+      fontFamily:'Kanit',
+      backgroundColor:"transparent"
     },
     reservations: {
       flex: 1,
