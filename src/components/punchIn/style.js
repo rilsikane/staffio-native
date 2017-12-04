@@ -57,7 +57,7 @@ export default styles={
     zIndex:999
   },
   TextDateStyle2:{
-    marginTop:-20,
+    marginTop:-16,
     fontFamily:"Kanit",  
     fontSize:em(3),
     color:'#f58020',
@@ -77,6 +77,7 @@ export default styles={
   TextNameStyle1:{
     fontFamily:"Kanit",
     fontSize:em(1.2),
+    marginTop : 1,
     marginLeft:5,
     color:'#ffff',
     
@@ -85,6 +86,7 @@ export default styles={
     fontFamily:"Kanit",
     fontSize:em(0.8),
     color:'#ffff',
+    marginLeft:5
     
   },
   TextDateTimeStyle:{
@@ -132,7 +134,7 @@ export default styles={
   TextTimeStyle2:{
      fontFamily:"Kanit",
     fontSize:em(0.8),
-    marginLeft:35,
+    marginLeft:26,
     color:'#ffff',
     
   },
@@ -147,7 +149,7 @@ export default styles={
   TextTimeStyle4:{
      fontFamily:"Kanit",
     fontSize:em(0.8),
-    marginLeft:45,
+    marginLeft:41,
     color:'#ffff',
     width:em(5)
     
@@ -182,10 +184,11 @@ export default styles={
     
   },
   bodyImage:{
-    height: responsiveHeight(8),
-    width: responsiveWidth(14.5),
-    marginLeft:responsiveWidth(1),
-    borderRadius:responsiveWidth(7.5)
+    height: responsiveHeight(6),
+    width: responsiveWidth(11),
+    marginTop : responsiveHeight(1),
+    marginLeft:responsiveWidth(1.5),
+    borderRadius:responsiveWidth(11/2)
 
   },
   gridStyle:{

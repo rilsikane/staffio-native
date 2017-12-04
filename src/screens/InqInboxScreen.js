@@ -214,7 +214,7 @@ export default class InboxScreen extends React.Component {
         screen: "staffio.InqInboxCriteria", // unique ID registered with Navigation.registerScreen
         title: "Modal", // title of the screen as appears in the nav bar (optional)
         passProps: {cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
-        locations:this.state.locations,statuses:this.state.statuses,users:this.state.staffs}, // simple serializable object that will pass as props to the modal (optional)
+        locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
         navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
         animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
       });
@@ -401,7 +401,7 @@ export default class InboxScreen extends React.Component {
             </Button>
           </Fab>*/}
             <ActionButton size={45}  backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
-            icon={<IconTello name="hhmm-29" style={{color:"#ffff"}}/>} 
+            icon={<IconTello name="hhmm-29" style={{color:"#ffff", backgroundColor:'transparent'}}/>} 
             backdrop={<AnimatedOverlay
               backgroundColor='#000'
               opacity={0.8}
@@ -409,10 +409,10 @@ export default class InboxScreen extends React.Component {
               overlayShow={true}
             />} degrees={180}>
               <ActionButton.Item  buttonColor={Colors.baseColor} title='ค้นหา' onPress={this.openCriteria}>
-                 <Icon name="search" style={{color:"#ffff"}}/>
+                 <Icon name="search" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
               <ActionButton.Item  buttonColor={Colors.baseColor} title="ล้างตัวเลือก"  onPress={this.clearTags}>
-               <Icon name="trash" style={{color:"#ffff"}}/>
+               <Icon name="trash" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
           </ActionButton>
            
@@ -436,7 +436,8 @@ const styles = StyleSheet.create({
   tabLabel:{
     color:Colors.baseColor,
     fontFamily:'Kanit',
-    fontSize:em(0.7)
+    fontSize:em(0.7),
+    backgroundColor:'transparent'
   },
   tabHeading:{
     borderRightWidth: 1,
@@ -445,7 +446,8 @@ const styles = StyleSheet.create({
   HeaderFont:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2)
+    fontSize:responsiveFontSize(2),
+    backgroundColor:'transparent',
   },
   buttonStyle: {
     position: "absolute",

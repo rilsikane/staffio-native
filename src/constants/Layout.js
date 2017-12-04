@@ -16,6 +16,13 @@ export const y = Dimensions.get('window').height;
 const ratioX = x < 375 ? (x < 320 ? 0.75 : 0.875) : 1 ;
 const ratioY = y < 568 ? (y < 480 ? 0.75 : 0.875) : 1 ;
 
+//  for ipad
+
+// const ratioX = x < 375 ? (x < 320 ? 0.75 : 0.875) : 1 ;
+// const ratioY = y < 568 ? (y < 480 ? 0.75 : 0.875) : 1 ;
+
+
+
 // We set our base font size value
 
 let base_unit = 14;

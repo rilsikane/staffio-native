@@ -79,22 +79,26 @@ const styles={
     fontWeight: '500',
     color:'#f58020',
     fontSize:responsiveFontSize(3),
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   TextStyle1:{
     fontSize:responsiveFontSize(2.2),
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   TextStyle2:{
     marginTop:10,
     fontSize:responsiveFontSize(1.8),
     color:'#a9a9a9',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   TextStyle3:{
     fontSize:responsiveFontSize(1.8),
     color:'#a9a9a9',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   buttonStyle1:{
     borderRadius: 5,
@@ -110,7 +114,8 @@ const styles={
   TextStyleButton:{
     fontSize:responsiveFontSize(2.2),
     color:'white',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   RowStyle:{
     borderTopWidth:1,

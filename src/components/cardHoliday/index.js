@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(3),
     color: '#ffff',
+    backgroundColor:'transparent'
   },
   titleText: {
     fontFamily:"Kanit",
@@ -63,19 +64,23 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     justifyContent:"center",
     alignItems:"center",
-    marginRight:responsiveWidth(1)
+    marginRight:responsiveWidth(1),
+    backgroundColor:'transparent'
+    
   },
   weekText: {
     fontFamily:"Kanit",
     color: '#ffff',
     fontSize: responsiveFontSize(1),
-    marginTop:-responsiveHeight(1)
+    marginTop:-responsiveHeight(1),
+    backgroundColor:'transparent'
   },
   numberText: {
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(4),
     marginRight:responsiveWidth(1),
-     color: '#f58020'
+     color: '#f58020',
+     backgroundColor:'transparent'
    
   },
   cardContainer:{

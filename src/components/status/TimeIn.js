@@ -113,16 +113,19 @@ const styles={
   TextColor1:{
     fontSize:responsiveFontSize(1.4),
     //color:'#ff7f50',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   TextColor2:{
     fontSize:responsiveFontSize(1.5),
     color:'#a9a9a9',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   TextColor3:{
     fontSize:responsiveFontSize(1.7),
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   ViewStyle:{
     flexDirection: 'row',
@@ -153,7 +156,8 @@ const styles={
     bottom: 1,
     color: 'white',
     backgroundColor:'transparent',
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+    backgroundColor:'transparent'
   },
   fromStatus2:{
     fontSize:responsiveFontSize(1.1),
@@ -161,7 +165,8 @@ const styles={
     color: 'white',
     bottom: 1,
     backgroundColor:'transparent',
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+    backgroundColor:'transparent'
 
   },
 }

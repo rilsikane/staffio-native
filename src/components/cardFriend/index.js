@@ -75,13 +75,14 @@ const styles = StyleSheet.create({
   titleText: {
     color: '#6E6E6E',
     fontSize: em(1.2),
-    fontFamily:'Kanit'
-
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   headText: {
     color: '#f58020',
     fontSize: em(1.2),
-     fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   noteText: {
     color: '#A4A4A4',
@@ -89,7 +90,8 @@ const styles = StyleSheet.create({
     marginTop:-2,
     alignItems:'flex-start',
     fontFamily:'Kanit',
-    zIndex:9999
+    zIndex:9999,
+    backgroundColor:"transparent"
   },
   litelText: {
     fontSize: em(0.5),
@@ -98,17 +100,20 @@ const styles = StyleSheet.create({
   bacisText: {
     fontSize: em(0.5),
     color: '#6E6E6E',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   numberText: {
     fontSize: 30,
     color: '#A4A4A4',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   numText: {
     fontSize: 30,
     color: '#f58020',
-    fontFamily:'Kanit'
+    fontFamily:'Kanit',
+    backgroundColor:"transparent"
   },
   imageHead: {
     height:em(2.9),

@@ -75,31 +75,31 @@ class StampResult extends React.Component {
             <KeyboardAvoidingView behavior='padding' style={styles.ViewStyle}>
                 <View style={styles.workShiftContainerStyle}>
                          <Image source={{ uri: `${this.props.punch.imagepath_tempMobile}` }} style={{width: responsiveWidth(52),height:responsiveHeight(39)}} />
-                         <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit'}}>{this.props.punch.fullNameTH}</Text>
+                         <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit', backgroundColor:"transparent"}}>{this.props.punch.fullNameTH}</Text>
                 </View>
                
                 <View style={{marginLeft:10,marginRight:10}}>
-                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2)}}>หมายเหตุ  :</Label>
-                    <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1)}}>{this.props.punch.remark || "ไม่ได้ระบุ"}</Label>
+                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2), backgroundColor:"transparent"}}>หมายเหตุ  :</Label>
+                    <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1), backgroundColor:"transparent"}}>{this.props.punch.remark || "ไม่ได้ระบุ"}</Label>
                 </View>
 
                 <View style={{marginLeft:10,marginRight:10,marginTop:responsiveHeight(2),borderTopWidth:1,borderTopColor:"#f58020"}}>
-                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2),marginTop:responsiveHeight(2)}}>คอมเมนท์  :</Label>
+                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2),marginTop:responsiveHeight(2),backgroundColor:"transparent"}}>คอมเมนท์  :</Label>
                      {this.props.punch.leaderCode == this.props.empCode && <Item inlineLabel last style={{height:responsiveHeight(3)}}>
                         <Input name="comment" value={this.state.comment} onChangeText={this.onChange} returnKeyType="send" onSubmitEditing={this.ok}
-                        style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(2),lineHeight:responsiveFontSize(1.5)}}/>
+                        style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(2),lineHeight:responsiveFontSize(1.5), backgroundColor:"transparent"}}/>
                       </Item>}
-                      {this.props.punch.leaderCode != this.props.empCode &&  <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1)}}>{this.state.comment || "ไม่ได้ระบุ"}</Label>}
+                      {this.props.punch.leaderCode != this.props.empCode &&  <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1), backgroundColor:"transparent"}}>{this.state.comment || "ไม่ได้ระบุ"}</Label>}
                 </View>
               
                 <View style={{marginTop:responsiveHeight(5),marginLeft:5,marginRight:5,marginBottom:5
                 ,alignItems:"flex-end",borderTopWidth:1,borderTopColor:"#737373"}}>
                      <View style={{flexDirection:"row",alignItems:"flex-end",zIndex:9999,}}>
                         <Button transparent onPress={this.ok}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> ตกลง </Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}> ตกลง </Text>
                         </Button>
                         <Button transparent onPress={this.cancel}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> ยกเลิก </Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}> ยกเลิก </Text>
                         </Button>
                     </View>
                 </View>

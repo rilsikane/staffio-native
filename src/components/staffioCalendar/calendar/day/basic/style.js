@@ -42,7 +42,7 @@ export default function styleConstructor(theme={}) {
       borderRadius: 2,
       opacity: 0,
       color:'#f58020',
-      fontSize:responsiveFontSize(1.1),
+      fontSize:responsiveFontSize(1),
       height:responsiveHeight(2)
     },
     visibleDot: {

@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   HeaderFont:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2.5)
+    fontSize:responsiveFontSize(2.5),
+    backgroundColor:'transparent'
   }
 });

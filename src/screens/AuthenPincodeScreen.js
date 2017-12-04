@@ -71,7 +71,7 @@ export default class AuthenPincodeScreen extends Component {
 					{this.state.loading && <Loading visible={this.state.loading} mini={true}/>}
 					{!this.state.loading && <PincodePress pincode={this.state.pincode}  navigation={this.props.navigator} 
 					isAuthen={true} titileTxt="กรอกรหัสผ่าน" onDonePress={this.onDonePress}/>}
-					{!this.state.loading && <View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
+					{!this.state.loading && <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"transparent"}}>
 						<Text style={{marginTop:responsiveHeight(10),color:"#F7BC65"}}>
 							{`V.0.1.0-R${Constans.version}`}
 						</Text>

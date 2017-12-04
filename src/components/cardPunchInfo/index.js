@@ -58,7 +58,7 @@ export default class CardPunchInfo extends React.Component {
               </Row>
               <Row size={45} style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginTop: 0 }}>
                 <Col size={30}>
-                  <View style={{ flexDirection: 'row', alignItems: "center", borderRightWidth: 0.5, borderRightColor: '#9fa1a3', marginTop: 2 }}>
+                  <View style={{ flexDirection: 'row', alignItems: "center", borderRightWidth: 0.5, borderRightColor: '#9fa1a3', marginTop: 2, backgroundColor:'transparent' }}>
                     <Text allowFontScaling={false} style={styles.noteTimeText}>•</Text>
                     <Text allowFontScaling={false} style={styles.noteTimeText}>{moment(timeRecord.dateRecord.replace("00:00:00", timeRecord.timeRecord)).fromNow()}</Text>
                   </View>
@@ -97,42 +97,50 @@ const styles = StyleSheet.create({
   titleText: {
     color: '#545254',
     fontSize: responsiveFontSize(2),
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   headText: {
     color: '#ff8c00',
     fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   noteText: {
     color: '#9fa1a3',
     fontSize: responsiveFontSize(1.5),
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   noteTimeText: {
     color: '#9fa1a3',
     fontSize: responsiveFontSize(1.1),
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   litelText: {
     fontSize: responsiveFontSize(1.5),
    // color: '#ff8c00',
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+     backgroundColor:'transparent'
   },
   bacisText: {
     fontSize: responsiveFontSize(1.4),
     color: '#818283',
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   numberText: {
     fontSize: responsiveFontSize(2.5),
     color: '#6d6e71',
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   numberLate: {
     fontSize: responsiveFontSize(2.5),
     color: 'red',
-    fontFamily: 'Kanit'
+    fontFamily: 'Kanit',
+    backgroundColor:'transparent'
   },
   imageHead: {
     height: responsiveHeight(8),
@@ -153,12 +161,14 @@ const styles = StyleSheet.create({
     marginRight: 3,
     fontSize: responsiveFontSize(1.6),
     color: '#818283',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor:'transparent'
 
   },
   icon: {
     fontSize: responsiveFontSize(1.6),
-    color: '#ff8c00'
+    color: '#ff8c00',
+    backgroundColor:'transparent'
   },
   content: {
     alignItems: 'flex-start'

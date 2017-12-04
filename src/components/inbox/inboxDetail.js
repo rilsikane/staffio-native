@@ -41,12 +41,13 @@ const styles={
     fontSize:25,
     marginLeft:20,
     color:'#ff7f50',
-
+    backgroundColor:'transparent',
   },
   TextStyle2:{
     marginTop:12,
     color:'#ff7f50',
-    fontSize: 13
+    fontSize: 13,
+    backgroundColor:'transparent'
   },
 }
 export default FormStatus;

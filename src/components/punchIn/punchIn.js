@@ -208,8 +208,8 @@ class PunchIn extends React.Component {
             <Row size={5}/>
           </Col>
           <Col size={75}>
-            <Row style={{marginTop:1}}>
-              <Col size={25} >
+            <Row style={{marginTop:2}}>
+              <Col size={20} >
                 <Bounceable
                   level={1.1}>
                   <Thumbnail   source={{uri:`data:image/jpeg;base64,${this.props.user.IMG_BASE}`}} style={styles.bodyImage} />

@@ -23,7 +23,8 @@ export default  styles = {
   textHeader:{
      fontFamily:'Kanit',
      fontSize: em(1.2),
-     color: "#545254"
+     color: "#545254",
+     backgroundColor:"transparent"
   },
   pinCodeContainer:{
     backgroundColor:"#ffff"

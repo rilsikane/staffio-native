@@ -136,13 +136,15 @@ const styles={
       fontSize:responsiveFontSize(1.8),
       lineHeight:responsiveFontSize(2),
       fontFamily:"Kanit",
-      marginTop:Platform.OS=="ios" ? 0 : -5
+      marginTop:Platform.OS=="ios" ? 0 : -5,
+      backgroundColor:'transparent'
   },
   label:{
       color:"#737373",
       fontSize:responsiveFontSize(1.8),
       lineHeight:responsiveFontSize(2),
-      fontFamily:"Kanit"
+      fontFamily:"Kanit",
+      backgroundColor:'transparent'
   },
   ContainerStyle:{
       backgroundColor: '#FFF',
@@ -170,6 +172,7 @@ const styles={
     marginLeft:responsiveWidth(1),
     flexDirection:"row",
     width:responsiveWidth(30),
+    backgroundColor:'transparent'
     
   },
   ViewStyle2:{
@@ -177,6 +180,7 @@ const styles={
     marginLeft:10,
     flexDirection:"row",
     marginTop:-3,
+    backgroundColor:'transparent'
 
   },
   ViewStyle3:{
@@ -240,27 +244,33 @@ const styles={
     color: 'white',
     bottom: 1,
     backgroundColor:'transparent',
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+     backgroundColor:'transparent'
 
   },
   TextColor1:{
     fontSize:responsiveFontSize(1.5),
+     backgroundColor:'transparent'
     //color:'#f58020'
   },
   TextColor2:{
     fontSize:responsiveFontSize(2),
     color:'#f58020',
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+     backgroundColor:'transparent'
   },
   TextColor3:{
     fontSize:responsiveFontSize(1.5),
     color:'red',
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+     backgroundColor:'transparent'
   },
   TextWorkTime:{
     fontSize:responsiveFontSize(1.2),
     color:"#737373",
-    fontFamily:"Kanit"
+    fontFamily:"Kanit",
+     backgroundColor:'transparent'
+    
   },
   TextWorkTime2:{
     marginTop:3,

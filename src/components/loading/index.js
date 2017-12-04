@@ -13,7 +13,7 @@ export default class Loading extends React.Component {
         if(!this.props.mini)
         return  ( <Spinner animation="fade" visible={this.props.visible} overlayColor="rgba(255, 255, 255, 1)" 
         >
-          <View style={{flex:1,justifyContent:"center",alignItems:"center",marginTop:-50}}>
+          <View style={{flex:1,justifyContent:"center",alignItems:"center",marginTop:-50, backgroundColor:'transparent'}}>
             <SpinnerKit size={80} type={"WanderingCubes"} color="#f58020" />
             <Animatable.Text animation="tada" easing="ease-in" iterationCount="infinite" style={{ textAlign: 'center' }}>
                 {this.props.text || "Loading..."}
@@ -21,7 +21,7 @@ export default class Loading extends React.Component {
            </View>
         </Spinner>);
         else
-        return (<View style={{flex:1,justifyContent:"center",alignItems:"center",marginTop:-50}}>
+        return (<View style={{flex:1,justifyContent:"center",alignItems:"center",marginTop:-50,backgroundColor:'transparent'}}>
             <SpinnerKit size={80} type={"WanderingCubes"} color="#f58020" />
             <Animatable.Text animation="tada" easing="ease-in" iterationCount="infinite" style={{ textAlign: 'center' }}>
                 {this.props.text || "Loading..."}
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   HeaderFont:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:em(1.2)
+    fontSize:em(1.2),
+    backgroundColor:'transparent'
   }
 });
