@@ -91,7 +91,7 @@ const styles = ({
     },
     Text2: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.2)
     },
     Text3: {
         fontFamily: 'Kanit',

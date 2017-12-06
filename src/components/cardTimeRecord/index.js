@@ -6,6 +6,7 @@ import Dimensions from 'Dimensions';
 import {em,x} from '../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {getmonth,getyear} from '../../utils/staffioUtils';
+import { BlurView, VibrancyView } from 'react-native-blurry';
 //import ProgressCircle from 'react-native-progress-circle'
 
 export default class CardTimeRecord extends React.Component {
@@ -35,12 +36,14 @@ export default class CardTimeRecord extends React.Component {
                       <View style={styles.circle2}>    
                         <View style={styles.circle}>
                             <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1)}}/>
                             <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
                         </View>
                         </View>
                         </View>
                         <View style={styles.square}/>
                         <View style={styles.square2}/>
+                        <BlurView  blurType="light"  blurAmount={100} style={styles.square2}/>
                     </TouchableOpacity> 
 
                    <TouchableOpacity style={styles.card} onPress={(e)=>this.onpressItem("LT")}>
@@ -48,6 +51,7 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}> 
                       <View style={styles.circle}>                                         
                           <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
+                          <Text style={{ fontSize: responsiveFontSize(1)}}/>
                           <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
                       </View>
                       </View>
@@ -60,6 +64,7 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}>
                       <View  style={styles.circle}>          
                           <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
+                          <Text style={{ fontSize: responsiveFontSize(1)}}/>
                           <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
                       </View>
                       </View>
@@ -95,19 +100,19 @@ const styles = StyleSheet.create({
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(1.5),
     backgroundColor:'transparent',
-    color: '#666600',
+    color: '#808285',
   },
   noteText2: {
     fontFamily:"Kanit",
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(4.5),
     backgroundColor:'transparent',
-    lineHeight:responsiveFontSize(4),
+    lineHeight:responsiveFontSize(5),
     color: '#FBAB3E',
     alignItems: 'center'
   },
   litelText: {
     fontFamily:"Kanit",
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(1.2),
     paddingLeft:responsiveWidth(2),
     alignItems: 'center',
     color :'#744C36',
@@ -151,11 +156,18 @@ cardContainer3:{
   },
   square2: {
     height: responsiveHeight(0.5),
-    width: responsiveWidth(16),
-    backgroundColor:'#E5E5E5',
+    width: responsiveWidth(10),
+    backgroundColor: '#F3F3F4',
     alignItems: 'center',
     flex:null,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   },
   circle: {
     height:  responsiveHeight(10),

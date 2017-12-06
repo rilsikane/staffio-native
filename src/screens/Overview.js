@@ -24,6 +24,7 @@ import {
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Progress from '../components/cardProgress/index';
 import ProgressCircle from 'react-native-progress-circle'
+import { BlurView, VibrancyView } from 'react-native-blurry';
 //import Progress from '../components/cardProgress/testindex';
 import { ScrollView , Linking} from 'react-native';
 import CardCheckin from '../components/cardCheckin/Cardcheckin';
@@ -38,14 +39,14 @@ export default class Overview extends React.Component {
         super(props);
        
         
-        this.checkin = [{name : 'Pramot sudjai', position : '004901  solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
-        {name : 'Anuwat Phetaum', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
-        {name : 'Preecha Satbut', position : '004901  solution specialist', location : 'the mail', checkin : 'true'},
-        {name : 'Sarin  Rubtong', position : '004901  solution specialist', location : 'the mail', checkin : 'false'}, 
-        {name : 'Piranan  Naja', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
-        {name : 'Worrawat  RO', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
-        {name : 'Sittichok  Boom', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
-        {name : 'Kritsada  DJ', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}]
+        this.checkin = [{name : 'Pramot sudjai', position : '004901 solution specialist', location : 'the mail', checkin : 'false', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
+        {name : 'Anuwat Phetaum', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        {name : 'Preecha Satbut', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
+        {name : 'Sarin  Rubtong', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        {name : 'Piranan  Naja', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        {name : 'Worrawat  RO', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        {name : 'Sittichok  Boom', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        {name : 'Kritsada  DJ', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}]
         this.onContactSelected = this.onContactSelected.bind(this);
         
     }
@@ -103,7 +104,7 @@ export default class Overview extends React.Component {
                
                    
                 <Body>
-                <CardItem style={{height: responsiveHeight(15), width:  responsiveWidth(95) }}>
+                <CardItem style={{height: responsiveHeight(18), width:  responsiveWidth(95) }}>
                 <View style={{alignItems : 'center' }}>
                 <View style={styles.circle}>
                 <ProgressCircle

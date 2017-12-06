@@ -14,7 +14,7 @@ import Calendar from '../calendar';
 import {em} from '../../../constants/Layout'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
-const calendarHeight = responsiveHeight(45);
+const calendarHeight = responsiveHeight(50);
 class CalendarList extends Component {
 
   constructor(props) {
@@ -60,7 +60,7 @@ class CalendarList extends Component {
           selected={this.props.selected}
           style={[{height: calendarHeight}, this.style.calendar]}
           current={row}
-          hideArrows
+          hideArrowsz
           hideExtraDays={this.props.hideExtraDays === undefined ? true : this.props.hideExtraDays}
           disableMonthChange
           markedDates={this.props.markedDates}
