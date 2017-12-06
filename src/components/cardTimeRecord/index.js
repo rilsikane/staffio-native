@@ -6,7 +6,6 @@ import Dimensions from 'Dimensions';
 import {em,x} from '../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {getmonth,getyear} from '../../utils/staffioUtils';
-import { BlurView, VibrancyView } from 'react-native-blurry';
 //import ProgressCircle from 'react-native-progress-circle'
 
 export default class CardTimeRecord extends React.Component {
@@ -43,7 +42,6 @@ export default class CardTimeRecord extends React.Component {
                         </View>
                         <View style={styles.square}/>
                         <View style={styles.square2}/>
-                        <BlurView  blurType="light"  blurAmount={100} style={styles.square2}/>
                     </TouchableOpacity> 
 
                    <TouchableOpacity style={styles.card} onPress={(e)=>this.onpressItem("LT")}>
