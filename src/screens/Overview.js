@@ -24,7 +24,6 @@ import {
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Progress from '../components/cardProgress/index';
 import ProgressCircle from 'react-native-progress-circle'
-//import { BlurView, VibrancyView } from 'react-native-blurry';
 //import Progress from '../components/cardProgress/testindex';
 import { ScrollView , Linking} from 'react-native';
 import CardCheckin from '../components/cardCheckin/Cardcheckin';
