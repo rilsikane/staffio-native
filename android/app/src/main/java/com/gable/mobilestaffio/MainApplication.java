@@ -3,7 +3,8 @@ package com.gable.mobilestaffio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.reactnativenavigation.NavigationApplication;
+
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -66,16 +67,15 @@ import java.util.List;
 public class MainApplication extends NavigationApplication  {
 
     @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
+    public boolean isDebug() {
+        // Make sure you are using BuildConfig from your own application
+        return BuildConfig.DEBUG;
     }
 
-    @Override
     protected List<ReactPackage> getPackages() {
 
         return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SplashScreenReactPackage(),
             new ImageResizerPackage(),
             new BackgroundTimerPackage(),
             new RNDeviceInfo(),
@@ -84,20 +84,13 @@ public class MainApplication extends NavigationApplication  {
             new RNSpinkitPackage(),
             new FIRMessagingPackage(),
             new VectorIconsPackage()
-      );
+        );
     }
-  };
 
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
-  }
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-  }
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return getPackages();
+    }
 }
 
 
