@@ -58,7 +58,11 @@ export default class ConfirmPunchScreen extends React.Component {
         if(loactionDistance > Number(shiftData.Accuracy)){
           this.setState({showRemark:true})
         }else{
-           this.setState({showRemark:false})
+           if(this.state.shiftData.timeRecordType =="O" && this.state.lateCondition){
+            this.setState({showRemark:true});
+           }else{
+            this.setState({showRemark:false});
+           }
         }
       },(error)=>{
          Alert.alert(
@@ -69,6 +73,7 @@ export default class ConfirmPunchScreen extends React.Component {
             ],
           )
       });
+
   }
   // componentDidMount() {
     

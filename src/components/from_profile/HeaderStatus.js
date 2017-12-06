@@ -156,13 +156,13 @@ const styles={
   },
   TextStyle1:{
     textAlign: 'center',
-    fontSize:18,
+    fontSize:responsiveFontSize(2.8),
     fontFamily: 'Kanit',
-    marginTop:8
+    marginTop:responsiveHeight(2)
   },
   TextStyle2:{
   textAlign: 'center',
-    fontSize:15,
+    fontSize:responsiveFontSize(1.3),
     color:'#a9a9a9'
   },
   TextStyle3:{
@@ -186,14 +186,17 @@ const styles={
   },
   TextStyle7:{
     color:'#f58020',
-    fontSize:40,
+    fontSize:responsiveFontSize(5),
     textAlign: 'center',
     fontFamily: 'Kanit',
+    backgroundColor:"transparent"
   },
   TextStyle8:{
     color:'#a9a9a9',
     textAlign: 'center',
     fontFamily: 'Kanit',
+    backgroundColor:"transparent",
+    fontSize:responsiveFontSize(1.5),
   },
   BadgeStyleBackground:{
     borderRadius:em(4),

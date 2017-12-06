@@ -87,7 +87,7 @@ class StampResult extends React.Component {
                     <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2),marginTop:responsiveHeight(2),backgroundColor:"transparent"}}>คอมเมนท์  :</Label>
                      {this.props.punch.leaderCode == this.props.empCode && <Item inlineLabel last style={{height:responsiveHeight(3)}}>
                         <Input name="comment" value={this.state.comment} onChangeText={this.onChange} returnKeyType="send" onSubmitEditing={this.ok}
-                        style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(2),lineHeight:responsiveFontSize(1.5), backgroundColor:"transparent"}}/>
+                        style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(2),lineHeight:responsiveFontSize(1.8), backgroundColor:"transparent"}}/>
                       </Item>}
                       {this.props.punch.leaderCode != this.props.empCode &&  <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1), backgroundColor:"transparent"}}>{this.state.comment || "ไม่ได้ระบุ"}</Label>}
                 </View>
