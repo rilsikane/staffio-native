@@ -12,7 +12,7 @@ const IconTello = createIconSetFromFontello(fontelloConfig);
 
 async function prepareIcons() {
   const icons = await Promise.all([
-    IconTello.getImageSource('hhmm-36', 25),
+    Icon.getImageSource('home', 25),
     Icon.getImageSource('inbox', 25),
     IconTello.getImageSource('hhmm-34', 25),
     IconTello.getImageSource('hhmm-33', 25),
@@ -40,7 +40,9 @@ export default async function startApplication(root) {
         Navigation.startTabBasedApp({
           tabs: [
             {
+              //labal: 'Overview',
               label: 'Home',
+              //screen: 'staffio.Overview',
               screen: 'staffio.HomeScreen',
               icon: icons.home,
               title: undefined,
