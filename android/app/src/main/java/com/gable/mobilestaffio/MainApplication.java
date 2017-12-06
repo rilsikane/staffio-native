@@ -5,13 +5,14 @@ import android.support.annotation.Nullable;
 
 import com.reactnativenavigation.NavigationApplication;
 import com.facebook.react.ReactApplication;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 //import com.cmcewen.blurview.BlurViewPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rnfs.RNFSPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
+
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -39,7 +40,8 @@ import java.util.List;
 //    protected List<ReactPackage> getPackages() {
 //      return Arrays.<ReactPackage>asList(
 //          new MainReactPackage(),
-          
+
+
 //            new NavigationReactPackage(),
 //            new ImageResizerPackage(),
 //            new BackgroundTimerPackage(),
@@ -75,41 +77,37 @@ public class MainApplication extends NavigationApplication {
         return BuildConfig.DEBUG;
     }
 
-    @Nullable
-    @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
-        return null;
-    }
+
 
     //@Override
     protected List<ReactPackage> getPackages() {
 
         return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new SplashScreenReactPackage(),
-            //new BlurViewPackage(),
-            new ImageResizerPackage(),
-            new BackgroundTimerPackage(),
-            new RNDeviceInfo(),
-            new RNFSPackage(),
-            new RCTCameraPackage(),
-            new RNSpinkitPackage(),
-            new FIRMessagingPackage(),
-            new VectorIconsPackage()
-      );
+                new MainReactPackage(),
+                new SplashScreenReactPackage(),
+                //new BlurViewPackage(),
+                new ImageResizerPackage(),
+                new BackgroundTimerPackage(),
+                new RNDeviceInfo(),
+                new RNFSPackage(),
+                new RCTCameraPackage(),
+                new RNSpinkitPackage(),
+                new FIRMessagingPackage(),
+                new VectorIconsPackage()
+        );
     }
 
 
 //  @Override
 //  public ReactNativeHost getReactNativeHost() {
-//    return mReactNativeHost;
+//
+//      return mReactNativeHost;
 //  }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-  }
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return getPackages();
+    }
 }
 
 
