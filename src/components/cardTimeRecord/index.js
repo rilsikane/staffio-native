@@ -160,14 +160,7 @@ cardContainer3:{
     backgroundColor: '#F3F3F4',
     alignItems: 'center',
     flex:null,
-    justifyContent: 'center',
-    shadowColor: "#000000",
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    }
+    justifyContent: 'center'
   },
   circle: {
     height:  responsiveHeight(10),
