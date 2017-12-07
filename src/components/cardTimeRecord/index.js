@@ -167,8 +167,8 @@ cardContainer3:{
     backgroundColor:'#ffff',
     alignItems: 'center',
     flex:null,
-    marginRight:5,
-    marginLeft:5,
+    marginRight:responsiveWidth(5),
+    marginLeft:responsiveWidth(5),
   },
   circle2: {
     height:   responsiveHeight(11),
@@ -177,8 +177,8 @@ cardContainer3:{
     backgroundColor:'#F3F3F4',
     alignItems: 'center',
     flex:null,
-    marginRight:5,
-    marginLeft:5,
+    marginRight:responsiveWidth(5),
+    marginLeft:responsiveWidth(5),
     justifyContent: 'center'
   },
   circle3: {
@@ -188,13 +188,13 @@ cardContainer3:{
     backgroundColor:'#E5E5E5',
     alignItems: 'center',
     flex:null,
-    marginRight:5,
-    marginLeft:5,
+    marginRight:responsiveWidth(0),
+    marginLeft:responsiveWidth(0),
     justifyContent: 'center'
   },
   card:{
-    marginRight:5,
-    marginLeft:5,
+    marginRight:responsiveWidth(2),
+    marginLeft:responsiveWidth(2),
     backgroundColor:'#ffff',
     height:responsiveHeight(13),
     width:responsiveWidth(27),
@@ -202,8 +202,8 @@ cardContainer3:{
     alignItems: 'center'
 },
 cardItem:{
-  marginRight:5,
-  marginLeft:5,
+  marginRight:responsiveWidth(0),
+  marginLeft:responsiveWidth(0),
   backgroundColor:'#ffff',
   height:responsiveHeight(13),
   width:responsiveHeight(97),
