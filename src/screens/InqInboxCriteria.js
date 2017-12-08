@@ -8,7 +8,7 @@ import {
     Text,
     AppState,NativeAppEventEmitter,DeviceEventEmitter,ScrollView,Image,TouchableOpacity
   } from 'react-native';
-import {Content,Tabs,Tab,TabHeading,Container,Footer,Button} from 'native-base'
+import {Content,Tabs,Tab,TabHeading,Container,Footer,Button,CardItem} from 'native-base'
 import Location from '../components/inbox/location'
 import Status from '../components/inbox/status'
 import Staff from '../components/inbox/staff'
@@ -55,12 +55,13 @@ import Colors from '../constants/Colors'
                    </Content>
                     <Footer style={{backgroundColor:"transparent",borderColor:"transparent"}}>
                          <View>
-                          <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.onDoneDialog}>
-                            <Icon style={{color:"#ffff", backgroundColor:"transparent"}} name="search"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ค้นหา</Text>
+                          <Button style={{backgroundColor:Colors.baseColor,alignItems : 'center', justifyContent: 'center', marginTop:5,width:responsiveWidth(40),height: responsiveHeight(8)}} rounded onPress={this.onDoneDialog}>
+                            <Icon style={{color:"#ffff", backgroundColor:"transparent"}} name="search"/>
+                            <Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ค้นหา</Text>
                           </Button>
                         </View>
                          <View style={{borderLeftColor:Colors.baseColor,marginLeft:5}}>
-                          <Button style={{backgroundColor:Colors.baseColor,marginTop:5}} rounded onPress={this.cancelDialog}>
+                          <Button style={{backgroundColor:Colors.baseColor,alignItems : 'center', justifyContent: 'center',marginTop:5,width:responsiveWidth(40),height: responsiveHeight(8)}} rounded onPress={this.cancelDialog}>
                             <Icon style={{color:"#ffff",backgroundColor:"transparent"}} name="times"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ยกเลิก</Text>
                           </Button>
                         </View>
@@ -84,7 +85,9 @@ const styles = StyleSheet.create({
   },
   tabHeading:{
     borderRightWidth: 1,
-    borderColor:Colors.backgroundColor
+    borderColor:Colors.backgroundColor,
+    backgroundColor : '#FFFF'
+    
   },
   HeaderFont:{
     color:"#FFFF",
