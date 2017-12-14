@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import {
     Container, Header, Left, Body, Right, Button, Icon, Title, Text, View, Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
 
@@ -6,13 +7,15 @@ import {
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
 import { ScrollView } from 'react-native';
+import { NavigationActions } from'react-navigation';
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';
-export default class CardProgress extends React.Component {
+export default class CardPro extends React.Component {
     constructor(props) {
         super(props);
         this.DashBorad = this.DashBorad.bind(this);
+        
     }
 
 
@@ -39,6 +42,7 @@ export default class CardProgress extends React.Component {
             return { color: "#229d9e", fontSize: 18 }
         }
     }
+
     DashBorad() {
         this.props.DashBorad();
     }
@@ -70,11 +74,6 @@ export default class CardProgress extends React.Component {
                         <Body>
                             <Text style={styles.Text1}>    {this.props.data.projectName}</Text>
                             <CardItem>
-                                <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                <Badge danger >
-                                    <Text>1</Text>
-                                </Badge>
-                                <Text style={styles.Text3}> {this.props.data.branchName}</Text>
                             </CardItem>
                             <CardItem style={{ height: responsiveHeight(0.1) }}>
                                 <Icon name='person' />
@@ -85,11 +84,11 @@ export default class CardProgress extends React.Component {
                     </CardItem>
                 </Button>
                 <Text />
-
             </View>
         );
     }
 }
+
 const styles = ({
     Text1: {
         fontFamily: 'Kanit',

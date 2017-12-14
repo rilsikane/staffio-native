@@ -1,54 +1,24 @@
 import React, { Component } from 'react';
-import {
-    Container,
-    Header,
-    Left,
-    Body,
-    Right,
-    Button,
-    Icon,
-    Title,
-    Text,
-    View,
-    Content,
-    List,
-    ListItem,
-    Thumbnail,
-    CardItem,
-    Card,
-    Footer,
-    FooterTab,
-    Badge
+import {Container,Header,Left,Body,Right,Button,Icon,Title,Text,View,Content,List,ListItem,Thumbnail,CardItem,Card,Footer,FooterTab,Badge
 
 } from 'native-base';
+import { ScrollView } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import Progress from '../components/cardProgress/index';
 import ProgressCircle from 'react-native-progress-circle'
-//import Progress from '../components/cardProgress/testindex';
-import { ScrollView , Linking} from 'react-native';
-import CardCheckin from '../components/cardCheckin/Cardcheckin';
-
-//import Icon from 'react-native-vector-icons/FontAwesome';
-//import { observer, inject } from 'mobx-react';
-//import { post } from '../api';
-//@inject('searchStore')
-//@observer
-export default class Overview extends React.Component {
+import CardCheckin from './Cardcheckin';
+export default class Checkin extends React.Component {
     constructor(props) {
         super(props);
-       
-        this.projectView = this.props.projectView;
-        console.log('นี่   this.projectView นะครับ' +   JSON.stringify(this.projectView)); 
-        this.checkin = [{name : 'Pramot sudjai', position : '004901 solution specialist', location : 'the mail', checkin : 'false', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
-        {name : 'Anuwat Phetaum', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Preecha Satbut', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
-        {name : 'Sarin  Rubtong', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Piranan  Naja', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Worrawat  RO', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Sittichok  Boom', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Kritsada  DJ', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}]
+        
+        this.checkin = [{name : 'Pramot sudjai', position : '004901  solution specialist', location : 'the mail', checkin : 'true', url : 'www.google.com'},
+        {name : 'Anuwat Phetaumphai', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
+        {name : 'Preecha Satbut', position : '004901  solution specialist', location : 'the mail', checkin : 'true'},
+        {name : 'Sarin  Rubtong', position : '004901  solution specialist', location : 'the mail', checkin : 'false'}, 
+        {name : 'Piranan  Naja', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
+        {name : 'Worrawat  RO', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
+        {name : 'Sittichok  Boom', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}, 
+        {name : 'Kritsada  DJ', position : '004901  solution specialist', location : 'the mail', checkin : 'true'}]
         this.onContactSelected = this.onContactSelected.bind(this);
-       
     }
 
 
@@ -86,25 +56,15 @@ export default class Overview extends React.Component {
     }
 
     onContactSelected(url) {
-        return Linking.openURL(url);
+        this.props.navigator.handleDeepLink({
+            link: url 
+          });
     }
 
-    
     render() {
         return (
-          
-            <Container style={{ backgroundColor: '#FFCCFF' }}>
-                <Header style={styles.Header}>
-                    <Icon name='home' style={{ color: 'white' }} />
-                    <Body style={{ alignItems: "center" }}>
-                        <Title style={styles.Text}>ภาพรวม...</Title>
-                    </Body>
-                    <Icon name='menu' style={{ color: 'white' }} />
-                </Header>
-               
-                   
-                <Body>
-                <CardItem style={{height: responsiveHeight(18), width:  responsiveWidth(95) }}>
+            <Body>
+                <CardItem style={{height: responsiveHeight(15), width:  responsiveWidth(95) }}>
                 <View style={{alignItems : 'center' }}>
                 <View style={styles.circle}>
                 <ProgressCircle
@@ -140,7 +100,6 @@ export default class Overview extends React.Component {
                 </Body>
             </CardItem>
             <Text />
-            <ScrollView>
             <View style={{alignItems : 'center',justifyContent: 'center',}}>
             { this.checkin.map((val) => {
                     return (
@@ -150,34 +109,23 @@ export default class Overview extends React.Component {
             
 
             </View>
-            </ScrollView>
             </Body>
-            
-
-     
-            </Container>
-     
+             
         );
     }
 
 }
 const styles = ({
-    Text: {
-        fontFamily: 'Kanit',
-        color: 'white'
-    },
-    Header: {
-        backgroundColor: 'orange',
-        height: 33
-    },
     Text1: {
         fontFamily: 'Kanit',
         color: 'brown',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.5),
+        height:responsiveHeight(2)
     },
     Text2: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.5),
+        height:responsiveHeight(2)
     },
     Text3: {
         fontFamily: 'Kanit',
@@ -185,6 +133,33 @@ const styles = ({
     },
     Text4: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5)
-    }
+        fontSize: responsiveFontSize(1.5),
+        height:responsiveHeight(2)
+    },
+    circle : {
+        width: 83,
+        height: 83,
+        borderRadius: 100/2,
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'#E5E5E5',
+    },
+    square: {
+        height: 4,
+        width: 35,
+        backgroundColor:'#ffff',
+        alignItems: 'center',
+        flex:null,
+        justifyContent: 'center'
+      },
+      square2: {
+        height: 3,
+        width: 60,
+        backgroundColor:'#E5E5E5',
+        alignItems: 'center',
+        flex:null,
+        justifyContent: 'center'
+      }
 });
+

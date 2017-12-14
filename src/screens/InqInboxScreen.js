@@ -45,6 +45,7 @@ export default class InboxScreen extends React.Component {
      this.onPressItem = this.onPressItem.bind(this);
      this._refresh = this._refresh.bind(this);
      this.openCriteria = this.openCriteria.bind(this);
+     this.DashBorad = this.DashBorad.bind(this);
      this.onDoneDialog = this.onDoneDialog.bind(this);
      this.onLocationChange = this.onLocationChange.bind(this);
      this.cancelDialog = this.cancelDialog.bind(this);
@@ -219,6 +220,24 @@ export default class InboxScreen extends React.Component {
         animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
       });
   }
+  DashBorad(){
+    //  this.setState({isLoading:true});
+    //  this.setState({modalVisible:true});
+    //  setTimeout(()=>{
+    //    this.setState({isLoading:false});
+    //  },500);
+     //this.setState({modalVisible:true});
+      this.props.navigator.showModal({
+        screen: "staffio.DashBoradProject", // unique ID registered with Navigation.registerScreen
+        title: "Modal", // title of the screen as appears in the nav bar (optional)
+        passProps: {cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
+        navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+      });
+  }
+
+
   onCriteriaChange(tag){
     console.log(tag);
   }
@@ -413,6 +432,9 @@ export default class InboxScreen extends React.Component {
               </ActionButton.Item>
               <ActionButton.Item  buttonColor={Colors.baseColor} title="ล้างตัวเลือก"  onPress={this.clearTags}>
                <Icon name="trash" style={{color:"#ffff",backgroundColor:'transparent'}}/>
+              </ActionButton.Item>
+              <ActionButton.Item  buttonColor={Colors.baseColor} title="desbord"  onPress={this.DashBorad}>
+               <Icon name="search" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
           </ActionButton>
            
