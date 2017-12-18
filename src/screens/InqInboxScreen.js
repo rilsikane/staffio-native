@@ -433,7 +433,7 @@ export default class InboxScreen extends React.Component {
               <ActionButton.Item  buttonColor={Colors.baseColor} title="ล้างตัวเลือก"  onPress={this.clearTags}>
                <Icon name="trash" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
-              <ActionButton.Item  buttonColor={Colors.baseColor} title="desbord"  onPress={this.DashBorad}>
+              <ActionButton.Item  buttonColor={Colors.baseColor} title="dashbord"  onPress={this.DashBorad}>
                <Icon name="search" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
           </ActionButton>

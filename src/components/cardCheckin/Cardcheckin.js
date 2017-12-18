@@ -22,10 +22,10 @@ export default class Checkin extends React.Component {
       }
 
       changcolorborder(checkin){
-        if(checkin == 'true'){
-             return  {borderTopColor : 'green'} 
+        if(checkin == null){
+             return  {borderTopColor : 'red'} 
         }else {
-            return  {borderTopColor : 'red'}
+            return  {borderTopColor : 'green'}
         }
        
       }
@@ -42,15 +42,15 @@ export default class Checkin extends React.Component {
                 
             
                 <CardItem>
-                <View style={[styles.box1,this.changcolorborder(this.props.data.checkin)]}/>
+                <View style={[styles.box1,this.changcolorborder(this.props.data.timeRecord)]}/>
                     <Left style ={{left : responsiveWidth(3), top : responsiveWidth(0)}}>
                     <Image source={require('../../../img/1510652332811.jpg')} style={{height: responsiveHeight(8), width:  responsiveWidth(10) }}/>
                     </Left>
 
 
                     <Body>
-                            <Text style={styles.Text1}>{this.props.data.name}</Text>
-                            <Text note style={styles.Text2}>{this.props.data.position}</Text>
+                            <Text style={styles.Text1}>{this.props.data.fullNameTh}</Text>
+                            <Text note style={styles.Text2}>{this.props.data.empCode}</Text>
                     </Body>
                     <Right>
                         <CardItem>
@@ -60,7 +60,7 @@ export default class Checkin extends React.Component {
                             <Button style={styles.icon}>
                             <IconTello style={{color:"blue"}} size={em(2)} name="hhmm-18" />
                             </Button>
-                            <Button style={styles.icon} onPress={(e)=>this.onContactSelected(this.props.data.url)}>
+                            <Button style={styles.icon} onPress={(e)=>this.onContactSelected(this.props.data.lineID)}>
                             <IconTello style={{color:"green"}} size={em(2)} name="hhmm-20" />
                             </Button>
                         </CardItem>

@@ -21,20 +21,34 @@ export default class DashBoradProject extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { isLoading: true };
+        this.state = { isLoading: true,users:[],projectView:[] };
         this.progress = [{ location: 'the mail', staffcount: 50 }, { location: 'terminal 21', staffcount: 30 }, { location: 'terminal 22', staffcount: 80 }];
-        this.projectView
+        //this.projectView
         this.cancelDialog = this.cancelDialog.bind(this);
         this.DashBorad = this.DashBorad.bind(this);
         
         //this.changDialog = this.changDialog.bind(this);
     }
 
+    async  componentDidMount() {
+        const userData = await store.get("USER");
+        //console.log('User นะครัช ' + JSON.stringify(userData))
+        const projectView = await this.projectView(userData)
+
+        this.setState({projectView : projectView})
+        this.setState({ user: userData });
+        if (userData) {
+            TimerMixin.setTimeout(() => {
+                this.setState({ isLoading: false });
+            }, 1000);
+        }
+    }
+
     cancelDialog() {
         this.props.cancelDialog();
     }
 
-    DashBorad(){
+    DashBorad(data){
         //  this.setState({isLoading:true});
         //  this.setState({modalVisible:true});
         //  setTimeout(()=>{
@@ -44,36 +58,25 @@ export default class DashBoradProject extends React.Component {
           this.props.navigator.showModal({
             screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
             title: "Modal", // title of the screen as appears in the nav bar (optional)
-            passProps: {projectView : this.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
+            passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
             DashBorad:this.DashBorad,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
             navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
           });
       }
     
-    async  componentDidMount() {
-        const userData = await store.get("USER");
-        console.log('User นะครัช ' + JSON.stringify(userData))
-        this.projectView = await this.projectView(userData)
-
-        this.setState({ user: userData });
-        if (userData) {
-            TimerMixin.setTimeout(() => {
-                this.setState({ isLoading: false });
-            }, 1000);
-        }
-    }
+    
 
     projectView = async (user) => {
-        console.log('ถึงนี่ละสาส')
+        //console.log('ถึงนี่ละสาส')
         params = {}
         params.empCode = user.EMP_CODE;
         params.orgCode = user.ORG_CODE;
         params.shftDate = new Date();
         const response = await post("GetDashBoradProjectDetailsOrg", params);
-        console.log('response นะจ๊ะ' + JSON.stringify(response));
+        //console.log('response นะจ๊ะ' + JSON.stringify(response));
         const response2 = response.data;
-        console.log('response นะจ๊ะ2' + JSON.stringify(response2));
+        //console.log('response นะจ๊ะ2' + JSON.stringify(response2));
         return response2;
 
         // const state = response.data;
@@ -115,7 +118,7 @@ export default class DashBoradProject extends React.Component {
                                         <Text style={styles.tabLabel}>  มุมมองของโครงการ</Text>
                                         </Tab>
                                         </TabHeading>}>
-                                            {this.projectView.map((val) => {
+                                            {this.state.projectView.map((val) => {
 
                                                 return (
                                                     <CardProgress key={val.projectName} data={val} DashBorad={this.DashBorad} >
@@ -130,7 +133,7 @@ export default class DashBoradProject extends React.Component {
                                         <Text style={styles.tabLabel}>  เรียงตามโครงสร้างองค์กร</Text>
                                         </Tab>
                                         </TabHeading>}>
-                                            {this.projectView.map((val) => {
+                                            {this.state.projectView.map((val) => {
                                                 return (
                                                     <CardPro key={val.projectName} data={val} DashBorad={this.DashBorad} >
                                                     </CardPro>);

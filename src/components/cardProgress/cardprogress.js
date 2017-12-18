@@ -39,15 +39,15 @@ export default class CardProgress extends React.Component {
             return { color: "#229d9e", fontSize: 18 }
         }
     }
-    DashBorad() {
-        this.props.DashBorad();
+    DashBorad(data) {
+        this.props.DashBorad(data);
     }
 
     render() {
         return (
 
             <View>
-                <Button style={{ height: 120, width: 390 }} onPress={(e)=>this.DashBorad()}>
+                <Button style={{ height: 120, width: 390 }} onPress={(e)=>this.DashBorad(this.props.data)}>
                     <CardItem style={{ height: 120, width: 390 }}>
                         <View style={{ alignItems: 'center' }}>
                             <View style={styles.circle}>
