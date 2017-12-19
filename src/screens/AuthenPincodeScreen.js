@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {View,Keyboard,TouchableWithoutFeedback,Text} from 'react-native';
+import {View,Keyboard,TouchableWithoutFeedback,Text,Platform} from 'react-native';
 import PincodePress from '../components/pincode/PincodePress';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
@@ -46,7 +46,8 @@ export default class AuthenPincodeScreen extends Component {
 		user.password = "";
 		user.u_id = uuid;
 		user.tokenType = "M"
-		user.version = Constans.version;
+		user.versionNew = Constans.version;
+		user.platform = `${Platform.OS}_${DeviceInfo.getSystemVersion()}`;
 		
 		const response =  await authen("checkLogin", user);
 		if(response){
