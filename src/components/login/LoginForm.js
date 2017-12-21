@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 	Image,Keyboard,
 	TouchableWithoutFeedback,
-    Alert,Text
+    Alert,Text,Platform
 } from 'react-native';
 
 import UserInput from '../UserInput';
@@ -27,6 +27,7 @@ import store from 'react-native-simple-store';
 import {authen} from '../../api';
 import Constans from '../../constants/Constants';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import DeviceInfo from 'react-native-device-info';
 
 @inject('userStore')
 @observer
@@ -56,7 +57,9 @@ export default class LoginForm extends Component {
 		user.user_name = this.props.userStore.userLogin.username;
       	user.password = this.props.userStore.userLogin.password;
 		user.tokenType = "M";
-		user.version = Constans.version;
+		user.versionNew = Constans.version;
+		user.platform = `${Platform.OS}_${DeviceInfo.getSystemVersion()}`;
+		
 
 		const orgTmp = this.props.userStore.userLogin.username.split("@");
 		if(orgTmp.length>1){
