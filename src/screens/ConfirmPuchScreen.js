@@ -29,7 +29,7 @@ export default class ConfirmPunchScreen extends React.Component {
       super(props);
 	    this.goBack = this.goBack.bind(this);
       this.donePress = this.donePress.bind(this);
-      this.state = {isLoading:true,showRemark:true,remark:"",latRecord:"",longRecord:""};
+      this.state = {isLoading:true,showRemark:true,remark:"",latRecord:"",longRecord:"",area_flag:false};
       this.onChangeText = this.onChangeText.bind(this);
       this.cancel = this.cancel.bind(this);
       this.okPress = this.okPress.bind(this);
@@ -49,15 +49,14 @@ export default class ConfirmPunchScreen extends React.Component {
       this.setState({isLoading:false});
       this.watchID = navigator.geolocation.watchPosition((position) => {
         var lastPosition = JSON.stringify(position);
-        console.log("dataPosition   "+ shiftData.LocationLat,shiftData.LocationLong);
-        console.log("lastPosition   "+ lastPosition);
-        const loactionDistance = this.distance(Number(shiftData.LocationLat)
+        let loactionDistance = this.distance(Number(shiftData.LocationLat)
         ,Number(shiftData.LocationLong),position.coords.latitude,position.coords.longitude)
         this.setState({latRecord:position.coords.latitude,longRecord:position.coords.longitude});
         console.log("distance  "+loactionDistance);
         if(loactionDistance > Number(shiftData.Accuracy)){
           this.setState({showRemark:true})
         }else{
+           this.setState({area_flag:true});
            if(this.state.shiftData.timeRecordType =="O" && this.state.lateCondition){
             this.setState({showRemark:true});
            }else{
@@ -65,6 +64,7 @@ export default class ConfirmPunchScreen extends React.Component {
            }
         }
       },(error)=>{
+         this.setState({latRecord:undefined,longRecord:undefined});
          Alert.alert(
             'แจ้งเตือน',
             'คุณไม่ได้ทำการเปิด Location ระบบจะทำการระบุว่าคุณได้บันทึกเวลานอกถสานที่',
@@ -143,13 +143,17 @@ export default class ConfirmPunchScreen extends React.Component {
      TempMobile.longRecord = this.state.longRecord;
      TempMobile.orgCode = this.state.shiftData.ORG_CODE;
      TempMobile.stringBase64 = this.props.punchStore.selfiePath;
-     if(this.state.showRemark){
+     if(!this.state.area_flag){
        TempMobile.area_flag = "N"
       
      }else{
        TempMobile.area_flag = "Y"
      }
-    TempMobile.remark = this.state.remark;
+    if(""==TempMobile.latRecord && ""==TempMobile.longRecord){
+      TempMobile.remark = `${this.state.remark}{cannot get location}`;
+    }else{
+      TempMobile.remark = this.state.remark;
+    }
      
      param.TempMobile = TempMobile
      const response = await post("InsertTempMobile",param);
@@ -202,7 +206,7 @@ export default class ConfirmPunchScreen extends React.Component {
     else
     return  <StampPunch imgPath={this.props.punchStore.selfiePath} shiftData={this.state.shiftData} remark={this.state.remark}
          cancel={this.cancel} retry={this.goBack} donePress={this.okPress} user={this.state.userData} showRemark={this.state.showRemark} 
-         onChangeText={this.onChangeText} lateCondition={this.state.lateCondition!==null}></StampPunch>
+         onChangeText={this.onChangeText} lateCondition={this.state.lateCondition!==null} area_flag={this.state.area_flag}></StampPunch>
   }
   distance(lat1, lon1, lat2, lon2) {
   var p = 0.017453292519943295;    // Math.PI / 180

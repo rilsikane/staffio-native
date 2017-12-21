@@ -98,7 +98,8 @@ class StampPunch extends React.Component {
      return (<View style={{marginTop:5,alignItems:"center"}}>
                 <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
                        <CheckBox checked={true}/>
-                        <Text allowFontScaling={false}style={{marginLeft:10,fontSize:responsiveFontSize(2),color:"#9a9c9e",fontFamily:'Kanit'}}> บันทึกเวลานอกสถานที่ </Text>
+                        <Text allowFontScaling={false}style={{marginLeft:10,fontSize:responsiveFontSize(2),color:"#9a9c9e",fontFamily:'Kanit'}}> 
+                            {this.props.area_flag ? this.props.shiftData.branch_name :'บันทึกเวลานอกสถานที่ี่'} </Text>
                 </View>
                
              </View>)

@@ -35,7 +35,6 @@ export default class CardTimeRecord extends React.Component {
                       <View style={styles.circle2}>    
                         <View style={styles.circle}>
                             <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(1)}}/>
                             <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
                         </View>
                         </View>
@@ -49,7 +48,6 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}> 
                       <View style={styles.circle}>                                         
                           <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
-                          <Text style={{ fontSize: responsiveFontSize(1)}}/>
                           <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
                       </View>
                       </View>
@@ -62,7 +60,6 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}>
                       <View  style={styles.circle}>          
                           <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
-                          <Text style={{ fontSize: responsiveFontSize(1)}}/>
                           <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
                       </View>
                       </View>
@@ -101,6 +98,7 @@ const styles = StyleSheet.create({
     color: '#808285',
   },
   noteText2: {
+    marginTop:responsiveHeight(1),
     fontFamily:"Kanit",
     fontSize: responsiveFontSize(4.5),
     backgroundColor:'transparent',
