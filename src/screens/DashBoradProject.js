@@ -14,14 +14,16 @@ import TimerMixin from 'react-timer-mixin';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import store from 'react-native-simple-store';
 import { post, post1 } from '../api';
+import Loading from '../components/loading';
 import Colors from '../constants/Colors'
 
 
 export default class DashBoradProject extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = { isLoading: true,users:[],projectView:[] };
+        navigator = this.props.navigator
+        console.log('นี่ เนวิแกชั่นนะ ' + JSON.stringify(navigator));
+        this.state = { isLoading: true,users:[],projectView:[],dataperson: []};
         this.progress = [{ location: 'the mail', staffcount: 50 }, { location: 'terminal 21', staffcount: 30 }, { location: 'terminal 22', staffcount: 80 }];
         //this.projectView
         this.cancelDialog = this.cancelDialog.bind(this);
@@ -30,12 +32,15 @@ export default class DashBoradProject extends React.Component {
         //this.changDialog = this.changDialog.bind(this);
     }
 
-    async  componentDidMount() {
+    async  componentWillMount() {
         const userData = await store.get("USER");
-        //console.log('User นะครัช ' + JSON.stringify(userData))
+        console.log('User นะครัช ' + JSON.stringify(userData))
         const projectView = await this.projectView(userData)
+  
 
+    
         this.setState({projectView : projectView})
+        console.log('ล๊อคนะครัช' + this.state.projectView.empAmount)
         this.setState({ user: userData });
         if (userData) {
             TimerMixin.setTimeout(() => {
@@ -59,7 +64,7 @@ export default class DashBoradProject extends React.Component {
             screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
             title: "Modal", // title of the screen as appears in the nav bar (optional)
             passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
-            DashBorad:this.DashBorad,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
+            DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
             navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
           });
@@ -68,15 +73,15 @@ export default class DashBoradProject extends React.Component {
     
 
     projectView = async (user) => {
-        //console.log('ถึงนี่ละสาส')
+        console.log('ถึงนี่ละสาส')
         params = {}
         params.empCode = user.EMP_CODE;
         params.orgCode = user.ORG_CODE;
-        params.shftDate = new Date();
+        //params.shftDate = new Date();
         const response = await post("GetDashBoradProjectDetailsOrg", params);
-        //console.log('response นะจ๊ะ' + JSON.stringify(response));
+        console.log('response นะจ๊ะ' + JSON.stringify(response));
         const response2 = response.data;
-        //console.log('response นะจ๊ะ2' + JSON.stringify(response2));
+        console.log('response นะจ๊ะ2' + JSON.stringify(response2));
         return response2;
 
         // const state = response.data;
@@ -89,8 +94,8 @@ export default class DashBoradProject extends React.Component {
 
     render() {
         if (this.state.isLoading)
-            //return (<View style={styles.container}>{this.loading()}</View>)
-            return null;
+            return  <Loading visible={this.state.isLoading} text="Loading..."/>
+            //return null;
         else
             return (
                 <Container style={{ width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>

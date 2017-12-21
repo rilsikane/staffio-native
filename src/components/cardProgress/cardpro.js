@@ -57,15 +57,15 @@ export default class CardPro extends React.Component {
                             <View style={styles.circle}>
                                 <ProgressCircle
 
-                                    percent={this.props.data.empAmount}
+                                    percent={((this.props.data.empStatus * 100) / this.props.data.empAmount )}
                                     radius={40}
                                     borderWidth={6}
-                                    color={this.changcolor(this.props.data.empAmount)}
+                                    color={this.changcolor((this.props.data.empStatus * 100) / this.props.data.empAmount )}
                                     shadowColor="#999"
                                     bgColor="#fff"
 
                                 >
-                                    <Text style={this.color(this.props.data.empAmount)}>{this.props.data.empAmount + '%'}</Text>
+                                <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
                                 </ProgressCircle>
                             </View>
                             <View style={styles.square} />
@@ -77,7 +77,7 @@ export default class CardPro extends React.Component {
                             </CardItem>
                             <CardItem style={{ height: responsiveHeight(0.1) }}>
                                 <Icon name='person' />
-                                <Text style={styles.Text4}>{this.props.data.empAmount * 10 / 100} / 10    </Text>
+                                <Text style={styles.Text4}>{this.props.data.empStatus} / {this.props.data.empAmount}   </Text>
                                 <Text style={styles.Text4}>พนักงานที่ลงเวลา</Text>
                             </CardItem>
                         </Body>

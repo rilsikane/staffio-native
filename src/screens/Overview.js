@@ -28,8 +28,9 @@ import store from 'react-native-simple-store';
 import TimerMixin from 'react-timer-mixin';
 import Spinner from 'react-native-loading-spinner-overlay';
 //import Progress from '../components/cardProgress/testindex';
-import { ScrollView , Linking} from 'react-native';
+import { ScrollView, Linking } from 'react-native';
 import { post, post1 } from '../api';
+import Loading from '../components/loading';
 import CardCheckin from '../components/cardCheckin/Cardcheckin';
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
@@ -40,29 +41,28 @@ import CardCheckin from '../components/cardCheckin/Cardcheckin';
 export default class Overview extends React.Component {
     constructor(props) {
         super(props);
-       
+
         data = this.props.data;
-       
-        //console.log('นี่   this.projectView นะครับ' +   JSON.stringify( data)); 
-        this.checkin = [{name : 'Pramot sudjai', position : '004901 solution specialist', location : 'the mail', checkin : 'false', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
-        {name : 'Anuwat Phetaum', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Preecha Satbut', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
-        {name : 'Sarin  Rubtong', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Piranan  Naja', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Worrawat  RO', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Sittichok  Boom', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
-        {name : 'Kritsada  DJ', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}]
+        // this.checkin = [{name : 'Pramot sudjai', position : '004901 solution specialist', location : 'the mail', checkin : 'false', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
+        // {name : 'Anuwat Phetaum', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        // {name : 'Preecha Satbut', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'},
+        // {name : 'Sarin  Rubtong', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        // {name : 'Piranan  Naja', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        // {name : 'Worrawat  RO', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        // {name : 'Sittichok  Boom', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}, 
+        // {name : 'Kritsada  DJ', position : '004901 solution specialist', location : 'the mail', checkin : 'true', url : 'https://wix.github.io/react-native-navigation/#/deep-links'}]
         this.onContactSelected = this.onContactSelected.bind(this);
-        this.state = { isLoading: true, data :[] };
-       
+        this.state = { isLoading: true, data: [], modalVisible: false };
+        this.closeDialog = this.closeDialog.bind(this);
+
     }
 
-    async  componentDidMount() {
+    async  componentWillMount() {
         const userData = await store.get("USER");
-        //console.log('User นะครัช ' + JSON.stringify(JSON.stringify(userData) + "นี่ข้อมูล" + JSON.stringify(data)))
-        const dataperson = await this.dataperson(userData,data)
+        console.log('User นะครัช ' + JSON.stringify(JSON.stringify(userData) + "นี่ข้อมูล" + JSON.stringify(data)))
+        const dataperson = await this.dataperson(userData, data)
 
-        this.setState({data : dataperson})
+        this.setState({ data: dataperson })
         this.setState({ user: userData });
         if (userData) {
             TimerMixin.setTimeout(() => {
@@ -71,17 +71,17 @@ export default class Overview extends React.Component {
         }
     }
 
-    dataperson = async (user,data) => {
-        //console.log('ถึงนี่ละสาส')
+    dataperson = async (user, data) => {
+        console.log('ถึงนี่ละสาส')
         params = {}
         params.orgCode = user.ORG_CODE;
         params.projectCode = data.projectCode;
         params.currentDate = '2017-11-15';
         params.currentTime = '12:30';
         const response = await post("GetDashBoradProjectDetail", params);
-        //console.log('response นะจ๊ะ' + JSON.stringify(response));
+        console.log('response นะจ๊ะ' + JSON.stringify(response));
         const response2 = response.EmpDetails;
-        //console.log('response นะจ๊ะ2' + JSON.stringify(response2));
+        console.log('response นะจ๊ะ2' + JSON.stringify(response2));
         return response2;
 
         // const state = response.data;
@@ -91,36 +91,42 @@ export default class Overview extends React.Component {
         // console.log('นี่ this.State' + JSON.stringify(this.state))
 
     }
+    closeDialog() {
+        this.props.navigator.dismissModal({
+            //screen: 'staffio.DashBoradProject', 
+            animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+        });
+    }
 
 
 
-    changcolor(progress){ //เปลี่ยนสี
-        if (progress < 31 ) {
-            color="#f16061"
-            return color   
-        }else if (progress <= 79){
-            color="#fdbd3a" 
+    changcolor(progress) { //เปลี่ยนสี
+        if (progress < 31) {
+            color = "#f16061"
             return color
-        }else if (progress >= 80){
+        } else if (progress <= 79) {
+            color = "#fdbd3a"
+            return color
+        } else if (progress >= 80) {
             color = "#229d9e"
             return color
         }
     }
 
-    color(color){
-        if (color <31){
-            return   {color:"#f16061",fontSize: 18}
-        }else if (color <= 79){
-            return   {color:"#fdbd3a",fontSize: 18}
-        }else if (color >= 80){
-            return   {color:"#229d9e",fontSize: 18}
+    color(color) {
+        if (color < 31) {
+            return { color: "#f16061", fontSize: 18 }
+        } else if (color <= 79) {
+            return { color: "#fdbd3a", fontSize: 18 }
+        } else if (color >= 80) {
+            return { color: "#229d9e", fontSize: 18 }
         }
     }
 
-    check(checkin){
+    check(checkin) {
         var a = 0
-        for(i = 0 ; i < checkin.length ; i++){
-            if(checkin[i].timeRecord != null && checkin[i].timeRecord != "" ){
+        for (i = 0; i < checkin.length; i++) {
+            if (checkin[i].timeRecord != null && checkin[i].timeRecord != "") {
                 a = a + 1
             }
         }
@@ -131,79 +137,79 @@ export default class Overview extends React.Component {
         return Linking.openURL(url);
     }
 
-    
+
     render() {
         if (this.state.isLoading)
-        //return (<View style={styles.container}>{this.loading()}</View>)
-        return null;
-    else
-        return (
-          
-            <Container style={{ backgroundColor: '#FFCCFF' }}>
-                <Header style={styles.Header}>
-                    <Icon name='home' style={{ color: 'white' }} />
-                    <Body style={{ alignItems: "center" }}>
-                        <Title style={styles.Text}>ภาพรวม...</Title>
+            //return (<View style={styles.container}>{this.loading()}</View>)
+            return <Loading visible={this.state.isLoading} text="Loading..." />;
+        else
+            return (
+
+                <Container style={{ backgroundColor: '#fee2c8' }}>
+                    <Header style={styles.Header}>
+                        <Icon name='home' style={{ color: 'white' }} onPress={this.closeDialog} />
+                        <Body style={{ alignItems: "center" }}>
+                            <Title style={styles.Text}>ภาพรวม...</Title>
+                        </Body>
+                        <Icon name='menu' style={{ color: 'white' }} />
+                    </Header>
+
+
+                    <Body>
+                        <CardItem style={{ height: responsiveHeight(18), width: responsiveWidth(98) }}>
+                            <View style={{ alignItems: 'center' }}>
+                                <View style={styles.circle}>
+                                    <ProgressCircle
+
+                                        percent={this.check(this.state.data) * 100 / this.state.data.length}
+                                        radius={40}
+                                        borderWidth={6}
+                                        color={this.changcolor(this.check(this.state.data) * 100 / this.state.data.length)}
+                                        shadowColor="#999"
+                                        bgColor="#fff"
+
+                                    >
+                                        <Text style={this.color(this.check(this.state.data) * 100 / this.state.data.length)}>{this.check(this.state.data) * 100 / this.state.data.length + '%'}</Text>
+                                    </ProgressCircle>
+                                </View>
+                                <View style={styles.square} />
+                                <View style={styles.square2} />
+                            </View>
+                            <Body>
+                                <Text style={styles.Text1}>    {data.projectName}</Text>
+                                <CardItem>
+                                    <Text style={styles.Text2}>สถานที่เข้างาน </Text>
+                                    <Badge danger >
+                                        <Text>1</Text>
+                                    </Badge>
+                                    <Text style={styles.Text3}>{data.branchName}</Text>
+                                </CardItem>
+                                <CardItem style={{ height: responsiveHeight(0.1) }}>
+                                    <Icon name='person' />
+                                    <Text style={styles.Text4}> {this.check(this.state.data)} / {this.state.data.length} </Text>
+                                    <Text style={styles.Text4}>พนักงานที่ลงเวลา</Text>
+                                </CardItem>
+                            </Body>
+                        </CardItem>
+                        <Text />
+                        <ScrollView>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                {this.state.data.map((val) => {
+                                    return (
+                                        <CardCheckin key={val.fullNameTh} data={val} onContactSelected={this.onContactSelected} >
+                                        </CardCheckin>);
+                                })}
+
+
+                            </View>
+                        </ScrollView>
                     </Body>
-                    <Icon name='menu' style={{ color: 'white' }} />
-                </Header>
-               
-                   
-                <Body>
-                <CardItem style={{height: responsiveHeight(18), width:  responsiveWidth(95) }}>
-                <View style={{alignItems : 'center' }}>
-                <View style={styles.circle}>
-                <ProgressCircle
-                 
-                    percent  = {this.check(this.state.data) *100 / this.state.data.length}
-                    radius={40}
-                    borderWidth={6}
-                    color= {this.changcolor(this.check(this.state.data) *100 / this.state.data.length)}
-                    shadowColor="#999"
-                    bgColor="#fff"
-                    
-                >
-                <Text style={this.color(this.state.data.length * 10)}>{this.check(this.state.data) *100 / this.state.data.length +'%'}</Text>
-                </ProgressCircle>
-                </View>
-                <View style={styles.square}/>
-                <View style={styles.square2}/>
-                </View>
-                <Body>
-                    <Text style={styles.Text1}>    งานแสดงสินค้า  Mega sell 2017</Text>
-                    <CardItem>
-                        <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                        <Badge danger >
-                            <Text>1</Text>
-                        </Badge>
-                        <Text style={styles.Text3}> เดอะมอลล์ท่าพระ</Text>
-                    </CardItem>
-                    <CardItem style={{ height:responsiveHeight(0.1)}}>
-                    <Icon name='person'/>
-                    <Text style={styles.Text4}> {this.check(this.state.data)} / {this.state.data.length} </Text>
-                    <Text style={styles.Text4}>พนักงานที่ลงเวลา</Text>
-                    </CardItem>
-                </Body>
-            </CardItem>
-            <Text />
-            <ScrollView>
-            <View style={{alignItems : 'center',justifyContent: 'center',}}>
-            { this.state.data.map((val) => {
-                    return (
-                    <CardCheckin key={val.fullNameTh}  data={val}  onContactSelected={this.onContactSelected} >
-                    </CardCheckin>);
-                    })} 
-            
 
-            </View>
-            </ScrollView>
-            </Body>
-            
 
-     
-            </Container>
-     
-        );
+
+                </Container>
+
+            );
     }
     loading() {
         if (this.state.isLoading)
