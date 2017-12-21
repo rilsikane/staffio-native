@@ -42,7 +42,7 @@ export default class Checkin extends React.Component {
 
                     <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98), flex: 1 }}>
                         <View>
-                            { data.imagePathPersonal && <Image source={{ uri: data.imagePathPersonal }} style={{ height: responsiveHeight(11), width: responsiveWidth(18)}}></Image>}
+                            { data.imagePathPersonal && <Image source={{ uri: data.imagePathPersonal }} style={styles.image}></Image>}
                             <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} />
                         </View>
                         <View style={{marginTop : responsiveHeight(4) , width :responsiveWidth(50)}}>
@@ -53,13 +53,13 @@ export default class Checkin extends React.Component {
                         <View style={{marginTop : responsiveHeight(2) }}>
                         <CardItem style={{marginRight : responsiveWidth(2) }}>
                             <Button style={styles.icon}>
-                                <IconTello style={{ color: "yellow" }} size={em(2)} name="hhmm-17" />
+                                <IconTello style={{ color: "yellow" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
                             </Button>
                             <Button style={styles.icon}>
-                                <IconTello style={{ color: "blue" }} size={em(2)} name="hhmm-18" />
+                                <IconTello style={{ color: "blue" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
                             </Button>
                             <Button style={styles.icon} onPress={(e) => this.onContactSelected( data.lineID)}>
-                                <IconTello style={{ color: "green" }} size={em(2)} name="hhmm-20" />
+                                <IconTello style={{ color: "green" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
                             </Button>
                         </CardItem>
                         </View>
@@ -124,6 +124,14 @@ const styles = ({
     },
     container: {
         flex: 1
+    },
+    image : {
+        height: responsiveHeight(9), 
+        width: responsiveWidth(15),
+        borderRadius:2,
+        borderRightWidth:1,
+        marginTop:responsiveHeight(1),
+         marginLeft : responsiveWidth(2)
     }
 });
 

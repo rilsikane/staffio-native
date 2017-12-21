@@ -179,7 +179,7 @@ export default class Overview extends React.Component {
                                 <Text style={styles.Text1}>    {data.projectName}</Text>
                                 <CardItem>
                                     <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                    <Badge danger >
+                                    <Badge danger style={{size : responsiveFontSize(3.5)}}>
                                         <Text>1</Text>
                                     </Badge>
                                     <Text style={styles.Text3}>{data.branchName}</Text>

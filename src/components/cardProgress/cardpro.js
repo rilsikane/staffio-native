@@ -51,8 +51,8 @@ export default class CardPro extends React.Component {
         return (
 
             <View>
-                <Button style={{ height: 120, width: 390 }} onPress={(e)=>this.DashBorad(this.props.data)}>
-                    <CardItem style={{ height: 120, width: 390 }}>
+                <Button style={{ height: responsiveHeight(20), width: responsiveWidth(100) }} onPress={(e)=>this.DashBorad(this.props.data)}>
+                    <CardItem style={{ height: responsiveHeight(20), width: responsiveWidth(100) }}>
                         <View style={{ alignItems: 'center' }}>
                             <View style={styles.circle}>
                                 <ProgressCircle

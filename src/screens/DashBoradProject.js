@@ -103,8 +103,8 @@ export default class DashBoradProject extends React.Component {
                         <ScrollView>
                             <View style={{ backgroundColor: '#fee2c8' }}>
                                 <Body style={{ backgroundColor: '#fee2c8' }}>
-                                    <CardItem style={{ backgroundColor: '#fee2c8', height: 30 }}>
-                                        <CardItem style={{ backgroundColor: '#fee2c8', height: 30 }} >
+                                    <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5) }}>
+                                        <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5) }} >
                                             <Icon name='calendar' />
                                             <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>การลงเวลาเข้างาน</Text>
                                         </CardItem>
