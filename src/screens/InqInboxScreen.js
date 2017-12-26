@@ -396,7 +396,7 @@ export default class InboxScreen extends React.Component {
   render() {
     return (
       <View  style={{backgroundColor:Colors.backgroundColor,flex:1}}>
-       <CardHeader title="ประวัติ"/>
+       <CardHeader title="ประวัติ"/>   
            <Loading visible={this.state.isLoading}/>
            <View style={{height:responsiveHeight(10),marginTop:5,flexDirection:"row",alignItems:"center",marginLeft:10}}>
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
@@ -434,7 +434,7 @@ export default class InboxScreen extends React.Component {
                <Icon name="trash" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
               <ActionButton.Item  buttonColor={Colors.baseColor} title="dashbord"  onPress={this.DashBorad}>
-               <Icon name="search" style={{color:"#ffff",backgroundColor:'transparent'}}/>
+               <IconTello name="hhmm-03" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
           </ActionButton>
            

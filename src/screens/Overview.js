@@ -32,7 +32,9 @@ import { ScrollView, Linking } from 'react-native';
 import { post, post1 } from '../api';
 import Loading from '../components/loading';
 import CardCheckin from '../components/cardCheckin/Cardcheckin';
-
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../assets/fonts/config.json';
+const IconTello = createIconSetFromFontello(fontelloConfig);
 //import Icon from 'react-native-vector-icons/FontAwesome';
 //import { observer, inject } from 'mobx-react';
 //import { post } from '../api';
@@ -179,9 +181,8 @@ export default class Overview extends React.Component {
                                 <Text style={styles.Text1}>    {data.projectName}</Text>
                                 <CardItem>
                                     <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                    <Badge danger style={{size : responsiveFontSize(3.5)}}>
-                                        <Text>1</Text>
-                                    </Badge>
+                                    <IconTello  name="hhmm-15" style={{size : responsiveFontSize(3.5)}}>
+                                    </IconTello>
                                     <Text style={styles.Text3}>{data.branchName}</Text>
                                 </CardItem>
                                 <CardItem style={{ height: responsiveHeight(0.1) }}>

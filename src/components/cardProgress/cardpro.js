@@ -47,6 +47,19 @@ export default class CardPro extends React.Component {
         this.props.DashBorad(data);
     }
 
+    bgColor(percent){
+        if(percent == 0){
+            color = "red"
+            return color
+        }else {
+            color = "#999"
+            return color
+        }
+    }    
+
+    checkpercent(percent){
+        return  parseInt(percent) 
+    }
     render() {
         return (
 
@@ -61,18 +74,18 @@ export default class CardPro extends React.Component {
                                     radius={40}
                                     borderWidth={6}
                                     color={this.changcolor((this.props.data.empStatus * 100) / this.props.data.empAmount )}
-                                    shadowColor="#999"
-                                    bgColor="#fff"
+                                    shadowColor={this.bgColor(this.props.data.empStatus)}
+                                    bgColor="#ffff"
 
                                 >
-                                <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
+                                <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{this.checkpercent((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
                                 </ProgressCircle>
                             </View>
                             <View style={styles.square} />
                             <View style={styles.square2} />
                         </View>
                         <Body>
-                            <Text style={styles.Text1}>    {this.props.data.projectName}</Text>
+                            <Text style={styles.Text1}>    {this.props.data.orgName}</Text>
                             <CardItem>
                             </CardItem>
                             <CardItem style={{ height: responsiveHeight(0.1) }}>

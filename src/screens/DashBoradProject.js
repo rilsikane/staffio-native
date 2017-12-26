@@ -30,6 +30,12 @@ export default class DashBoradProject extends React.Component {
         this.DashBorad = this.DashBorad.bind(this);
         
         //this.changDialog = this.changDialog.bind(this);
+        this.checkin = [{projectName : "staffio1",empStatus : 4,empAmount:6},
+        {projectName : "staffio2",empStatus : 1,empAmount:6},
+        {projectName : "staffio3",empStatus : 6,empAmount:6},
+        {projectName : "staffio4",empStatus : 5,empAmount:6},
+        {projectName : "staffio5",empStatus : 5,empAmount:6},
+        {projectName : "staffio6",empStatus : 5,empAmount:6}]
     }
 
     async  componentWillMount() {
@@ -117,7 +123,7 @@ export default class DashBoradProject extends React.Component {
 
                                     <Tabs  initialPage={0} tabBarUnderlineStyle={{ backgroundColor: Colors.baseColor }}>
                                         <Tab  style={{backgroundColor: '#fee2c8'}}  heading={<TabHeading style={styles.tabHeading}>
-                                        <Icon name="map-marker" style={styles.tabIcon} />
+                                        <Icon name="building" style={styles.tabIcon} />
                                         <Tab style={{alignItems:'center',justifyContent:'center'}}>
                                         <Text style={styles.tabLabel}>  Project View</Text>
                                         <Text style={styles.tabLabel}>  มุมมองของโครงการ</Text>
@@ -132,7 +138,7 @@ export default class DashBoradProject extends React.Component {
                                           
                                         </Tab>
                                         <Tab   style={{backgroundColor: '#fee2c8'}}  heading={<TabHeading style={styles.tabHeading}>
-                                        <Icon name="clock-o" style={styles.tabIcon} />
+                                        <Icon name="sitemap" style={styles.tabIcon} />
                                         <Tab style={{alignItems:'center',justifyContent:'center'}}>
                                         <Text style={styles.tabLabel}>  Organization</Text>
                                         <Text style={styles.tabLabel}>  เรียงตามโครงสร้างองค์กร</Text>
@@ -175,8 +181,9 @@ export default class DashBoradProject extends React.Component {
 
 const styles = StyleSheet.create({
     tabIcon: {
+        marginLeft : responsiveWidth(4),
         color: Colors.baseColor,
-        fontSize: responsiveFontSize(2),
+        fontSize: responsiveFontSize(4),
         backgroundColor: "transparent"
     },
     tabLabel: {

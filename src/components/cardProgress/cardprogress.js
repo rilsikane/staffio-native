@@ -9,12 +9,17 @@ import { ScrollView } from 'react-native';
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../../assets/fonts/config.json';
+const IconTello = createIconSetFromFontello(fontelloConfig);
 export default class CardProgress extends React.Component {
     constructor(props) {
         super(props);
         this.DashBorad = this.DashBorad.bind(this);
        console.log('นี่นะครัช ' + this.props.data.empAmount)
        console.log('นี่นะครัช ' + this.props.data.empAmountDesc)
+       
+       
     }
 
 
@@ -45,6 +50,19 @@ export default class CardProgress extends React.Component {
         this.props.DashBorad(data);
     }
 
+    bgColor(percent){
+        if(percent == 0){
+            color = "red"
+            return color
+        }else {
+            color = "#999"
+            return color
+        }
+    }   
+
+    checkpercent(percent){
+        return  parseInt(percent) 
+    }
     render() {
         return (
 
@@ -59,11 +77,11 @@ export default class CardProgress extends React.Component {
                                     radius={40}
                                     borderWidth={6}
                                     color={this.changcolor((this.props.data.empStatus * 100) / this.props.data.empAmount )}
-                                    shadowColor="#999"
+                                    shadowColor={this.bgColor(this.props.data.empStatus)}
                                     bgColor="#fff"
 
                                 >
-                                    <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
+                                    <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{this.checkpercent((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
                                 </ProgressCircle>
                             </View>
                             <View style={styles.square} />
@@ -73,9 +91,8 @@ export default class CardProgress extends React.Component {
                             <Text style={styles.Text1}>    {this.props.data.projectName}</Text>
                             <CardItem>
                                 <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                <Badge danger style={{size : responsiveFontSize(3.5)}} >
-                                    <Text>1</Text>
-                                </Badge>
+                                <IconTello  name="hhmm-15" style={{size : responsiveFontSize(3.5)}}>
+                                </IconTello>
                                 <Text style={styles.Text3}> {this.props.data.branchName}</Text>
                             </CardItem>
                             <CardItem style={{ height: responsiveHeight(0.1) }}>
