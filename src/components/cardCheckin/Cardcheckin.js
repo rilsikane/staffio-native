@@ -59,7 +59,7 @@ export default class Checkin extends React.Component {
                         </View>
                     </Card>
                 </ScrollView>
-                <Text/>
+         
             </Content>
             
 

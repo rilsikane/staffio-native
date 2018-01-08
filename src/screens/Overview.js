@@ -62,12 +62,12 @@ export default class Overview extends React.Component {
 
     async  componentWillMount() {
         const userData = await store.get("USER");
-        console.log('นี่ user นะ' + JSON.stringify(userData));
+        //console.log('นี่ user นะ' + JSON.stringify(userData));
         const dataperson = await this.dataperson(userData, data)
 
         this.setState({ data: dataperson })
         this.setState({ user: userData });
-        console.log('นี่this.state.data' + JSON.stringify(this.state.data));
+        //console.log('นี่this.state.data' + JSON.stringify(this.state.data));
         if (userData) {
             TimerMixin.setTimeout(() => {
                 this.setState({ isLoading: false });
@@ -82,15 +82,15 @@ export default class Overview extends React.Component {
         var day = new Date();
         day = day.toISOString();
         day = day.substring(0,10);
-        console.log('นี่ day นะ' + day);
-        params.currentDate = "2018-01-05";
+        //console.log('นี่ day นะ' + day);
+        params.currentDate = day;
         var time = new Date();
         time = time.toString();
         time = time.substring(16,21);
-        console.log('นี่ time นะ' + time);
+        //console.log('นี่ time นะ' + time);
         params.currentTime = time;
         const response = await post("GetDashBoradProjectDetail", params);
-         console.log('นี่response2นะ'+JSON.stringify(response));
+        // console.log('นี่response2นะ'+JSON.stringify(response));
         const response2 = response.EmpDetails;
         return response2;
 
