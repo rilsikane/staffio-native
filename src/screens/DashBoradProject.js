@@ -98,7 +98,7 @@ export default class DashBoradProject extends React.Component {
             //return null;
         else
             return (
-                <Container style={{ width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
+                <Container style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
                     <Content>
                         <ScrollView>
                             <View style={{ backgroundColor: '#fee2c8' }}>

@@ -169,7 +169,7 @@ export default class Overview extends React.Component {
         else
             return (
 
-                <Container style={{ backgroundColor: '#fee2c8' }}>
+                <Container style={{paddingTop:22,flex:1, backgroundColor: '#fee2c8' }}>
                     <Header style={styles.Header}>
                         <Icon name='home' style={{ color: 'white' }} onPress={this.closeDialog} />
                         <Body style={{ alignItems: "center" }}>

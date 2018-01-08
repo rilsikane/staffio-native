@@ -67,7 +67,7 @@ export default class CardProgress extends React.Component {
         return (
 
             <View>
-                <Button style={{ height: responsiveHeight(20), width: responsiveWidth(100) }} onPress={(e)=>this.DashBorad(this.props.data)}>
+                <Button style={{ height: responsiveHeight(20), width: responsiveWidth(100) ,backgroundColor:'white'}} onPress={(e)=>this.DashBorad(this.props.data)}>
                     <CardItem style={{ height: responsiveHeight(20), width: responsiveWidth(100) }}>
                         <View style={{ alignItems: 'center' }}>
                             <View style={styles.circle}>
@@ -91,7 +91,7 @@ export default class CardProgress extends React.Component {
                             <Text style={styles.Text1}>    {this.props.data.projectName}</Text>
                             <CardItem>
                                 <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                <IconTello  name="hhmm-15" style={{size : responsiveFontSize(3.5)}}>
+                                <IconTello  name="hhmm-15" style={{fontSize : responsiveFontSize(3.5)}}>
                                 </IconTello>
                                 <Text style={styles.Text3}> {this.props.data.branchName}</Text>
                             </CardItem>
