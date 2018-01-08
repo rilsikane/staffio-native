@@ -8,6 +8,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import ProgressCircle from 'react-native-progress-circle'
 import CardCheckin from './Cardcheckin';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
+import Communications from 'react-native-communications';
 import fontelloConfig from '../../../assets/fonts/config.json'
 import { em } from '../../constants/Layout'
 const IconTello = createIconSetFromFontello(fontelloConfig);
@@ -15,61 +16,52 @@ export default class Checkin extends React.Component {
     constructor(props) {
         super(props);
         this.onContactSelected = this.onContactSelected.bind(this);
-        
         //console.log('นี imagePathPersonal' + JSON.stringify(imagePathPersonal))
     }
-
-
     onContactSelected(url) {
         this.props.onContactSelected(url);
     }
-
     changcolorborder(checkin) {
         if (checkin == null) {
             return { borderTopColor: 'red' }
         } else {
             return { borderTopColor: 'green' }
         }
-
     }
-
-
     render() {
-      const data =  this.props.data
+      var data =  this.props.data
+      console.log('นี่data' + JSON.stringify(data));
         return (
-            <Content style={{ flex: 1 }}>
+            <Content style={{flex : 1}}>
                 <ScrollView>
-
-                    <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98), flex: 1 }}>
-                        <View>
-                            { data.imagePathPersonal && <Image source={{ uri: data.imagePathPersonal }} style={styles.image}></Image>}
-                            <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} />
-                        </View>
-                        <View style={{marginTop : responsiveHeight(4) , width :responsiveWidth(50)}}>
+                    <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98) }}>
+                        <View style={{ width :responsiveWidth(17)}}>
+                            {( data.imagePathPersonal && data.imagePathPersonal!= "") && <Image source={{uri:data.imagePathPersonal}} style={styles.image}></Image>}
+                            <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} /> 
+                        </View>  
+                        <View style={{marginTop : responsiveHeight(4) , width :responsiveWidth(60)}}>
                             <Text style={styles.Text1}>    { data.fullNameTh}</Text>
                             <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
                         </View>
 
-                        <View style={{marginTop : responsiveHeight(2) }}>
+                        <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
                         <CardItem style={{marginRight : responsiveWidth(2) }}>
-                            <Button style={styles.icon}>
+                           {(data.mobileNo && data.mobileNo !="") && <Button style={styles.icon} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
                                 <IconTello style={{ color: "yellow" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
-                            </Button>
-                            <Button style={styles.icon}>
+                            </Button>}
+                            {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
                                 <IconTello style={{ color: "blue" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
-                            </Button>
-                            <Button style={styles.icon} onPress={(e) => this.onContactSelected( data.lineID)}>
+                            </Button>}
+                            {(data.lineid && data.lineid !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.lineid)} >
                                 <IconTello style={{ color: "green" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
-                            </Button>
+                            </Button>}
                         </CardItem>
                         </View>
-
-
-
-
                     </Card>
                 </ScrollView>
+                <Text/>
             </Content>
+            
 
 
         );
@@ -112,10 +104,7 @@ const styles = ({
     },
     box1: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: 0,
-        height: 0,
+        marginTop:responsiveHeight(0.1),
         backgroundColor: 'transparent',
         borderStyle: 'solid',
         borderRightWidth: responsiveWidth(8),

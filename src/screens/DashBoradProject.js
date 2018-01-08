@@ -22,7 +22,6 @@ export default class DashBoradProject extends React.Component {
     constructor(props) {
         super(props);
         navigator = this.props.navigator
-        console.log('นี่ เนวิแกชั่นนะ ' + JSON.stringify(navigator));
         this.state = { isLoading: true,users:[],projectView:[],dataperson: []};
         this.progress = [{ location: 'the mail', staffcount: 50 }, { location: 'terminal 21', staffcount: 30 }, { location: 'terminal 22', staffcount: 80 }];
         //this.projectView
@@ -30,23 +29,21 @@ export default class DashBoradProject extends React.Component {
         this.DashBorad = this.DashBorad.bind(this);
         
         //this.changDialog = this.changDialog.bind(this);
-        this.checkin = [{projectName : "staffio1",empStatus : 4,empAmount:6},
-        {projectName : "staffio2",empStatus : 1,empAmount:6},
-        {projectName : "staffio3",empStatus : 6,empAmount:6},
-        {projectName : "staffio4",empStatus : 5,empAmount:6},
-        {projectName : "staffio5",empStatus : 5,empAmount:6},
-        {projectName : "staffio6",empStatus : 5,empAmount:6}]
+        // this.checkin = [{projectName : "staffio1",empStatus : 4,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
+        // {projectName : "staffio2",empStatus : 1,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
+        // {projectName : "staffio3",empStatus : 6,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
+        // {projectName : "staffio4",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
+        // {projectName : "staffio5",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
+        // {projectName : "staffio6",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"}]
     }
 
     async  componentWillMount() {
         const userData = await store.get("USER");
-        console.log('User นะครัช ' + JSON.stringify(userData))
         const projectView = await this.projectView(userData)
   
 
     
         this.setState({projectView : projectView})
-        console.log('ล๊อคนะครัช' + this.state.projectView.empAmount)
         this.setState({ user: userData });
         if (userData) {
             TimerMixin.setTimeout(() => {
@@ -79,22 +76,19 @@ export default class DashBoradProject extends React.Component {
     
 
     projectView = async (user) => {
-        console.log('ถึงนี่ละสาส')
         params = {}
         params.empCode = user.EMP_CODE;
         params.orgCode = user.ORG_CODE;
         //params.shftDate = new Date();
+        console.log('นีนะครัช' + params.orgCode);
         const response = await post("GetDashBoradProjectDetailsOrg", params);
-        console.log('response นะจ๊ะ' + JSON.stringify(response));
         const response2 = response.data;
-        console.log('response นะจ๊ะ2' + JSON.stringify(response2));
+        //console.log('นี่นะ response2' + response2);
         return response2;
 
         // const state = response.data;
         // Object.keys(this.state).forEach(key => { projectName[key] = this.state[key]; });
         // this.setState({ state })
-
-        // console.log('นี่ this.State' + JSON.stringify(this.state))
 
     }
 
