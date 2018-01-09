@@ -67,7 +67,7 @@ export default class Overview extends React.Component {
 
         this.setState({ data: dataperson })
         this.setState({ user: userData });
-        //console.log('นี่this.state.data' + JSON.stringify(this.state.data));
+        console.log('นี่this.state.data' + JSON.stringify(this.state.data));
         if (userData) {
             TimerMixin.setTimeout(() => {
                 this.setState({ isLoading: false });
@@ -189,7 +189,7 @@ export default class Overview extends React.Component {
                                         radius={40}
                                         borderWidth={6}
                                         color={this.changcolor(this.check(this.state.data) * 100 / this.state.data.length)}
-                                        shadowColor={this.bgColor(this.state.data)}
+                                        shadowColor={this.bgColor(this.check(this.state.data))}
                                         bgColor="#fff"
 
                                     >
@@ -221,6 +221,7 @@ export default class Overview extends React.Component {
                                                 return (
                                                     <CardCheckin key={val.fullNameTh} data={val} onContactSelected={this.onContactSelected} >
                                                     </CardCheckin>);
+                                                   
                                             })}
 
 

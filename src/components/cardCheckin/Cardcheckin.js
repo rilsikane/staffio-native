@@ -28,11 +28,21 @@ export default class Checkin extends React.Component {
             return { borderTopColor: 'green' }
         }
     }
+
+    bgColor(percent){
+        if(percent == 0){
+            color = "red"
+            return color
+        }else {
+            color = "#999"
+            return color
+        }
+    }    
+
     render() {
       var data =  this.props.data
-      console.log('นี่data' + JSON.stringify(data));
-        return (
-            <Content style={{flex : 1}}>
+      console.log('นี่dataนะครับ' + JSON.stringify(data));
+        return (            
                 <ScrollView>
                     <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98) }}>
                         <View style={{ width :responsiveWidth(17)}}>
@@ -60,7 +70,7 @@ export default class Checkin extends React.Component {
                     </Card>
                 </ScrollView>
          
-            </Content>
+          
             
 
 
@@ -123,4 +133,5 @@ const styles = ({
          marginLeft : responsiveWidth(2)
     }
 });
+
 
