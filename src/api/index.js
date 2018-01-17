@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+
+
+
 //dev
 
 //const endpoint = "http://172.20.14.212/api_mobile/api/";
@@ -14,6 +17,11 @@ import axios from 'axios';
 const endpoints ={"DEV":"http://172.20.14.212/api_mobile/api/"
 ,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/",
 "G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
+//const endpoints ={"OMS":"http://172.20.14.212/api_mobile/api/"}
+// ,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/",
+// "G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
+
+
 
 import store from 'react-native-simple-store';
 import {
