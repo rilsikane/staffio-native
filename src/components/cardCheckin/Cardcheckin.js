@@ -23,9 +23,9 @@ export default class Checkin extends React.Component {
     }
     changcolorborder(checkin) {
         if (checkin == null) {
-            return { borderTopColor: 'red' }
+            return { borderTopColor: '#bf1e2d' }
         } else {
-            return { borderTopColor: 'green' }
+            return { borderTopColor: '#2bb673' }
         }
     }
 
@@ -41,10 +41,9 @@ export default class Checkin extends React.Component {
 
     render() {
       var data =  this.props.data
-      console.log('นี่dataนะครับ' + JSON.stringify(data));
         return (            
-                <ScrollView>
-                    <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98) }}>
+                <View style={{flex:1}}>
+                    <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98),borderRadius:2,marginTop:2,marginBottom:2 }}>
                         <View style={{ width :responsiveWidth(17)}}>
                             {( data.imagePathPersonal && data.imagePathPersonal!= "") && <Image source={{uri:data.imagePathPersonal}} style={styles.image}></Image>}
                             <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} /> 
@@ -57,18 +56,18 @@ export default class Checkin extends React.Component {
                         <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
                         <CardItem style={{marginRight : responsiveWidth(2) }}>
                            {(data.mobileNo && data.mobileNo !="") && <Button style={styles.icon} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
-                                <IconTello style={{ color: "yellow" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
+                                <IconTello style={{ color: "#fbaa3e" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
                             </Button>}
                             {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
-                                <IconTello style={{ color: "blue" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
+                                <IconTello style={{ color: "#3c5b9a" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
                             </Button>}
                             {(data.lineid && data.lineid !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.lineid)} >
-                                <IconTello style={{ color: "green" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
+                                <IconTello style={{ color: "#37b54a" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
                             </Button>}
                         </CardItem>
                         </View>
                     </Card>
-                </ScrollView>
+                </View>
          
           
             
@@ -114,23 +113,23 @@ const styles = ({
     },
     box1: {
         position: 'absolute',
-        marginTop:responsiveHeight(0.1),
         backgroundColor: 'transparent',
         borderStyle: 'solid',
-        borderRightWidth: responsiveWidth(8),
-        borderTopWidth: responsiveWidth(8),
-        borderRightColor: 'transparent'
+        borderRightWidth: responsiveWidth(13),
+        borderTopWidth: responsiveWidth(9.5),
+        borderRightColor: 'transparent',
+        borderRadius:1
     },
     container: {
         flex: 1
     },
     image : {
-        height: responsiveHeight(9), 
-        width: responsiveWidth(15),
+        height: responsiveHeight(8), 
+        width: responsiveWidth(12),
         borderRadius:2,
         borderRightWidth:1,
         marginTop:responsiveHeight(1),
-         marginLeft : responsiveWidth(2)
+        marginLeft : responsiveWidth(2)
     }
 });
 

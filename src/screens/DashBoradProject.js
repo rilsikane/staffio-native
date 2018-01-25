@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Header, Tabs, Tab, TabHeading, Left, Body, Right, Button, Title, Text, View, Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
+    StyleProvider,Container, Header, Tabs, Tab, TabHeading, Left, Body, Right, Button, Title, Text, View, Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
 
 } from 'native-base';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -16,25 +16,19 @@ import store from 'react-native-simple-store';
 import { post, post1 } from '../api';
 import Loading from '../components/loading';
 import Colors from '../constants/Colors'
+import getTheme from '../../native-base-theme/components';
 
 
 export default class DashBoradProject extends React.Component {
     constructor(props) {
         super(props);
         navigator = this.props.navigator
-        this.state = { isLoading: true,users:[],projectView:[],dataperson: []};
+        this.state = { isLoading: true,users:[],projectView:[],dataperson: [],tabIndex:0,orgView:[]};
         this.progress = [{ location: 'the mail', staffcount: 50 }, { location: 'terminal 21', staffcount: 30 }, { location: 'terminal 22', staffcount: 80 }];
         //this.projectView
         this.cancelDialog = this.cancelDialog.bind(this);
         this.DashBorad = this.DashBorad.bind(this);
-        
-        //this.changDialog = this.changDialog.bind(this);
-        // this.checkin = [{projectName : "staffio1",empStatus : 4,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
-        // {projectName : "staffio2",empStatus : 1,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
-        // {projectName : "staffio3",empStatus : 6,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
-        // {projectName : "staffio4",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
-        // {projectName : "staffio5",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"},
-        // {projectName : "staffio6",empStatus : 5,empAmount:6,projectCode:"PJ_00428_002",orgCode: "01344"}]
+        this.changeTab = this.changeTab.bind(this);
     }
 
     async  componentWillMount() {
@@ -51,18 +45,22 @@ export default class DashBoradProject extends React.Component {
             }, 1000);
         }
     }
+    async changeTab(i, ref){      
+      this.setState({tabIndex:i.i});
+      if(i.i == 1){
+        if(this.state.orgView.length ==0){
+            const userData = await store.get("USER");  
+            const data = await this.orgView(userData);
+            this.setState({orgView:data});
+        }
+      }
+    }
 
     cancelDialog() {
         this.props.cancelDialog();
     }
 
     DashBorad(data){
-        //  this.setState({isLoading:true});
-        //  this.setState({modalVisible:true});
-        //  setTimeout(()=>{
-        //    this.setState({isLoading:false});
-        //  },500);
-         //this.setState({modalVisible:true});
           this.props.navigator.showModal({
             screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
             title: "Modal", // title of the screen as appears in the nav bar (optional)
@@ -79,17 +77,18 @@ export default class DashBoradProject extends React.Component {
         params = {}
         params.empCode = user.EMP_CODE;
         params.orgCode = user.ORG_CODE;
-        //params.shftDate = new Date();
-        console.log('นีนะครัช' + params.orgCode);
         const response = await post("GetDashBoradProjectDetailsOrg", params);
         const response2 = response.data;
-        //console.log('นี่นะ response2' + response2);
         return response2;
-
-        // const state = response.data;
-        // Object.keys(this.state).forEach(key => { projectName[key] = this.state[key]; });
-        // this.setState({ state })
-
+    }
+    orgView = async (user) => {
+        params = {}
+        params.empCode = user.EMP_CODE;
+        params.orgCode = user.ORG_CODE;
+        //params.shftDate = new Date("2018-01-23T13:00:00Z").toISOString();
+        //console.log("GetDashBoradOrgParam",params);
+        const response = await post("GetDashBoradOrg", params);
+        return response.data;
     }
 
     render() {
@@ -98,67 +97,77 @@ export default class DashBoradProject extends React.Component {
             //return null;
         else
             return (
-                <Container style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
-                    <Content>
-                        <ScrollView>
-                            <View style={{ backgroundColor: '#fee2c8' }}>
-                                <Body style={{ backgroundColor: '#fee2c8' }}>
-                                    <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5) }}>
-                                        <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5) }} >
-                                            <Icon name='calendar' />
-                                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>การลงเวลาเข้างาน</Text>
+                <StyleProvider  style={getTheme()}>  
+                    <Container style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
+                        <Content>
+                            <ScrollView>
+                                <View style={{ backgroundColor: '#fee2c8' }}>
+                                    <Body style={{ backgroundColor: '#fee2c8' }}>
+                                        <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),flex:1,paddingLeft:0,paddingRight:0}}>
+                                            <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),justifyContent:"flex-start",paddingLeft:10}} >
+                                                <Icon name='calendar' style={{color:"#785e52"}}/>
+                                                <Text style={styles.headerFont1}>การลงเวลาเข้างาน</Text>
+                                            </CardItem>
+                                            <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
+                                                <Icon name='refresh' style={{color: "#989898"}}/>
+                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>ดึงข้อมูลล่าสุด </Text>
+                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>: 21 นาทีที่แล้ว </Text>
+                                            </CardItem>
                                         </CardItem>
-                                        <CardItem style={{ backgroundColor: '#fee2c8' }} >
-                                            <Icon name='refresh' />
-                                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>ดึงข้อมูล </Text>
-                                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange' }}>: 21 นาทีที่แล้ว </Text>
-                                        </CardItem>
-                                    </CardItem>
 
-                                    <Tabs  initialPage={0} tabBarUnderlineStyle={{ backgroundColor: Colors.baseColor }}>
-                                        <Tab  style={{backgroundColor: '#fee2c8'}}  heading={<TabHeading style={styles.tabHeading}>
-                                        <Icon name="building" style={styles.tabIcon} />
-                                        <Tab style={{alignItems:'center',justifyContent:'center'}}>
-                                        <Text style={styles.tabLabel}>  Project View</Text>
-                                        <Text style={styles.tabLabel}>  มุมมองของโครงการ</Text>
-                                        </Tab>
-                                        </TabHeading>}>
-                                            {this.state.projectView.map((val) => {
+                                        <Tabs onChangeTab={this.changeTab} initialPage={0} tabBarUnderlineStyle={{backgroundColor:"transparent"}}>
+                                            <Tab style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
+                                            <TabHeading style={styles.tabHeading}>
+                                                <Icon name="building" style={this.state.tabIndex == 0 ? styles.tabIconActive:styles.tabIcon} />
+                                                <View style={{flexDirection:"column"}}>
+                                                <Text style={[styles.tabLabel,this.state.tabIndex == 0 && {color:"#ffa83e"}]}>  Project View</Text>
+                                                <Text style={styles.tabLabel2}>  มุมมองของโครงการ</Text>
+                                                </View>
+                                            </TabHeading>}>
+                                                {this.state.projectView.map((val) => {
 
-                                                return (
-                                                    <CardProgress key={val.projectName} data={val} DashBorad={this.DashBorad} >
-                                                    </CardProgress>);
-                                            })}
-                                          
-                                        </Tab>
-                                        <Tab   style={{backgroundColor: '#fee2c8'}}  heading={<TabHeading style={styles.tabHeading}>
-                                        <Icon name="sitemap" style={styles.tabIcon} />
-                                        <Tab style={{alignItems:'center',justifyContent:'center'}}>
-                                        <Text style={styles.tabLabel}>  Organization</Text>
-                                        <Text style={styles.tabLabel}>  เรียงตามโครงสร้างองค์กร</Text>
-                                        </Tab>
-                                        </TabHeading>}>
-                                            {this.state.projectView.map((val) => {
-                                                return (
-                                                    <CardPro key={val.projectName} data={val} DashBorad={this.DashBorad} >
-                                                    </CardPro>);
-                                            })}
-                                        </Tab>
-                                    </Tabs>
-                                   
-                                </Body>
+                                                    return (
+                                                        <View key={val.projectName} style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
+                                                        ,paddingTop:responsiveHeight(1)}}>
+                                                        <CardProgress  data={val} DashBorad={this.DashBorad} isProj={true}>
+                                                        </CardProgress>
+                                                        </View>
+                                                        );
+                                                })}
+                                            
+                                            </Tab>
+                                            <Tab   style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
+                                            <TabHeading style={styles.tabHeading2}>
+                                                <Icon name="sitemap" style={this.state.tabIndex == 1 ? styles.tabIconActive:styles.tabIcon} />
+                                                <View style={{flexDirection:"column"}}>
+                                                    <Text style={[styles.tabLabel,this.state.tabIndex == 1 && {color:"#ffa83e"}]}>  Organization</Text>
+                                                    <Text style={styles.tabLabel2}>  เรียงตามโครงสร้างองค์กร</Text>
+                                                </View>
+                                            </TabHeading>}>
+                                                {this.state.orgView.map((val) => {
+                                                    return (
+                                                        <View key={val.projectName} style={{paddingTop:responsiveHeight(1)}}>
+                                                        <CardProgress  data={val} DashBorad={this.DashBorad} isOrg={true}>
+                                                        </CardProgress>
+                                                        </View>
+                                                        );
+                                                })}
+                                            </Tab>
+                                        </Tabs>
+                                    
+                                    </Body>
+                                </View>
+                            </ScrollView>
+                        </Content>
+                        <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
+                            <View >
+                                <Button style={{ backgroundColor: '#f58020', alignItems: 'center', justifyContent: 'center', marginTop: 5, width: responsiveWidth(40), height: responsiveHeight(8) }} onPress={this.cancelDialog}>
+                                    <Icon style={{ color: "#ffff", backgroundColor: "transparent" }} name="times" /><Text style={{ color: "#ffff" }}>  ยกเลิก</Text>
+                                </Button>
                             </View>
-                        </ScrollView>
-                    </Content>
-                    <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
-                        <View >
-                            <Button style={{ backgroundColor: '#f58020', alignItems: 'center', justifyContent: 'center', marginTop: 5, width: responsiveWidth(40), height: responsiveHeight(8) }} onPress={this.cancelDialog}>
-                                <Icon style={{ color: "#ffff", backgroundColor: "transparent" }} name="times" /><Text style={{ color: "#ffff" }}>  ยกเลิก</Text>
-                            </Button>
-                        </View>
-                    </Footer>
-                </Container>
-
+                        </Footer>
+                    </Container>
+                </StyleProvider>
             );
     }
 
@@ -176,21 +185,52 @@ export default class DashBoradProject extends React.Component {
 const styles = StyleSheet.create({
     tabIcon: {
         marginLeft : responsiveWidth(4),
-        color: Colors.baseColor,
+        color: "#989898",
+        fontSize: responsiveFontSize(4),
+        backgroundColor: "transparent"
+    },
+    tabIconActive: {
+        marginLeft : responsiveWidth(4),
+        color: "#ffa83e",
         fontSize: responsiveFontSize(4),
         backgroundColor: "transparent"
     },
     tabLabel: {
-        color: Colors.baseColor,
+        color: "#785e52",
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5),
+        fontSize: responsiveFontSize(1.7),
+        backgroundColor: "transparent",
+        fontWeight:"500"
+    },
+    tabLabel2: {
+        color: "#989898",
+        fontFamily: 'Kanit',
+        fontSize: responsiveFontSize(1.2),
         backgroundColor: "transparent"
     },
     tabHeading: {
         borderRightWidth: 1,
         borderColor: Colors.backgroundColor,
-        backgroundColor: '#FFFF'
-
+        backgroundColor: '#FFFF',
+        width:responsiveWidth(44),
+        height:responsiveHeight(10.5),
+        marginLeft:responsiveWidth(5),
+        marginRight:responsiveWidth(2),
+        flex:0,
+        borderRadius:5,
+        justifyContent:"flex-start"
+    },
+    tabHeading2: {
+        borderRightWidth: 1,
+        borderColor: Colors.backgroundColor,
+        backgroundColor: '#FFFF',
+        width:responsiveWidth(44),
+        height:responsiveHeight(10.5),
+        marginRight:responsiveWidth(5),
+        marginLeft:responsiveWidth(2),
+        flex:0,
+        borderRadius:5,
+        justifyContent:"flex-start"
     },
     HeaderFont: {
         color: "#FFFF",
@@ -205,5 +245,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginBottom: 10,
         backgroundColor: "blue"
+    },
+    headerFont1:{ 
+        fontSize: responsiveFontSize(1.7), 
+        fontFamily: 'Kanit', 
+        backgroundColor:'transparent',
+        color:"#785e52",
+        fontWeight:"500",
+        paddingLeft:5
     }
 });

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import {
-    Container, Header, Left, Body, Right, Button, Icon, Title, Text, View, Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
+    Container, Header, Left, Body, Right, Button, Title, Text, View, Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
 
 } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
-import { ScrollView } from 'react-native';
+import { ScrollView,TouchableOpacity } from 'react-native';
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../../assets/fonts/config.json';
 const IconTello = createIconSetFromFontello(fontelloConfig);
+
 export default class CardProgress extends React.Component {
     constructor(props) {
         super(props);
         this.DashBorad = this.DashBorad.bind(this);
-       console.log('นี่นะครัช ' + this.props.data.empAmount)
-       console.log('นี่นะครัช ' + this.props.data.empAmountDesc)
        
        
     }
@@ -26,24 +26,24 @@ export default class CardProgress extends React.Component {
 
     changcolor(progress) {
         if (progress < 31) {
-            color = "#f16061"
+            color = "#ad262b"
             return color
         } else if (progress <= 79) {
-            color = "#fdbd3a"
+            color = "#f8c618"
             return color
         } else if (progress >= 80) {
-            color = "#229d9e"
+            color = "#37b078"
             return color
         }
     }
 
     color(color) {
         if (color < 31) {
-            return { color: "#f16061", fontSize: 18 }
+            return { color: "#ad262b", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
         } else if (color <= 79) {
-            return { color: "#fdbd3a", fontSize: 18 }
+            return { color: "#f8c618", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
         } else if (color >= 80) {
-            return { color: "#229d9e", fontSize: 18 }
+            return { color: "#37b078", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
         }
     }
     DashBorad(data) {
@@ -66,45 +66,38 @@ export default class CardProgress extends React.Component {
     render() {
         return (
 
-            <View>
-                <Button style={{ height: responsiveHeight(20), width: responsiveWidth(100) ,backgroundColor:'white'}} onPress={(e)=>this.DashBorad(this.props.data)}>
-                    <CardItem style={{ height: responsiveHeight(20), width: responsiveWidth(100) }}>
+            <View style={{flex:1}}>
+                <TouchableOpacity  onPress={(e)=>this.DashBorad(this.props.data)}>
+                    <CardItem style={styles.cardContainer}>
                         <View style={{ alignItems: 'center' }}>
                             <View style={styles.circle}>
-                                <ProgressCircle
-
-                                    percent={((this.props.data.empStatus * 100) / this.props.data.empAmount )}
-                                    radius={40}
-                                    borderWidth={6}
+                                <ProgressCircle percent={((this.props.data.empStatus * 100) / this.props.data.empAmount )}
+                                    radius={30}
+                                    borderWidth={3}
                                     color={this.changcolor((this.props.data.empStatus * 100) / this.props.data.empAmount )}
                                     shadowColor={this.bgColor(this.props.data.empStatus)}
-                                    bgColor="#fff"
-
-                                >
+                                    bgColor="#fff" >
                                     <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{this.checkpercent((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
                                 </ProgressCircle>
                             </View>
-                            <View style={styles.square} />
                             <View style={styles.square2} />
                         </View>
-                        <Body>
-                            <Text style={styles.Text1}>    {this.props.data.projectName}</Text>
-                            <CardItem>
+                        <Body style={{ justifyContent: 'center' }}>
+                            <Text style={styles.Text1}>    {this.props.isProj ? this.props.data.projectName : this.props.data.orgName}</Text>
+                            {this.props.isProj && (<CardItem style={{paddingTop:6,backgroundColor:'transparent'}}>
                                 <Text style={styles.Text2}>สถานที่เข้างาน </Text>
-                                <IconTello  name="hhmm-15" style={{fontSize : responsiveFontSize(3.5)}}>
+                                <IconTello  name="hhmm-15" style={{fontSize : responsiveFontSize(1.6),color:"#ffa83e"}}>
                                 </IconTello>
                                 <Text style={styles.Text3}> {this.props.data.branchName}</Text>
-                            </CardItem>
-                            <CardItem style={{ height: responsiveHeight(0.1) }}>
-                                <Icon name='person' />
+                            </CardItem>)}
+                            <CardItem style={this.props.isProj ? { height: responsiveHeight(0.1) ,paddingTop:6} :{ height: responsiveHeight(0.1) ,paddingTop:20}}>
+                                <Icon name='user' style={styles.Text1}/>
                                 <Text style={styles.Text4}>{this.props.data.empStatus} / {this.props.data.empAmount}   </Text>
-                                <Text style={styles.Text4}>พนักงานที่ลงเวลา</Text>
+                                <Text style={styles.Text5}>พนักงานที่ลงเวลา</Text>
                             </CardItem>
                         </Body>
                     </CardItem>
-                </Button>
-                <Text />
-
+                </TouchableOpacity>
             </View>
         );
     }
@@ -112,36 +105,52 @@ export default class CardProgress extends React.Component {
 const styles = ({
     Text1: {
         fontFamily: 'Kanit',
-        color: 'brown',
-        fontSize: responsiveFontSize(1.5),
-        height: responsiveHeight(2)
+        color: '#785a4f',
+        fontSize: responsiveFontSize(1.9),
+        backgroundColor:'transparent',
+        fontWeight:'500'
     },
     Text2: {
         fontFamily: 'Kanit',
         fontSize: responsiveFontSize(1.5),
-        height: responsiveHeight(2)
+        backgroundColor:'transparent',
+        color:"#989898",
+        fontWeight:'500'
+        
     },
     Text3: {
         fontFamily: 'Kanit',
         fontSize: responsiveFontSize(1.5),
-        height: responsiveHeight(2)
+        backgroundColor:'transparent',
+        color:"#ffa83e"
+       
     },
     Text4: {
+        paddingLeft:5,
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5),
-        height: responsiveHeight(2)
+        fontSize: responsiveFontSize(1.7),
+        color:"#785a4f",
+        backgroundColor:'transparent',
+        fontWeight:'500'
+    },
+     Text5: {
+        fontFamily: 'Kanit',
+        fontSize: responsiveFontSize(1.6),
+        color:"#989898",
+        backgroundColor:'transparent',
+        fontWeight:'500'
     },
     circle: {
-        width: 83,
-        height: 83,
-        borderRadius: 100 / 2,
+        width: 65,
+        height: 65,
+        borderRadius: 70 / 2,
         backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#E5E5E5',
     },
     square: {
-        height: 4,
+        height: 3,
         width: 35,
         backgroundColor: '#ffff',
         alignItems: 'center',
@@ -149,11 +158,27 @@ const styles = ({
         justifyContent: 'center'
     },
     square2: {
+        marginTop:4,
         height: 3,
-        width: 60,
+        width: 26,
         backgroundColor: '#E5E5E5',
         alignItems: 'center',
         flex: null,
         justifyContent: 'center'
+    },
+    card:{
+         height: responsiveHeight(14), 
+         width: responsiveWidth(90),
+         paddingLeft:responsiveWidth(2),
+         paddingRight:responsiveWidth(2),
+         paddingTop:5,
+         justifyContent:"center"
+    },
+    cardContainer:{
+        flex:1,
+        height:responsiveHeight(14),
+        backgroundColor:'#fff',
+        borderRadius:5,
+        justifyContent:"center"
     }
 });
