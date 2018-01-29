@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Header, Left, Body, Right, Button, Icon, Title, Text,  Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
+    Container, Header, Left, Body, Right, Button, Title, Text,  Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
 
 } from 'native-base';
 import { ScrollView,View, Image } from 'react-native';
@@ -11,7 +11,9 @@ import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Communications from 'react-native-communications';
 import fontelloConfig from '../../../assets/fonts/config.json'
 import { em } from '../../constants/Layout'
+import Icon from 'react-native-vector-icons/FontAwesome';
 const IconTello = createIconSetFromFontello(fontelloConfig);
+
 export default class Checkin extends React.Component {
     constructor(props) {
         super(props);
@@ -48,9 +50,13 @@ export default class Checkin extends React.Component {
                             {( data.imagePathPersonal && data.imagePathPersonal!= "") && <Image source={{uri:data.imagePathPersonal}} style={styles.image}></Image>}
                             <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} /> 
                         </View>  
-                        <View style={{marginTop : responsiveHeight(4) , width :responsiveWidth(60)}}>
+                        <View style={{marginTop : responsiveHeight(2) , width :responsiveWidth(60)}}>
                             <Text style={styles.Text1}>    { data.fullNameTh}</Text>
                             <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
+                            <View style={{flexDirection:"row",paddingLeft:responsiveWidth(4),paddingTop:1}}>
+                                <Icon style={{color:"#989898"}}  name="clock-o"/>
+                                <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :'ยังไม่ได้ลงเวลา' }</Text>
+                             </View>
                         </View>
 
                         <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
@@ -80,7 +86,8 @@ export default class Checkin extends React.Component {
 const styles = ({
     Text: {
         fontFamily: 'Kanit',
-        color: 'white'
+        color: 'white',
+        backgroundColor: 'transparent',
     },
     Header: {
         backgroundColor: 'orange',
@@ -89,19 +96,24 @@ const styles = ({
     Text1: {
         fontFamily: 'Kanit',
         color: 'brown',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.5),
+        backgroundColor: 'transparent'
     },
     Text2: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.2)
+        fontSize: responsiveFontSize(1.2),
+        backgroundColor: 'transparent',
+        width:responsiveWidth(60)
     },
     Text3: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.5),
+        backgroundColor: 'transparent'
     },
     Text4: {
         fontFamily: 'Kanit',
-        fontSize: responsiveFontSize(1.5)
+        fontSize: responsiveFontSize(1.5),
+        backgroundColor: 'transparent'
     },
     icon: {
         height: responsiveHeight(4),

@@ -47,6 +47,9 @@ export default class CardProgress extends React.Component {
         }
     }
     DashBorad(data) {
+        if(!this.props.DashBorad){
+            return;
+        }
         this.props.DashBorad(data);
     }
 

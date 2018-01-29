@@ -7,6 +7,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
 import CardProgress from '../components/cardProgress/cardprogress';
+import CardNone from '../components/cardProgress/cardNone';
 import CardPro from '../components/cardProgress/cardpro';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { NavigationActions } from'react-navigation';
@@ -124,7 +125,7 @@ export default class DashBoradProject extends React.Component {
                                                 <Text style={styles.tabLabel2}>  มุมมองของโครงการ</Text>
                                                 </View>
                                             </TabHeading>}>
-                                                {this.state.projectView.map((val) => {
+                                                {(this.state.projectView && this.state.projectView.length > 0) && this.state.projectView.map((val) => {
 
                                                     return (
                                                         <View key={val.projectName} style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
@@ -134,6 +135,8 @@ export default class DashBoradProject extends React.Component {
                                                         </View>
                                                         );
                                                 })}
+                                                {this.state.projectView.length == 0 && (<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
+                                                        ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
                                             
                                             </Tab>
                                             <Tab   style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
@@ -144,14 +147,15 @@ export default class DashBoradProject extends React.Component {
                                                     <Text style={styles.tabLabel2}>  เรียงตามโครงสร้างองค์กร</Text>
                                                 </View>
                                             </TabHeading>}>
-                                                {this.state.orgView.map((val) => {
+                                                {this.state.orgView.length > 0 ? this.state.orgView.map((val) => {
                                                     return (
-                                                        <View key={val.projectName} style={{paddingTop:responsiveHeight(1)}}>
+                                                        <View key={val.projectName} style={{paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)}}>
                                                         <CardProgress  data={val} DashBorad={this.DashBorad} isOrg={true}>
                                                         </CardProgress>
                                                         </View>
                                                         );
-                                                })}
+                                                }):(<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
+                                                        ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
                                             </Tab>
                                         </Tabs>
                                     

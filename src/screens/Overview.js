@@ -98,7 +98,7 @@ export default class Overview extends React.Component {
                                 <CardProgress  data={this.props.data}  isProj={true}></CardProgress>
                             </View>
                             <ScrollView>
-                                <View style={{ alignItems: 'center', justifyContent: 'center'}}>
+                                <View style={{ alignItems: 'center', justifyContent: 'center',paddingTop:5}}>
                                     {this.state.data.map((val) => {
                                         return (
                                             <CardCheckin key={val.fullNameTh} data={val} onContactSelected={this.onContactSelected} >
