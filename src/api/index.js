@@ -89,6 +89,40 @@ export async function post(path,param){
   let requestURL = `${endpoint}${path}`;
       try{
           const response = await  axios.post(requestURL, param,{headers: {token:userData.token}});
+          if(response.status=='200' && (response.data.Success || response.data.Complete)){
+            console.log("postService"+JSON.stringify(response));
+            return response.data;
+          }else{
+              console.log(response.data.Msg);
+              Alert.alert(
+                  'เกิดข้อผิดพลาด',
+                  response.data.Msg,
+                  [
+                  {text: 'OK', onPress: () => console.log('OK Pressed!')},
+                  ]
+              )
+              return false;
+          }
+      }catch(e){
+    console.log(e);
+     console.error(e);
+     Alert.alert(
+      'เกิดข้อผิดพลาด',
+      'ไม่สามารถเชื่อมต่อระบบได้',
+      [
+      {text: 'OK', onPress: () => console.log('OK Pressed!')},
+      ]
+    )
+          return e;
+      }
+}
+export async function get(path,param){
+  console.log("param: "+JSON.stringify(param));
+  const userData = await store.get("USER");
+  const endpoint = await getEndpoint();
+  let requestURL = `${endpoint}${path}`;
+      try{
+          const response = await  axios.get(requestURL, param,{headers: {token:userData.token}});
           if(response.status=='200' && response.data.Success){
             console.log("postService"+JSON.stringify(response));
             return response.data;

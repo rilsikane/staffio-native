@@ -65,7 +65,7 @@ export default class LoginForm extends Component {
 		if(orgTmp.length>1){
 		let endTmp = this.props.userStore.userLogin.username.split("@")[1];
 		if(endTmp=='DEV'){
-			user.user_name =  `${this.props.userStore.userLogin.username.split("@")[0]}@${endTmp}`;
+			user.user_name =  `${this.props.userStore.userLogin.username.split("@")[0]}@OMS`;
 		}
 		await store.save('endpoint',endTmp);
 		}else{
