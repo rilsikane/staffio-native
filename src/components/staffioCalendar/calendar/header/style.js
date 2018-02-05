@@ -32,12 +32,12 @@ export default function(theme={}) {
       })
     },
     week: {
-      marginTop:responsiveHeight(0.7),
+      marginTop:5,
       flexDirection: 'row',
       justifyContent: 'space-around'
     },
     dayHeader: {
-      marginTop: 2,
+      marginTop: 1,
       marginBottom: 7,
       width: 32,
       textAlign: 'center',

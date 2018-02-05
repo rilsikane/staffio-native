@@ -14,9 +14,9 @@ import axios from 'axios';
 //G-Able
 //const endpoint = "https://staffio.g-able.com/Staffio_gable_api/api/";
 
-const endpoints ={"DEV":"http://172.20.14.212/api_mobile/api/"
-,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/",
-"G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
+const endpoints ={"DEV":"http://172.20.14.212/api_mobile/api/","PAN":"https://staffio.g-able.com/STAFFIO_DEMO_API/api/"
+,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/"
+,"DEMO":"https://staffio.g-able.com/STAFFIO_DEMO_API/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
 //const endpoints ={"OMS":"http://172.20.14.212/api_mobile/api/"}
 // ,"TFS":"https://staffio.g-able.com/Staffio_API/api/","G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/",
 // "G-ABLE":"https://staffio.g-able.com/Staffio_gable_api/api/","OMS":"https://staffio.g-able.com/Staffio_gable_api/api/"}
@@ -122,8 +122,8 @@ export async function get(path,param){
   const endpoint = await getEndpoint();
   let requestURL = `${endpoint}${path}`;
       try{
-          const response = await  axios.get(requestURL, param,{headers: {token:userData.token}});
-          if(response.status=='200' && response.data.Success){
+          const response = await  axios.get(requestURL,{params:param},{headers: {token:userData.token}});
+          if(response.status=='200' && (response.data.Success || response.data.Complete)){
             console.log("postService"+JSON.stringify(response));
             return response.data;
           }else{

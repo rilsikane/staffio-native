@@ -3,7 +3,7 @@ export default function platformStyles(appStyle) {
   return {
     knob: {
       width: responsiveWidth(2),
-      height: responsiveHeight(1),
+      height: responsiveHeight(0.8),
       marginTop: responsiveHeight(1.2),
       borderRadius: 3,
       backgroundColor: '#f58020'
@@ -15,9 +15,9 @@ export default function platformStyles(appStyle) {
       top: 0,
       flexDirection: 'row',
       justifyContent: 'space-around',
-      paddingTop: responsiveHeight(3),
+      paddingTop: responsiveHeight(0.5),
       paddingBottom: 7,
-      backgroundColor: "#f58020",
+      backgroundColor: "#754C36",
       shadowOpacity: 0.75,
       shadowRadius: 3,
       shadowColor: '#000',

@@ -136,10 +136,8 @@ const styles = StyleSheet.create({
 },
 cardContainer3:{
     marginRight:5,
-    marginLeft:5,
     backgroundColor:'transparent',
-    width:responsiveWidth(97),
-    width: responsiveWidth(97),
+    width:responsiveWidth(95),
     flex:null
 },
   square: {

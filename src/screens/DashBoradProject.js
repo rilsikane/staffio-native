@@ -18,6 +18,7 @@ import { post, post1 } from '../api';
 import Loading from '../components/loading';
 import Colors from '../constants/Colors'
 import getTheme from '../../native-base-theme/components';
+import CardHeader from '../components/cardHeader';
 
 
 export default class DashBoradProject extends React.Component {
@@ -99,8 +100,10 @@ export default class DashBoradProject extends React.Component {
         else
             return (
                 <StyleProvider  style={getTheme()}>  
-                    <Container style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
-                        <Content>
+                    
+                    <Container >
+                    <CardHeader title="Dashboard"/>  
+                        <Content style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
                             <ScrollView>
                                 <View style={{ backgroundColor: '#fee2c8' }}>
                                     <Body style={{ backgroundColor: '#fee2c8' }}>
@@ -163,13 +166,13 @@ export default class DashBoradProject extends React.Component {
                                 </View>
                             </ScrollView>
                         </Content>
-                        <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
+                        {/* <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
                             <View >
                                 <Button style={{ backgroundColor: '#f58020', alignItems: 'center', justifyContent: 'center', marginTop: 5, width: responsiveWidth(40), height: responsiveHeight(8) }} onPress={this.cancelDialog}>
                                     <Icon style={{ color: "#ffff", backgroundColor: "transparent" }} name="times" /><Text style={{ color: "#ffff" }}>  ยกเลิก</Text>
                                 </Button>
                             </View>
-                        </Footer>
+                        </Footer> */}
                     </Container>
                 </StyleProvider>
             );

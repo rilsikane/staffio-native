@@ -14,7 +14,7 @@ import Calendar from '../calendar';
 import {em} from '../../../constants/Layout'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
-const calendarHeight = responsiveHeight(50);
+const calendarHeight = responsiveHeight(55);
 class CalendarList extends Component {
 
   constructor(props) {
@@ -91,7 +91,7 @@ class CalendarList extends Component {
     for (let i = 0; i < days.length; i++) {
       week = Math.floor(i / 7);
       if (dateutils.sameDate(days[i], day)) {
-        scrollAmount += 46 * week;
+        scrollAmount += (46 * week) + (week * (-4.5));
         break;
       }
     }

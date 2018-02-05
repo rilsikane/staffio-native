@@ -24,7 +24,7 @@ import Loading from '../components/loading';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import PTRView from 'react-native-pull-to-refresh';
 import {convertDateDB,convertForTag} from '../utils/staffioUtils';
-import ActionButton from 'react-native-action-button';
+import ActionButton from '../components/stffioActionButton/ActionButton';
 import AnimatedOverlay from 'react-native-animated-overlay';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
@@ -60,6 +60,7 @@ export default class InboxScreen extends React.Component {
   };
   async componentWillMount(){
     //this.setState({isLoading:true});
+     this.init();
   }
   async init(){
     this.setState({isLoading:true});
@@ -359,8 +360,8 @@ export default class InboxScreen extends React.Component {
     }
   }
   onNavigatorEvent(event) {
-    if (event.id === 'bottomTabSelected') {
-      this.init();
+    if (event.id === 'willAppear') {
+     
     }
     if (event.id === 'didAppear') {
       if(this.props.statusForm){
@@ -419,7 +420,7 @@ export default class InboxScreen extends React.Component {
               <Icon name="trash" />
             </Button>
           </Fab>*/}
-            <ActionButton size={45}  backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
+            {/* <ActionButton size={45}  backPress={this.closeOverlay} buttonColor={Colors.baseColor} 
             icon={<IconTello name="hhmm-29" style={{color:"#ffff", backgroundColor:'transparent'}}/>} 
             backdrop={<AnimatedOverlay
               backgroundColor='#000'
@@ -436,6 +437,16 @@ export default class InboxScreen extends React.Component {
               <ActionButton.Item  buttonColor={Colors.baseColor} title="dashbord"  onPress={this.DashBorad}>
                <IconTello name="hhmm-03" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
+          </ActionButton> */}
+          <ActionButton  IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
+            <ActionButton.Item marginRight={-(responsiveWidth(11))} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={this.openCriteria}>
+              <Icon name="search" style={styles.actionButtonIcon} />
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ค้นหา</Text>
+            </ActionButton.Item>
+            <ActionButton.Item marginRight={responsiveWidth(18)} marginBottom={-(responsiveHeight(10))} buttonColor='transparent' onPress={this.clearTags}>
+              <Icon name="trash" style={styles.actionButtonIcon} />
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ล้างตัวเลือก</Text>
+            </ActionButton.Item>
           </ActionButton>
            
            {/*<Modal animationType="slide"
@@ -478,5 +489,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 10,
     backgroundColor: "blue"
-  }
+  },
+  actionButtonIcon: {
+    fontSize: responsiveFontSize(3),
+    height: 22,
+    color: 'white',
+  },
 });

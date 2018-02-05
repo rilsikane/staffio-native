@@ -23,8 +23,8 @@ import Iocon from 'react-native-vector-icons/Ionicons';
 import colors from '../../../constants/Colors'
 
 
-const HEADER_HEIGHT = responsiveHeight(15);
-const KNOB_HEIGHT = responsiveHeight(4);
+const HEADER_HEIGHT = responsiveHeight(13);
+const KNOB_HEIGHT = responsiveHeight(3.5);
 
 //Fallback when RN version is < 0.44
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -61,7 +61,7 @@ export default class AgendaView extends Component {
   }
 
   calendarOffset() {
-    return responsiveHeight(11) - (this.viewHeight / 2);
+    return responsiveHeight(14) - (this.viewHeight / 2);
   }
 
   initialScrollPadPosition() {

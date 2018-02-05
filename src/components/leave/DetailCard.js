@@ -8,7 +8,7 @@ export default class DetailLeave extends React.Component {
 
   render() {
     return (
-        <Card style={{height:responsiveHeight(32)}}>
+        <Card style={{height:responsiveHeight(30)}}>
             <CardItem>
                 <Body style={{flex:4}}>
                     <View style={{flexDirection: 'row', alignItems:'center' }}>
@@ -17,7 +17,7 @@ export default class DetailLeave extends React.Component {
                     </View>
                     <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>สาเหตุ</Text>
-                        <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:3,}}>{this.props.cause}</Text>
+                        <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:3,}}>{this.props.cause||'ไม่ระบุ'}</Text>
                     </View>
                     <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(2.2),textAlign:'center'}}>ตั้งแต่</Text>
@@ -28,14 +28,14 @@ export default class DetailLeave extends React.Component {
                     </View>
                     <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>วันลาคงเหลือ</Text>
-                        <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:2}}>{this.props.balance}</Text>
+                        <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:2}}>{`${this.props.remain||0} จาก ${this.props.max} วัน`}</Text>
                     </View>
-                    <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
+                    {/*<View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(2.2)}}>เอกสารแนบ</Text>
                         <Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:3}}>{this.props.docRef}</Text>
                         <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:1,textAlign:'center'}}>{this.props.typedoc}</Text>
                         <Icon name="eye" size={25} style={{ color: '#fbaa3e',flex:0 }} />
-                    </View>
+                    </View>*/}
                 </Body>
             </CardItem>
         </Card>

@@ -23,9 +23,15 @@ import app  from '../stores/app';
 import BackgroundTimer from 'react-native-background-timer';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Provacypolicy from '../components/privacypolicy';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import CardHeader from '../components/cardHeader';
+import { observer, inject } from 'mobx-react';
+
 // const customData = require('../api/shiftData.json');
 // const customData2 = require('../api/shiftHistory.json');
 let intervalId = null;
+@inject('naviStore')
+@observer
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +39,7 @@ class HomeScreen extends React.Component {
     this.state = {
       items: {},
       user:{},
-      shiftData:{},isLoading:false,
+      shiftData:{},isLoading:true,
       agreen:true
     };
    LocaleConfig.locales['th'] = {
@@ -51,10 +57,10 @@ class HomeScreen extends React.Component {
     this.watchID = navigator.geolocation.watchPosition((position) => {
       
     });
+    this.props.naviStore.navigation = this.props.navigator;
   }
-  static navigationOptions = {
-    header: null,
-  };
+   
+  
 
   async getagreen(){
     const agreen = await store.get("agreen");
@@ -104,8 +110,9 @@ class HomeScreen extends React.Component {
   
   render() {
     return (
-       
-       <View style={styles.container}>
+    <View style={styles.container}>
+      <CardHeader />
+       <View style={{flex:1}}>
          {this.state.isLoading && <Loading visible={true}/>}
          {(!this.state.isLoading && !this.state.agreen) && <Agenda
             items={this.state.items}
@@ -126,10 +133,8 @@ class HomeScreen extends React.Component {
             // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
             //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           />}
-          
-          
+        </View>
       </View>
-     
       
     )
    
@@ -264,6 +269,7 @@ class HomeScreen extends React.Component {
        }
     
   }
+  
   getShiftPatternByPersonal = async (user,startDate,endDate)=>{
     let params  = {};
     params.EmpCode = user.EMP_CODE;
@@ -319,6 +325,8 @@ class HomeScreen extends React.Component {
     console.log("componentWillUnmount");
     AppState.removeEventListener('change', this._handleAppStateChange);
     navigator.geolocation.clearWatch(this.watchID);
+    BackgroundTimer.clearTimeout(intervalId);
+    intervalId = null;
   }
    _handleAppStateChange = async (nextAppState) => {
     console.log("_handleAppStateChange",nextAppState);
@@ -344,7 +352,7 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D6EBD6',
+    backgroundColor: '#ffe9d4',
   }
 });
 export default HomeScreen

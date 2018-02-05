@@ -12,6 +12,7 @@ import { NavigationActions } from 'react-navigation'
 import {post} from '../api';
 import { observer, inject } from 'mobx-react';
 import Loading from '../components/loading';
+import CardHeader from '../components/cardHeader'
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {
@@ -62,6 +63,7 @@ export default class FindFriendsScreen extends React.Component {
   render() {
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
+         <CardHeader title={'Find Friends'}/>
          <Loading visible={this.state.isLoading} text="กำลังค้นหาข้อมูล..."/>
         <View style={{marginTop:em(2),marginLeft:em(1),marginRight:em(1)}}>
             <FindFriends onPress={this.onFindPress}  value={this.state.searchtext} 

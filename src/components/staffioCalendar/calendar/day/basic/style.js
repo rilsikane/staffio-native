@@ -8,11 +8,11 @@ export default function styleConstructor(theme={}) {
   return StyleSheet.create({
     base: {
       width: responsiveWidth(7),
-      height: responsiveHeight(7),
+      height: responsiveHeight(6),
       alignItems: 'center'
     },
     text: {
-      marginTop: responsiveHeight(0.2),
+      marginTop: responsiveHeight(1.5),
       fontSize: responsiveFontSize(1.7),
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '300',
@@ -25,12 +25,14 @@ export default function styleConstructor(theme={}) {
     selected: {
       backgroundColor: appStyle.selectedDayBackgroundColor,
       borderRadius: responsiveHeight(4),
-      height: responsiveHeight(4)
+      height: responsiveHeight(4),
+      marginTop:5
     },
     todayText: {
       color: appStyle.todayTextColor
     },
     selectedText: {
+      marginTop:1.5,
       color: appStyle.selectedDayTextColor
     },
     disabledText: {

@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { observer, inject } from 'mobx-react';
 import {post} from '../api';
 import Loading from '../components/loading';
+import CardHeader from '../components/cardHeader';
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {
@@ -23,6 +24,7 @@ export default class FindFriendsScreen extends React.Component {
     this.state={friendList :[],searchtext:"",isLoading:false,isFocus:false}
     this.onFindPress = this.onFindPress.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -54,11 +56,18 @@ export default class FindFriendsScreen extends React.Component {
       return false;
     }
   }
+  goBack(){
+    this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+    });
+  }
 
 
   render() {
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
+       <CardHeader title="รายชื่อพนักงาน" goBack={this.goBack}/>
         <View style={{flex:1,marginTop:em(2),marginLeft:em(1),marginRight:em(1)}}>
             <View style={{paddingLeft:30,paddingRight:30,paddingBottom:10}}>
               <Item style={{borderColor:Colors.baseColor}}>

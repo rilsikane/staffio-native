@@ -30,7 +30,7 @@ export default styles={
       marginRight:5,
       backgroundColor:  "rgba(109, 110, 113, 1)",
       opacity:0.8,
-      marginTop:em(1.2)
+      marginTop:responsiveHeight(1)
   },
   RowStyle1:{
      borderRightWidth: 1,

@@ -26,13 +26,13 @@ export default function styleConstructor(theme = {}) {
       position: 'absolute',
       left: 0,
       right: 0,
-      height: 12,
+      height: 10,
       bottom: 0,
       zIndex:9999,
       alignItems: 'center',
       backgroundColor: "transparent",
       justifyContent:"flex-end",
-      marginTop:5
+      marginTop:3
     },
     weekday: {
       width: responsiveWidth(6),

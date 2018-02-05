@@ -64,7 +64,7 @@ export default class LoginForm extends Component {
 		const orgTmp = this.props.userStore.userLogin.username.split("@");
 		if(orgTmp.length>1){
 		let endTmp = this.props.userStore.userLogin.username.split("@")[1];
-		if(endTmp=='DEV'){
+		if(endTmp=='DEV'||endTmp=='DEMO'){
 			user.user_name =  `${this.props.userStore.userLogin.username.split("@")[0]}@OMS`;
 		}
 		await store.save('endpoint',endTmp);
@@ -94,7 +94,7 @@ export default class LoginForm extends Component {
 		try {
 			const deviceId = await store.get("DEVICEID");
 			data.deviceId = deviceId;
-			data.USER_NAME =  this.props.userStore.userLogin.username;
+			data.USER_NAME =  data.UserName;
 			await store.save('USER',data);
 		}catch(ex){
 			console.error(ex)

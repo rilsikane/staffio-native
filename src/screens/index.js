@@ -21,6 +21,8 @@ import DashBoradProject from './DashBoradProject';
 import PersonalStatScreen from './PersonalStatScreen';
 import LeaveDetailScreen from './LeaveDetailScreen';
 import MenuScreen from './MenuScreen';
+import LeaveApprScreen from './LeaveApprScreen';
+
 
 
 // register all screens of the app (including internal ones)
@@ -44,6 +46,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.PersonalStatScreen', () => PersonalStatScreen, Store, Provider);
   Navigation.registerComponent('staffio.LeaveDetailScreen', () => LeaveDetailScreen, Store, Provider);
   Navigation.registerComponent('staffio.MenuScreen', () => MenuScreen, Store, Provider);
+  Navigation.registerComponent('staffio.LeaveApprScreen', () => LeaveApprScreen, Store, Provider);
 }
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

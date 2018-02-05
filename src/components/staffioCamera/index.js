@@ -240,7 +240,7 @@ export default class Example extends React.Component {
           defaultTouchToFocus
           mirrorImage={false}
           orientation={this.state.camera.orientation}
-          
+          playSoundOnCapture={false}          
         />
         <View style={[styles.overlay, styles.topOverlay]}>
           <TouchableOpacity
