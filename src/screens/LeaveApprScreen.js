@@ -251,10 +251,10 @@ export default class PersonalStatScreen extends React.Component {
       <View style={{backgroundColor: '#ffe9d4',flex:1}}>
          
           <CardHeader title={'พิจารณาการลา'}/>
-            <View style={{height:responsiveHeight(30)}}>
+            {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
-            </View>
+            </View> */}
            <PTRView onRefresh={this._refresh}>
               {!this.state.loading  ? this.renderList() 
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
@@ -265,11 +265,11 @@ export default class PersonalStatScreen extends React.Component {
               <Icon name="times" style={[styles.actionButtonIcon,{marginRight:responsiveWidth(12)}]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5),width:100}}>ปฏิเสธทั้งหมด</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={() => {}}>
+            <ActionButton.Item marginRight={responsiveWidth(13)} marginBottom={-(responsiveHeight(5))} buttonColor='transparent'  onPress={() => {}}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืนทั้งหมด</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืนทั้งหมด</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent' onPress={() => {}}>
+            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(17))} buttonColor='transparent' onPress={() => {}}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติทั้งหมด</Text>
             </ActionButton.Item>
