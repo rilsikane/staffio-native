@@ -260,16 +260,16 @@ export default class PersonalStatScreen extends React.Component {
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}
           </PTRView>
-          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-responsiveWidth(14)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => console.log("notes tapped!")}>
-              <Icon name="times" style={[styles.actionButtonIcon,{marginRight:responsiveWidth(12)}]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5),width:100}}>ปฏิเสธทั้งหมด</Text>
+          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(18)} buttonColor="#fbaa3e">
+            <ActionButton.Item marginRight={-responsiveWidth(6)} marginBottom={-responsiveHeight(8)} buttonColor='transparent'   onPress={() => console.log("notes tapped!")}>
+              <Icon name="times" style={[styles.actionButtonIcon]} />
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ปฏิเสธทั้งหมด</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={() => {}}>
+            <ActionButton.Item marginRight={responsiveWidth(13)} marginBottom={-(responsiveHeight(5))} buttonColor='transparent'  onPress={() => {}}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืนทั้งหมด</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืนทั้งหมด</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent' onPress={() => {}}>
+            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(17))} buttonColor='transparent' onPress={() => {}}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติทั้งหมด</Text>
             </ActionButton.Item>

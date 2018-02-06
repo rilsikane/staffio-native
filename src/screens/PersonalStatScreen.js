@@ -17,6 +17,7 @@ import Profile from '../components/leave/Profile';
 import LeaveCard from '../components/leave/LeaveCard';
 import LeaveStatCard from '../components/leave/LeaveStatCard';
 import CardHeader from '../components/cardHeader';
+import LeavePersonalCard from '../components/leave/LeavePersonalCard'
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {convertByFormat} from '../utils/staffioUtils';
@@ -122,7 +123,7 @@ export default class PersonalStatScreen extends React.Component {
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
       <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
-       <LeaveCard info={info} />
+       <LeavePersonalCard info={info} />
       </TouchableOpacity>
       );
     }else{
