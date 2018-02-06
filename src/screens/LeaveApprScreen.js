@@ -260,7 +260,7 @@ export default class PersonalStatScreen extends React.Component {
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}
           </PTRView>
-          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
+          {/* <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
             <ActionButton.Item marginRight={-responsiveWidth(14)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => console.log("notes tapped!")}>
               <Icon name="times" style={[styles.actionButtonIcon,{marginRight:responsiveWidth(12)}]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5),width:100}}>ปฏิเสธทั้งหมด</Text>
@@ -273,7 +273,7 @@ export default class PersonalStatScreen extends React.Component {
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติทั้งหมด</Text>
             </ActionButton.Item>
-          </ActionButton>
+          </ActionButton> */}
       </View>
     );
   }

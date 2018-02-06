@@ -61,7 +61,7 @@ export default class Checkin extends React.Component {
 
                         <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
                         <CardItem style={{marginRight : responsiveWidth(2) }}>
-                           {(data.mobileNo && data.mobileNo !="") && <Button style={styles.icon} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
+                           {(data.mobileNo && data.mobileNo !="") && <Button style={[styles.icon]} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
                                 <IconTello style={{ color: "#fbaa3e" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
                             </Button>}
                             {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
@@ -119,9 +119,9 @@ const styles = ({
         height: responsiveHeight(4),
         width: responsiveWidth(8),
         borderRadius: responsiveWidth(8 / 2),
-        backgroundColor: '#ffff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:'transparent'
     },
     box1: {
         position: 'absolute',

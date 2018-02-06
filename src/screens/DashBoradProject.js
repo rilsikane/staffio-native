@@ -63,14 +63,24 @@ export default class DashBoradProject extends React.Component {
     }
 
     DashBorad(data){
-          this.props.navigator.showModal({
-            screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
-            title: "Modal", // title of the screen as appears in the nav bar (optional)
+        this.props.navigator.push({
+            screen: 'staffio.Overview', // unique ID registered with Navigation.registerScreen
+            title: undefined, // navigation bar title of the pushed screen (optional)
             passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
-            DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
-            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-            animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+                DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the pushed screen (optional)
+            animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+            animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+            navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+            navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
           });
+        //   this.props.navigator.push({
+        //     screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
+        //     title: "Modal", // title of the screen as appears in the nav bar (optional)
+        //     passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
+        //     DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
+        //     navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        //     animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+        //   });
       }
     
     
