@@ -23,6 +23,11 @@ import LeaveDetailScreen from './LeaveDetailScreen';
 import MenuScreen from './MenuScreen';
 import LeaveApprScreen from './LeaveApprScreen';
 
+//Modal
+import InputModalScreen from './Modal/inputModal';
+import ConfirmModalScreen from './Modal/confirmModal';
+import MsgModalScreen from './Modal/msgModal';
+
 
 
 // register all screens of the app (including internal ones)
@@ -47,6 +52,11 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.LeaveDetailScreen', () => LeaveDetailScreen, Store, Provider);
   Navigation.registerComponent('staffio.MenuScreen', () => MenuScreen, Store, Provider);
   Navigation.registerComponent('staffio.LeaveApprScreen', () => LeaveApprScreen, Store, Provider);
+
+  //Modal
+  Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
+  Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);
+  Navigation.registerComponent('staffio.MsgModalScreen', () => MsgModalScreen, Store, Provider);
 }
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

@@ -39,6 +39,12 @@ export default class PersonalStatScreen extends React.Component {
     this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[]}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
+    this.cancelModal = this.cancelModal.bind(this);
+    this.rejectLeave = this.rejectLeave.bind(this);
+    this.returnLeave = this.returnLeave.bind(this);
+    this.onReturnPress = this.onReturnPress.bind(this);
+    this.onApprovePress = this.onApprovePress.bind(this);
+    this.onRejectPress = this.onRejectPress.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -104,7 +110,8 @@ export default class PersonalStatScreen extends React.Component {
      this.props.navigator.push({
         screen: 'staffio.LeaveDetailScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
-        passProps: {isAppr:true}, // simple serializable object that will pass as props to the pushed screen (optional)
+        passProps: {isAppr:true,onReturnPress:this.onReturnPress
+          ,onRejectPress:this.onRejectPress,onApprovePress:this.onApprovePress}, // simple serializable object that will pass as props to the pushed screen (optional)
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
         animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
         navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
@@ -113,54 +120,58 @@ export default class PersonalStatScreen extends React.Component {
   }
   onApprovePress(data){
     this.setState({loading:true});
-    Alert.alert(
-      'ยืนยันการอนุมัติ',
-      `ยืนยันการอุนมัติการลาของ 
-      ${data.name} ใช่หรือไม่ ?`,
-      [
-        {text: 'ยกเลิก' ,onPress: () => this.setState({loading:false})},
-        {text: 'ยืนยัน', onPress: () => this.approveLeave(data)},
-      ],
-      { cancelable:  false}
-    )
+    
+    this.props.navigator.showLightBox({
+      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ยืนยันการอนุมัติ : ${data.type}`,msg:'ยืนยันการอุนมัติการลาของ '
+      ,msg2: `${data.name}` ,cancel:this.cancelModal
+      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  cancelModal(){
+    this.setState({loading:false});
+    this.props.navigator.dismissLightBox();
   }
   onRejectPress(data){
     this.setState({loading:true});
-    Alert.alert(
-      'ยืนยันการปฏิเสธ',
-      `ยืนยันการปฏิเสธการลาของ 
-      ${data.name} ใช่หรือไม่ ?`,
-      [
-        {text: 'ยกเลิก' ,onPress: () => this.setState({loading:false})},
-        {text: 'ยืนยัน', onPress: () => this.rejectLeave(data)},
-      ],
-      { cancelable:  false}
-    )
-    // this.props.navigator.showLightBox({
-    //   screen: "staffio.PrivacyScreen", // unique ID registered with Navigation.registerScreen
-    //   passProps: {}, // simple serializable object that will pass as props to the lightbox (optional)
-    //   style: {
-    //     backgroundBlur: "light", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-    //     backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-    //     height:responsiveHeight(20)
-    //   },
-    //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-    //  });
+   
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ปฏิเสธรายการ : ${data.type}`,remark:'สาเหตุ'
+      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
   }
   onReturnPress(data){
     this.setState({loading:true});
-    Alert.alert(
-      'ยืนยันการส่งงานกลับ',
-      `ยืนยันการส่งงานกลับการลาของ 
-      ${data.name} ใช่หรือไม่ ?`,
-      [
-        {text: 'ยกเลิก' ,onPress: () => this.setState({loading:false})},
-        {text: 'ยืนยัน', onPress: () => this.returnLeave(data)},
-      ],
-      { cancelable:  false}
-    )
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ส่งคืนรายการ : ${data.type}`,remark:'สาเหตุ'
+      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
   }
   async approveLeave(data){
+    this.props.navigator.dismissLightBox();
     this.setState({loading:true});
     const userData = await store.get("USER");
     let params = {};
@@ -175,6 +186,7 @@ export default class PersonalStatScreen extends React.Component {
     }
   }
   async rejectLeave(data){
+    this.props.navigator.dismissLightBox();
     this.setState({loading:true});
     const userData = await store.get("USER");
     let params = {};
@@ -183,13 +195,13 @@ export default class PersonalStatScreen extends React.Component {
     params.LEAVE_TYPE_CODE = data.typeCode;
     params.OrgCode = data.orgCode;
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
-    params.Remark = "TEST";
     let response = await post("ESSServices/RejectLeaveRequest",params);
     if(response){
       this.getLeaveList(userData);
     }
   }
   async returnLeave(data){
+    this.props.navigator.dismissLightBox();
     this.setState({loading:true});
     const userData = await store.get("USER");
     let params = {};
@@ -198,8 +210,7 @@ export default class PersonalStatScreen extends React.Component {
     params.LEAVE_TYPE_CODE = data.typeCode;
     params.OrgCode = data.orgCode;
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
-    params.Remark = "TEST";
-    let response = await post("ESSServices/RejectLeaveRequest",params);
+    let response = await post("ESSServices/ReturnLeaveRequest",params);
     if(response){
       this.getLeaveList(userData);
     }

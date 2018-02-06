@@ -43,7 +43,7 @@ export default class MenuScreen extends React.Component {
          menus.map(menu => menu.active = menu.link == link);
          menuAppr.map(menu => menu.active = menu.link == link);
          this.setState({menus:menus,menuAppr:menuAppr});
-         this.props.naviStore.navigation.push({
+         this.props.naviStore.navigation.resetTo({
 			screen: link, // unique ID registered with Navigation.registerScreen
 			title: undefined, // navigation bar title of the pushed screen (optional)
 			titleImage: undefined, // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
@@ -76,7 +76,7 @@ export default class MenuScreen extends React.Component {
 
     render() {
     return (
-         <Wallpaper bgSrc={bgSrc}>
+         <Wallpaper bgSrc={bgSrc} style={{width:responsiveWidth(50)}}>
         <Container style={{flex:1,paddingTop:10}}>
         <Thumbnail small style={styles.imageStyle} source={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
                     <Text style={styles.textName}>{this.state.userData.FULL_NAME_TH}</Text>

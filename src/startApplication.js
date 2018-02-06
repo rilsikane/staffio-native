@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from './constants/Colors';
 import fontelloConfig from '../assets/fonts/config.json'
 import { createIconSetFromFontello } from 'react-native-vector-icons';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
@@ -113,7 +114,7 @@ export default async function startApplication(root) {
                 screen: 'staffio.MenuScreen', // unique ID registered with Navigation.registerScreen
                 passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
                 disableOpenGesture: false, // can the drawer be opened with a swipe instead of button (optional, Android only)
-                fixedWidth: 500 // a fixed width you want your left drawer to have (optional)
+                fixedWidth: 700 // a fixed width you want your left drawer to have (optional)
               },
               style: {
                 // ( iOS only )

@@ -32,7 +32,15 @@ export default class LeaveDetailScreen extends React.Component {
     super(props);
     this.state={userData:{}, leaveBalance:{},leaveData:{},loading:true,leaveBalances:[]}
     this.goBack = this.goBack.bind(this);
+    this.cancelModal = this.cancelModal.bind(this);
+    this.approveLeave = this.approveLeave.bind(this);
+    this.cancelModal = this.cancelModal.bind(this);
+    this.rejectLeave = this.rejectLeave.bind(this);
+    this.returnLeave = this.returnLeave.bind(this);
+    this.onReturnPress = this.onReturnPress.bind(this);
     this.onApprovePress = this.onApprovePress.bind(this);
+    this.onRejectPress = this.onRejectPress.bind(this);
+    this.closeScreen = this.closeScreen.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -81,21 +89,71 @@ export default class LeaveDetailScreen extends React.Component {
       animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
     });
   }
+  closeScreen(){
+    
+    this.props.navigator.resetTo({
+      screen: 'staffio.LeaveApprScreen', // unique ID registered with Navigation.registerScreen
+      title: undefined, // navigation bar title of the pushed screen (optional)
+      passProps: {isAppr:true,onReturnPress:this.onReturnPress
+        ,onRejectPress:this.onRejectPress,onApprovePress:this.onApprovePress}, // simple serializable object that will pass as props to the pushed screen (optional)
+      animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+    });
+    this.props.navigator.dismissLightBox();
+  }
   onApprovePress(data){
-    this.setState({loading:true});
-    Alert.alert(
-      'ยืนยันการอนุมัติ',
-      `ยืนยันการอุนมัติการลาของ 
-      ${data.name} ใช่หรือไม่ ?`,
-      [
-        {text: 'ยกเลิก' ,onPress: () => this.setState({loading:false})},
-        {text: 'ยืนยัน', onPress: () => this.approveLeave(data)},
-      ],
-      { cancelable:  false}
-    )
+    
+    this.props.navigator.showLightBox({
+      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ยืนยันการอนุมัติ : ${data.type}`,msg:'ยืนยันการอุนมัติการลาของ '
+      ,msg2: `${data.name}` ,cancel:this.cancelModal
+      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  cancelModal(){
+    this.setState({loading:false});
+    this.props.navigator.dismissLightBox();
+  }
+  onRejectPress(data){
+   
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ปฏิเสธรายการ : ${data.type}`,remark:'สาเหตุ'
+      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  onReturnPress(data){
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`ส่งคืนรายการ : ${data.type}`,remark:'สาเหตุ'
+      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
   }
   async approveLeave(data){
-    this.setState({loading:true});
+    this.props.navigator.dismissLightBox();
     const userData = await store.get("USER");
     let params = {};
     params.ApproveBy = userData.EMP_CODE;
@@ -105,7 +163,68 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/ApproveLeaveRequest",params);
     if(response){
-      this.getLeaveList(userData);
+      this.props.navigator.showLightBox({
+        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`อนุมัติรายการ : ${data.type}`,msg:'อนุมัติรายการเรียบร้อย'
+        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: {
+          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+          height:responsiveHeight(70),
+          width:responsiveWidth(90)
+        },
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }
+  }
+  async rejectLeave(data){
+    this.props.navigator.dismissLightBox();
+    const userData = await store.get("USER");
+    let params = {};
+    params.ApproveBy = userData.EMP_CODE;
+    params.EMP_CODE = data.empId;
+    params.LEAVE_TYPE_CODE = data.typeCode;
+    params.OrgCode = data.orgCode;
+    params.REQUEST_LEAVE_NO = data.requestLeaveNo;
+    let response = await post("ESSServices/RejectLeaveRequest",params);
+    if(response){
+      this.props.navigator.showLightBox({
+        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`ปฏิเสธรายการ : ${data.type}`,msg:'ปฏิเสธรายการเรียบร้อย'
+        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: {
+          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+          height:responsiveHeight(70),
+          width:responsiveWidth(90)
+        },
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }
+  }
+  async returnLeave(data){
+    this.props.navigator.dismissLightBox();
+    const userData = await store.get("USER");
+    let params = {};
+    params.ApproveBy = userData.EMP_CODE;
+    params.EMP_CODE = data.empId;
+    params.LEAVE_TYPE_CODE = data.typeCode;
+    params.OrgCode = data.orgCode;
+    params.REQUEST_LEAVE_NO = data.requestLeaveNo;
+    let response = await post("ESSServices/ReturnLeaveRequest",params);
+    if(response){
+      this.props.navigator.showLightBox({
+        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`ส่งคืนรายการ : ${data.type}`,msg:'ส่งคืนรายการเรียบร้อย'
+        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: {
+          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+          height:responsiveHeight(70),
+          width:responsiveWidth(90)
+        },
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
     }
   }
 
@@ -127,15 +246,15 @@ export default class LeaveDetailScreen extends React.Component {
         </Content>
          {this.props.isAppr &&
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-responsiveWidth(10)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => this.onApprovePress()}>
+            <ActionButton.Item marginRight={-responsiveWidth(10)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ปฏิเสธ</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(1))} buttonColor='transparent'  onPress={() => {}}>
+            <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(1))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืน</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent'  onPress={() => this.onApprovePress()}>
+            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติ</Text>
             </ActionButton.Item>
