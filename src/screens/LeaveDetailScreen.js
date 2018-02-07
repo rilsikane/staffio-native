@@ -24,11 +24,18 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 const IconTello = createIconSetFromFontello(fontelloConfig);
-
+const modalStyle = {
+  backgroundBlur: "dark",
+  backgroundColor: "rgba(0,0,0,.5)",
+  height:responsiveHeight(70),
+  width:responsiveWidth(90)
+}
 @inject('leaveStore')
 @observer
 export default class LeaveDetailScreen extends React.Component {
+  
   constructor(props){
+    
     super(props);
     this.state={userData:{}, leaveBalance:{},leaveData:{},loading:true,leaveBalances:[]}
     this.goBack = this.goBack.bind(this);
@@ -90,18 +97,18 @@ export default class LeaveDetailScreen extends React.Component {
     });
   }
   closeScreen(){
-    
+    this.props.navigator.dismissLightBox();
+    setTimeout(() => {
     this.props.navigator.resetTo({
       screen: 'staffio.LeaveApprScreen', // unique ID registered with Navigation.registerScreen
       title: undefined, // navigation bar title of the pushed screen (optional)
-      passProps: {isAppr:true,onReturnPress:this.onReturnPress
-        ,onRejectPress:this.onRejectPress,onApprovePress:this.onApprovePress}, // simple serializable object that will pass as props to the pushed screen (optional)
       animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
       animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
       navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
       navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
     });
-    this.props.navigator.dismissLightBox();
+  },500);
+    
   }
   onApprovePress(data){
     
@@ -110,10 +117,7 @@ export default class LeaveDetailScreen extends React.Component {
       passProps: {title:`ยืนยันการอนุมัติ : ${data.type}`,msg:'ยืนยันการอุนมัติการลาของ '
       ,msg2: `${data.name}` ,cancel:this.cancelModal
       ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-      },
+      style: modalStyle,
       adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
      });
   }
@@ -128,12 +132,7 @@ export default class LeaveDetailScreen extends React.Component {
       passProps: {title:`ปฏิเสธรายการ : ${data.type}`,remark:'สาเหตุ'
       ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
       ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
+      style: modalStyle,
       adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
      });
   }
@@ -143,15 +142,11 @@ export default class LeaveDetailScreen extends React.Component {
       passProps: {title:`ส่งคืนรายการ : ${data.type}`,remark:'สาเหตุ'
       ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
       ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
+      style: modalStyle,
       adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
      });
   }
+  
   async approveLeave(data){
     this.props.navigator.dismissLightBox();
     const userData = await store.get("USER");
@@ -163,18 +158,16 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/ApproveLeaveRequest",params);
     if(response){
-      this.props.navigator.showLightBox({
-        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`อนุมัติรายการ : ${data.type}`,msg:'อนุมัติรายการเรียบร้อย'
-        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: {
-          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-          height:responsiveHeight(70),
-          width:responsiveWidth(90)
-        },
-        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-       });
+      setTimeout(() => {
+        this.props.navigator.showLightBox({
+          screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+          passProps: {title:`อนุมัติรายการ : ${data.type}`,msg:'อนุมัติรายการเรียบร้อย'
+          ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+          style: modalStyle,
+          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+        });
+      },1000);
+
     }
   }
   async rejectLeave(data){
@@ -192,12 +185,7 @@ export default class LeaveDetailScreen extends React.Component {
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
         passProps: {title:`ปฏิเสธรายการ : ${data.type}`,msg:'ปฏิเสธรายการเรียบร้อย'
         ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: {
-          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-          height:responsiveHeight(70),
-          width:responsiveWidth(90)
-        },
+        style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
        });
     }
@@ -217,12 +205,7 @@ export default class LeaveDetailScreen extends React.Component {
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
         passProps: {title:`ส่งคืนรายการ : ${data.type}`,msg:'ส่งคืนรายการเรียบร้อย'
         ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: {
-          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-          height:responsiveHeight(70),
-          width:responsiveWidth(90)
-        },
+        style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
        });
     }
@@ -271,6 +254,7 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  
 });
 
 
