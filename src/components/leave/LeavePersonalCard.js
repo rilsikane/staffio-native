@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Image ,View,TouchableOpacity} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 export default class LeavePersonalCard extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class LeavePersonalCard extends React.Component {
   openDetail(){
     this.props.openDetail(this.props.info);
   }
+  
   
   render() {
     return (
@@ -27,20 +29,20 @@ export default class LeavePersonalCard extends React.Component {
                     </Left> */}
                     <Body style={{flex:4}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>ทำรายการวันที่</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('TransactionDate')}</Text>)}
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8)}}>05 ก.ย. 2557</Text>)}
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#f4a692',flex:1.3, fontSize:responsiveFontSize(1.8)}}>{this.props.info.type}</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:'#f4a692',borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} วัน`}</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:'#f4a692',borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} ${I18n.t('Day')}`}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>ตั้งแต่</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('Since')}</Text>)}
                             {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.startDate}</Text>)}
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>ถึง</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('To')}</Text>)}
                             {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.endDate}</Text>)}
                             
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>สถานะรายการ</Text>)}   
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Status')}</Text>)}   
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8)}}>รอพิจรณา</Text>)}                         
                         </View>
                     </Body>
@@ -57,3 +59,22 @@ export default class LeavePersonalCard extends React.Component {
 const styles = StyleSheet.create({
    
 });
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    TransactionDate: 'Transaction Date',
+    Day: 'Day(s)',
+    Since: 'Since',
+    To: 'To',
+    Status: 'Status'
+  },
+  th: {
+    TransactionDate: 'วันที่ทำรายการ',
+    Day: 'วัน',
+    Since: 'ตั้งแต่',
+    To: 'ถึง',
+    Status: 'สถานะรายการ'
+  },
+};
