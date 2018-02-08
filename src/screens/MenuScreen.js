@@ -8,20 +8,21 @@ import store from 'react-native-simple-store';
 import app  from '../stores/app';
 import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/homeBG.png';
+import I18n from 'react-native-i18n';
 
 let menus = [
-    {name: "ลงเวลาเข้างาน", icon: "calendar",link:"staffio.HomeScreen",active:true},
-    {name: "Inbox", icon: "inbox",link:"staffio.InqInboxScreen",active:false},
-    {name: "สถิติการลา", icon: "bar-chart",link:"staffio.PersonalStatScreen",active:false},
-    {name: "ค้นหาเพื่อน", icon: "book",link:"staffio.FindFriendScreen",active:false}
+    {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true},
+    {name: `${I18n.t('Inbox')}`, icon: "inbox",link:"staffio.InqInboxScreen",active:false},
+    {name: `${I18n.t('StatLeave')}`, icon: "bar-chart",link:"staffio.PersonalStatScreen",active:false},
+    {name: `${I18n.t('FindFriend')}`, icon: "book",link:"staffio.FindFriendScreen",active:false}
   ];
 let menuAppr = [
-     {name: "Dashboard เข้างาน", icon: "pie-chart",link:"staffio.DashBoradProject",active:false},
-     {name: "พิจารณาการลา", icon: "gavel",link:"staffio.LeaveApprScreen",active:false}
+     {name: `${I18n.t('Dashboard')}`, icon: "pie-chart",link:"staffio.DashBoradProject",active:false},
+     {name: `${I18n.t('ApproveLeave')}`, icon: "gavel",link:"staffio.LeaveApprScreen",active:false}
   ];
 const menuEtc = [
     // {name: "วิธีใช้งาน", icon: "question-circle"},
-    {name: "ออกจากระบบ", icon: "sign-out",active:false}
+    {name: `${I18n.t('Logout')}`, icon: "sign-out",active:false}
 ];
 
 
@@ -59,11 +60,11 @@ export default class MenuScreen extends React.Component {
     }
      logOutPress(){
         Alert.alert(
-            'คำเตือน',
-            'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+            `${I18n.t('Warning')}`,
+            `${I18n.t('WarningDetail')}`,
             [
-            {text: 'ยืนยัน', onPress: () => this.logOut()},
-            {text: 'ยกเลิก'},
+            {text: `${I18n.t('Confirm')}`, onPress: () => this.logOut()},
+            {text: `${I18n.t('Cancel')}`},
             ],
             { cancelable: false }
         )
@@ -75,6 +76,7 @@ export default class MenuScreen extends React.Component {
     }
 
     render() {
+        I18n.locale = 'en';
     return (
          <Wallpaper bgSrc={bgSrc} style={{width:responsiveWidth(50)}}>
         <Container style={{flex:1,paddingTop:10}}>
@@ -212,4 +214,35 @@ const styles = {
         position: 'relative'
     }
 
+  };
+
+  I18n.fallbacks = true;
+  
+  I18n.translations = {
+    en: {
+        HomeS: 'Home',
+        Inbox: 'Inbox',
+        StatLeave: 'Leave Stat',
+        Logout: 'Logout',
+        FindFriend: 'Find Friends',
+        Dashboard: 'Dashboard',
+        ApproveLeave: 'Approve Leave',
+        Warning: 'Warning',
+        Confirm: 'comfirm',
+        Cancel: 'cancel',
+        WarningDetail: 'You confirm to logout'
+    },
+    th: {
+      HomeS: 'ลงเวลาเข้างาน',
+      Inbox: 'กล่องข้อความ',
+      StatLeave: 'สถิติการลา',
+      Logout: 'ออกจากระบบ',
+      FindFriend: 'ค้นหาเพื่อน',
+      Dashboard: 'Dashboard เข้างาน',
+      ApproveLeave: 'พิจารณาการลา',
+      Warning: 'คำเตือน',
+      Confirm: 'ยืนยัน',
+      Cancel: 'ยกเลิก',
+      WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+    },
   };

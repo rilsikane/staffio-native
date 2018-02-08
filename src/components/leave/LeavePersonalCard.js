@@ -13,9 +13,9 @@ export default class LeavePersonalCard extends React.Component {
   openDetail(){
     this.props.openDetail(this.props.info);
   }
-  
-  
+ 
   render() {
+    // I18n.locale = 'th'    
     return (
         this.props.info.total && 
         (
