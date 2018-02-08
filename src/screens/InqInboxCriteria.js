@@ -15,6 +15,7 @@ import Staff from '../components/inbox/staff'
 import SearchDate from '../components/inbox/searchDate'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../constants/Colors'
+import I18n from 'react-native-i18n';
 
   export default class InqInboxCriteria extends React.Component {
     constructor(props) {
@@ -34,20 +35,21 @@ import Colors from '../constants/Colors'
         this.props.cancelDialog();
       }
     render() {
+      I18n.locale = 'en';      
         return (
             <Container style={{paddingTop:22,flex:1,backgroundColor:Colors.backgroundColor}}>
                  <Content>
                     <Tabs   initialPage={0} tabBarUnderlineStyle={{backgroundColor:Colors.baseColor}}>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="map-marker" style={styles.tabIcon}/><Text style={styles.tabLabel}>  สถานที่</Text></TabHeading>}>
+                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="map-marker" style={styles.tabIcon}/><Text style={styles.tabLabel}>{`  ${I18n.t('Place')}`}</Text></TabHeading>}>
                         <Location locations={this.props.locations} />
                       </Tab>
-                      <Tab  heading={ <TabHeading style={styles.tabHeading}><Icon name="clock-o"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  สถานะ</Text></TabHeading>}>
+                      <Tab  heading={ <TabHeading style={styles.tabHeading}><Icon name="clock-o"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>{`  ${I18n.t('Status')}`}</Text></TabHeading>}>
                         <Status statusList={this.props.statuses}/>
                       </Tab>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="calendar"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  วันที่</Text></TabHeading>}>
+                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="calendar"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>{`  ${I18n.t('Date')}`}</Text></TabHeading>}>
                         <SearchDate />
                       </Tab>
-                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="user"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>  พนักงาน</Text></TabHeading>}>
+                      <Tab heading={ <TabHeading style={styles.tabHeading}><Icon name="user"  style={styles.tabIcon}/><Text  style={styles.tabLabel}>{`  ${I18n.t('Staff')}`}</Text></TabHeading>}>
                           <Staff users={this.props.users}/>
                       </Tab>
                     
@@ -57,12 +59,12 @@ import Colors from '../constants/Colors'
                          <View>
                           <Button style={{backgroundColor:Colors.baseColor,alignItems : 'center', justifyContent: 'center', marginTop:5,width:responsiveWidth(40),height: responsiveHeight(8)}} rounded onPress={this.onDoneDialog}>
                             <Icon style={{color:"#ffff", backgroundColor:"transparent"}} name="search"/>
-                            <Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ค้นหา</Text>
+                            <Text style={{color:"#ffff", backgroundColor:"transparent"}}>{`  ${I18n.t('Search')}`}</Text>
                           </Button>
                         </View>
                          <View style={{borderLeftColor:Colors.baseColor,marginLeft:5}}>
                           <Button style={{backgroundColor:Colors.baseColor,alignItems : 'center', justifyContent: 'center',marginTop:5,width:responsiveWidth(40),height: responsiveHeight(8)}} rounded onPress={this.cancelDialog}>
-                            <Icon style={{color:"#ffff",backgroundColor:"transparent"}} name="times"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>  ยกเลิก</Text>
+                            <Icon style={{color:"#ffff",backgroundColor:"transparent"}} name="times"/><Text style={{color:"#ffff", backgroundColor:"transparent"}}>{`  ${I18n.t('Cancel')}`}</Text>
                           </Button>
                         </View>
                     </Footer>
@@ -104,3 +106,24 @@ const styles = StyleSheet.create({
     backgroundColor: "blue"
   }
 });
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    Place: 'Place',
+    Status: 'Status',
+    Date: 'Date',
+    Staff: 'Staff',
+    Search: 'Search',
+    Cancel: 'Cancel' ,
+  },
+  th: {
+    Place: 'สถานที่',
+    Status: 'สถานะ',
+    Date: 'วันที่',
+    Staff: 'พนักงาน',
+    Search: 'ค้นหา',
+    Cancel: 'ยกเลิก' ,
+  },
+};

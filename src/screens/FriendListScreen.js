@@ -16,6 +16,8 @@ import { observer, inject } from 'mobx-react';
 import {post} from '../api';
 import Loading from '../components/loading';
 import CardHeader from '../components/cardHeader';
+import I18n from 'react-native-i18n';
+
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {
@@ -65,9 +67,10 @@ export default class FindFriendsScreen extends React.Component {
 
 
   render() {
+    I18n.locale = 'en';    
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
-       <CardHeader title="รายชื่อพนักงาน" goBack={this.goBack}/>
+       <CardHeader title={`${I18n.t('SearchData')}`} goBack={this.goBack}/>
         <View style={{flex:1,marginTop:em(2),marginLeft:em(1),marginRight:em(1)}}>
             <View style={{paddingLeft:30,paddingRight:30,paddingBottom:10}}>
               <Item style={{borderColor:Colors.baseColor}}>
@@ -77,7 +80,7 @@ export default class FindFriendsScreen extends React.Component {
               </Item>
             </View>
             <ScrollView>
-            <Loading visible={this.state.isLoading} text="กำลังค้นหาข้อมูล..."/>
+            <Loading visible={this.state.isLoading} text={`${I18n.t('StaffList')}`}/>
             { this.state.friendList.map((val) => {
             return (<CardFriend key={val.EMP_CODE} employee={val}/>);
             })}
@@ -88,5 +91,16 @@ export default class FindFriendsScreen extends React.Component {
   }
 
 }
+I18n.fallbacks = true;
 
+I18n.translations = {
+  en: {
+    StaffList:'Staff List',
+    SearchData:'Searching Data…',   
+  },
+  th: {
+    StaffList:'รายชื่อพนักงาน',
+    SearchData:'กำลังค้นหาข้อมูล…',  
+  },
+};
 

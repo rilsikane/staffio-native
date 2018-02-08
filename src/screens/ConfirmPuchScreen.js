@@ -18,6 +18,7 @@ import store from 'react-native-simple-store';
 import {post} from '../api';
 import {convertDate} from '../utils/staffioUtils';
 import app  from '../stores/app';
+import I18n from 'react-native-i18n';
 
 
 
@@ -66,10 +67,10 @@ export default class ConfirmPunchScreen extends React.Component {
       },(error)=>{
          this.setState({latRecord:undefined,longRecord:undefined});
          Alert.alert(
-            'แจ้งเตือน',
-            'คุณไม่ได้ทำการเปิด Location ระบบจะทำการระบุว่าคุณได้บันทึกเวลานอกถสานที่',
+            `${I18n.t('Alert')}`,
+            `${I18n.t('NotTurnOnLocation')}`,
             [
-              {text: 'ตกลง'},
+              {text: `${I18n.t('ok')}`},
             ],
           )
       });
@@ -105,11 +106,11 @@ export default class ConfirmPunchScreen extends React.Component {
  okPress(){
   if(this.state.lateCondition &&  this.state.shiftData.timeRecordType !="I"){
      Alert.alert(
-        'คำเตือน',
-        'คุณลงเวลาออกงานก่อนเวลา คุณต้องการยืนยันที่จะลงเวลา ใช่หรือไม่ ?',
+      `${I18n.t('Warning')}`,
+      `${I18n.t('EnterBefore')}`,
         [
-          {text: 'ยืนยัน', onPress: () => this.donePress()},
-          {text: 'ยกเลิก'},
+          {text: `${I18n.t('Confirm')}`, onPress: () => this.donePress()},
+          {text: `${I18n.t('Cancel')}`},
         ],
         { cancelable: false }
       )
@@ -161,10 +162,10 @@ export default class ConfirmPunchScreen extends React.Component {
         this.setState({isLoading:false});
         TimerMixin.setTimeout( () => { 
           Alert.alert(
-            'ลงเวลา',
-            'ลงเวลาสำเร็จ',
+            `${I18n.t('EnterTime')}`,
+            `${I18n.t('EnterTimess')}`,
             [
-              {text: 'ตกลง', onPress: () => this.success()},
+              {text: `${I18n.t('ok')}`, onPress: () => this.success()},
             ],
             { cancelable: false }
           )
@@ -220,6 +221,7 @@ export default class ConfirmPunchScreen extends React.Component {
 
   
   render() {
+    I18n.locale = 'en';    
     return (
        <View style={{flex:1}}>
           {this.loading()}
@@ -231,5 +233,33 @@ export default class ConfirmPunchScreen extends React.Component {
  }
 
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    Alert:'Alert',
+    NotTurnOnLocation:'You did not turn on location. System will identify that you save time outside',
+    ok:'Ok',
+    Warning:'Warning',
+    EnterBefore:'You enter time before finish working you need to enter time. Yes or no?',
+    Confirm:'Confirm',
+    Cancel:'Cancel',
+    EnterTime:'Enter time',
+    EnterTimess:'Enter time success',
+  },
+  th: {
+    Alert:'แจ้งเตือน',
+    NotTurnOnLocation:'คุณไม่ได้ทำการเปิด Location ระบบจะทำการระบุว่าคุณได้บันทึกเวลานอกสถานที่',
+    ok:'ตกลง',
+    Warning:'คำเตือน',
+    EnterBefore:'คุณลงเวลาออกงานก่อนเวลา คุณต้องการยืนยันที่จะลงเวลา ใช่หรือไม่ ?',
+    Confirm:'ยืนยัน',
+    Cancel:'ยกเลิก',
+    EnterTime:'ลงเวลา',
+    EnterTimess:'ลงเวลาสำเร็จ',
+  },
+};
+
 
 

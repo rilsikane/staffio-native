@@ -19,7 +19,7 @@ import Loading from '../components/loading';
 import Colors from '../constants/Colors'
 import getTheme from '../../native-base-theme/components';
 import CardHeader from '../components/cardHeader';
-
+import I18n from 'react-native-i18n';
 
 export default class DashBoradProject extends React.Component {
     constructor(props) {
@@ -104,6 +104,7 @@ export default class DashBoradProject extends React.Component {
     }
 
     render() {
+        I18n.locale = 'en';        
         if (this.state.isLoading)
             return  <Loading visible={this.state.isLoading} text="Loading..."/>
             //return null;
@@ -124,7 +125,7 @@ export default class DashBoradProject extends React.Component {
                                             </CardItem>
                                             <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
                                                 <Icon name='refresh' style={{color: "#989898"}}/>
-                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>ดึงข้อมูลล่าสุด </Text>
+                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>{I18n.t('Fetch')} </Text>
                                                 <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>: 21 นาทีที่แล้ว </Text>
                                             </CardItem>
                                         </CardItem>
@@ -272,3 +273,13 @@ const styles = StyleSheet.create({
         paddingLeft:5
     }
 });
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    Fetch: 'Fetch latest'
+  },
+  th: {
+    Fetch: 'ดึงข้อมูลล่าสุด'
+  },
+};

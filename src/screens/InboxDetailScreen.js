@@ -24,6 +24,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import {post} from '../api';
 import Loading from '../components/loading';
 import store from 'react-native-simple-store';
+import I18n from 'react-native-i18n';
 
 @inject('punchStore')
 @observer
@@ -109,10 +110,11 @@ export default class InboxDetailScreen extends React.Component {
   }
 
   render() {
+    I18n.locale = 'en';    
     let DateToday = new Date().toDateString().split(' ');
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
-            <CardHeader title="ประวัติ" goBack={this.goBack}/>
+            <CardHeader title={`${I18n.t('History')}`} goBack={this.goBack}/>
             <Loading visible={this.state.isLoading}/>
              <ScrollView style={{flex:1}}>
               <View style={styles.ViewStyle}>
@@ -171,4 +173,14 @@ const styles={
     backgroundColor:'transparent'
   },
 }
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    History: 'History'    
+  },
+  th: {
+    History: 'ประวัติ'    
+  },
+};
 

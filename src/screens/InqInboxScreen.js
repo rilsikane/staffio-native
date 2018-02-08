@@ -28,6 +28,8 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import AnimatedOverlay from 'react-native-animated-overlay';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
+import I18n from 'react-native-i18n';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 
@@ -395,9 +397,10 @@ export default class InboxScreen extends React.Component {
   }
 
   render() {
+    I18n.locale = 'en';    
     return (
       <View  style={{backgroundColor:Colors.backgroundColor,flex:1}}>
-       <CardHeader title="ประวัติ"/>   
+       <CardHeader title={`${I18n.t('History')}`}/>   
            <Loading visible={this.state.isLoading}/>
            <View style={{height:responsiveHeight(10),marginTop:5,flexDirection:"row",alignItems:"center",marginLeft:10}}>
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
@@ -496,3 +499,13 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    History: 'History'
+  },
+  th: {
+    History: 'ประวัติ'
+  },
+};
