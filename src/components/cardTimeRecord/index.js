@@ -214,11 +214,11 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    History: '',
-    Month: '',
+    History: 'History enter time',
+    Month: 'Month',
     Absence: 'Absence',
     Late: 'Late',
-    Back: '',
+    Back: 'Back before time',
   },
   th: {
     History: 'ประวัติการลงเวลา',

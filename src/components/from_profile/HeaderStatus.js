@@ -301,7 +301,7 @@ I18n.translations = {
   en: {
     Absence: 'Absence',
     Late: 'Late',
-    Back: '',
+    Back: 'Back before time',
   },
   th: {
     Absence: 'ขาด',

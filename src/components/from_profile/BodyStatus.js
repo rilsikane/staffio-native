@@ -230,7 +230,7 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    DeptTime: '',
+    DeptTime: 'Responsible staff',
     ViewAll: 'View All',
     
   },

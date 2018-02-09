@@ -158,7 +158,7 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    DeptTime: '',
+    DeptTime: 'Staff enter time',
   },
   th: {
     DeptTime: 'พนักงานที่ลงเวลา',

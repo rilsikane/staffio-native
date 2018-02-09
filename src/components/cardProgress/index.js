@@ -70,8 +70,8 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    TimeWork: '',
-    LoadData: '',
+    TimeWork: 'Enter time',
+    LoadData: 'Download',
   },
   th: {
     TimeWork: 'การลงเวลาเข้างาน',

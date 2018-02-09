@@ -193,7 +193,7 @@ I18n.fallbacks = true;
 I18n.translations = {
   en: {
     PlaceWork: 'Place of attendance',
-    DeptTime:  '',
+    DeptTime:  'Staff enter time    ',
   },
   th: {
     PlaceWork: 'สถานที่เข้างาน',

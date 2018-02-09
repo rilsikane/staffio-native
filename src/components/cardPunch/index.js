@@ -288,9 +288,9 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    Not: '',
+    Not: 'did not enter time',
     Late: 'Late',
-    Back: '',
+    Back: 'Back before time',
     Absence: 'absence',  
   },
   th: {
