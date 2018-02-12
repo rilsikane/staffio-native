@@ -23,6 +23,8 @@ import LeaveStatCard from '../components/leave/LeaveStatCard';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
+import I18n from 'react-native-i18n';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 const modalStyle = {
   backgroundBlur: "dark",
@@ -114,7 +116,7 @@ export default class LeaveDetailScreen extends React.Component {
     
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ยืนยันการอนุมัติ : ${data.type}`,msg:'ยืนยันการอุนมัติการลาของ '
+      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg:`${I18n.t('ConfirmApproveLeave')}`
       ,msg2: `${data.name}` ,cancel:this.cancelModal
       ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: modalStyle,
@@ -129,8 +131,8 @@ export default class LeaveDetailScreen extends React.Component {
    
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ปฏิเสธรายการ : ${data.type}`,remark:'สาเหตุ'
-      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: modalStyle,
       adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -139,8 +141,8 @@ export default class LeaveDetailScreen extends React.Component {
   onReturnPress(data){
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ส่งคืนรายการ : ${data.type}`,remark:'สาเหตุ'
-      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: modalStyle,
       adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -161,7 +163,7 @@ export default class LeaveDetailScreen extends React.Component {
       setTimeout(() => {
         this.props.navigator.showLightBox({
           screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-          passProps: {title:`อนุมัติรายการ : ${data.type}`,msg:'อนุมัติรายการเรียบร้อย'
+          passProps: {title:`${I18n.t('Approve')} : ${data.type}`,msg:`${I18n.t('ApproveSuccess')}`
           ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
           style: modalStyle,
           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -183,7 +185,7 @@ export default class LeaveDetailScreen extends React.Component {
     if(response){
       this.props.navigator.showLightBox({
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`ปฏิเสธรายการ : ${data.type}`,msg:'ปฏิเสธรายการเรียบร้อย'
+        passProps: {title:`${I18n.t('Reject')} : ${data.type}`,msg:`${I18n.t('RejectSuccess')}`
         ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
         style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -203,7 +205,7 @@ export default class LeaveDetailScreen extends React.Component {
     if(response){
       this.props.navigator.showLightBox({
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`ส่งคืนรายการ : ${data.type}`,msg:'ส่งคืนรายการเรียบร้อย'
+        passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
         ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
         style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -257,4 +259,31 @@ const styles = StyleSheet.create({
   
 });
 
+I18n.fallbacks = true;
 
+I18n.translations = {
+  en: {
+    ConfirmApprove: 'Confirm approval',
+    ConfirmApproveLeave: 'Confirm approval of leave',
+    Reject: 'Reject',
+    Cause: 'Cause',
+    SpecifyCause: 'Specify cause',
+    SendBack: 'Send back',
+    Approve: 'Approve',
+    ApproveSuccess: 'Approved successfully',
+    RejectSuccess: 'Rejected successfully',
+    SendBackSuccess: 'Send back successfully'
+  },
+  th: {
+	  ConfirmApprove: 'ยืนยันการอนุมัติ',
+    ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
+    Reject: 'ปฏิเสธรายการ',
+    Cause: 'สาเหตุ',
+    SpecifyCause: 'ระบุเหตุผล',
+    SendBack: 'ส่งคืนรายการ',
+    Approve: 'อนุมัติรายการ',
+    ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
+    RejectSuccess: 'ปฏิเสธรายการเรียบร้อย',
+    SendBackSuccess: 'ส่งคืนรายการเรียบร้อย'
+  },
+};

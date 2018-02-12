@@ -6,6 +6,8 @@ import Colors from '../../constants/Colors'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
+import I18n from 'react-native-i18n';
+
 const IdName = ({record}) => {
   console.log(record);
   return(
@@ -27,12 +29,12 @@ const IdName = ({record}) => {
           </Row>
            <Row size={30}>
             <Col size={100}>
-                <Text allowFontScaling={false}style={styles.TextStyle}>รหัส  :{record.empCode}</Text>
+                <Text allowFontScaling={false}style={styles.TextStyle}>{I18n.t('Code')}  :{record.empCode}</Text>
             </Col>
           </Row>
           <Row size={25}>
            <Col size={100} style={{backgroundColor:"transparent"}}>
-              <Text allowFontScaling={false}style={styles.TextStyle} numberOfLines={1}>ตำแหน่ง: {record.positionName}</Text>
+              <Text allowFontScaling={false}style={styles.TextStyle} numberOfLines={1}>{I18n.t('Position')}: {record.positionName}</Text>
             </Col>
           </Row>
         </Col>
@@ -63,4 +65,18 @@ const styles={
     backgroundColor:"transparent"
   }
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	  Code: 'Code',
+    Position: 'Position'
+  },
+  th: {
+	  Code: 'รหัส',
+    Position: 'ตำแหน่ง'
+  },
+};
+
 export default IdName;

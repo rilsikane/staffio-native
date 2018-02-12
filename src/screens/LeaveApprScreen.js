@@ -27,8 +27,9 @@ import Swipeable from 'react-native-swipeable';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
-const IconTello = createIconSetFromFontello(fontelloConfig);
+import I18n from 'react-native-i18n';
 
+const IconTello = createIconSetFromFontello(fontelloConfig);
 
 @inject('leaveStore')
 @observer
@@ -123,7 +124,7 @@ export default class PersonalStatScreen extends React.Component {
     
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ยืนยันการอนุมัติ : ${data.type}`,msg:'ยืนยันการอุนมัติการลาของ '
+      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
       ,msg2: `${data.name}` ,cancel:this.cancelModal
       ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: {
@@ -142,8 +143,8 @@ export default class PersonalStatScreen extends React.Component {
    
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ปฏิเสธรายการ : ${data.type}`,remark:'สาเหตุ'
-      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: {
         backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
@@ -158,8 +159,8 @@ export default class PersonalStatScreen extends React.Component {
     this.setState({loading:true});
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`ส่งคืนรายการ : ${data.type}`,remark:'สาเหตุ'
-      ,cancel:this.cancelModal,placeholder:'ระบุเหตุผล'
+      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: {
         backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
@@ -250,7 +251,7 @@ export default class PersonalStatScreen extends React.Component {
       
       <View style={{backgroundColor: '#ffe9d4',flex:1}}>
          
-          <CardHeader title={'พิจารณาการลา'}/>
+          <CardHeader title={`${I18n.t('Consider')}`}/>
             {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
@@ -298,4 +299,25 @@ const styles = StyleSheet.create({
   },
 });
 
+I18n.fallbacks = true;
 
+I18n.translations = {
+  en: {
+	  ConfirmApprove: 'Confirm approval',
+    ConfirmApproveLeave: 'Confirm approval of leave',
+    Reject: 'Reject',
+    Cause: 'Cause',
+    SpecifyCause: 'Specify cause',
+    SendBack: 'Send back',
+    Consider: 'Consider leave'
+  },
+  th: {
+    ConfirmApprove: 'ยืนยันการอนุมัติ',
+    ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
+    Reject: 'ปฏิเสธรายการ',
+    Cause: 'สาเหตุ',
+    SpecifyCause: 'ระบุเหตุผล',
+    SendBack: 'ส่งคืนรายการ',
+    Consider: 'พิจารณาการลา'
+  },
+};
