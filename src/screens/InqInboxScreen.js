@@ -93,7 +93,7 @@ export default class InboxScreen extends React.Component {
     return master;
   }
   buildStatuses = async()=>{
-    let statuses = {"NM":"ปกติ","LT":"สาย","EL":"กลับก่อน","AB":"ขาด"};
+    let statuses = {"NM":`${I18n.t('Normal')}`,"LT":`${I18n.t('Late')}`,"EL":`${I18n.t('Earlyend')}`,"AB":`${I18n.t('Absence')}`};
     
     return statuses;
   }
@@ -101,7 +101,7 @@ export default class InboxScreen extends React.Component {
      let locations = {};
     if(branchMaster && branchMaster.length>0){
       let tmp = {};
-      tmp["99999"] = "ลงเวลานอกสถานที่";
+      tmp["99999"] = `${I18n.t('Entertimeoutside')}`;
       for(let i=0;i<branchMaster.length;i++){
         tmp[branchMaster[i].branchID] = branchMaster[i].branchName;
         locations=tmp;
@@ -443,11 +443,11 @@ export default class InboxScreen extends React.Component {
           <ActionButton  IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
             <ActionButton.Item marginRight={-(responsiveWidth(1))} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={this.openCriteria}>
               <Icon name="search" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ค้นหา</Text>
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('search')}</Text>
             </ActionButton.Item>
             <ActionButton.Item marginRight={responsiveWidth(18)} marginBottom={-(responsiveHeight(10))} buttonColor='transparent' onPress={this.clearTags}>
               <Icon name="trash" style={styles.actionButtonIcon} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ล้างตัวเลือก</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Clear')}</Text>
             </ActionButton.Item>
           </ActionButton>
            

@@ -1,10 +1,12 @@
 export default {  
     ///////////////COMPONENT///////////////
+    //Cardcheckin
+    didntEntertime:'Did not enter time',
     //cardPunch
     History: 'History',
     Month: 'Month',
     Late: 'Late',
-    Back: 'Back before time',
+    Back: 'Early end',
     Absence: 'absence',
     EnterTime: 'Not enter time',
     DayOff: 'Today is day off',
@@ -36,7 +38,7 @@ export default {
     Month: 'Month',
     Absence: 'Absence',
     Late: 'Late',
-    Back: 'Back before time',
+    Back: 'Early end',
 
     //findFriends
     FindFriends: 'Find Friends',
@@ -51,8 +53,8 @@ export default {
     //from_profileHeaderStatus
     Absence: 'Absence',
     Late: 'Late',
-    Back: 'Back before time',
-
+    Back: 'Early end',
+    summaryWork:'Summary of working status',
     //inbox-location
     location:'Search Locations',
 
@@ -111,10 +113,25 @@ export default {
     //status-TimeIn
     Normal: 'Normal',
     Late: 'Late',
-    Back: 'Back before time',
+    Back: 'Early end',
     Missing: 'Missing',
 
+    //punchCard-stampResult
+    ok:'Ok',
+    Cancel:'Cancel',
+
+
     ///////////////SCREEN///////////////
+    //Modal-confirmModal
+    YesorNo:'Yes or No?',
+
+    //Modal-modal
+    Ok:'Ok',
+    Cancel:'Cancel',
+
+    //AuthenPincodeScreen
+    EnterPassword:'Enter Password',
+
     //ConfirmPincodeScreen
     SetPass: 'Confirm Password',
 
@@ -192,7 +209,13 @@ export default {
 
     //InqInboxScreen
     History: 'History',
-
+    Normal:'Normal',
+    Late:'Late',
+    Earlyend:'Early end',
+    Absence:'Absence',
+    Entertimeoutside:'Enter time outside',
+    search:'Search',
+    Clear:'Clear',
     //LeaveApprDetailScreen
     LeaveInformation: 'Leave information',
 
@@ -217,7 +240,10 @@ export default {
     RejectSuccess: 'Rejected successfully',
     SendBackSuccess: 'Send back successfully',
     title: 'Leave Information',
-
+    Decline:'Decline',
+    Reject:'Reject',
+    Approve:'Approve',
+    
     //MenuScreen
     HomeS: 'Home',
     Inbox: 'Inbox',

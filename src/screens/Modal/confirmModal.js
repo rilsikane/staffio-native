@@ -9,6 +9,7 @@ import Modal from './modal'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Button, Item, Label, Input } from 'native-base';
 import * as Animatable from 'react-native-animatable';
+import I18n from '../../utils/i18n';
 
 export default class ConfirmModal extends Component {
   constructor(props){
@@ -35,7 +36,7 @@ export default class ConfirmModal extends Component {
                 <Text style={{fontFamily: 'Kanit', color: '#5f504b'
                 , fontSize: responsiveFontSize(2),textAlign:'center'}}>{this.props.msg2}</Text>
                  <Text style={{fontFamily: 'Kanit', color: '#5f504b'
-                , fontSize: responsiveFontSize(2),textAlign:'center'}}>ใช่หรือไม่ ?</Text>
+                , fontSize: responsiveFontSize(2),textAlign:'center'}}>{I18n.t('YesorNo')}</Text>
             </View>
         </Modal>
     );
