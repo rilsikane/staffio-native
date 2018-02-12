@@ -433,9 +433,9 @@ export default class InboxScreen extends React.Component {
               <ActionButton.Item  buttonColor={Colors.baseColor} title="ล้างตัวเลือก"  onPress={this.clearTags}>
                <Icon name="trash" style={{color:"#ffff",backgroundColor:'transparent'}}/>
               </ActionButton.Item>
-              <ActionButton.Item  buttonColor={Colors.baseColor} title="dashbord"  onPress={this.DashBorad}>
+              {/* <ActionButton.Item  buttonColor={Colors.baseColor} title="dashbord"  onPress={this.DashBorad}>
                <IconTello name="hhmm-03" style={{color:"#ffff",backgroundColor:'transparent'}}/>
-              </ActionButton.Item>
+              </ActionButton.Item> */}
           </ActionButton>
            
            {/*<Modal animationType="slide"

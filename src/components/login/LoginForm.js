@@ -61,16 +61,16 @@ export default class LoginForm extends Component {
 		user.platform = `${Platform.OS}_${DeviceInfo.getSystemVersion()}`;
 		
 
-		const orgTmp = this.props.userStore.userLogin.username.split("@");
-		if(orgTmp.length>1){
-		let endTmp = this.props.userStore.userLogin.username.split("@")[1];
-		if(endTmp=='DEV'){
-			user.user_name =  `${this.props.userStore.userLogin.username.split("@")[0]}@${endTmp}`;
-		}
-		await store.save('endpoint',endTmp);
-		}else{
-		await store.save('endpoint',"OMS");	
-		}
+		// const orgTmp = this.props.userStore.userLogin.username.split("@");
+		// if(orgTmp.length>1){
+		// let endTmp = this.props.userStore.userLogin.username.split("@")[1];
+		// if(endTmp=='DEV'){
+		// 	user.user_name =  `${this.props.userStore.userLogin.username.split("@")[0]}@${endTmp}`;
+		// }
+		// await store.save('endpoint',endTmp);
+		// }else{
+		// await store.save('endpoint',"OMS");	
+		// }
 
 		const response = await authen("checkLogin", user);
 		if(response){

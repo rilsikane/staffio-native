@@ -27,23 +27,51 @@ import store from 'react-native-simple-store';
 import {
     Alert,Linking
 } from 'react-native';
-
-async function getEndpoint(){
+async function getEndpointService(param){
+  try{
+      const response = await  axios.post("https://staffio.g-able.com/STAFFIO_DEMO_API/api/SecurityService/GetEndpointMobile", param);
+      console.log(response);
+      if(response.status=='200' && response.data.Success){
+        return response.data;
+      }else{
+            Alert.alert(
+              'เกิดข้อผิดพลาด',
+              response.data.Msg,
+              [
+              {text: 'OK', onPress: () => console.log('OK Pressed!')},
+              ]
+            )
+          return false;
+      }
+  }catch(e){
+      console.error(e);
+        Alert.alert(
+        'เกิดข้อผิดพลาด',
+        'ไม่สามารถเชื่อมต่อระบบได้',
+        [
+        {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+        )
+      return false;
+  }
+}
+async function getEndpoint(param){
   let endpointtmp = "";
-  const endpoint = await store.get("endpoint");
+  let endpoint = await store.get("endpointNew");
   if(endpoint && endpoint!=null){
     console.log(endpoint);
     endpointtmp = endpoint;
   }else{
-     const userData = await store.get("USER");
-     endpointtmp = userData.USER_NAME.split("@")[1];
+     endpoint  = await getEndpointService(param);
+     endpointtmp = endpoint.endPoint;
+     await store.save("endpointNew",endpointtmp);
   }
-   return endpoints[`${endpointtmp.toUpperCase()}`];
+   return endpointtmp;
 }
 
 export async function authen(path,param){
   console.log("authen-----"+param);
-  const endpoint = await getEndpoint();
+  const endpoint = await getEndpoint(param);
   let requestURL = `${endpoint}SecurityService/${path}`;
   console.log("requestURL-----"+requestURL);
       try{
@@ -116,3 +144,4 @@ export async function post(path,param){
           return e;
       }
 }
+
