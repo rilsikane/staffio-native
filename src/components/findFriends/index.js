@@ -7,6 +7,7 @@ import Colors from '../../constants/Colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 export default class FindFriends extends React.Component {
  constructor(props){
@@ -14,6 +15,7 @@ export default class FindFriends extends React.Component {
     this.state = {isFocus:false};
   }
 render() {
+  I18n.locale = 'en';
   const props = this.props;
   return(
       <KeyboardAvoidingView behavior='padding' style={styles.workShiftContainerStyle}>
@@ -21,7 +23,7 @@ render() {
           <Row size={responsiveHeight(1.5)}>
             <Body>
               <HideWithKeyboard>
-                <Text allowFontScaling={false}style={styles.TextHeader}>Find Friends</Text>
+                <Text allowFontScaling={false}style={styles.TextHeader}>{I18n.t('FindFriends')}</Text>
               </HideWithKeyboard>
             </Body>
           </Row>
@@ -35,9 +37,9 @@ render() {
          
           <Row size={responsiveHeight(2.5)}>
             <Body>
-              <Text allowFontScaling={false}style={styles.TextStyle1}>ระบุข้อมูลของเพื่อนคุณที่ต้องการค้นหา</Text>
-              <Text allowFontScaling={false}style={styles.TextStyle2}>โดยค้นหาจาก ID, ชื่อ, นามสกุล, ชื่อเล่น, แผนก</Text>
-              <Text allowFontScaling={false}style={styles.TextStyle3}>เบอร์ติดต่อ, มือถือ, อีเมล์ และ Social Account</Text>
+              <Text allowFontScaling={false}style={styles.TextStyle1}>{I18n.t('Detail1')}</Text>
+              <Text allowFontScaling={false}style={styles.TextStyle2}>{I18n.t('Detail2')}</Text>
+              <Text allowFontScaling={false}style={styles.TextStyle3}>{I18n.t('Detail3')}</Text>
             </Body>
           </Row>
           <Row size={responsiveHeight(1.5)}>
@@ -55,7 +57,7 @@ render() {
           <Body>
             <View style={{width: x-100}}>
               <Button block style={styles.buttonStyle1} onPress={props.onPress}>
-                <Text allowFontScaling={false}style={styles.TextStyleButton}>Find Friends</Text>
+                <Text allowFontScaling={false}style={styles.TextStyleButton}>{I18n.t('FindFriends')}</Text>
                 </Button>
             </View>
           </Body>
@@ -122,3 +124,20 @@ const styles={
     borderColor:'#dcdcdc'
   },
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    FindFriends: 'Find Friends',
+    Detail1:'Specify information you want to find friends.',
+    Detail2:'Search by ID, name, last name, nickname, department.',
+    Detail3:'Phone number, e-mail and Social Account',
+  },
+  th: {
+    FindFriends: 'ค้นหาเพื่อน',
+    Detail1:'ระบุข้อมูลของเพื่อนคุณที่ต้องการค้นหา',
+    Detail2:'โดยค้นหาจาก ID, ชื่อ, นามสกุล, ชื่อเล่น, แผนก',
+    Detail3:'เบอร์ติดต่อ, มือถือ, อีเมล์ และ Social Account',
+  },
+};

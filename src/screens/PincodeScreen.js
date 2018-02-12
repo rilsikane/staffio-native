@@ -4,6 +4,8 @@ import PincodePress from '../components/pincode/PincodePress';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { NavigationActions } from'react-navigation';
+import I18n from 'react-native-i18n';
+
 @inject('userStore')
 @observer
 export default class PincodeScreen extends Component {
@@ -31,9 +33,20 @@ export default class PincodeScreen extends Component {
 	render() {
 		return (
                 <View style={{flex:1,backgroundColor:"#ffff"}}>
-                    <PincodePress  titileTxt="ตั้งรหัสผ่าน" onDonePress={this.onDonePress}/>
+                    <PincodePress  titileTxt={I18n.t('SetPass')} onDonePress={this.onDonePress}/>
                 </View>
 				
 		);
 	}
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	SetPass: 'Set password'
+  },
+  th: {
+	SetPass: 'ตั้งรหัสผ่าน'
+  },
+};

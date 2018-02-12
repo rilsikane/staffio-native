@@ -11,6 +11,9 @@ import DeviceInfo from 'react-native-device-info';
 import Loading from '../components/loading';
 import FCM from "react-native-fcm";
 import app  from '../stores/app';
+import I18n from 'react-native-i18n';
+
+
 @inject('userStore')
 @observer
 export default class ConfirmPincodeScreen extends Component {
@@ -59,10 +62,20 @@ export default class ConfirmPincodeScreen extends Component {
                 <View style={{flex:1,backgroundColor:"#ffff"}}>
 					{this.state.loading && <Loading visible={this.state.loading} mini={true}/>}
                     {!this.state.loading && <PincodePress pincode={this.props.userStore.pincode} reset={this.reset} 
-					navigation={this.props.navigator} isConfirm={true} titileTxt="ยืนยันรหัสผ่าน" 
+					navigation={this.props.navigator} isConfirm={true} titileTxt={I18n.t('SetPass')} 
 					onDonePress={this.onDonePress}/>}
                 </View>
 				
 		);
 	}
 }
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	SetPass: 'Confirm Password'
+  },
+  th: {
+	SetPass: 'ยืนยันรหัสผ่าน'
+  },
+};

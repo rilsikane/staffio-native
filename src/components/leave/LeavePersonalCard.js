@@ -13,9 +13,9 @@ export default class LeavePersonalCard extends React.Component {
   openDetail(){
     this.props.openDetail(this.props.info);
   }
-  
-  
+ 
   render() {
+    // I18n.locale = 'th'    
     return (
         this.props.info.total && 
         (
@@ -43,7 +43,7 @@ export default class LeavePersonalCard extends React.Component {
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
                             {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Status')}</Text>)}   
-                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8)}}>รอพิจรณา</Text>)}                         
+                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8)}}>{I18n.t('Waiting')}</Text>)}                         
                         </View>
                     </Body>
                 </CardItem>
@@ -68,13 +68,15 @@ I18n.translations = {
     Day: 'Day(s)',
     Since: 'Since',
     To: 'To',
-    Status: 'Status'
+    Status: 'Status',
+    Waiting: 'Wait consider'
   },
   th: {
     TransactionDate: 'วันที่ทำรายการ',
     Day: 'วัน',
     Since: 'ตั้งแต่',
     To: 'ถึง',
-    Status: 'สถานะรายการ'
+    Status: 'สถานะรายการ',
+    Waiting: 'รอพิจารณา'
   },
 };

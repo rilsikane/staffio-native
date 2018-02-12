@@ -2,7 +2,10 @@ import React from 'react';
 import {View,Text} from 'react-native';
 import {Container,Card,CardItem,Grid,Row,Col,ScrollableTab,Thumbnail,Tabs,Tab,Body} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import I18n from 'react-native-i18n';
+
 const BodyStatus = (props) =>{
+  I18n.locale = 'en';  
   return(
 
           <Grid>
@@ -10,12 +13,12 @@ const BodyStatus = (props) =>{
               <Col size={80}>
                 <View style={styles.ViewStyle}>
                   <Icon name="user" size={20}/>
-                  <Text allowFontScaling={false}style={{marginLeft:5,fontFamily: 'Kanit'}}> พนักงานที่รับผิดชอบ</Text>
+                  <Text allowFontScaling={false}style={{marginLeft:5,fontFamily: 'Kanit'}}>{I18n.t('DeptTime')}</Text>
                 </View>
               </Col>
               <Col size={20} >
                 <View style={styles.ViewStyle}>
-                  <Text allowFontScaling={false}style={styles.TextStyle4}>View All</Text>
+                  <Text allowFontScaling={false}style={styles.TextStyle4}>{I18n.t('ViewAll')}</Text>
                   <Icon style={styles.IconStyle1} name="angle-right" size={20}/>
                 </View>
               </Col>
@@ -222,5 +225,18 @@ const styles ={
     textAlign: 'center',
     fontFamily: 'Kanit'
   }
+};
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    DeptTime: 'Responsible staff',
+    ViewAll: 'View All',
+    
+  },
+  th: {
+    DeptTime: 'พนักงานที่รับผิดชอบ',
+    ViewAll: 'ดูทั้งหมด',
+  },
 };
 export default BodyStatus;

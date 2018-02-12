@@ -6,6 +6,8 @@ import { ScrollView } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
 import CardProgress from './cardprogress';
+import I18n from 'react-native-i18n';
+
 export default class Progress extends React.Component {
     constructor(props) {
         super(props);
@@ -15,17 +17,18 @@ export default class Progress extends React.Component {
         
     }
     render() {
+        I18n.locale = 'en';        
         return (
             <ScrollView>
             <Body>
                  <CardItem style={{ backgroundColor: '#FFCCFF', height: 30 }}>
                         <CardItem style={{ backgroundColor: '#FFCCFF', height: 30 }} >
                             <Icon name='calendar' />
-                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>การลงเวลาเข้างาน</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>{I18n.t('TimeWork')}</Text>
                         </CardItem>
                         <CardItem style={{ backgroundColor: '#FFCCFF' }} >
                             <Icon name='refresh' />
-                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>ดึงข้อมูล </Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit' }}>{I18n.t('LoadData')} </Text>
                             <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit',color : 'orange' }}>: 21 นาทีที่แล้ว </Text>
                         </CardItem>
                     </CardItem>
@@ -63,3 +66,15 @@ export default class Progress extends React.Component {
 
 }
 
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    TimeWork: 'Enter time',
+    LoadData: 'Download',
+  },
+  th: {
+    TimeWork: 'การลงเวลาเข้างาน',
+    LoadData: 'ดึงข้อมูล',
+  },
+};

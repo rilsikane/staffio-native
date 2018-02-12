@@ -23,6 +23,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import {convertByFormat} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
+import I18n from 'react-native-i18n';
 
 @inject('leaveStore')
 @observer
@@ -139,14 +140,14 @@ export default class PersonalStatScreen extends React.Component {
       
       <Container style={{backgroundColor: '#ffe9d4'}}>
          
-          <CardHeader title={'สถิติการลา'}/>
+          <CardHeader title={`${I18n.t('Stat')}`}/>
         
             {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
             </View> */}
             <PTRView onRefresh={this._refresh}>  
-              {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard title={'ประวัติการลา'} date={''} data={this.state.leaveBalances}/></View>)
+              {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>)}
               {!this.state.loading  && this.renderList()}
           </PTRView>
@@ -156,4 +157,15 @@ export default class PersonalStatScreen extends React.Component {
 
 }
 
+I18n.fallbacks = true;
 
+I18n.translations = {
+  en: {
+	  Stat: 'Statistics of leave',
+    History: 'History of leave'
+  },
+  th: {
+	  Stat: 'สถิติการลา',
+    History: 'ประวัติการลา'
+  },
+};

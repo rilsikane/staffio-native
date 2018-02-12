@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {em} from '../../constants/Layout';
 import {convertDate,convertByFormat} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 function getShiftTime(tmpDate){
   if(tmpDate && tmpDate!="-"){
@@ -16,7 +17,7 @@ function getShiftCard(shiftTime){
   if(shiftTime && shiftTime!="-"){
     return (<Text allowFontScaling={false}style={styles.TextColor2}> {getShiftTime(shiftTime)} </Text>);
   }else{
-    return (<Text allowFontScaling={false}style={styles.TextColor3}> ไม่ได้ลงเวลา </Text>);
+    return (<Text allowFontScaling={false}style={styles.TextColor3}>` ${I18n.t('Not')} `</Text>);
   }
 }
 function renderFormStatus(status){
@@ -26,17 +27,17 @@ function renderFormStatus(status){
     case "LT" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>สาย</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Late')}</Text>
                   </View>)
     case "EL" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>กลับก่อน</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Back')}</Text>
                   </View>)
     case "AB" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>ขาด</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Absence')}</Text>
                   </View>)
     
  }
@@ -52,6 +53,7 @@ function changcolorborder(flagin,flagout) {
 
 const TimeInOut =(shift) => {
 
+  I18n.locale = 'en';
   
   return(
 
@@ -281,4 +283,23 @@ const styles={
   }
   
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    History: 'History',
+    Month: 'Month',
+    Late: 'Late',
+    Back: 'Back before time',
+    Absence: 'absence',  
+  },
+  th: {
+    History: 'ประวัติการเข้างาน',
+    Month: 'ช่วงเดือน',
+    Late: 'สาย',
+    Back: 'กลับก่อน',
+    Absence: 'ขาด',  
+  },
+};
 export default TimeInOut;

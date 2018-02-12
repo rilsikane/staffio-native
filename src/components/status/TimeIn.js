@@ -3,28 +3,29 @@ import {Text,View,TouchableOpacity,Modal} from 'react-native';
 import {Grid,Row,Col,Body} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 function renderFormStatus(status){
 switch(status){
    case "NM" :
     return (<View style={styles.fromNormal}>
                     <Text allowFontScaling={false}style={[styles.fromStatus1]}>•</Text>
-                    <Text allowFontScaling={false}style={[styles.fromStatus2,,{color:"#000"}]}>ปกติ</Text>
+                    <Text allowFontScaling={false}style={[styles.fromStatus2,,{color:"#000"}]}>{I18n.t('Normal')}</Text>
                   </View>)
     case "LT" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>สาย</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Late')}</Text>
                   </View>)
     case "EL" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>กลับก่อน</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Back')}</Text>
                   </View>)
     case "AB" :
     return (<View style={styles.fromStatus}>
                     <Text allowFontScaling={false}style={styles.fromStatus1}>•</Text>
-                    <Text allowFontScaling={false}style={styles.fromStatus2}>ขาด</Text>
+                    <Text allowFontScaling={false}style={styles.fromStatus2}>{I18n.t('Missing')}</Text>
                   </View>)
     
  }
@@ -170,4 +171,22 @@ const styles={
 
   },
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	  Normal: 'Normal',
+    Late: 'Late',
+    Back: 'Back before time',
+    Missing: 'Missing'
+  },
+  th: {
+	  Normal: 'ปกติ',
+    Late: 'สาย',
+    Back: 'กลับก่อน',
+    Missing: 'ขาด'
+  },
+};
+
 export default TimeIn;

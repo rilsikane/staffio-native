@@ -3,12 +3,14 @@ import {View,Text,Image,TouchableOpacity} from 'react-native';
 import {Grid,Row,Col,Body,Button,Badge,CardItem} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 import {em} from '../../constants/Layout' 
 
 const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
   console.log(user);
   const year = new Date().getFullYear()+543;
+  I18n.locale = 'en';  
   return(
 
         <Grid >
@@ -70,7 +72,7 @@ const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
                   <View style={styles.circle2}>    
                   <View style={styles.circle}>
                   <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_ab}</Text>
-                  <Text allowFontScaling={false}style={styles.TextStyle8}>ขาด</Text>
+                  <Text allowFontScaling={false}style={styles.TextStyle8}>{I18n.t('Absence')}</Text>
                   </View>
                   </View>
                   </View>
@@ -84,7 +86,7 @@ const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
                   <View style={styles.circle2}>    
                   <View style={styles.circle}>
                   <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_lt}</Text>
-                  <Text allowFontScaling={false}style={styles.TextStyle8}>สาย</Text>
+                  <Text allowFontScaling={false}style={styles.TextStyle8}>{I18n.t('Late')}</Text>
                   </View>
                   </View>
                   </View>
@@ -98,7 +100,7 @@ const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
                   <View style={styles.circle2}>    
                   <View style={styles.circle}>
                 <Text allowFontScaling={false}style={styles.TextStyle7}>{statusAmount.amount_el}</Text>
-                <Text allowFontScaling={false}style={styles.TextStyle8}>กลับก่อน</Text>
+                <Text allowFontScaling={false}style={styles.TextStyle8}>{I18n.t('Back')}</Text>
                 </View>
                   </View>
                   </View>
@@ -293,4 +295,18 @@ const styles={
     justifyContent: 'center'
   }
 }
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    Absence: 'Absence',
+    Late: 'Late',
+    Back: 'Back before time',
+  },
+  th: {
+    Absence: 'ขาด',
+    Late: 'สาย',
+    Back: 'กลับก่อน',
+  },
+};
 export default HeaderStatus;

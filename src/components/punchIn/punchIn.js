@@ -12,6 +12,8 @@ const IconTello = createIconSetFromFontello(fontelloConfig);
 import {convertPunch} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Bounceable from "react-native-bounceable";
+import I18n from 'react-native-i18n';
+
 class PunchIn extends React.Component {
 
   constructor(props) {
@@ -157,7 +159,7 @@ class PunchIn extends React.Component {
     if(puncIn || puncIn==""){
       return (<Text allowFontScaling={false}style={this.renderStyle(isStamp,isLate)}>{puncIn}</Text>)
     }else{
-      return (<Text allowFontScaling={false}style={styles.TextDateTimeStyleNotValid}>ไม่ได้ลงเวลา</Text>)
+      return (<Text allowFontScaling={false}style={styles.TextDateTimeStyleNotValid}>{I18n.t('EnterTime')}</Text>)
     }
   
  } 
@@ -182,7 +184,7 @@ class PunchIn extends React.Component {
     else
     return ( <Row style={{marginTop:responsiveHeight(2),flex:1,alignItems:'center',justifyContent:'center'}}>
                 <Col style={{flexDirection:"row",alignItems:"center",justifyContent:'center',flex:1}} size={100} >
-                    <Text allowFontScaling={false}style={styles.TextDateTimeHoliday}>วันนี้เป็นวันหยุด</Text>
+                    <Text allowFontScaling={false}style={styles.TextDateTimeHoliday}>{I18n.t('DayOff')}</Text>
                 </Col>
              </Row>);
  }
@@ -227,7 +229,7 @@ class PunchIn extends React.Component {
                   <Text allowFontScaling={false}note style={styles.TextTimeStyle1}>{this.state.WORK_START_TM}</Text>
                 </Row>
                 <Row>
-                  <Text allowFontScaling={false}note style={styles.TextTimeStyle2}>เวลาเข้า</Text>
+                  <Text allowFontScaling={false}note style={styles.TextTimeStyle2}>{I18n.t('TimeIn')}</Text>
                 </Row>
               </Col>
               <Col size={40}>
@@ -235,7 +237,7 @@ class PunchIn extends React.Component {
                   <Text allowFontScaling={false}note style={styles.TextTimeStyle3}>{this.state.WORK_END_TM}</Text>
                 </Row>
                 <Row>
-                  <Text allowFontScaling={false}note style={styles.TextTimeStyle4}>เวลาออก</Text>
+                  <Text allowFontScaling={false}note style={styles.TextTimeStyle4}>{I18n.t('TimeOut')}</Text>
                 </Row>
               </Col>
               <Col size={20}>
@@ -252,7 +254,7 @@ class PunchIn extends React.Component {
           <Body >
             <View style={{flexDirection: 'row'}}>
               <View style={{marginRight:20}}>
-                <Text allowFontScaling={false}style={styles.TextColor1}>สถานที่เข้างาน</Text>
+                <Text allowFontScaling={false}style={styles.TextColor1}>{I18n.t('PlaceWork')}</Text>
               </View>
               <View >
                   <Icon name='compass' size={20} color='#ffff'/>
@@ -267,5 +269,24 @@ class PunchIn extends React.Component {
   );
   }
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	EnterTime: 'Not enter time',
+    DayOff: 'Today is day off',
+    TimeIn: 'Time in',
+    TimeOut: 'Time out',
+	PlaceWork: 'Place work'
+  },
+  th: {
+	EnterTime: 'ไม่ได้ลงเวลา',
+    DayOff: 'วันนี้เป็นวันหยุด',
+    TimeIn: 'เวลาเข้า',
+    TimeOut: 'เวลาออก',
+	PlaceWork: 'สถานที่เข้างาน'
+  },
+};
 
 export default PunchIn;

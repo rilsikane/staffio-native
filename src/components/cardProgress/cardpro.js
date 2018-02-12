@@ -11,6 +11,8 @@ import { NavigationActions } from'react-navigation';
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';
+import I18n from 'react-native-i18n';
+
 export default class CardPro extends React.Component {
     constructor(props) {
         super(props);
@@ -61,6 +63,7 @@ export default class CardPro extends React.Component {
         return  parseInt(percent) 
     }
     render() {
+        I18n.locale = 'en';        
         return (
 
             <View>
@@ -91,7 +94,7 @@ export default class CardPro extends React.Component {
                             <CardItem style={{ height: responsiveHeight(0.1) }}>
                                 <Icon name='person' />
                                 <Text style={styles.Text4}>{this.props.data.empStatus} / {this.props.data.empAmount}   </Text>
-                                <Text style={styles.Text4}>พนักงานที่ลงเวลา</Text>
+                                <Text style={styles.Text4}>{I18n.t('DeptTime')}</Text>
                             </CardItem>
                         </Body>
                     </CardItem>
@@ -150,3 +153,14 @@ const styles = ({
         justifyContent: 'center'
     }
 });
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    DeptTime: 'Staff enter time',
+  },
+  th: {
+    DeptTime: 'พนักงานที่ลงเวลา',
+  },
+};

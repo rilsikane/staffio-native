@@ -12,6 +12,8 @@ import Overview from'../../screens/Overview';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../../assets/fonts/config.json';
+import I18n from 'react-native-i18n';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 export default class CardProgress extends React.Component {
@@ -67,6 +69,7 @@ export default class CardProgress extends React.Component {
         return  parseInt(percent) 
     }
     render() {
+        I18n.locale = 'en';        
         return (
 
             <View style={{flex:1}}>
@@ -88,7 +91,7 @@ export default class CardProgress extends React.Component {
                         <Body style={{ justifyContent: 'center' }}>
                             <Text style={styles.Text1}>    {this.props.isProj ? this.props.data.projectName : this.props.data.orgName}</Text>
                             {this.props.isProj && (<CardItem style={{paddingTop:6,backgroundColor:'transparent'}}>
-                                <Text style={styles.Text2}>สถานที่เข้างาน </Text>
+                                <Text style={styles.Text2}>{I18n.t('PlaceWork')}</Text>
                                 <IconTello  name="hhmm-15" style={{fontSize : responsiveFontSize(1.6),color:"#ffa83e"}}>
                                 </IconTello>
                                 <Text style={styles.Text3}> {this.props.data.branchName}</Text>
@@ -96,7 +99,7 @@ export default class CardProgress extends React.Component {
                             <CardItem style={this.props.isProj ? { height: responsiveHeight(0.1) ,paddingTop:6} :{ height: responsiveHeight(0.1) ,paddingTop:20}}>
                                 <Icon name='user' style={styles.Text1}/>
                                 <Text style={styles.Text4}>{this.props.data.empStatus} / {this.props.data.empAmount}   </Text>
-                                <Text style={styles.Text5}>พนักงานที่ลงเวลา</Text>
+                                <Text style={styles.Text5}>{I18n.t('DeptTime')}</Text>
                             </CardItem>
                         </Body>
                     </CardItem>
@@ -185,3 +188,15 @@ const styles = ({
         justifyContent:"center"
     }
 });
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    PlaceWork: 'Place of attendance',
+    DeptTime:  'Staff enter time    ',
+  },
+  th: {
+    PlaceWork: 'สถานที่เข้างาน',
+    DeptTime:  'พนักงานที่ลงเวลา',
+  },
+};

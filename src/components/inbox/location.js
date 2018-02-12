@@ -13,6 +13,7 @@ import {Content,Tabs,Tab,TabHeading} from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CardPunchInfo from '../cardPunchInfo'
 import CustomMultiPicker from "react-native-multiple-select-list";
+import I18n from 'react-native-i18n';
 
 
 @inject('punchStore')
@@ -34,14 +35,14 @@ export default class Location extends React.Component {
   }
 
   render() {
-   
+    I18n.locale = 'en';    
     return (
        <View style={{flex:1}}>
            <CustomMultiPicker
             options={this.props.locations}
             search={true} // should show search bar?
             multiple={true} //
-            placeholder={"ค้นหาสถานที่"}
+            placeholder={`${I18n.t('location')}`}
             placeholderTextColor={'#757575'}
             callback={this.onSelect} // callback, array of selected items
             rowBackgroundColor={"#eee"}
@@ -61,3 +62,13 @@ export default class Location extends React.Component {
 const styles = StyleSheet.create({
   
 });
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    location:'Search Locations'
+  },
+  th: {
+    location:'ค้นหาสถานที่'
+  },
+};

@@ -12,6 +12,8 @@ import Overview from'../../screens/Overview';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../../assets/fonts/config.json';
+import I18n from 'react-native-i18n';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 export default class CardProgress extends React.Component {
@@ -19,16 +21,14 @@ export default class CardProgress extends React.Component {
         super(props);
     }
 
-
-
-   
     render() {
+        I18n.locale = 'en';
         return (
 
             <View style={{flex:1}}>
                     <CardItem style={styles.cardContainer}>
                         <Body style={{ justifyContent: 'center',alignItems:'center'}}>
-                            <Text style={styles.Text1}>ไม่มีรายการ</Text>
+                            <Text style={styles.Text1}>{I18n.t('NoItems')}</Text>
                         </Body>
                     </CardItem>
             </View>
@@ -54,3 +54,14 @@ const styles = ({
         justifyContent:"center"
     }
 });
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    NoItems:'No items',
+  },
+  th: {
+    NoItems:'ไม่มีรายการ',
+  },
+};

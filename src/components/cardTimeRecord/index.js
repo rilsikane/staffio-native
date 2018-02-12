@@ -7,6 +7,7 @@ import {em,x} from '../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {getmonth,getyear} from '../../utils/staffioUtils';
 //import ProgressCircle from 'react-native-progress-circle'
+import I18n from 'react-native-i18n';
 
 export default class CardTimeRecord extends React.Component {
     constructor(props){
@@ -19,12 +20,13 @@ export default class CardTimeRecord extends React.Component {
       this.props.gotoInbox(status);
     }
     render() {
+      I18n.locale = 'en';      
         const {amount_ab,amount_lt,amount_el} = this.props.record;
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
-                    <Text allowFontScaling={false}style={styles.titleText}>ประวัติการลงเวลา</Text>
-                    <Text allowFontScaling={false}style={styles.noteText}>  (ช่วงเดือน</Text>
+                    <Text allowFontScaling={false}style={styles.titleText}>{I18n.t('History')}</Text>
+                    <Text allowFontScaling={false}style={styles.noteText}>{`  (${I18n.t('Month')}`}</Text>
                     <Text allowFontScaling={false}style={styles.noteText}> {getmonth()}</Text>
                     <Text allowFontScaling={false}style={styles.noteText}> {getyear()} )</Text>
                     </CardItem>
@@ -35,7 +37,7 @@ export default class CardTimeRecord extends React.Component {
                       <View style={styles.circle2}>    
                         <View style={styles.circle}>
                             <Text allowFontScaling={false}style={styles.noteText2}>{amount_ab||0}</Text>
-                            <Text allowFontScaling={false}style={styles.litelText}>ขาด  </Text>  
+                            <Text allowFontScaling={false}style={styles.litelText}>{`${I18n.t('Absence')}  `}</Text>  
                         </View>
                         </View>
                         </View>
@@ -48,7 +50,7 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}> 
                       <View style={styles.circle}>                                         
                           <Text allowFontScaling={false}style={styles.noteText2} >{amount_lt||0}</Text>
-                          <Text allowFontScaling={false}style={styles.litelText}>สาย  </Text>                  
+                          <Text allowFontScaling={false}style={styles.litelText}>{`${I18n.t('Late')}  `}</Text>                  
                       </View>
                       </View>
                       </View>
@@ -60,7 +62,7 @@ export default class CardTimeRecord extends React.Component {
                     <View style={styles.circle2}>
                       <View  style={styles.circle}>          
                           <Text allowFontScaling={false}style={styles.noteText2}>{amount_el||0}</Text>
-                          <Text allowFontScaling={false}style={styles.litelText}>กลับก่อน  </Text>                      
+                          <Text allowFontScaling={false}style={styles.litelText}>{`${I18n.t('Back')}  `}</Text>                      
                       </View>
                       </View>
                       </View>
@@ -207,3 +209,22 @@ cardItem:{
   alignItems: 'center'
 },
 })
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    History: 'History enter time',
+    Month: 'Month',
+    Absence: 'Absence',
+    Late: 'Late',
+    Back: 'Back before time',
+  },
+  th: {
+    History: 'ประวัติการลงเวลา',
+    Month: 'ช่วงเดือน',
+    Absence: 'ขาด',
+    Late: 'สาย',
+    Back: 'กลับก่อน',
+  },
+};

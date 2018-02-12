@@ -5,15 +5,17 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import Dimensions from 'Dimensions';
 import {convertByFormat} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 export default class CardHoliday extends React.Component {
     render() {
+        I18n.locale = 'en';        
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                 <CardItem style={[styles.cardItemContainer,{paddingTop:5,paddingBottom:5}]}>
                     <Left>
                         <Body>
-                        <Text allowFontScaling={false}style={styles.titleText}>วันหยุดของคุณตั้งแต่วันที่</Text>
+                        <Text allowFontScaling={false}style={styles.titleText}>{I18n.t('DateHoliday')}</Text>
                         {/*<Text allowFontScaling={false}style={styles.weekText} note>สุดสัปด</Text>*/}
                         <View style={styles.buttonTxt}>
                             <Icon style={{backgroundColor:"transparent",color:"#ffff",fontSize:responsiveFontSize(2)}} name='calendar' />
@@ -22,9 +24,9 @@ export default class CardHoliday extends React.Component {
                         </Body>
                     </Left>                            
                     <Right style={{flexDirection:"row",justifyContent:"flex-end",alignItems:"center"}}>
-                        <Text allowFontScaling={false}style={styles.totalText}>รวม  </Text>
+                        <Text allowFontScaling={false}style={styles.totalText}>{`${I18n.t('Total')}  `}</Text>
                         <Text allowFontScaling={false}style={styles.numberText}>{this.props.holiday.sum_holiday}</Text>
-                        <Text allowFontScaling={false}style={styles.totalText}> วัน</Text>
+                        <Text allowFontScaling={false}style={styles.totalText}>{` ${I18n.t('Day')}`}</Text>
                     </Right>
                 </CardItem>
             </Card>
@@ -96,3 +98,17 @@ const styles = StyleSheet.create({
       backgroundColor:'transparent',
   }
 })
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    DateHoliday:'Your holiday since',
+    Total:'Total',
+    Day:'Day(s)', 
+  },
+  th: {
+    DateHoliday:'วันหยุดของคุณตั้งแต่วันที่',
+    Total:'รวม',
+    Day:'วัน', 
+  },
+};
