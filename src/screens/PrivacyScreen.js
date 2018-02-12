@@ -11,6 +11,7 @@ import {
   import {Card,CardItem,Thumbnail,Button}from 'native-base'
   import store from 'react-native-simple-store';
   import app  from '../stores/app';
+  import I18n from 'react-native-i18n';
 
   export default class Provacypolicy extends React.Component {
     constructor(props) {
@@ -27,11 +28,11 @@ import {
     
       logOutPress(){
         Alert.alert(
-           'คำเตือน',
-           'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+          `${I18n.t('Warning')}`,
+          `${I18n.t('Message')}`,
            [
-             {text: 'ยืนยัน', onPress: () => this.logOut()},
-             {text: 'ยกเลิก'},
+             {text: `${I18n.t('Confirm')}`, onPress: () => this.logOut()},
+             {text: `${I18n.t('Cancel')}`},
            ],
            { cancelable: false }
          )
@@ -108,3 +109,20 @@ All transactions are processed through a gateway provider and are not stored or 
         );
     }
 }
+
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	Warning: 'Warning',
+	Message: 'Do you want to confirm sign out?',
+	Confirm: 'Set password',
+	Cancel: 'Set password'
+  },
+  th: {
+	Warning: 'คำเตือน',
+	Message: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+	Confirm: 'ยืนยัน',
+	Cancel: 'ยกเลิก'
+  },
+};

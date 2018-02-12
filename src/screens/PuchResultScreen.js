@@ -19,6 +19,7 @@ import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import {post} from '../api';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 export default class PunchResultScreen extends React.Component {
   constructor(props){
@@ -46,29 +47,29 @@ export default class PunchResultScreen extends React.Component {
       if(response.Success){
           this.setState({isLoading:false});
             Alert.alert(
-              'คอมเมนท์',
-              'คอมเมนท์เรียบร้อย',
+              `${I18n.t('Comment')}`,
+              `${I18n.t('CommentSuccess')}`,
               [
-                {text: 'ตกลง', onPress: () => this.complete()},
+                {text: `${I18n.t('OK')}`, onPress: () => this.complete()},
               ],
               { cancelable: false }
             )
       }else{
         Alert.alert(
-              'เกิดข้อผิดพลาด',
+              `${I18n.t('Mistake')}`,
               response.Msg,
               [
-                {text: 'ตกลง'},
+                {text: `${I18n.t('OK')}`},
               ],
               { cancelable: false }
             )
       }
     }catch(ex){
        Alert.alert(
-        'เกิดข้อผิดพลาด',
+        `${I18n.t('Mistake')}`,
         response.Msg,
         [
-          {text: 'ตกลง'},
+          {text: `${I18n.t('OK')}`},
         ],
         { cancelable: false }
       )
@@ -122,3 +123,19 @@ const styles={
   },
 }
 
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+	Comment: 'Comment',
+	CommentSuccess: 'Commented successfully',
+	OK: 'OK',
+	Mistake: 'Mistake'
+  },
+  th: {
+	Comment: 'คอมเมนท์',
+	CommentSuccess: 'คอมเมนท์เรียบร้อย',
+	OK: 'ตกลง',
+	Mistake: 'เกิดข้อผิดพลาด'
+  },
+};
