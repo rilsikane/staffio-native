@@ -8,7 +8,7 @@ import store from 'react-native-simple-store';
 import app  from '../stores/app';
 import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/homeBG.png';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 let menus = [
     {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true},
@@ -72,6 +72,7 @@ export default class MenuScreen extends React.Component {
     logOut(){
         this.setState({loading:true});
         store.delete("USER");
+        store.delete("endpointNew");
         this.app.appInitialized();
     }
 
