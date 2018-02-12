@@ -18,7 +18,7 @@ import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {convertByFormat} from '../utils/staffioUtils';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 @inject('leaveStore')
 @observer
@@ -57,7 +57,6 @@ export default class LeaveDetailScreen extends React.Component {
   }
 
   render() {
-    I18n.locale = 'en';    
     return (
       <Container style={{backgroundColor: '#ffe9d4'}}>
         <CardHeader title={`${I18n.t('LeaveInformation')}`} goBack={this.goBack}/>
@@ -77,14 +76,5 @@ export default class LeaveDetailScreen extends React.Component {
   }
 
 }
-I18n.fallbacks = true;
 
-I18n.translations = {
-  en: {
-    LeaveInformation: 'Leave information'
-  },
-  th: {
-    LeaveInformation: 'ข้อมูลการลา'
-  },
-};
 

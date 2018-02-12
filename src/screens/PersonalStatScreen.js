@@ -23,7 +23,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import {convertByFormat} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 @inject('leaveStore')
 @observer
@@ -156,16 +156,3 @@ export default class PersonalStatScreen extends React.Component {
   }
 
 }
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	  Stat: 'Statistics of leave',
-    History: 'History of leave'
-  },
-  th: {
-	  Stat: 'สถิติการลา',
-    History: 'ประวัติการลา'
-  },
-};

@@ -18,9 +18,7 @@ import store from 'react-native-simple-store';
 import {post} from '../api';
 import {convertDate} from '../utils/staffioUtils';
 import app  from '../stores/app';
-import I18n from 'react-native-i18n';
-
-
+import I18n from '../utils/i18n';
 
 @inject('punchStore')
 @observer
@@ -221,7 +219,6 @@ export default class ConfirmPunchScreen extends React.Component {
 
   
   render() {
-    I18n.locale = 'en';    
     return (
        <View style={{flex:1}}>
           {this.loading()}
@@ -233,33 +230,6 @@ export default class ConfirmPunchScreen extends React.Component {
  }
 
 }
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    Alert:'Alert',
-    NotTurnOnLocation:'You did not turn on location. System will identify that you save time outside',
-    ok:'Ok',
-    Warning:'Warning',
-    EnterBefore:'You enter time before finish working you need to enter time. Yes or no?',
-    Confirm:'Confirm',
-    Cancel:'Cancel',
-    EnterTime:'Enter time',
-    EnterTimess:'Enter time success',
-  },
-  th: {
-    Alert:'แจ้งเตือน',
-    NotTurnOnLocation:'คุณไม่ได้ทำการเปิด Location ระบบจะทำการระบุว่าคุณได้บันทึกเวลานอกสถานที่',
-    ok:'ตกลง',
-    Warning:'คำเตือน',
-    EnterBefore:'คุณลงเวลาออกงานก่อนเวลา คุณต้องการยืนยันที่จะลงเวลา ใช่หรือไม่ ?',
-    Confirm:'ยืนยัน',
-    Cancel:'ยกเลิก',
-    EnterTime:'ลงเวลา',
-    EnterTimess:'ลงเวลาสำเร็จ',
-  },
-};
 
 
 

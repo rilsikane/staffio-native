@@ -19,7 +19,7 @@ import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import {post} from '../api';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 export default class PunchResultScreen extends React.Component {
   constructor(props){
@@ -122,20 +122,3 @@ const styles={
     backgroundColor:'transparent'
   },
 }
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	Comment: 'Comment',
-	CommentSuccess: 'Commented successfully',
-	OK: 'OK',
-	Mistake: 'Mistake'
-  },
-  th: {
-	Comment: 'คอมเมนท์',
-	CommentSuccess: 'คอมเมนท์เรียบร้อย',
-	OK: 'ตกลง',
-	Mistake: 'เกิดข้อผิดพลาด'
-  },
-};

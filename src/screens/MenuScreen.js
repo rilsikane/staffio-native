@@ -8,7 +8,7 @@ import store from 'react-native-simple-store';
 import app  from '../stores/app';
 import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/homeBG.png';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 let menus = [
     {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true},
@@ -76,7 +76,6 @@ export default class MenuScreen extends React.Component {
     }
 
     render() {
-        I18n.locale = 'en';
     return (
          <Wallpaper bgSrc={bgSrc} style={{width:responsiveWidth(50)}}>
         <Container style={{flex:1,paddingTop:10}}>
@@ -215,34 +214,3 @@ const styles = {
     }
 
   };
-
-//   I18n.fallbacks = true;
-  
-//   I18n.translations = {
-//     en: {
-//         HomeS: 'Home',
-//         Inbox: 'Inbox',
-//         StatLeave: 'Leave Stat',
-//         Logout: 'Logout',
-//         FindFriend: 'Find Friends',
-//         Dashboard: 'Dashboard',
-//         ApproveLeave: 'Approve Leave',
-//         Warning: 'Warning',
-//         Confirm: 'comfirm',
-//         Cancel: 'cancel',
-//         WarningDetail: 'You confirm to logout'
-//     },
-//     th: {
-//       HomeS: 'ลงเวลาเข้างาน',
-//       Inbox: 'กล่องข้อความ',
-//       StatLeave: 'สถิติการลา',
-//       Logout: 'ออกจากระบบ',
-//       FindFriend: 'ค้นหาเพื่อน',
-//       Dashboard: 'Dashboard เข้างาน',
-//       ApproveLeave: 'พิจารณาการลา',
-//       Warning: 'คำเตือน',
-//       Confirm: 'ยืนยัน',
-//       Cancel: 'ยกเลิก',
-//       WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
-//     },
-//   };

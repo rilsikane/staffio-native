@@ -26,8 +26,7 @@ import Provacypolicy from '../components/privacypolicy';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CardHeader from '../components/cardHeader';
 import { observer, inject } from 'mobx-react';
-import I18n from 'react-native-i18n';
-
+import I18n from '../utils/i18n';
 
 // const customData = require('../api/shiftData.json');
 // const customData2 = require('../api/shiftHistory.json');
@@ -112,7 +111,6 @@ class HomeScreen extends React.Component {
   
   
   render() {
-    I18n.locale = 'en';        
     return (
     <View style={styles.container}>
       <CardHeader />
@@ -360,87 +358,5 @@ const styles = StyleSheet.create({
   }
 });
 
-I18n.translations = {
-  en: {
-    January:'January',
-    February:'February',
-    March:'March',
-    April:'April',
-    May:'May',
-    June:'June',
-    July:'July',
-    August:'August',
-    September:'September',
-    October:'October',
-    November:'November',
-    December:'December',
-    Jan:'Jan',
-    Feb:'Feb',
-    Mar:'Mar',
-    Apr:'Apr',
-    May:'May',
-    Jun:'Jun',
-    Jul:'Jul',
-    Aug:'Aug',
-    Sep:'Sep',
-    Oct:'Oct',
-    Nov:'Nov',
-    Dec:'Dec',
-    Sunday:'Sunday',
-    Monday:'Monday',
-    Tuesday:'Tuesday',
-    Wednesday:'Wednesday',
-    Thursday:'Thursday',
-    Friday:'Friday',
-    Saturday:'Saturday',
-    Sun:'Sun',
-    Mon:'Mon',
-    Tue:'Tue',
-    Wed:'Wed',
-    Thu:'Thu',
-    Fri:'Fri',
-    Sat:'Sat',
-  },
-  th: {
-    January:'มกราคม',
-    February:'กุมภาพันธ์',
-    March:'มีนาคม',
-    April:'เมษายน',
-    May:'พฤษภาคม',
-    June:'มิถุนายน',
-    July:'กรกฏาคม',
-    August:'สิงหาคม',
-    September:'กันยายน',
-    October:'ตุลาคม',
-    November:'พฤศจิกายน',
-    December:'ธันวาคม',
-    Jan:'ม.ค.',
-    Feb:'ก.พ.',
-    Mar:'มี.ค.',
-    Apr:'เม.ย.',
-    May:'พ.ค.',
-    Jun:'มิ.ย.',
-    Jul:'ก.ค.',
-    Aug:'ส.ค.',
-    Sep:'ก.ย.',
-    Oct:'ต.ค.',
-    Nov:'พ.ย.',
-    Dec:'ธ.ค.',
-    Sunday:'อาทิตย์',
-    Monday:'จันทร์',
-    Tuesday:'อังคาร',
-    Wednesday:'พุธ',
-    Thursday:'พฤหัสบดี',
-    Friday:'ศุกร์',
-    Saturday:'เสาร์',
-    Sun:'อา.',
-    Mon:'จ.',
-    Tue:'อ.',
-    Wed:'พ.',
-    Thu:'พฤ.',
-    Fri:'ศ.',
-    Sat:'ส.',
-  },
-};
 export default HomeScreen
 

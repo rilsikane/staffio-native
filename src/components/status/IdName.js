@@ -6,7 +6,7 @@ import Colors from '../../constants/Colors'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 const IdName = ({record}) => {
   console.log(record);
@@ -66,17 +66,5 @@ const styles={
   }
 }
 
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	  Code: 'Code',
-    Position: 'Position'
-  },
-  th: {
-	  Code: 'รหัส',
-    Position: 'ตำแหน่ง'
-  },
-};
 
 export default IdName;

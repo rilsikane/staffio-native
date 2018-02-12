@@ -12,7 +12,7 @@ import Overview from'../../screens/Overview';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../../assets/fonts/config.json';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
@@ -22,7 +22,6 @@ export default class CardProgress extends React.Component {
     }
 
     render() {
-        I18n.locale = 'en';
         return (
 
             <View style={{flex:1}}>
@@ -54,14 +53,3 @@ const styles = ({
         justifyContent:"center"
     }
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    NoItems:'No items',
-  },
-  th: {
-    NoItems:'ไม่มีรายการ',
-  },
-};

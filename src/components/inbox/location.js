@@ -13,8 +13,7 @@ import {Content,Tabs,Tab,TabHeading} from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CardPunchInfo from '../cardPunchInfo'
 import CustomMultiPicker from "react-native-multiple-select-list";
-import I18n from 'react-native-i18n';
-
+import I18n from '../../utils/i18n';
 
 @inject('punchStore')
 @observer
@@ -35,7 +34,6 @@ export default class Location extends React.Component {
   }
 
   render() {
-    I18n.locale = 'en';    
     return (
        <View style={{flex:1}}>
            <CustomMultiPicker
@@ -62,13 +60,3 @@ export default class Location extends React.Component {
 const styles = StyleSheet.create({
   
 });
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    location:'Search Locations'
-  },
-  th: {
-    location:'ค้นหาสถานที่'
-  },
-};

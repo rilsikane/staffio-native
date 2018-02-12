@@ -3,7 +3,7 @@ import { StyleSheet ,View} from 'react-native';
 import { Container, Card, CardItem, Text, Body } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 export default class DetailLeave extends React.Component {
 
@@ -48,28 +48,3 @@ export default class DetailLeave extends React.Component {
 const styles = StyleSheet.create({
    
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    Type: 'Type of leave',
-    Cause: 'Cause',
-    Specify: 'Not specify',
-    Since: 'Since',
-    To: 'To',
-    Day: 'Day',
-    Balance: 'Balance',
-    From: 'From'
-  },
-  th: {
-    Type: 'ประเภทการลา',
-    Cause: 'สาเหตุ',
-    Specify: 'ไม่ระบุ',
-    Since: 'ตั้งแต่',
-    To: 'ถึง',
-    Day: 'วัน',
-    Balance: 'วันลาคงเหลือ',
-    From: 'จาก'
-  },
-};

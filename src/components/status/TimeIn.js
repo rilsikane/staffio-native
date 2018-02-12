@@ -3,7 +3,7 @@ import {Text,View,TouchableOpacity,Modal} from 'react-native';
 import {Grid,Row,Col,Body} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 function renderFormStatus(status){
 switch(status){
@@ -171,22 +171,5 @@ const styles={
 
   },
 }
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	  Normal: 'Normal',
-    Late: 'Late',
-    Back: 'Back before time',
-    Missing: 'Missing'
-  },
-  th: {
-	  Normal: 'ปกติ',
-    Late: 'สาย',
-    Back: 'กลับก่อน',
-    Missing: 'ขาด'
-  },
-};
 
 export default TimeIn;

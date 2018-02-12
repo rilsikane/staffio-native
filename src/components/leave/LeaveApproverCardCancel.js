@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image ,View,TouchableOpacity} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 export default class LeaveApproverCardCancel extends React.Component {
 //   constructor(props) {
@@ -64,20 +64,3 @@ export default class LeaveApproverCardCancel extends React.Component {
 const styles = StyleSheet.create({
    
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    Cancel: 'Cancel',
-    Since: 'Since',
-    To: 'To',
-    Day: 'Day'
-  },
-  th: {
-    Cancel: 'ขอยกเลิกรายการ',
-    Since: 'ตั้งแต่',
-    To: 'ถึง',
-    Day: 'วัน'
-  },
-};

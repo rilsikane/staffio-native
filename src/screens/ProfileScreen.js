@@ -21,7 +21,7 @@ import Iocon from 'react-native-vector-icons/Ionicons';
 import colors from '../constants/Colors'
 import { NavigationActions } from 'react-navigation'; 
 import app  from '../stores/app';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 class ProfileScreen extends React.Component {
   constructor(props){
@@ -230,22 +230,5 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	Warning: 'Warning',
-	Message: 'Do you want to confirm sign out?',
-	Confirm: 'Set password',
-	Cancel: 'Set password'
-  },
-  th: {
-	Warning: 'คำเตือน',
-	Message: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
-	Confirm: 'ยืนยัน',
-	Cancel: 'ยกเลิก'
-  },
-};
 
 export default withNavigationFocus(ProfileScreen, 'Profile')
