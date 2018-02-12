@@ -27,7 +27,7 @@ import Swipeable from 'react-native-swipeable';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
-import I18n from 'react-native-i18n';
+// import I18n from 'react-native-i18n';
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
@@ -299,25 +299,25 @@ const styles = StyleSheet.create({
   },
 });
 
-I18n.fallbacks = true;
+// I18n.fallbacks = true;
 
-I18n.translations = {
-  en: {
-	  ConfirmApprove: 'Confirm approval',
-    ConfirmApproveLeave: 'Confirm approval of leave',
-    Reject: 'Reject',
-    Cause: 'Cause',
-    SpecifyCause: 'Specify cause',
-    SendBack: 'Send back',
-    Consider: 'Consider leave'
-  },
-  th: {
-    ConfirmApprove: 'ยืนยันการอนุมัติ',
-    ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
-    Reject: 'ปฏิเสธรายการ',
-    Cause: 'สาเหตุ',
-    SpecifyCause: 'ระบุเหตุผล',
-    SendBack: 'ส่งคืนรายการ',
-    Consider: 'พิจารณาการลา'
-  },
-};
+// I18n.translations = {
+//   en: {
+// 	  ConfirmApprove: 'Confirm approval',
+//     ConfirmApproveLeave: 'Confirm approval of leave',
+//     Reject: 'Reject',
+//     Cause: 'Cause',
+//     SpecifyCause: 'Specify cause',
+//     SendBack: 'Send back',
+//     Consider: 'Consider leave'
+//   },
+//   th: {
+//     ConfirmApprove: 'ยืนยันการอนุมัติ',
+//     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
+//     Reject: 'ปฏิเสธรายการ',
+//     Cause: 'สาเหตุ',
+//     SpecifyCause: 'ระบุเหตุผล',
+//     SendBack: 'ส่งคืนรายการ',
+//     Consider: 'พิจารณาการลา'
+//   },
+// };

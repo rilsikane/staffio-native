@@ -12,7 +12,7 @@ const IconTello = createIconSetFromFontello(fontelloConfig);
 import {convertPunch} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Bounceable from "react-native-bounceable";
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 class PunchIn extends React.Component {
 
@@ -270,23 +270,5 @@ class PunchIn extends React.Component {
   }
 }
 
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	EnterTime: 'Not enter time',
-    DayOff: 'Today is day off',
-    TimeIn: 'Time in',
-    TimeOut: 'Time out',
-	PlaceWork: 'Place work'
-  },
-  th: {
-	EnterTime: 'ไม่ได้ลงเวลา',
-    DayOff: 'วันนี้เป็นวันหยุด',
-    TimeIn: 'เวลาเข้า',
-    TimeOut: 'เวลาออก',
-	PlaceWork: 'สถานที่เข้างาน'
-  },
-};
 
 export default PunchIn;

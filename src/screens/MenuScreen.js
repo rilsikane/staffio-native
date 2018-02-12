@@ -216,33 +216,33 @@ const styles = {
 
   };
 
-  I18n.fallbacks = true;
+//   I18n.fallbacks = true;
   
-  I18n.translations = {
-    en: {
-        HomeS: 'Home',
-        Inbox: 'Inbox',
-        StatLeave: 'Leave Stat',
-        Logout: 'Logout',
-        FindFriend: 'Find Friends',
-        Dashboard: 'Dashboard',
-        ApproveLeave: 'Approve Leave',
-        Warning: 'Warning',
-        Confirm: 'comfirm',
-        Cancel: 'cancel',
-        WarningDetail: 'You confirm to logout'
-    },
-    th: {
-      HomeS: 'ลงเวลาเข้างาน',
-      Inbox: 'กล่องข้อความ',
-      StatLeave: 'สถิติการลา',
-      Logout: 'ออกจากระบบ',
-      FindFriend: 'ค้นหาเพื่อน',
-      Dashboard: 'Dashboard เข้างาน',
-      ApproveLeave: 'พิจารณาการลา',
-      Warning: 'คำเตือน',
-      Confirm: 'ยืนยัน',
-      Cancel: 'ยกเลิก',
-      WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
-    },
-  };
+//   I18n.translations = {
+//     en: {
+//         HomeS: 'Home',
+//         Inbox: 'Inbox',
+//         StatLeave: 'Leave Stat',
+//         Logout: 'Logout',
+//         FindFriend: 'Find Friends',
+//         Dashboard: 'Dashboard',
+//         ApproveLeave: 'Approve Leave',
+//         Warning: 'Warning',
+//         Confirm: 'comfirm',
+//         Cancel: 'cancel',
+//         WarningDetail: 'You confirm to logout'
+//     },
+//     th: {
+//       HomeS: 'ลงเวลาเข้างาน',
+//       Inbox: 'กล่องข้อความ',
+//       StatLeave: 'สถิติการลา',
+//       Logout: 'ออกจากระบบ',
+//       FindFriend: 'ค้นหาเพื่อน',
+//       Dashboard: 'Dashboard เข้างาน',
+//       ApproveLeave: 'พิจารณาการลา',
+//       Warning: 'คำเตือน',
+//       Confirm: 'ยืนยัน',
+//       Cancel: 'ยกเลิก',
+//       WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+//     },
+//   };

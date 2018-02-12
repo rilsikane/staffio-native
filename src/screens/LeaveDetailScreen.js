@@ -259,33 +259,33 @@ const styles = StyleSheet.create({
   
 });
 
-I18n.fallbacks = true;
+// I18n.fallbacks = true;
 
-I18n.translations = {
-  en: {
-    ConfirmApprove: 'Confirm approval',
-    ConfirmApproveLeave: 'Confirm approval of leave',
-    Reject: 'Reject',
-    Cause: 'Cause',
-    SpecifyCause: 'Specify cause',
-    SendBack: 'Send back',
-    Approve: 'Approve',
-    ApproveSuccess: 'Approved successfully',
-    RejectSuccess: 'Rejected successfully',
-    SendBackSuccess: 'Send back successfully',
-    title: 'Leave Information'
-  },
-  th: {
-	  ConfirmApprove: 'ยืนยันการอนุมัติ',
-    ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
-    Reject: 'ปฏิเสธรายการ',
-    Cause: 'สาเหตุ',
-    SpecifyCause: 'ระบุเหตุผล',
-    SendBack: 'ส่งคืนรายการ',
-    Approve: 'อนุมัติรายการ',
-    ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
-    RejectSuccess: 'ปฏิเสธรายการเรียบร้อย',
-    SendBackSuccess: 'ส่งคืนรายการเรียบร้อย',
-    title: 'ข้อมูลการลา'
-  },
-};
+// I18n.translations = {
+//   en: {
+//     ConfirmApprove: 'Confirm approval',
+//     ConfirmApproveLeave: 'Confirm approval of leave',
+//     Reject: 'Reject',
+//     Cause: 'Cause',
+//     SpecifyCause: 'Specify cause',
+//     SendBack: 'Send back',
+//     Approve: 'Approve',
+//     ApproveSuccess: 'Approved successfully',
+//     RejectSuccess: 'Rejected successfully',
+//     SendBackSuccess: 'Send back successfully',
+//     title: 'Leave Information'
+//   },
+//   th: {
+// 	  ConfirmApprove: 'ยืนยันการอนุมัติ',
+//     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
+//     Reject: 'ปฏิเสธรายการ',
+//     Cause: 'สาเหตุ',
+//     SpecifyCause: 'ระบุเหตุผล',
+//     SendBack: 'ส่งคืนรายการ',
+//     Approve: 'อนุมัติรายการ',
+//     ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
+//     RejectSuccess: 'ปฏิเสธรายการเรียบร้อย',
+//     SendBackSuccess: 'ส่งคืนรายการเรียบร้อย',
+//     title: 'ข้อมูลการลา'
+//   },
+// };

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {em} from '../../constants/Layout';
 import {convertDate,convertByFormat} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 function getShiftTime(tmpDate){
   if(tmpDate && tmpDate!="-"){
@@ -52,9 +52,7 @@ function changcolorborder(flagin,flagout) {
 }
 
 const TimeInOut =(shift) => {
-
-  I18n.locale = 'en';
-  
+  I18n.locale = 'th';
   return(
 
       <View style={styles.ContainerStyle}>
@@ -284,22 +282,4 @@ const styles={
   
 }
 
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    History: 'History',
-    Month: 'Month',
-    Late: 'Late',
-    Back: 'Back before time',
-    Absence: 'absence',  
-  },
-  th: {
-    History: 'ประวัติการเข้างาน',
-    Month: 'ช่วงเดือน',
-    Late: 'สาย',
-    Back: 'กลับก่อน',
-    Absence: 'ขาด',  
-  },
-};
 export default TimeInOut;
