@@ -15,7 +15,7 @@ import Staff from '../components/inbox/staff'
 import SearchDate from '../components/inbox/searchDate'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../constants/Colors'
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
   export default class InqInboxCriteria extends React.Component {
     constructor(props) {
@@ -35,7 +35,6 @@ import I18n from 'react-native-i18n';
         this.props.cancelDialog();
       }
     render() {
-      I18n.locale = 'en';      
         return (
             <Container style={{paddingTop:22,flex:1,backgroundColor:Colors.backgroundColor}}>
                  <Content>
@@ -106,24 +105,3 @@ const styles = StyleSheet.create({
     backgroundColor: "blue"
   }
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    Place: 'Place',
-    Status: 'Status',
-    Date: 'Date',
-    Staff: 'Staff',
-    Search: 'Search',
-    Cancel: 'Cancel' ,
-  },
-  th: {
-    Place: 'สถานที่',
-    Status: 'สถานะ',
-    Date: 'วันที่',
-    Staff: 'พนักงาน',
-    Search: 'ค้นหา',
-    Cancel: 'ยกเลิก' ,
-  },
-};

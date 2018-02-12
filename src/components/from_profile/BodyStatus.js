@@ -2,10 +2,9 @@ import React from 'react';
 import {View,Text} from 'react-native';
 import {Container,Card,CardItem,Grid,Row,Col,ScrollableTab,Thumbnail,Tabs,Tab,Body} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 const BodyStatus = (props) =>{
-  I18n.locale = 'en';  
   return(
 
           <Grid>
@@ -226,17 +225,5 @@ const styles ={
     fontFamily: 'Kanit'
   }
 };
-I18n.fallbacks = true;
 
-I18n.translations = {
-  en: {
-    DeptTime: 'Responsible staff',
-    ViewAll: 'View All',
-    
-  },
-  th: {
-    DeptTime: 'พนักงานที่รับผิดชอบ',
-    ViewAll: 'ดูทั้งหมด',
-  },
-};
 export default BodyStatus;

@@ -11,8 +11,7 @@ import DeviceInfo from 'react-native-device-info';
 import Loading from '../components/loading';
 import FCM from "react-native-fcm";
 import app  from '../stores/app';
-import I18n from 'react-native-i18n';
-
+import I18n from '../utils/i18n';
 
 @inject('userStore')
 @observer
@@ -69,13 +68,3 @@ export default class ConfirmPincodeScreen extends Component {
 		);
 	}
 }
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-	SetPass: 'Confirm Password'
-  },
-  th: {
-	SetPass: 'ยืนยันรหัสผ่าน'
-  },
-};

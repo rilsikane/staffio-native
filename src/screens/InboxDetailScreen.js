@@ -24,7 +24,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import {post} from '../api';
 import Loading from '../components/loading';
 import store from 'react-native-simple-store';
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 @inject('punchStore')
 @observer
@@ -110,7 +110,6 @@ export default class InboxDetailScreen extends React.Component {
   }
 
   render() {
-    I18n.locale = 'en';    
     let DateToday = new Date().toDateString().split(' ');
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
@@ -173,14 +172,4 @@ const styles={
     backgroundColor:'transparent'
   },
 }
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    History: 'History'    
-  },
-  th: {
-    History: 'ประวัติ'    
-  },
-};
 

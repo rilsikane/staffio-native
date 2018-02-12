@@ -13,7 +13,7 @@ import {post} from '../api';
 import { observer, inject } from 'mobx-react';
 import Loading from '../components/loading';
 import CardHeader from '../components/cardHeader'
-import I18n from 'react-native-i18n';
+import I18n from '../utils/i18n';
 
 @inject('searchStore')
 @observer
@@ -63,7 +63,6 @@ export default class FindFriendsScreen extends React.Component {
   }
 
   render() {
-    I18n.locale = 'en';    
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
          <CardHeader title={'Find Friends'}/>
@@ -77,14 +76,4 @@ export default class FindFriendsScreen extends React.Component {
   }
 
 }
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    SearchData:'Searching Data…'
-  },
-  th: {
-    SearchData:'กำลังค้นหาข้อมูล...'
-  },
-};
 

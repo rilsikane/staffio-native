@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { observer, inject } from 'mobx-react';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 @inject('punchStore')
 @observer
@@ -32,7 +32,6 @@ export default class Staff extends React.Component {
     this.props.punchStore.staffSearch = res;
   }
   render() {
-    I18n.locale = 'en';    
     return (
        <View style={{flex:1}}>
            <CustomMultiPicker
@@ -60,13 +59,3 @@ export default class Staff extends React.Component {
 const styles = StyleSheet.create({
   
 });
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    staff:'Search Staff'
-  },
-  th: {
-    staff:'ค้นหาพนักงาน'
-  },
-};

@@ -5,11 +5,10 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import Dimensions from 'Dimensions';
 import {convertByFormat} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 export default class CardHoliday extends React.Component {
     render() {
-        I18n.locale = 'en';        
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                 <CardItem style={[styles.cardItemContainer,{paddingTop:5,paddingBottom:5}]}>
@@ -98,17 +97,3 @@ const styles = StyleSheet.create({
       backgroundColor:'transparent',
   }
 })
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    DateHoliday:'Your holiday since',
-    Total:'Total',
-    Day:'Day(s)', 
-  },
-  th: {
-    DateHoliday:'วันหยุดของคุณตั้งแต่วันที่',
-    Total:'รวม',
-    Day:'วัน', 
-  },
-};

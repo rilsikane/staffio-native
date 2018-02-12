@@ -7,7 +7,7 @@ import {em,x} from '../../constants/Layout';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {getmonth,getyear} from '../../utils/staffioUtils';
 //import ProgressCircle from 'react-native-progress-circle'
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 export default class CardTimeRecord extends React.Component {
     constructor(props){
@@ -20,7 +20,6 @@ export default class CardTimeRecord extends React.Component {
       this.props.gotoInbox(status);
     }
     render() {
-      I18n.locale = 'en';      
         const {amount_ab,amount_lt,amount_el} = this.props.record;
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
@@ -209,22 +208,3 @@ cardItem:{
   alignItems: 'center'
 },
 })
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    History: 'History enter time',
-    Month: 'Month',
-    Absence: 'Absence',
-    Late: 'Late',
-    Back: 'Back before time',
-  },
-  th: {
-    History: 'ประวัติการลงเวลา',
-    Month: 'ช่วงเดือน',
-    Absence: 'ขาด',
-    Late: 'สาย',
-    Back: 'กลับก่อน',
-  },
-};

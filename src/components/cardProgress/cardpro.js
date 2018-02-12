@@ -11,7 +11,7 @@ import { NavigationActions } from'react-navigation';
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';
-import I18n from 'react-native-i18n';
+import I18n from '../../utils/i18n';
 
 export default class CardPro extends React.Component {
     constructor(props) {
@@ -63,7 +63,6 @@ export default class CardPro extends React.Component {
         return  parseInt(percent) 
     }
     render() {
-        I18n.locale = 'en';        
         return (
 
             <View>
@@ -153,14 +152,3 @@ const styles = ({
         justifyContent: 'center'
     }
 });
-
-I18n.fallbacks = true;
-
-I18n.translations = {
-  en: {
-    DeptTime: 'Staff enter time',
-  },
-  th: {
-    DeptTime: 'พนักงานที่ลงเวลา',
-  },
-};
