@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  Alert
+  Alert,
+  I18nManager
 } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Text } from 'native-base';
 // import LeaveCalendar from '../components/LeaveCalendar'
@@ -232,15 +233,15 @@ export default class LeaveDetailScreen extends React.Component {
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
             <ActionButton.Item marginRight={-responsiveWidth(10)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ปฏิเสธ</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Decline')}</Text>
             </ActionButton.Item>
             <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(1))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืน</Text>
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>
             <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
               <Icon name="check" style={styles.actionButtonIcon} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติ</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>
           </ActionButton>
          }

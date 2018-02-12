@@ -60,7 +60,7 @@ const HeaderStatus = ({user,statusAmount,gotoInbox}) => {
           <Row size={8}>
             <View style={styles.ViewStyleFlex}>
               <Icon name="clock-o" size={20}/>
-              <Text allowFontScaling={false}style={styles.TextStyle6}>{`สรุปสถานะการมาทำงาน ${year}`}</Text>
+              <Text allowFontScaling={false}style={styles.TextStyle6}>{`${I18n.t('summaryWork')} ${year}`}</Text>
             </View>
           </Row>
           <Row size={15} style={{alignItems: 'center',justifyContent: 'center'}}>

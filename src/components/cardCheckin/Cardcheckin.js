@@ -12,6 +12,8 @@ import Communications from 'react-native-communications';
 import fontelloConfig from '../../../assets/fonts/config.json'
 import { em } from '../../constants/Layout'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import I18n from '../../utils/i18n';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 export default class Checkin extends React.Component {
@@ -55,7 +57,7 @@ export default class Checkin extends React.Component {
                             <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
                             <View style={{flexDirection:"row",paddingLeft:responsiveWidth(4),paddingTop:1}}>
                                 <Icon style={{color:"#989898"}}  name="clock-o"/>
-                                <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :'ยังไม่ได้ลงเวลา' }</Text>
+                                <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :`${I18n.t('didntEntertime')}` }</Text>
                              </View>
                         </View>
 

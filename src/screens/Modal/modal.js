@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Button } from 'native-base';
+import I18n from '../../utils/i18n';
+
 export default class Modal extends Component {
   constructor(props){
     super(props);
@@ -31,12 +33,12 @@ export default class Modal extends Component {
             <View style={styles.bottom}>
               <View style={styles.buttonContent}>
                 <Button transparent  onPress={this.okPress}>
-                  <Text style={styles.buttonstyle}>ตกลง</Text>
+                  <Text style={styles.buttonstyle}>{I18n.t('Ok')}</Text>
                 </Button>
               </View>
               {this.props.cancel && <View style={styles.buttonContent}>
                 <Button transparent onPress={this.cancelPress}>
-                  <Text style={styles.buttonstyle}>ยกเลิก</Text>
+                  <Text style={styles.buttonstyle}>{I18n.t('Cancel')}</Text>
                 </Button>
               </View>}
             </View>
