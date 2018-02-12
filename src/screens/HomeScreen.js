@@ -26,6 +26,8 @@ import Provacypolicy from '../components/privacypolicy';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CardHeader from '../components/cardHeader';
 import { observer, inject } from 'mobx-react';
+import I18n from 'react-native-i18n';
+
 
 // const customData = require('../api/shiftData.json');
 // const customData2 = require('../api/shiftHistory.json');
@@ -43,10 +45,10 @@ class HomeScreen extends React.Component {
       agreen:true
     };
    LocaleConfig.locales['th'] = {
-    monthNames: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-    monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
-    dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
-    dayNamesShort: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.']
+    monthNames: [`${I18n.t('January')}`,`${I18n.t('February')}`,`${I18n.t('March')}`,`${I18n.t('April')}`,`${I18n.t('May')}`,`${I18n.t('June')}`,`${I18n.t('July')}`,`${I18n.t('August')}`,`${I18n.t('September')}`,`${I18n.t('October')}`,`${I18n.t('November')}`,`${I18n.t('December')}`],
+    monthNamesShort: [`${I18n.t('Jan')}`,`${I18n.t('Feb')}`,`${I18n.t('Mar')}`,`${I18n.t('Apr')}`,`${I18n.t('May')}`,`${I18n.t('Jun')}`,`${I18n.t('Jul')}`,`${I18n.t('Aug')}`,`${I18n.t('Sep')}`,`${I18n.t('Oct')}`,`${I18n.t('Nov')}`,`${I18n.t('Dec')}`],
+    dayNames: [`${I18n.t('Sunday')}`,`${I18n.t('Monday')}`,`${I18n.t('Tuesday')}`,`${I18n.t('Wednesday')}`,`${I18n.t('Thursday')}`,`${I18n.t('Friday')}`,`${I18n.t('Saturday')}`],
+    dayNamesShort: [`${I18n.t('Sun')}`,`${I18n.t('Mon')}`,`${I18n.t('Tue')}`,`${I18n.t('Wed')}`,`${I18n.t('Thu')}`,`${I18n.t('Fri')}`,`${I18n.t('Sat')}`]
     };
 
     LocaleConfig.defaultLocale = 'th';
@@ -109,6 +111,7 @@ class HomeScreen extends React.Component {
   
   
   render() {
+    I18n.locale = 'en';        
     return (
     <View style={styles.container}>
       <CardHeader />
@@ -355,4 +358,88 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffe9d4',
   }
 });
+
+I18n.translations = {
+  en: {
+    January:'January',
+    February:'February',
+    March:'March',
+    April:'April',
+    May:'May',
+    June:'June',
+    July:'July',
+    August:'August',
+    September:'September',
+    October:'October',
+    November:'November',
+    December:'December',
+    Jan:'Jan',
+    Feb:'Feb',
+    Mar:'Mar',
+    Apr:'Apr',
+    May:'May',
+    Jun:'Jun',
+    Jul:'Jul',
+    Aug:'Aug',
+    Sep:'Sep',
+    Oct:'Oct',
+    Nov:'Nov',
+    Dec:'Dec',
+    Sunday:'Sunday',
+    Monday:'Monday',
+    Tuesday:'Tuesday',
+    Wednesday:'Wednesday',
+    Thursday:'Thursday',
+    Friday:'Friday',
+    Saturday:'Saturday',
+    Sun:'Sun',
+    Mon:'Mon',
+    Tue:'Tue',
+    Wed:'Wed',
+    Thu:'Thu',
+    Fri:'Fri',
+    Sat:'Sat',
+  },
+  th: {
+    January:'มกราคม',
+    February:'กุมภาพันธ์',
+    March:'มีนาคม',
+    April:'เมษายน',
+    May:'พฤษภาคม',
+    June:'มิถุนายน',
+    July:'กรกฏาคม',
+    August:'สิงหาคม',
+    September:'กันยายน',
+    October:'ตุลาคม',
+    November:'พฤศจิกายน',
+    December:'ธันวาคม',
+    Jan:'ม.ค.',
+    Feb:'ก.พ.',
+    Mar:'มี.ค.',
+    Apr:'เม.ย.',
+    May:'พ.ค.',
+    Jun:'มิ.ย.',
+    Jul:'ก.ค.',
+    Aug:'ส.ค.',
+    Sep:'ก.ย.',
+    Oct:'ต.ค.',
+    Nov:'พ.ย.',
+    Dec:'ธ.ค.',
+    Sunday:'อาทิตย์',
+    Monday:'จันทร์',
+    Tuesday:'อังคาร',
+    Wednesday:'พุธ',
+    Thursday:'พฤหัสบดี',
+    Friday:'ศุกร์',
+    Saturday:'เสาร์',
+    Sun:'อา.',
+    Mon:'จ.',
+    Tue:'อ.',
+    Wed:'พ.',
+    Thu:'พฤ.',
+    Fri:'ศ.',
+    Sat:'ส.',
+  },
+};
 export default HomeScreen
+

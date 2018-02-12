@@ -288,13 +288,15 @@ I18n.fallbacks = true;
 
 I18n.translations = {
   en: {
-    Not: 'did not enter time',
+    History: 'History',
+    Month: 'Month',
     Late: 'Late',
     Back: 'Back before time',
     Absence: 'absence',  
   },
   th: {
-    Not: 'ไม่ได้ลงเวลา',
+    History: 'ประวัติการเข้างาน',
+    Month: 'ช่วงเดือน',
     Late: 'สาย',
     Back: 'กลับก่อน',
     Absence: 'ขาด',  

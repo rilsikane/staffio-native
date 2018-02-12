@@ -28,7 +28,7 @@ export default class DetailLeave extends React.Component {
                         <Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:0, fontSize:responsiveFontSize(2.2),textAlign:'center'}}>{`${this.props.total} ${I18n.t('Day')}`}</Text>
                     </View>
                     <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
-                        <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>วันลาคงเหลือ</Text>
+                        <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('Balance')}</Text>
                         <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:2}}>{`${this.props.remain||0} ${I18n.t('From')} ${this.props.max} ${I18n.t('Day')}`}</Text>
                     </View>
                     {/*<View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>

@@ -442,7 +442,7 @@ export default class InboxScreen extends React.Component {
               </ActionButton.Item>
           </ActionButton> */}
           <ActionButton  IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-(responsiveWidth(11))} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={this.openCriteria}>
+            <ActionButton.Item marginRight={-(responsiveWidth(1))} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={this.openCriteria}>
               <Icon name="search" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ค้นหา</Text>
             </ActionButton.Item>

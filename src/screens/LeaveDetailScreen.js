@@ -216,7 +216,7 @@ export default class LeaveDetailScreen extends React.Component {
   render() {
     return (
       <Container style={{backgroundColor: '#ffe9d4'}}>
-        <CardHeader title="ข้อมูลการลา" goBack={this.goBack}/>
+        <CardHeader title={I18n.t('title')} goBack={this.goBack}/>
         <Content>
           <Profile name={this.props.leaveStore.leaveData.name} positions={this.props.leaveStore.leaveData.positions} 
           img={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}}/>
@@ -272,7 +272,8 @@ I18n.translations = {
     Approve: 'Approve',
     ApproveSuccess: 'Approved successfully',
     RejectSuccess: 'Rejected successfully',
-    SendBackSuccess: 'Send back successfully'
+    SendBackSuccess: 'Send back successfully',
+    title: 'Leave Information'
   },
   th: {
 	  ConfirmApprove: 'ยืนยันการอนุมัติ',
@@ -284,6 +285,7 @@ I18n.translations = {
     Approve: 'อนุมัติรายการ',
     ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
     RejectSuccess: 'ปฏิเสธรายการเรียบร้อย',
-    SendBackSuccess: 'ส่งคืนรายการเรียบร้อย'
+    SendBackSuccess: 'ส่งคืนรายการเรียบร้อย',
+    title: 'ข้อมูลการลา'
   },
 };

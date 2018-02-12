@@ -3,6 +3,7 @@ import {Text,View,TouchableOpacity,Modal} from 'react-native';
 import {Grid,Row,Col,Body} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import I18n from 'react-native-i18n';
 
 function renderFormStatus(status){
 switch(status){
