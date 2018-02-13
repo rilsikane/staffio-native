@@ -23,7 +23,7 @@ import CardHeader from '../components/cardHeader';
 import Loading from '../components/loading';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import PTRView from 'react-native-pull-to-refresh';
-import {convertDateDB,convertForTag} from '../utils/staffioUtils';
+import {convertDateDB,convertForTag, disbackButton} from '../utils/staffioUtils';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import AnimatedOverlay from 'react-native-animated-overlay';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
@@ -36,6 +36,9 @@ const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('punchStore')
 @observer
 export default class InboxScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props)
     this.state = {showCriteria:false,tags:["All"]

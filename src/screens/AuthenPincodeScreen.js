@@ -13,13 +13,16 @@ import FCM from "react-native-fcm";
 import Constans from '../constants/Constants';
 import app  from '../stores/app';
 import I18n from '../utils/i18n';
+import {disbackButton} from '../utils/staffioUtils'
 
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 @inject('userStore')
 @observer
 export default class AuthenPincodeScreen extends Component {
-	
+	componentWillMount(){
+		disbackButton();
+	}
 	constructor(props) {
       super(props);
       this.onDonePress = this.onDonePress.bind(this);

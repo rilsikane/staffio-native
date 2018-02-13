@@ -11,9 +11,4 @@ I18n.translations = {
   en,
   th
 };
-getLanguages().then(languages => {
-    console.log(languages); // ['en-US', 'en']
-    console.log(I18n.t('DayOff')); // ['en-US', 'en']
-  });
-
 export default I18n;

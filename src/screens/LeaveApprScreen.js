@@ -20,7 +20,7 @@ import LeaveStatCard from '../components/leave/LeaveStatCard';
 import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormat} from '../utils/staffioUtils';
+import {convertByFormat, getConfirmModal, getInputModal, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import Swipeable from 'react-native-swipeable';
@@ -34,6 +34,9 @@ const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
 export default class PersonalStatScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
@@ -121,18 +124,20 @@ export default class PersonalStatScreen extends React.Component {
   }
   onApprovePress(data){
     this.setState({loading:true});
+    //
+    getConfirmModal(this.approveLeave,this.cancelModal,data);
     
-    this.props.navigator.showLightBox({
-      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
-      ,msg2: `${data.name}` ,cancel:this.cancelModal
-      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-      },
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+  //   this.props.navigator.showLightBox({
+  //     screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+  //     passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
+  //     ,msg2: `${data.name}` ,cancel:this.cancelModal
+  //     ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+  //     style: {
+  //       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+  //       backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+  //     },
+  //     adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+  //    });
   }
   cancelModal(){
     this.setState({loading:false});
@@ -140,36 +145,39 @@ export default class PersonalStatScreen extends React.Component {
   }
   onRejectPress(data){
     this.setState({loading:true});
-   
-    this.props.navigator.showLightBox({
-      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
-      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
-      ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    getInputModal(this.rejectLeave,this.cancelModal,I18n.t('Reject'),data,"resize")
+
+    // this.props.navigator.showLightBox({
+    //   screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+    //   passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+    //   ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+    //   ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+    //   style: {
+    //     backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+    //     backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+    //     height:responsiveHeight(70),
+    //     width:responsiveWidth(90)
+    //   },
+    //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+    //  });
   }
   onReturnPress(data){
     this.setState({loading:true});
-    this.props.navigator.showLightBox({
-      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
-      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
-      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
-      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    getInputModal(this.returnLeave,this.cancelModal,I18n.t('SendBack'),data,"nothing")
+
+    // this.props.navigator.showLightBox({
+    //   screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+    //   passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+    //   ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+    //   ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+    //   style: {
+    //     backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+    //     backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+    //     height:responsiveHeight(70),
+    //     width:responsiveWidth(90)
+    //   },
+    //   adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+    //  });
   }
   async approveLeave(data){
     this.props.navigator.dismissLightBox();

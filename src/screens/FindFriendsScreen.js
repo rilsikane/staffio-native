@@ -14,10 +14,13 @@ import { observer, inject } from 'mobx-react';
 import Loading from '../components/loading';
 import CardHeader from '../components/cardHeader'
 import I18n from '../utils/i18n';
-
+import {disbackButton} from '../utils/staffioUtils'
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
      this.state = {searchtext:"",isLoading:false};

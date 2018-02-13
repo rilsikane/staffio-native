@@ -20,7 +20,7 @@ import CardHeader from '../components/cardHeader';
 import LeavePersonalCard from '../components/leave/LeavePersonalCard'
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormat} from '../utils/staffioUtils';
+import {convertByFormat, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
@@ -28,6 +28,9 @@ import I18n from '../utils/i18n';
 @inject('leaveStore')
 @observer
 export default class PersonalStatScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);

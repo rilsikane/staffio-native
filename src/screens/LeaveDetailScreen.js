@@ -24,7 +24,7 @@ import LeaveStatCard from '../components/leave/LeaveStatCard';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
-
+import I18n from '../utils/i18n'
 const IconTello = createIconSetFromFontello(fontelloConfig);
 const modalStyle = {
   backgroundBlur: "dark",
@@ -226,7 +226,7 @@ export default class LeaveDetailScreen extends React.Component {
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }
-          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={'สถิติการลา'} date={''} data={this.state.leaveBalances}/>}
+          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`} date={''} data={this.state.leaveBalances}/>}
 
         </Content>
          {this.props.isAppr &&

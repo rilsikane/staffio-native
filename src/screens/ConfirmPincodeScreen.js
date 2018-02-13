@@ -12,11 +12,14 @@ import Loading from '../components/loading';
 import FCM from "react-native-fcm";
 import app  from '../stores/app';
 import I18n from '../utils/i18n';
+import {disbackButton} from '../utils/staffioUtils'
 
 @inject('userStore')
 @observer
 export default class ConfirmPincodeScreen extends Component {
-	
+	componentWillMount(){
+		disbackButton();
+	}
 	constructor(props) {
       super(props);
       this.onDonePress = this.onDonePress.bind(this);

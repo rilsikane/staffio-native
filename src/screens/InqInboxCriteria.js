@@ -16,8 +16,11 @@ import SearchDate from '../components/inbox/searchDate'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../constants/Colors'
 import I18n from '../utils/i18n';
-
+import {disbackButton} from '../utils/staffioUtils'
   export default class InqInboxCriteria extends React.Component {
+    componentWillMount(){
+      disbackButton();
+    }
     constructor(props) {
         super(props);
         this.onDoneDialog = this.onDoneDialog.bind(this);

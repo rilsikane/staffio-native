@@ -20,8 +20,11 @@ import Colors from '../constants/Colors'
 import getTheme from '../../native-base-theme/components';
 import CardHeader from '../components/cardHeader';
 import I18n from '../utils/i18n';
-
+import {disbackButton} from '../utils/staffioUtils'
 export default class DashBoradProject extends React.Component {
+    componentWillMount(){
+		disbackButton();
+	}
     constructor(props) {
         super(props);
         navigator = this.props.navigator

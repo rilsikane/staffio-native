@@ -1,5 +1,8 @@
 import moment from 'moment';
 import localization from 'moment/locale/th'
+import I18n from './i18n'
+import {BackHandler,Platform} from 'react-native'
+
 var dateFormat = require('dateformat');
 
 export function convertDate(tmpDate) {
@@ -40,8 +43,6 @@ export function getyear() {
          year = year + 543
         return year
   }
-  
-
 export function getmonth(){
     var date = new Date();
     var month = date.getMonth();
@@ -72,3 +73,55 @@ export function getmonth(){
       return 'ธันวาคม'
     }
   }
+
+export function getConfirmModal(okFunc,cancelFunc,Data){
+  this.props.navigator.showLightBox({
+    screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+    passProps: {title:`${I18n.t('ConfirmApprove')} : ${Data.type}`,msg: `${I18n.t('approveLeave')}`
+    ,msg2: `${Data.name}` ,cancel:cancelModal(cancelFunc)
+    ,ok:okModal(okFunc),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
+    style: {
+      backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+      backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+    },
+    adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+   });
+}
+
+export function getInputModal(Title,okFunc,cancelFunc,Data,AdjustSoftInput){
+  
+  this.props.navigator.showLightBox({
+    screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+    passProps: {title:`${Title} : ${Data.type}`,remark:`${I18n.t('Cause')}`
+    ,cancel:cancelModal(cancelFunc),placeholder:`${I18n.t('SpecifyCause')}`
+    ,ok:okModal(okFunc),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
+    style: {
+      backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+      backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+      height:responsiveHeight(70),
+      width:responsiveWidth(90)
+    },
+    adjustSoftInput: AdjustSoftInput, // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+   });
+}
+
+function cancelModal(func){
+  if(func){
+    func();
+  }
+  this.props.navigator.dismissLightBox();    
+}
+function okModal(func){
+  if(func){
+    func();
+  }
+  this.props.navigator.dismissLightBox();    
+}
+
+export function disbackButton(){
+  if(Platform.OS='android'){
+    BackHandler.addEventListener('hardwareBackPress', function() {
+    return true;
+  });
+}
+}
