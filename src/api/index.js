@@ -64,7 +64,11 @@ async function getEndpoint(param){
   }else{
      endpoint  = await getEndpointService(param);
      endpointtmp = endpoint.endPoint;
-     await store.save("endpointNew",endpointtmp);
+     if(endpointtmp && endpointtmp!= ''){
+      await store.save("endpointNew",endpointtmp);
+     }else{
+      await store.save("endpointNew",undefined);  
+     }
   }
    return endpointtmp;
 }
@@ -72,11 +76,36 @@ async function getEndpoint(param){
 export async function authen(path,param){
   console.log("authen-----"+param);
   const endpoint = await getEndpoint(param);
+  const orgTmp = param.user_name.split("@");
+  if(orgTmp.length>1){
+    let endTmp = param.user_name.split("@")[1];
+    if(endTmp=='DEV'){
+      param.user_name =  `${param.user_name.split("@")[0]}@OMS`;
+    }
+  }
   let requestURL = `${endpoint}SecurityService/${path}`;
   console.log("requestURL-----"+requestURL);
       try{
-          const response = await  axios.post(requestURL, param);
+          let response = await  axios.post(requestURL, param);
+          console.log(response);
           if(response.status=='200' && response.data.Success){
+            if(response.data.userProfile){
+              let roleId = response.data.userProfile.ROLE_ID;
+              let menuResponse = await  axios.post(`${endpoint}SecurityService/getMenu?module=7&roleID=${roleId}`);
+              let menus = menuResponse.data.objData[0].SubMenu;
+              
+                for(let i=0;i<menus.length;i++){
+                  if(menus[i].PageMenuCode=='ES002'){
+                    response.data.userProfile.canLeave = true;
+                  }
+                  if(menus[i].PageMenuCode=='ES007'){
+                    response.data.userProfile.canTime = true;
+                  }
+                }
+                console.log("menuResponse",menuResponse.data.objData[0].SubMenu);
+            }
+            
+           
             return response;
           }else{
               if(response.data.UrlDL && ""!=response.data.UrlDL){
@@ -99,6 +128,7 @@ export async function authen(path,param){
               return false;
           }
       }catch(e){
+        await store.delete("endpointNew"); 
           console.error(e);
             Alert.alert(
             'เกิดข้อผิดพลาด',

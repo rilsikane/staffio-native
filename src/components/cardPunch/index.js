@@ -52,7 +52,6 @@ function changcolorborder(flagin,flagout) {
 }
 
 const TimeInOut =(shift) => {
-  I18n.locale = 'th';
   return(
 
       <View style={styles.ContainerStyle}>

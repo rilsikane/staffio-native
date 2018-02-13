@@ -9,21 +9,9 @@ import app  from '../stores/app';
 import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/homeBG.png';
 import I18n from '../utils/i18n';
+import SwitchSelector from 'react-native-switch-selector'
 
-let menus = [
-    {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true},
-    {name: `${I18n.t('Inbox')}`, icon: "inbox",link:"staffio.InqInboxScreen",active:false},
-    {name: `${I18n.t('StatLeave')}`, icon: "bar-chart",link:"staffio.PersonalStatScreen",active:false},
-    {name: `${I18n.t('FindFriend')}`, icon: "book",link:"staffio.FindFriendScreen",active:false}
-  ];
-let menuAppr = [
-     {name: `${I18n.t('Dashboard')}`, icon: "pie-chart",link:"staffio.DashBoradProject",active:false},
-     {name: `${I18n.t('ApproveLeave')}`, icon: "gavel",link:"staffio.LeaveApprScreen",active:false}
-  ];
-const menuEtc = [
-    // {name: "วิธีใช้งาน", icon: "question-circle"},
-    {name: `${I18n.t('Logout')}`, icon: "sign-out",active:false}
-];
+
 
 
 @inject('naviStore')
@@ -32,15 +20,40 @@ export default class MenuScreen extends React.Component {
     constructor(props){
         super(props);
         this.navigateTo = this.navigateTo.bind(this);
-        this.state = {userData:{},menus:menus,menuAppr:menuAppr};
         this.app = app;
         this.logOutPress = this.logOutPress.bind(this);
+        this.switchLang = this.switchLang.bind(this);
+        this.state = {userData:{},menus:[],menuAppr:[],menuEtc:[]};
+    }
+    async componentWillMount(){
+        let locale = await store.get("locale");
+        I18n.locale = locale;
+        let localeIndex = locale =='th' ? 0:1;
+        this.setState({localeIndex:localeIndex});
     }
     async componentDidMount(){
-         const userData = await store.get("USER");
-         this.setState({userData:userData});
+        const userData = await store.get("USER");
+        let menus = [
+            {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true,show:true},
+            {name: `${I18n.t('Inbox')}`, icon: "inbox",link:"staffio.InqInboxScreen",active:false,show:true},
+            {name: `${I18n.t('StatLeave')}`, icon: "bar-chart",link:"staffio.PersonalStatScreen",active:false,show:userData.canLeave},
+            {name: `${I18n.t('FindFriend')}`, icon: "book",link:"staffio.FindFriendScreen",active:false,show:true}
+          ];
+        let menuAppr = [
+             {name: `${I18n.t('Dashboard')}`, icon: "pie-chart",link:"staffio.DashBoradProject",active:false,show:true},
+             {name: `${I18n.t('ApproveLeave')}`, icon: "gavel",link:"staffio.LeaveApprScreen",active:false,show:userData.canLeave}
+          ];
+          let menuEtc = [
+            // {name: "วิธีใช้งาน", icon: "question-circle"},
+            {name: `${I18n.t('Logout')}`, icon: "sign-out",active:false}
+        ];
+         
+        
+         this.setState({userData:userData,menus:menus,menuAppr:menuAppr,menuEtc:menuEtc});
     }
     navigateTo(link){
+         let menus =  this.state.menus;
+         let menuAppr = this.state.menuAppr;
          menus.map(menu => menu.active = menu.link == link);
          menuAppr.map(menu => menu.active = menu.link == link);
          this.setState({menus:menus,menuAppr:menuAppr});
@@ -75,18 +88,33 @@ export default class MenuScreen extends React.Component {
         store.delete("endpointNew");
         this.app.appInitialized();
     }
+    switchLang(value){
+        store.save("locale",value);
+        this.app.appInitialized();
+    }
 
     render() {
+    const options = [
+        { label: 'TH', value: 'th' },
+        { label: 'EN', value: 'en' }
+    ];
     return (
          <Wallpaper bgSrc={bgSrc} style={{width:responsiveWidth(50)}}>
         <Container style={{flex:1,paddingTop:10}}>
-        <Thumbnail small style={styles.imageStyle} source={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
-                    <Text style={styles.textName}>{this.state.userData.FULL_NAME_TH}</Text>
-                    <Text style={styles.textPosition}>{this.state.userData.POSITION_NAME}</Text>
-
+        <View style={{flexDirection:"row"}}>
+            <View style={{flex:2}}>
+                <Thumbnail small style={styles.imageStyle} source={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
+                <Text style={styles.textName}>{this.state.userData.FULL_NAME_TH}</Text>
+                <Text style={styles.textPosition}>{this.state.userData.POSITION_NAME}</Text>
+            </View>
+            <View style={{alignItems:"center",flex:1,justifyContent:"center",alignContent:"center",paddingRight:responsiveWidth(5)}}>
+            {this.state.localeIndex!==undefined && <SwitchSelector options={options} initial={this.state.localeIndex} buttonColor="#fbaa3e" fontSize={12} height={25}
+            onPress={this.switchLang}  hasPadding={false}/>}
+            </View>
+         </View>          
                 <ScrollView style={[styles.cardStyle]}>           
                      { this.state.menus.map((menuName) => {
-                        return (
+                        return menuName.show && (
                         <CardItem style={!menuName.active ? styles.containerStyle : styles.highlight} key={menuName.name} >
                             <TouchableOpacity style={{flexDirection: 'row', alignItems:'center',flex:1}} onPress={(e)=>this.navigateTo(menuName.link)}>
                                 <FontAwesome name={menuName.icon} style={!menuName.active ? styles.iconStyle:styles.iconHighlight}/>
@@ -96,7 +124,7 @@ export default class MenuScreen extends React.Component {
                     })}
                     {this.state.userData.isApprover  == 'Y'  && <View style={{marginTop:responsiveHeight(3)}}>
                      { this.state.menuAppr.map((menuName) => {
-                        return (<CardItem style={!menuName.active ? styles.containerStyle : styles.highlight} key={menuName.name}>
+                        return menuName.show && (<CardItem style={!menuName.active ? styles.containerStyle : styles.highlight} key={menuName.name}>
                             <TouchableOpacity style={{flexDirection: 'row', alignItems:'center',flex:1}} onPress={(e)=>this.navigateTo(menuName.link)}>
                                 <FontAwesome name={menuName.icon} style={!menuName.active ? styles.iconStyle:styles.iconHighlight}/>
                                 <Text style={!menuName.active ? styles.textMenuStyle : styles.textMenuHighlight}>{menuName.name}</Text>
@@ -107,7 +135,7 @@ export default class MenuScreen extends React.Component {
                     
                 </ScrollView>
                 <View style={{position:'absolute',bottom:0}}>
-                     { menuEtc.map((menuName) => {
+                     { this.state.menuEtc.map((menuName) => {
                         return (<CardItem style={styles.containerStyle} key={menuName.name}>
                             <TouchableOpacity style={{flexDirection: 'row', alignItems:'center'}} onPress={this.logOutPress}>
                                 <FontAwesome name={menuName.icon} style={styles.iconStyle}/>

@@ -1,5 +1,6 @@
 import { observable } from 'mobx';
 import store from 'react-native-simple-store';
+import I18n from '../utils/i18n';
 
 class AppStore {
   @observable root = undefined; // 'login' / 'after-login'
@@ -7,7 +8,9 @@ class AppStore {
   constructor() {}
 
   async appInitialized() {
-    const userData = await store.get("USER");
+    let userData = await store.get("USER");
+    let locale = await store.get("locale");
+    I18n.locale = locale;
     if (userData == null || userData.pincode==null) {
       this.root = 'login';
     }else{
