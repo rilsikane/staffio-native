@@ -80,12 +80,12 @@ export default  styles = {
   iconStyleTouch:{
     width: responsiveWidth(10),
     fontFamily: "Kanit",
-    fontSize:responsiveFontSize(3),
+    fontSize:responsiveFontSize(5.5),
     backgroundColor:'transparent',
-    color: "#f58020",
+    color: "#fff",
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:responsiveWidth(5)
+    marginLeft:responsiveWidth(0)
    
   },
   buttonView:{
