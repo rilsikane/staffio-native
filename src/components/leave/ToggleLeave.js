@@ -7,30 +7,33 @@ import I18n from '../../utils/i18n';
 export default class ToggleLeave extends React.Component {
   constructor(props) {
         super(props);
-        this.openDetail = this.openDetail.bind(this);
+        this.state = {listType:false}
+        this.onSwitch = this.onSwitch.bind(this);
         
   }
-  openDetail(){
-    this.props.openDetail(this.props.info);
+  onSwitch(value){
+      
+      this.setState({listType:value});
+      this.props.onSwitch(value);
   }
-  
   render() {
     return (
-        this.props.info.total && 
         (
-            <Card style={{marginBottom:0}}>
-                <CardItem style={{paddingLeft:5,paddingRight:5}}>
-                    <Left style={{flex:2}}>
-                        {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Type')}</Text>)}
-                    </Left>
-                    <Body style={{flex:2}}>
-                        <View style={{flexDirection: 'row', alignItems:'center'}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Approve')}</Text>)}
-                            <Switch onTintColor='#fbaa3e' tintColor='#feddb4' thumbTintColor='#fbaa3e'/>
-                            {(<Text style={{fontFamily: 'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),flex:2,textAlign:'center'}}>{I18n.t('Cancel')}</Text>)}
+            <Card style={{flex:1,flexWrap:"nowrap"}}>
+                <View style={{paddingLeft:5,paddingRight:5,flexDirection:"row",paddingTop:5,paddingBottom:5,flex:1}}>
+                    <View style={{flex:1}}>
+                        <View style={{flexDirection: 'row', alignItems:'center',flex:1}}>
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Type')}</Text>)}
                         </View>
-                    </Body>
-                </CardItem>
+                    </View>
+                    <View style={{flex:2 ,alignItems:"flex-end"}}>
+                        <View style={{flexDirection: 'row', alignItems:'center',flex:1}}>
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),textAlign:'left',paddingRight:5}}>{I18n.t('ToggleApprove')}</Text>)}
+                            <Switch onTintColor='#feddb4' tintColor='#feddb4' thumbTintColor='#fbaa3e' value={this.state.listType} onValueChange={this.onSwitch}/>
+                            {(<Text style={{fontFamily: 'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),textAlign:'center',paddingLeft:5}}>{I18n.t('ToggleCancel')}</Text>)}
+                        </View>
+                    </View>
+                </View>
             </Card>
         
         )

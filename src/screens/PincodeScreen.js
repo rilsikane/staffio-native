@@ -34,7 +34,7 @@ export default class PincodeScreen extends Component {
 
 	render() {
 		return (
-                <View style={{flex:1,backgroundColor:"#ffff"}}>
+                <View style={{flex:1,backgroundColor:"#FCBA66"}}>
                     <PincodePress  titileTxt={I18n.t('SetPass')} onDonePress={this.onDonePress}/>
                 </View>
 				

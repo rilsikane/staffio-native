@@ -103,8 +103,8 @@ export default {
 
     //ToggleLeave
     Type: 'Type of list',
-    Approve: 'Approve',
-    Cancel: 'Cancel',
+    ToggleApprove: 'Approve',
+    ToggleCancel: 'Cancel',
 
     //status-IdName
     Code: 'Code',

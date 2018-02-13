@@ -23,8 +23,10 @@ import {convertByFormat} from '../utils/staffioUtils';
 import LeaveStatCard from '../components/leave/LeaveStatCard';
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
-import fontelloConfig from '../../assets/fonts/config.json'
-import I18n from '../utils/i18n'
+import fontelloConfig from '../../assets/fonts/config.json';
+import I18n from '../utils/i18n';
+
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 const modalStyle = {
   backgroundBlur: "dark",

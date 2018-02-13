@@ -47,7 +47,6 @@ class HomeScreen extends React.Component {
       shiftData:{},isLoading:true,
       agreen:true
     };
-  I18n.locale = 'en';
    LocaleConfig.locales['th'] = {
     monthNames: [`${I18n.t('January')}`,`${I18n.t('February')}`,`${I18n.t('March')}`,`${I18n.t('April')}`,`${I18n.t('May')}`,`${I18n.t('June')}`,`${I18n.t('July')}`,`${I18n.t('August')}`,`${I18n.t('September')}`,`${I18n.t('October')}`,`${I18n.t('November')}`,`${I18n.t('December')}`],
     monthNamesShort: [`${I18n.t('Jan')}`,`${I18n.t('Feb')}`,`${I18n.t('Mar')}`,`${I18n.t('Apr')}`,`${I18n.t('May')}`,`${I18n.t('Jun')}`,`${I18n.t('Jul')}`,`${I18n.t('Aug')}`,`${I18n.t('Sep')}`,`${I18n.t('Oct')}`,`${I18n.t('Nov')}`,`${I18n.t('Dec')}`],

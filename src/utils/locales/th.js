@@ -104,8 +104,8 @@ export default {
 
     //ToggleLeave
     Type: 'ประเภทรายการ',
-    Approve: 'ขอ อนุมัติ',
-    Cancel: 'ขอ ยกเลิก',
+    ToggleApprove: 'ขออนุมัติ',
+    ToggleCancel: 'ขอยกเลิก',
 
     //status-IdName
     Code: 'รหัส',
