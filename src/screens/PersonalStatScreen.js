@@ -18,6 +18,7 @@ import LeaveCard from '../components/leave/LeaveCard';
 import LeaveStatCard from '../components/leave/LeaveStatCard';
 import CardHeader from '../components/cardHeader';
 import LeavePersonalCard from '../components/leave/LeavePersonalCard'
+import ToggleLeave from '../components/leave/ToggleLeave';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {convertByFormat} from '../utils/staffioUtils';
@@ -27,12 +28,14 @@ import I18n from '../utils/i18n';
 
 @inject('leaveStore')
 @observer
+
 export default class PersonalStatScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[]}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
     this._refresh = this._refresh.bind(this);
+    this.onSwitch = this.onSwitch.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -53,7 +56,6 @@ export default class PersonalStatScreen extends React.Component {
     const response = await post("ESSServices/SearchLeaveListforEmp",params);
     const infos = this.transformToInfos(response.objData);
     const leaveBalances = await this.getLeaveBalance(user);
-    
 
     this.setState({leaveList:infos,leaveBalances:this.transFormStatHis(leaveBalances),loading:false});
    
@@ -78,6 +80,7 @@ export default class PersonalStatScreen extends React.Component {
 
     return infos;
   }
+
   transformToInfos(list){
     let infos = [];
     for(let i=0;i<list.length;i++){
@@ -89,9 +92,13 @@ export default class PersonalStatScreen extends React.Component {
       info.typeCode = list[i].LEAVE_TYPE_CODE;
       info.startDate = convertByFormat(new Date(list[i].START_DATE).getTime(),"DD MMM ");
       info.endDate = convertByFormat(new Date(list[i].END_DATE).getTime(),"DD MMM ");
+      info.createDate = convertByFormat(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
+      info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
+      info.requestStatus = list[i].REQUEST_STATUS_SHOW;
+      info.requestStatusCode = list[i].REQUEST_STATUS;
       infos.push(info);
   }
     return infos;
@@ -106,6 +113,24 @@ export default class PersonalStatScreen extends React.Component {
         infos.push(info);
     }
     return infos;
+  }
+  getLeaveColor(typeCode){
+    switch (typeCode) {
+      case 'SC_1':
+        return "#fa6575";
+        break;
+      case 'VC':
+        return "#8BC34C";
+        break;
+      case 'PERS-01':
+        return "#1abbbd";
+        break;
+      default:
+       return "#f5dc0f";
+    }
+  }
+  onSwitch(value){
+    this.setState({isCancel:value});
   }
   openLeaveDetail(data){
     this.props.leaveStore.leaveData = data;
@@ -123,7 +148,8 @@ export default class PersonalStatScreen extends React.Component {
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
-      <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
+      (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
+      || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
        <LeavePersonalCard info={info} />
       </TouchableOpacity>
       );
@@ -136,19 +162,25 @@ export default class PersonalStatScreen extends React.Component {
     }
 }
   render() {
+    const options = [
+      {label:'ขออนุมัติ',value:'appr' },
+      {label:'ขอยกเลิก',value:'cancel' }
+    ];
     return (
       
       <Container style={{backgroundColor: '#ffe9d4'}}>
          
           <CardHeader title={`${I18n.t('Stat')}`}/>
-        
+
             {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
             </View> */}
-            <PTRView onRefresh={this._refresh}>  
+            <PTRView onRefresh={this._refresh}>
+              
               {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>)}
+              {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}  
               {!this.state.loading  && this.renderList()}
           </PTRView>
       </Container>

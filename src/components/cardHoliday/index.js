@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   totalText: {
     fontFamily:"Kanit",
-    fontSize: responsiveFontSize(3),
+    fontSize: responsiveFontSize(2.5),
     color: '#ffff',
     backgroundColor:'transparent'
   },
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   numberText: {
     fontFamily:"Kanit",
-    fontSize: responsiveFontSize(4),
+    fontSize: responsiveFontSize(3.5),
     marginRight:responsiveWidth(1),
      color: '#f58020',
      backgroundColor:'transparent'

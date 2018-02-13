@@ -16,8 +16,7 @@ export default class Progress extends React.Component {
         this.progress = [{location : 'the mail',staffcount : 50},{location : 'terminal 21',staffcount : 30},{location : 'terminal 22',staffcount : 80}];
         
     }
-    render() {
-        I18n.locale = 'en';        
+    render() {    
         return (
             <ScrollView>
             <Body>
