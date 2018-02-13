@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View,TextInput,PixelRatio,Alert,Platform } from 'react-native';
+import { Text, View,TextInput,PixelRatio,Alert,Platform, Image } from 'react-native';
 import { Button,Badge,Grid,Col,Row,Body} from 'native-base';
 import styles from './style';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../../assets/fonts/config.json';
 import Iocon from 'react-native-vector-icons/Ionicons';
-
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 
 export default class PincodePress extends React.Component { 
@@ -143,21 +143,22 @@ export default class PincodePress extends React.Component {
 
     <View style={styles.pinCodeContainer}>
       <View style={styles.viewHeader}>
+        <Image style={styles.thumbnailStyle} source={{uri: 'https://housing.umn.edu/sites/housing.umn.edu/files/key_icon-01.png'}} />
         <Text allowFontScaling={false}style={styles.textHeader}>{this.props.titileTxt}</Text>
       </View >
         <View style={styles.passText}>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText1 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText1 ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText2 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText2 ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText3 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText3 ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText4 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText4 ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
             <TextInput secureTextEntry={true} style={styles.TextPut} editable={false} 
-            selectTextOnFocus={false} placeholder='•' value={this.state.sampleText5 ? '•':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
+            selectTextOnFocus={false} placeholder='○' value={this.state.sampleText5 ? '●':''}  underlineColorAndroid={'rgba(0,0,0,0)'}></TextInput>
         </View>
       <Grid style={styles.gridStyles}>
       <Row >

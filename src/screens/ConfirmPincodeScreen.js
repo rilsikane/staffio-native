@@ -58,7 +58,7 @@ export default class ConfirmPincodeScreen extends Component {
 
 	render() {
 		return (
-                <View style={{flex:1,backgroundColor:"#ffff"}}>
+                <View style={{flex:1,backgroundColor:"#FCBA66"}}>
 					{this.state.loading && <Loading visible={this.state.loading} mini={true}/>}
                     {!this.state.loading && <PincodePress pincode={this.props.userStore.pincode} reset={this.reset} 
 					navigation={this.props.navigator} isConfirm={true} titileTxt={I18n.t('SetPass')} 

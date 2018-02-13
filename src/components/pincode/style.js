@@ -24,14 +24,14 @@ export default  styles = {
   textHeader:{
      fontFamily:'Kanit',
      fontSize: responsiveFontSize(3),
-     color: "#545254",
+     color: "#ffff",
      backgroundColor:"transparent"
   },
   pinCodeContainer:{
-    backgroundColor:"#ffff"
+    backgroundColor:"#FCBA66"
   },
   rowStyle: {
-    marginTop:responsiveHeight(15),
+    marginTop:responsiveHeight(13),
     
   },
   colStyle :{
@@ -44,13 +44,14 @@ export default  styles = {
   viewHeader:{
     justifyContent: 'center',
     alignItems: 'center',
-    height: responsiveHeight(10),
-    backgroundColor:'transparent'
+    height: responsiveHeight(30),
+    backgroundColor:'transparent',
+    backgroundColor:"#FCAB3F"
   },
   textStyle: {
     fontFamily: "Kanit",
     fontSize: responsiveFontSize(4),
-    color: "#f58020",
+    color: "#ffff",
     backgroundColor:'transparent',
     textAlign: 'center'
   },
@@ -59,7 +60,7 @@ export default  styles = {
     fontFamily: "Kanit",
     fontSize: responsiveFontSize(3),
     backgroundColor:'transparent',
-    color: "#f58020",
+    color: "#ffff",
     alignItems:'flex-start',
     justifyContent:'flex-start',
     marginLeft:responsiveWidth(3)
@@ -70,7 +71,7 @@ export default  styles = {
     fontFamily: "Kanit",
     fontSize: responsiveFontSize(3),
     backgroundColor:'transparent',
-    color: "#f58020",
+    color: "#ffff",
     alignItems:'flex-start',
     justifyContent:'flex-start',
     marginLeft:responsiveWidth(5)
@@ -88,18 +89,18 @@ export default  styles = {
    
   },
   buttonView:{
-    borderRadius:responsiveWidth(18/2),
+    // borderRadius:responsiveWidth(18/2),
     marginRight: 0,
     marginLeft: 0,
     height: responsiveHeight(10),
     width: responsiveWidth(18),
-    backgroundColor: "#f1f2f2",
-    borderColor:"#f1f2f2",
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.6,
-    shadowRadius: 1,
+    backgroundColor: "#FCBA66",
+    borderColor:"#FCBA66",
+    // borderBottomWidth: 0,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.6,
+    // shadowRadius: 1,
     alignItems:'center',
     justifyContent:'center'
   },
@@ -109,26 +110,32 @@ export default  styles = {
     fontSize: responsiveFontSize(5),
     // height: em(2.8),
     width: responsiveWidth(10),
-    color:"#f58020",
+    color:"#ffff",
     justifyContent:'center',
     alignItems:'center'
   },
   passText:{
       flex:0,
       flexDirection: 'row',
-      borderColor:"#f58020",
+      borderColor:"#FCAB3F",
       borderBottomWidth:2,
      justifyContent:'center',
-     alignItems:'center'
+     alignItems:'center',
+     backgroundColor:"#FCAB3F"
       
   },
   gridStyles:{
     flex:0,
-    marginTop:responsiveHeight(7),
-    marginLeft:responsiveWidth(15),
-    backgroundColor:"#ffff",
+    marginTop:responsiveHeight(2),
+    marginLeft:responsiveWidth(10),
+    backgroundColor:"#FCBA66",
     justifyContent:'center',
     alignItems:'center'
-
+  },
+  thumbnailStyle: {
+    marginTop: responsiveHeight(4),
+    marginBottom: responsiveHeight(5),
+    height: responsiveHeight(18),
+    width: responsiveWidth(30),
   }
 };
