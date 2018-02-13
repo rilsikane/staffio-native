@@ -228,6 +228,7 @@ export default {
     SpecifyCause: 'ระบุเหตุผล',
     SendBack: 'ส่งคืนรายการ',
     Consider: 'พิจารณาการลา',
+    approveLeave: 'อนุมัติรายการเรียบร้อย',
 
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
@@ -244,6 +245,7 @@ export default {
     Decline:'Decline',
     Reject: 'ปฏิเสธรายการ',
     Approve:'อนุมัติรายการ',
+    LeaveStatistics: 'สถิติการลา',
     
     //MenuScreen
     HomeS: 'ลงเวลาเข้างาน',

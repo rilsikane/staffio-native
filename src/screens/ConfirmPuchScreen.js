@@ -16,14 +16,16 @@ import TimerMixin from 'react-timer-mixin';
 var SpinnerKit = require('react-native-spinkit');
 import store from 'react-native-simple-store';
 import {post} from '../api';
-import {convertDate} from '../utils/staffioUtils';
+import {convertDate, disbackButton} from '../utils/staffioUtils';
 import app  from '../stores/app';
 import I18n from '../utils/i18n';
 
 @inject('punchStore')
 @observer
 export default class ConfirmPunchScreen extends React.Component {
-  
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props) {
       super(props);
 	    this.goBack = this.goBack.bind(this);

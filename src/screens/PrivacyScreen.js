@@ -12,8 +12,11 @@ import {
   import store from 'react-native-simple-store';
   import app  from '../stores/app';
   import I18n from '../utils/i18n';
-  
+  import {disbackButton} from '../utils/staffioUtils'
   export default class Provacypolicy extends React.Component {
+    componentWillMount(){
+      disbackButton();
+    }
     constructor(props) {
         super(props);
         this.closeDialog = this.closeDialog.bind(this);

@@ -15,7 +15,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import TimerMixin from 'react-timer-mixin';
 var SpinnerKit = require('react-native-spinkit');
 import moment from 'moment';
-import {convertDate} from '../utils/staffioUtils';
+import {convertDate, disbackButton} from '../utils/staffioUtils';
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import Iocon from 'react-native-vector-icons/Ionicons';
 import colors from '../constants/Colors'
@@ -24,6 +24,9 @@ import app  from '../stores/app';
 import I18n from '../utils/i18n';
 
 class ProfileScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
     this.state = {isLoading:true};

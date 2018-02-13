@@ -228,7 +228,7 @@ export default class LeaveDetailScreen extends React.Component {
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }
-          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={'สถิติการลา'} date={''} data={this.state.leaveBalances}/>}
+          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`} date={''} data={this.state.leaveBalances}/>}
 
         </Content>
          {this.props.isAppr &&

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  BackHandler,
   AppState,NativeAppEventEmitter,DeviceEventEmitter,ScrollView,Image
 } from 'react-native';
 import {Card,CardItem,Thumbnail,Button}from 'native-base'
@@ -16,7 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import TimerMixin from 'react-timer-mixin';
 var SpinnerKit = require('react-native-spinkit');
 import moment from 'moment';
-import {convertDate} from '../utils/staffioUtils';
+import {convertDate, disbackButton} from '../utils/staffioUtils';
 import Loading from '../components/loading';
 import {LocaleConfig} from 'react-native-calendars';
 import app  from '../stores/app';
@@ -34,6 +35,9 @@ let intervalId = null;
 @inject('naviStore')
 @observer
 class HomeScreen extends React.Component {
+  componentWillMount(){
+    disbackButton();
+  }
   constructor(props) {
     super(props);
    
@@ -356,6 +360,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffe9d4',
   }
 });
-
 export default HomeScreen
 

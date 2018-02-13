@@ -227,6 +227,7 @@ export default {
     SpecifyCause: 'Specify cause',
     SendBack: 'Send back',
     Consider: 'Consider leave',
+    approveLeave: 'Approved',
 
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
@@ -243,6 +244,7 @@ export default {
     Decline:'Decline',
     Reject:'Reject',
     Approve:'Approve',
+    LeaveStatistics: 'Leave Statistics',
     
     //MenuScreen
     HomeS: 'Home',
@@ -267,7 +269,7 @@ export default {
     //PrivacyScreen
     Warning: 'Warning',
 	Message: 'Do you want to confirm sign out?',
-	Confirm: 'Log Out',
+	Confirm: 'Confirm',
     Cancel: 'Cancel',
     
     //ProfileScreen
