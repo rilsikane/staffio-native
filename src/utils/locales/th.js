@@ -34,7 +34,7 @@ export default {
     LoadData: 'ดึงข้อมูล',
 
     //cardTimeRecord
-    History: 'ประวัติการลงเวลา',
+    HistoryTime: 'ประวัติการลงเวลา',
     Month: 'ช่วงเดือน',
     Absence: 'ขาด',
     Late: 'สาย',
@@ -63,7 +63,7 @@ export default {
     staff:'ค้นหาพนักงาน',
 
     //DetailCard
-    Type: 'ประเภทการลา',
+    TypeLeve: 'ประเภทการลา',
     Cause: 'สาเหตุ',
     Specify: 'ไม่ระบุ',
     Since: 'ตั้งแต่',
@@ -89,14 +89,14 @@ export default {
     Day: 'วัน',
 
     //LeaveCard
-    Type: 'ประเภทการลา',
+    TypeLeve: 'ประเภทการลา',
     Since: 'ตั้งแต่',
     To: 'ถึง',
     Day: 'วัน',
 
     //LeavePersonalCard
     TransactionDate: 'วันที่ทำรายการ',
-    Day: 'วัน',
+    LeaveDay: 'วัน',
     Since: 'ตั้งแต่',
     To: 'ถึง',
     Status: 'สถานะรายการ',
@@ -254,8 +254,8 @@ export default {
     Dashboard: 'Dashboard เข้างาน',
     ApproveLeave: 'พิจารณาการลา',
     Warning: 'คำเตือน',
-    Confirm: 'ยืนยัน',
-    Cancel: 'ยกเลิก',
+    ConfirmLogout: 'ยืนยัน',
+    CancelLogout: 'ยกเลิก',
     WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
 
     //PersonalStatScreen

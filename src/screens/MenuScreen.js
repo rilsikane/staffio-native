@@ -76,8 +76,8 @@ export default class MenuScreen extends React.Component {
             `${I18n.t('Warning')}`,
             `${I18n.t('WarningDetail')}`,
             [
-            {text: `${I18n.t('Confirm')}`, onPress: () => this.logOut()},
-            {text: `${I18n.t('Cancel')}`},
+            {text: `${I18n.t('ConfirmLogout')}`, onPress: () => this.logOut()},
+            {text: `${I18n.t('CancelLogout')}`},
             ],
             { cancelable: false }
         )

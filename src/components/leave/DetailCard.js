@@ -9,11 +9,11 @@ export default class DetailLeave extends React.Component {
 
   render() {
     return (
-        <Card style={{height:responsiveHeight(30)}}>
+        <Card style={{height:responsiveHeight(32)}}>
             <CardItem>
                 <Body style={{flex:4}}>
                     <View style={{flexDirection: 'row', alignItems:'center' }}>
-                        <Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('Type')}</Text>
+                        <Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('TypeLeve')}</Text>
                         <Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(2.2)}}>{this.props.type}</Text>
                     </View>
                     <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
@@ -31,6 +31,13 @@ export default class DetailLeave extends React.Component {
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('Balance')}</Text>
                         <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:2}}>{`${this.props.remain||0} ${I18n.t('From')} ${this.props.max} ${I18n.t('Day')}`}</Text>
                     </View>
+                    <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
+                        <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('Status')}</Text>
+                        <Text style={{fontFamily: 'Kanit', color:'#fbaa3e', fontSize:responsiveFontSize(1.7),flex:3,}}>{this.props.requestStatus}</Text>
+                        {/* <Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1, fontSize:responsiveFontSize(2.2)}}>{I18n.t('Status')}</Text>
+                        <Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:3, fontSize:responsiveFontSize(2.2)}}>{this.props.requestStatus}</Text> */}
+                    </View>
+                    
                     {/*<View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
                         <Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:2, fontSize:responsiveFontSize(2.2)}}>เอกสารแนบ</Text>
                         <Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:3}}>{this.props.docRef}</Text>

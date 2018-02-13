@@ -31,7 +31,7 @@ export default class LeaveCard extends React.Component {
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:2,textAlign:'center'}}>{this.props.info.positions}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                            {(<Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1, fontSize:responsiveFontSize(1.5)}}>{I18n.t('Type')}</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1, fontSize:responsiveFontSize(1.5)}}>{I18n.t('TypeLeve')}</Text>)}
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:1, fontSize:responsiveFontSize(1.8)}}>{this.props.info.type}</Text>)}
                             {(<Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} ${I18n.t('Day')}`}</Text>)}
                         </View>

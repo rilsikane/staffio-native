@@ -23,7 +23,7 @@ export default class ToggleLeave extends React.Component {
                 <View style={{paddingLeft:5,paddingRight:5,flexDirection:"row",paddingTop:5,paddingBottom:5,flex:1}}>
                     <View style={{flex:1}}>
                         <View style={{flexDirection: 'row', alignItems:'center',flex:1}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Type')}</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('TypeLeve')}</Text>)}
                         </View>
                     </View>
                     <View style={{flex:2 ,alignItems:"flex-end"}}>

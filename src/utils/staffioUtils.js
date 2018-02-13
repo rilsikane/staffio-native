@@ -1,30 +1,49 @@
 import moment from 'moment';
 import localization from 'moment/locale/th'
+import store from 'react-native-simple-store';
 var dateFormat = require('dateformat');
+var localeTmp = 'en';
+
+store.get('locale')
+.then((res) =>
+  {localeTmp = res;}
+)
 
 export function convertDate(tmpDate) {
 
     return dateFormat(tmpDate,"dd/mm/yyyy");
 }
 export function convertByFormat(tmpDate,format) {
-     let dayMonth = moment(tmpDate).locale("th", localization).format(format);
-     let year = moment(tmpDate).locale("th", localization).format("YYYY");
+    store.get('locale')
+    .then((res) =>
+      {localeTmp = res;}
+    )
+     let dayMonth = moment(tmpDate).locale(localeTmp, localization).format(format);
+     let year = moment(tmpDate).locale(localeTmp, localization).format("YYYY");
     // return dateFormat(tmpDate,format);
-    return dayMonth+(parseInt(year)+543);
+    return dayMonth+(parseInt(year)+(localeTmp=='th'? 543:0));
 }
 export function convertPunch(tmpDate) {
-     let day = moment(tmpDate).locale("th", localization).format("dd");
-     let date = moment(tmpDate).locale("th", localization).format("DD");
-     let month = moment(tmpDate).locale("th", localization).format("MMM");
-     let year = parseInt(moment(tmpDate).locale("th", localization).format("YYYY"))+543
+    store.get('locale')
+    .then((res) =>
+      {localeTmp = res;}
+    )
+     let day = moment(tmpDate).locale(localeTmp, localization).format("dd");
+     let date = moment(tmpDate).locale(localeTmp, localization).format("DD");
+     let month = moment(tmpDate).locale(localeTmp, localization).format("MMM");
+     let year = parseInt(moment(tmpDate).locale(localeTmp, localization).format("YYYY"))+(localeTmp=='th'?543:0)
     // return dateFormat(tmpDate,format);
     return day+" "+month+" "+date+" "+year;
 }
 export function convertForTag(tmpDate,format) {
-     let dayMonth = moment(tmpDate).locale("th", localization).format(format);
-     let year = moment(tmpDate).locale("th", localization).format("YYYY");
+    store.get('locale')
+    .then((res) =>
+      {localeTmp = res;}
+    )
+     let dayMonth = moment(tmpDate).locale(localeTmp, localization).format(format);
+     let year = moment(tmpDate).locale(localeTmp, localization).format("YYYY");
     // return dateFormat(tmpDate,format);
-    return dayMonth+((parseInt(year)+543)+"").substr(2,2);
+    return dayMonth+((parseInt(year)+(localeTmp=='th'?543:0))+"").substr(2,2);
 }
 export function convertDateThai(strDate) {
     moment.locale('th');
@@ -37,7 +56,7 @@ export function getyear() {
     var year = Date("YYYY");
         year =  year.substring(11,15)
          year = parseInt(year)
-         year = year + 543
+         year = year + (localeTmp=='th'? 543 :0)
         return year
   }
   
@@ -47,28 +66,28 @@ export function getmonth(){
     var month = date.getMonth();
     var month =  month + 1
     if(month == 1){
-      return 'มกราคม'
+      return localeTmp=='th'?'มกราคม':'January'
     }else if (month == 2){
-      return 'กุมภาพันธ์'
+      return localeTmp=='th'?'กุมภาพันธ์':'February'
     }else if (month == 3){
-      return 'มีนาคม'
+      return localeTmp=='th'?'มีนาคม':'March'
     }else if (month == 4){
-      return 'เมษายน'
+      return localeTmp=='th'?'เมษายน':'April'
     }else if (month == 5){
-      return 'พฤษภาคม'
+      return localeTmp=='th'?'พฤษภาคม':'May'
     }else if (month == 6){
-      return 'มิถุนายน'
+      return localeTmp=='th'?'มิถุนายน':'June'
     }else if (month == 7){
-      return 'กรกฏาคม'
+      return localeTmp=='th'?'กรกฏาคม':'July'
     }else if (month == 8){
-      return 'สิงหาคม'
+      return  localeTmp=='th'?'สิงหาคม':'August'
     }else if (month == 9){
-      return 'กันยายน'
+      return  localeTmp=='th'?'กันยายน':'September'
     }else if (month == 10){
-      return 'ตุลาคม'
+      return  localeTmp=='th'?'ตุลาคม':'October'
     }else if (month == 11){
-      return 'พฤศจิกายน'
+      return  localeTmp=='th'? 'พฤศจิกายน':'November'
     }else if (month == 12){
-      return 'ธันวาคม'
+      return  localeTmp=='th'?'ธันวาคม':'December'
     }
   }
