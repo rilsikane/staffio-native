@@ -98,7 +98,7 @@ export default class CardProgress extends React.Component {
                             </CardItem>)}
                             <CardItem style={this.props.isProj ? { height: responsiveHeight(0.1) ,paddingTop:6} :{ height: responsiveHeight(0.1) ,paddingTop:20}}>
                                 <Icon name='user' style={styles.Text1}/>
-                                <Text style={styles.Text4}>{this.props.data.empStatus} </Text>
+                                <Text style={styles.Text4}>{this.props.data.empAmount} </Text>
                                 <Text style={styles.Text5}>{I18n.t('DeptTime')}</Text>
                             </CardItem>
                         </Body>

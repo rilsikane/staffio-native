@@ -246,6 +246,7 @@ export default {
     Reject:'Reject',
     Approve:'Approve',
     LeaveStatistics: 'Leave Statistics',
+    ReqType:'Request Type',
     
     //MenuScreen
     HomeS: 'Home',

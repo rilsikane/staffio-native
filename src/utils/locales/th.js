@@ -247,6 +247,7 @@ export default {
     Reject: 'ปฏิเสธรายการ',
     Approve:'อนุมัติรายการ',
     LeaveStatistics: 'สถิติการลา',
+    ReqType:'ประเภทใบคำขอ',
     
     //MenuScreen
     HomeS: 'ลงเวลาเข้างาน',
