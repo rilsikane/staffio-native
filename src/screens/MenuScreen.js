@@ -11,9 +11,6 @@ import bgSrc from '../../img/homeBG.png';
 import I18n from '../utils/i18n';
 import SwitchSelector from 'react-native-switch-selector'
 
-
-
-
 @inject('naviStore')
 @observer 
 export default class MenuScreen extends React.Component {
@@ -76,9 +73,14 @@ export default class MenuScreen extends React.Component {
             `${I18n.t('Warning')}`,
             `${I18n.t('WarningDetail')}`,
             [
+<<<<<<< HEAD
+            {text: `${I18n.t('ConfirmLogout')}`, onPress: () => this.logOut()},
+            {text: `${I18n.t('CancelLogout')}`},
+=======
            
             {text: `${I18n.t('CancelLogout')}`},
             {text: `${I18n.t('ConfirmLogout')}`, onPress: () => this.logOut()},
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
             ],
             { cancelable: false }
         )
