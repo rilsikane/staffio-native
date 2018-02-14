@@ -68,7 +68,7 @@ export default {
     Specify: 'Not specify',
     Since: 'Since',
     To: 'To',
-    Day: 'Day',
+    Day: 'Day(s)',
     Balance: 'Balance',
     From: 'From',
 
@@ -76,27 +76,27 @@ export default {
     Cancel: 'Cancel',
     Since: 'Since',
     To: 'To',
-    Day: 'Day',
+    Day: 'Day(s)',
 
     //LeaveApproverCardGreen
     Since: 'Since',
     To: 'To',
-    Day: 'Day',
+    Day: 'Day(s)',
 
     //LeaveApproverCardRed
     Since: 'Since',
     To: 'To',
-    Day: 'Day',
+    Day: 'Day(s)',
 
     //LeaveCard
     TypeLeve: 'Type of leave',
     Since: 'Since',
     To: 'To',
-    Day: 'Day',
+    Day: 'Day(s)',
 
     //LeavePersonalCard
     TransactionDate: 'Transaction Date',
-    LeaveDay: 'Day',
+    LeaveDay: 'Day(s)',
     Since: 'Since',
     To: 'To',
     Status: 'Status',
@@ -117,10 +117,19 @@ export default {
     Back: 'Early end',
     Missing: 'Missing',
 
+    //punchCard-stampPunch
+    saveoutsideStampPunch: 'Enter time outside',
+    RemarkStampPunch: 'Remark',
+    RetakeStampPunch: 'Retake',
+    cancelStampPunch: 'Cancel',
+    okStampPunch: 'Ok',
+
     //punchCard-stampResult
     ok:'Ok',
     Cancel:'Cancel',
-
+    remarkStampResult: 'Remark',
+    notspecifyStampResult: 'did not specify',
+    commentStampResult: 'Comment',
 
     ///////////////SCREEN///////////////
     //Modal-confirmModal
