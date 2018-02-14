@@ -330,9 +330,9 @@ class HomeScreen extends React.Component {
   componentWillUnmount() {
     console.log("componentWillUnmount");
     AppState.removeEventListener('change', this._handleAppStateChange);
-    if(navigator){
-      navigator.geolocation.clearWatch(this.watchID);
-    }
+    // if(navigator){
+    //   navigator.geolocation.clearWatch(this.watchID);
+    // }
     BackgroundTimer.clearTimeout(intervalId);
     intervalId = null;
   }
