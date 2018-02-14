@@ -227,20 +227,12 @@ export default class LeaveDetailScreen extends React.Component {
           <Profile name={this.props.leaveStore.leaveData.name} positions={this.props.leaveStore.leaveData.positions} 
           img={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}}/>
           {!this.state.loading ? <DetailCard type={this.props.leaveStore.leaveData.type} cause={this.props.leaveStore.leaveData.reasonName} 
-<<<<<<< HEAD
           start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  
-=======
-          start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  isAppr ={this.props.isAppr}
->>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
           total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} requestStatus={this.props.leaveStore.leaveData.requestStatus}
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }
-<<<<<<< HEAD
           {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`} date={''} data={this.state.leaveBalances}/>}
-=======
-          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`}  data={this.state.leaveBalances}/>}
->>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
 
         </Content>
          {this.props.isAppr &&

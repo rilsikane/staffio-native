@@ -255,10 +255,7 @@ export default {
     Reject:'Reject',
     Approve:'Approve',
     LeaveStatistics: 'Leave Statistics',
-<<<<<<< HEAD
-=======
     ReqType:'Request Type',
->>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
     
     //MenuScreen
     HomeS: 'Home',
