@@ -39,6 +39,7 @@ export default {
     Absence: 'ขาด',
     Late: 'สาย',
     Back: 'กลับก่อน',
+    NotPunch : 'ไม่ได้ลงเวลา',
 
     //findFriends
     FindFriends: 'ค้นหาเพื่อน',

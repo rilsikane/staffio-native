@@ -39,6 +39,7 @@ export default {
     Absence: 'Absence',
     Late: 'Late',
     Back: 'Early end',
+    NotPunch : 'Not punch',
 
     //findFriends
     FindFriends: 'Find Friends',

@@ -109,7 +109,7 @@ export default  styles = {
     marginLeft: responsiveWidth(1),
     fontSize: responsiveFontSize(3.3),
     // height: em(2.8),
-    width: responsiveFontSize(3.7),
+    width: responsiveFontSize(4),
     color:"#ffff",
     justifyContent:'center',
     alignItems:'center'
@@ -136,6 +136,6 @@ export default  styles = {
     marginTop: responsiveHeight(4),
     marginBottom: responsiveHeight(5),
     height: responsiveHeight(18),
-    width: responsiveWidth(30),
+    width: responsiveWidth(33),
   }
 };
