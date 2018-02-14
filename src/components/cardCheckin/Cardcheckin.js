@@ -46,22 +46,51 @@ export default class Checkin extends React.Component {
     render() {
       var data =  this.props.data
         return (            
-                <View style={{flex:1}}>
-                    <Card style={{ height: responsiveHeight(11), width: responsiveWidth(98),borderRadius:2,marginTop:2,marginBottom:2 }}>
-                        <View style={{ width :responsiveWidth(17)}}>
-                            {( data.imagePathPersonal && data.imagePathPersonal!= "") && <Image source={{uri:data.imagePathPersonal}} style={styles.image}></Image>}
-                            <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} /> 
-                        </View>  
-                        <View style={{marginTop : responsiveHeight(2) , width :responsiveWidth(60)}}>
+            <View style={{flex:1}}>
+                <Card style={{ height: responsiveHeight(12), width: responsiveWidth(98),borderRadius:2,marginTop:2,marginBottom:2 ,flexWrap:"nowrap"}}>
+                    {/* <View style={{ width :responsiveWidth(17)}}>
+                        {( data.imagePathPersonal && data.imagePathPersonal!= "") && <Image source={{uri:data.imagePathPersonal}} style={styles.image}></Image>}
+                        <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} /> 
+                    </View>   */}
+                    <View style={[styles.box1, this.changcolorborder( data.timeRecord)]} />
+                        <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5),flex:3}}>
+                            <Left style={{flex:1,backgroundColor:'transparent'}}>
+                                <Thumbnail source={{uri:data.imagePathPersonal}} />
+                            </Left>
+                            <Body style={{flex:4}}>
+                                <View style={{flexDirection: 'row', alignItems:'center'}}>
+                                <Text style={styles.Text1}>    { data.fullNameTh}</Text>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
+                                <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
+                                </View>
+                                <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
+                                <Icon style={{color:"#989898", marginLeft: responsiveWidth(4.5)}}  name="clock-o"/>
+                                <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :`${I18n.t('didntEntertime')}` }</Text>
+                                </View>
+                            </Body>
+                            <Right>
+                                 {(data.mobileNo && data.mobileNo !="") && <Button style={[styles.icon]} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
+                                    <IconTello style={{ color: "#fbaa3e" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
+                                </Button>}
+                                {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
+                                    <IconTello style={{ color: "#3c5b9a" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
+                                </Button>}
+                                {(data.lineid && data.lineid !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.lineid)} >
+                                    <IconTello style={{ color: "#37b54a" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
+                                </Button>}
+                            </ Right>
+                        </CardItem>
+                        {/* <View style={{marginTop : responsiveHeight(2) , width :responsiveWidth(60)}}>
                             <Text style={styles.Text1}>    { data.fullNameTh}</Text>
                             <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
                             <View style={{flexDirection:"row",paddingLeft:responsiveWidth(4),paddingTop:1}}>
                                 <Icon style={{color:"#989898"}}  name="clock-o"/>
                                 <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :`${I18n.t('didntEntertime')}` }</Text>
                              </View>
-                        </View>
+                        </View> */}
 
-                        <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
+                        {/* <View style={{marginTop : responsiveHeight(2),marginRight:responsiveWidth(-1) }}>
                         <CardItem style={{marginRight : responsiveWidth(2) }}>
                            {(data.mobileNo && data.mobileNo !="") && <Button style={[styles.icon]} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
                                 <IconTello style={{ color: "#fbaa3e" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
@@ -73,14 +102,9 @@ export default class Checkin extends React.Component {
                                 <IconTello style={{ color: "#37b54a" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
                             </Button>}
                         </CardItem>
-                        </View>
-                    </Card>
-                </View>
-         
-          
-            
-
-
+                        </View> */}
+                </Card>
+            </View>
         );
     }
 
@@ -123,16 +147,20 @@ const styles = ({
         borderRadius: responsiveWidth(8 / 2),
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'transparent'
+        backgroundColor:'transparent',
+        marginRight: responsiveWidth(5)
     },
     box1: {
+        zIndex:999,
+        height:responsiveHeight(3),
+        width:responsiveWidth(5),
         position: 'absolute',
         backgroundColor: 'transparent',
         borderStyle: 'solid',
         borderRightWidth: responsiveWidth(13),
-        borderTopWidth: responsiveWidth(9.5),
-        borderRightColor: 'transparent',
-        borderRadius:1
+        borderTopWidth: responsiveWidth(10),
+        borderRightColor:"transparent"
+        // borderRadius:1
     },
     container: {
         flex: 1
@@ -146,5 +174,3 @@ const styles = ({
         marginLeft : responsiveWidth(2)
     }
 });
-
-
