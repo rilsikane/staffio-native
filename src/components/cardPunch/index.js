@@ -17,7 +17,7 @@ function getShiftCard(shiftTime){
   if(shiftTime && shiftTime!="-"){
     return (<Text allowFontScaling={false}style={styles.TextColor2}> {getShiftTime(shiftTime)} </Text>);
   }else{
-    return (<Text allowFontScaling={false}style={styles.TextColor3}>` ${I18n.t('Not')} `</Text>);
+    return (<Text allowFontScaling={false}style={styles.TextColor3}>{I18n.t('NotPunch')}</Text>);
   }
 }
 function renderFormStatus(status){

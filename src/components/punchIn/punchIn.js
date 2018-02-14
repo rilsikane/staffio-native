@@ -13,6 +13,7 @@ import {convertPunch} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Bounceable from "react-native-bounceable";
 import I18n from '../../utils/i18n';
+import app  from '../../stores/app';
 
 class PunchIn extends React.Component {
 
@@ -21,6 +22,7 @@ class PunchIn extends React.Component {
     super(props);
     this.state = {punchInTime:"00:00",DateTime:new Date().toDateString().split(' ')
     ,WORK_START_TM:"",WORK_END_TM:"",branch_name:"",punchOutTime:"",updateShift:"I",timeRecordType:""};
+    this.app = app;
   }
 
   punchIn(){
@@ -218,7 +220,7 @@ class PunchIn extends React.Component {
                 </Bounceable>
               </Col>
               <Col size={75}>
-                <Text allowFontScaling={false}style={styles.TextNameStyle1}>{this.props.user.FULL_NAME_TH}</Text>
+                <Text allowFontScaling={false}style={styles.TextNameStyle1}>{this.app && this.app.locale=='en'? this.props.user.FULL_NAME_EN : this.props.user.FULL_NAME_TH}</Text>
                 <Text allowFontScaling={false}style={styles.TextNameStyle2}>{this.props.user.POSITION_NAME}</Text>
               </Col>
             </Row>

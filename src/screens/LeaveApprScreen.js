@@ -95,7 +95,7 @@ export default class LeaveApprScreen extends React.Component {
       info.endDate = convertByFormat(new Date(list[i].LeaveEndDate).getTime(),"DD MMM ");
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
-      info.reasonName = list[i].REASON_NAME;
+      info.reasonName = list[i].LeaveReasonNameTH;
       info.orgCode = list[i].OrgCode;
       info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
       info.requestStatus = list[i].flaq == 'L' ? I18n.t('ToggleApprove'):I18n.t('ToggleCancel');
@@ -138,7 +138,7 @@ export default class LeaveApprScreen extends React.Component {
      this.props.navigator.push({
         screen: 'staffio.LeaveDetailScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
-        passProps: {isAppr:true,onReturnPress:this.onReturnPress
+        passProps: {isAppr:true,onReturnPress:this.onReturnPress,isCancel:this.state.isCancel
           ,onRejectPress:this.onRejectPress,onApprovePress:this.onApprovePress}, // simple serializable object that will pass as props to the pushed screen (optional)
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
         animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
@@ -149,7 +149,11 @@ export default class LeaveApprScreen extends React.Component {
   onApprovePress(data){
     this.setState({loading:true});
     //
+<<<<<<< HEAD
     getConfirmModal(this.approveLeave,this.cancelModal,data);
+=======
+    //getConfirmModal(this.approveLeave,this.cancelModal,data);
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
     
   //   this.props.navigator.showLightBox({
   //     screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
@@ -169,6 +173,7 @@ export default class LeaveApprScreen extends React.Component {
   }
   onRejectPress(data){
     this.setState({loading:true});
+<<<<<<< HEAD
     getInputModal(this.rejectLeave,this.cancelModal,I18n.t('Reject'),data,"resize")
 
     // this.props.navigator.showLightBox({
@@ -202,6 +207,41 @@ export default class LeaveApprScreen extends React.Component {
     //   },
     //   adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
     //  });
+=======
+    // getInputModal(this.rejectLeave,this.cancelModal,I18n.t('Reject'),data,"resize")
+
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+      ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  onReturnPress(data){
+    this.setState({loading:true});
+    // getInputModal(this.returnLeave,this.cancelModal,I18n.t('SendBack'),data,"nothing")
+
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        height:responsiveHeight(70),
+        width:responsiveWidth(90)
+      },
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
   }
   async approveLeave(data){
     this.props.navigator.dismissLightBox();
@@ -253,17 +293,19 @@ export default class LeaveApprScreen extends React.Component {
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
         <Swipeable  key={info.requestLeaveNo} rightButtons={[
-            <TouchableOpacity style={[styles.rightSwipeItem]} onPress={()=>this.onApprovePress(info)}>
+            <TouchableOpacity style={[styles.rightSwipeItem]} onPress={()=>this.onApprovePress(info)} >
                 <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>,
 
-            <TouchableOpacity style={[styles.rightSwipeItem ]} onPress={()=>this.onReturnPress(info)}>
+            !this.state.isCancel && (<TouchableOpacity style={[styles.rightSwipeItem ]}
+            onPress={()=>this.onReturnPress(info)}>
                 <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white' }} />
-            </TouchableOpacity>,
+            </TouchableOpacity>),
 
-            <TouchableOpacity style={[styles.rightSwipeItem]} onPress={()=>this.onRejectPress(info)}>
+            !this.state.isCancel && (<TouchableOpacity style={[styles.rightSwipeItem]} disabled={this.state.isCancel}
+            onPress={()=>this.onRejectPress(info)}>
               <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white' }} />
-            </TouchableOpacity>,  
+            </TouchableOpacity>),  
           ]}>
             {(!this.state.isCancel && (info.requestStatusCode != 'C')
             || this.state.isCancel && (info.requestStatusCode == 'C')) &&

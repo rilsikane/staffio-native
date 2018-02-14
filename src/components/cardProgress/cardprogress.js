@@ -76,13 +76,14 @@ export default class CardProgress extends React.Component {
                     <CardItem style={styles.cardContainer}>
                         <View style={{ alignItems: 'center' }}>
                             <View style={styles.circle}>
-                                <ProgressCircle percent={((this.props.data.empStatus * 100) / this.props.data.empAmount )}
+                            {/* percent={((this.props.data.empStatus * 100) / this.props.data.empAmount ) */}
+                                <ProgressCircle percent={this.props.data.empStatus}
                                     radius={30}
                                     borderWidth={3}
-                                    color={this.changcolor((this.props.data.empStatus * 100) / this.props.data.empAmount )}
+                                    color={this.changcolor(this.props.data.empStatus )}
                                     shadowColor={this.bgColor(this.props.data.empStatus)}
                                     bgColor="#fff" >
-                                    <Text style={this.color((this.props.data.empStatus * 100) / this.props.data.empAmount )}>{this.checkpercent((this.props.data.empStatus * 100) / this.props.data.empAmount ) + '%'}</Text>
+                                    <Text style={this.color(this.props.data.empStatus)}>{this.checkpercent(this.props.data.empStatus) + '%'}</Text>
                                 </ProgressCircle>
                             </View>
                             <View style={styles.square2} />
@@ -97,7 +98,7 @@ export default class CardProgress extends React.Component {
                             </CardItem>)}
                             <CardItem style={this.props.isProj ? { height: responsiveHeight(0.1) ,paddingTop:6} :{ height: responsiveHeight(0.1) ,paddingTop:20}}>
                                 <Icon name='user' style={styles.Text1}/>
-                                <Text style={styles.Text4}>{this.props.data.empStatus} / {this.props.data.empAmount}   </Text>
+                                <Text style={styles.Text4}>{this.props.data.empAmount} </Text>
                                 <Text style={styles.Text5}>{I18n.t('DeptTime')}</Text>
                             </CardItem>
                         </Body>

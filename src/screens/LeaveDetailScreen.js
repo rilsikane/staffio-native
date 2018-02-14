@@ -170,7 +170,7 @@ export default class LeaveDetailScreen extends React.Component {
           style: modalStyle,
           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
         });
-      },1000);
+      },500);
 
     }
   }
@@ -185,6 +185,7 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/RejectLeaveRequest",params);
     if(response){
+      setTimeout(() => {
       this.props.navigator.showLightBox({
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
         passProps: {title:`${I18n.t('Reject')} : ${data.type}`,msg:`${I18n.t('RejectSuccess')}`
@@ -192,6 +193,7 @@ export default class LeaveDetailScreen extends React.Component {
         style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
        });
+      },500);
     }
   }
   async returnLeave(data){
@@ -205,13 +207,15 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/ReturnLeaveRequest",params);
     if(response){
-      this.props.navigator.showLightBox({
-        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
-        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: modalStyle,
-        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-       });
+      setTimeout(() => {
+        this.props.navigator.showLightBox({
+          screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+          passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
+          ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+          style: modalStyle,
+          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+        });
+      },500);
     }
   }
 
@@ -223,25 +227,33 @@ export default class LeaveDetailScreen extends React.Component {
           <Profile name={this.props.leaveStore.leaveData.name} positions={this.props.leaveStore.leaveData.positions} 
           img={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}}/>
           {!this.state.loading ? <DetailCard type={this.props.leaveStore.leaveData.type} cause={this.props.leaveStore.leaveData.reasonName} 
+<<<<<<< HEAD
           start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  
+=======
+          start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  isAppr ={this.props.isAppr}
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
           total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} requestStatus={this.props.leaveStore.leaveData.requestStatus}
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }
+<<<<<<< HEAD
           {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`} date={''} data={this.state.leaveBalances}/>}
+=======
+          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`}  data={this.state.leaveBalances}/>}
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
 
         </Content>
          {this.props.isAppr &&
-          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-responsiveWidth(10)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
+          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
+             {!this.props.isCancel && <ActionButton.Item marginRight={-responsiveWidth(3)} marginBottom={-responsiveHeight(4.8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Decline')}</Text>
-            </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(14.9)} marginBottom={-(responsiveHeight(1))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
+            </ActionButton.Item>}
+            {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(21.9)} marginBottom={-(responsiveHeight(0.5))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
-            </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(18))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
+            </ActionButton.Item>}
+           <ActionButton.Item marginRight={responsiveWidth(31)} marginBottom={-(responsiveHeight(17))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>

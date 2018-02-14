@@ -106,7 +106,7 @@ export default class Overview extends React.Component {
                                 <View style={{ alignItems: 'center', justifyContent: 'center',paddingTop:5}}>
                                     {this.state.data.map((val) => {
                                         return (
-                                            <CardCheckin key={val.fullNameTh} data={val} onContactSelected={this.onContactSelected} >
+                                            <CardCheckin key={val.empCode} data={val} onContactSelected={this.onContactSelected} >
                                             </CardCheckin>);
                                         
                                     })}

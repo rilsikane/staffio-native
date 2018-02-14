@@ -1,16 +1,22 @@
 import { observable } from 'mobx';
 import store from 'react-native-simple-store';
 import I18n from '../utils/i18n';
+import { locale } from 'moment';
 
 class AppStore {
   @observable root = undefined; // 'login' / 'after-login'
-
+  @observable locale = 'th';
   constructor() {}
 
   async appInitialized() {
     let userData = await store.get("USER");
-    let locale = await store.get("locale");
-    I18n.locale = locale;
+    let localeStore = await store.get("locale");
+    if(!localeStore){
+      localeStore = 'th';
+    }
+    I18n.locale = localeStore;
+    this.locale = localeStore;
+
     if (userData == null || userData.pincode==null) {
       this.root = 'login';
     }else{

@@ -73,8 +73,14 @@ export default class MenuScreen extends React.Component {
             `${I18n.t('Warning')}`,
             `${I18n.t('WarningDetail')}`,
             [
+<<<<<<< HEAD
             {text: `${I18n.t('ConfirmLogout')}`, onPress: () => this.logOut()},
             {text: `${I18n.t('CancelLogout')}`},
+=======
+           
+            {text: `${I18n.t('CancelLogout')}`},
+            {text: `${I18n.t('ConfirmLogout')}`, onPress: () => this.logOut()},
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
             ],
             { cancelable: false }
         )
@@ -83,6 +89,7 @@ export default class MenuScreen extends React.Component {
         this.setState({loading:true});
         store.delete("USER");
         store.delete("endpointNew");
+        store.delete("locale");
         this.app.appInitialized();
     }
     switchLang(value){
@@ -101,7 +108,7 @@ export default class MenuScreen extends React.Component {
         <View style={{flexDirection:"row"}}>
             <View style={{flex:2}}>
                 <Thumbnail small style={styles.imageStyle} source={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
-                <Text style={styles.textName}>{this.state.userData.FULL_NAME_TH}</Text>
+                <Text style={styles.textName}>{this.app && this.app.locale=='en'? this.state.userData.FULL_NAME_EN:this.state.userData.FULL_NAME_TH}</Text>
                 <Text style={styles.textPosition}>{this.state.userData.POSITION_NAME}</Text>
             </View>
             <View style={{alignItems:"center",flex:1,justifyContent:"center",alignContent:"center",paddingRight:responsiveWidth(5)}}>

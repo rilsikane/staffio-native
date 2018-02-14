@@ -39,6 +39,7 @@ export default {
     Absence: 'ขาด',
     Late: 'สาย',
     Back: 'กลับก่อน',
+    NotPunch : 'ไม่ได้ลงเวลา',
 
     //findFriends
     FindFriends: 'ค้นหาเพื่อน',
@@ -209,7 +210,7 @@ export default {
     Cancel: 'ยกเลิก' ,
 
     //InqInboxScreen
-    History: 'ประวัติ',
+    HistoryTime: 'ประวัติการลงเวลา',
     Normal:'ปกติ',
     Late:'สาย',
     Earlyend:'กลับก่อน',
@@ -246,6 +247,10 @@ export default {
     Reject: 'ปฏิเสธรายการ',
     Approve:'อนุมัติรายการ',
     LeaveStatistics: 'สถิติการลา',
+<<<<<<< HEAD
+=======
+    ReqType:'ประเภทใบคำขอ',
+>>>>>>> a0a49f72211d663b79db0998151cf49f1af95eb6
     
     //MenuScreen
     HomeS: 'ลงเวลาเข้างาน',

@@ -18,6 +18,7 @@ import Loading from '../components/loading';
 import CardHeader from '../components/cardHeader';
 import I18n from '../utils/i18n';
 
+
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {

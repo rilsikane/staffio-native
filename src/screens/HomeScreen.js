@@ -40,7 +40,7 @@ class HomeScreen extends React.Component {
   }
   constructor(props) {
     super(props);
-   
+    this.app = app;
     this.state = {
       items: {},
       user:{},
@@ -55,7 +55,7 @@ class HomeScreen extends React.Component {
     };
 
     LocaleConfig.defaultLocale = 'th';
-    this.app = app;
+    
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.closeDialog = this.closeDialog.bind(this);
     this.gotoInbox = this.gotoInbox.bind(this);
@@ -134,6 +134,7 @@ class HomeScreen extends React.Component {
             statusAmount={this.state.statusAmount}
             hideCalendar={this.state.hideCalendar}
             gotoInbox={this.gotoInbox}
+            app={this.app}
             // monthFormat={'yyyy'}
             // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
             //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
@@ -329,7 +330,9 @@ class HomeScreen extends React.Component {
   componentWillUnmount() {
     console.log("componentWillUnmount");
     AppState.removeEventListener('change', this._handleAppStateChange);
-    navigator.geolocation.clearWatch(this.watchID);
+    if(navigator){
+      navigator.geolocation.clearWatch(this.watchID);
+    }
     BackgroundTimer.clearTimeout(intervalId);
     intervalId = null;
   }

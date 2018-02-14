@@ -9,7 +9,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../../assets/fonts/config.json';
 import Iocon from 'react-native-vector-icons/Ionicons';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import logoImg from '../../../img/key.png';
 
 export default class PincodePress extends React.Component { 
   constructor(props) {
@@ -143,7 +143,7 @@ export default class PincodePress extends React.Component {
 
     <View style={styles.pinCodeContainer}>
       <View style={styles.viewHeader}>
-        <Image style={styles.thumbnailStyle} source={{uri: 'https://housing.umn.edu/sites/housing.umn.edu/files/key_icon-01.png'}} />
+        <Image style={styles.thumbnailStyle} source={logoImg} />
         <Text allowFontScaling={false}style={styles.textHeader}>{this.props.titileTxt}</Text>
       </View >
         <View style={styles.passText}>
