@@ -17,10 +17,11 @@ import Loading from '../components/loading';
 import Profile from '../components/leave/Profile';
 import LeaveCard from '../components/leave/LeaveCard';
 import LeaveStatCard from '../components/leave/LeaveStatCard';
+import LeaveApprover from '../components/leave/LeaveApproverCardGreen';
 import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormat} from '../utils/staffioUtils';
+import {convertByFormat, getConfirmModal, getInputModal, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import Swipeable from 'react-native-swipeable';
@@ -28,16 +29,20 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import I18n from '../utils/i18n';
+import ToggleLeave from '../components/leave/ToggleLeave';
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 @inject('leaveStore')
 @observer
-export default class PersonalStatScreen extends React.Component {
+export default class LeaveApprScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[]}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
     this.cancelModal = this.cancelModal.bind(this);
@@ -46,6 +51,7 @@ export default class PersonalStatScreen extends React.Component {
     this.onReturnPress = this.onReturnPress.bind(this);
     this.onApprovePress = this.onApprovePress.bind(this);
     this.onRejectPress = this.onRejectPress.bind(this);
+    this.onSwitch = this.onSwitch.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -91,9 +97,30 @@ export default class PersonalStatScreen extends React.Component {
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
       info.orgCode = list[i].OrgCode;
+      info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
+      info.requestStatus = list[i].flaq == 'L' ? I18n.t('ToggleApprove'):I18n.t('ToggleCancel');
+      info.requestStatusCode = list[i].flaq;
       infos.push(info);
   }
     return infos;
+  }
+  getLeaveColor(typeCode){
+    switch (typeCode) {
+      case 'SC_1':
+        return "#fa6575";
+        break;
+      case 'VC':
+        return "#8BC34C";
+        break;
+      case 'PERS-01':
+        return "#1abbbd";
+        break;
+      default:
+       return "#f5dc0f";
+    }
+  }
+  onSwitch(value){
+    this.setState({isCancel:value});
   }
   transFormStatHis(list){
      let infos = [];
@@ -121,18 +148,20 @@ export default class PersonalStatScreen extends React.Component {
   }
   onApprovePress(data){
     this.setState({loading:true});
+    //
+    getConfirmModal(this.approveLeave,this.cancelModal,data);
     
-    this.props.navigator.showLightBox({
-      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
-      ,msg2: `${data.name}` ,cancel:this.cancelModal
-      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-      },
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+  //   this.props.navigator.showLightBox({
+  //     screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+  //     passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
+  //     ,msg2: `${data.name}` ,cancel:this.cancelModal
+  //     ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+  //     style: {
+  //       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+  //       backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+  //     },
+  //     adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+  //    });
   }
   cancelModal(){
     this.setState({loading:false});
@@ -140,36 +169,39 @@ export default class PersonalStatScreen extends React.Component {
   }
   onRejectPress(data){
     this.setState({loading:true});
-   
-    this.props.navigator.showLightBox({
-      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
-      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
-      ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    getInputModal(this.rejectLeave,this.cancelModal,I18n.t('Reject'),data,"resize")
+
+    // this.props.navigator.showLightBox({
+    //   screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+    //   passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+    //   ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+    //   ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+    //   style: {
+    //     backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+    //     backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+    //     height:responsiveHeight(70),
+    //     width:responsiveWidth(90)
+    //   },
+    //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+    //  });
   }
   onReturnPress(data){
     this.setState({loading:true});
-    this.props.navigator.showLightBox({
-      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
-      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
-      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: {
-        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-        height:responsiveHeight(70),
-        width:responsiveWidth(90)
-      },
-      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    getInputModal(this.returnLeave,this.cancelModal,I18n.t('SendBack'),data,"nothing")
+
+    // this.props.navigator.showLightBox({
+    //   screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+    //   passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+    //   ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+    //   ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+    //   style: {
+    //     backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+    //     backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+    //     height:responsiveHeight(70),
+    //     width:responsiveWidth(90)
+    //   },
+    //   adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+    //  });
   }
   async approveLeave(data){
     this.props.navigator.dismissLightBox();
@@ -233,9 +265,12 @@ export default class PersonalStatScreen extends React.Component {
               <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>,  
           ]}>
+            {(!this.state.isCancel && (info.requestStatusCode != 'C')
+            || this.state.isCancel && (info.requestStatusCode == 'C')) &&
            <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>  
-            <LeaveCard  info={info} openDetail={this.openLeaveDetail}/>
+            <LeaveApprover  info={info} openDetail={this.openLeaveDetail}/>
            </TouchableOpacity>
+            }
          </Swipeable> 
       );
     }else{
@@ -247,6 +282,10 @@ export default class PersonalStatScreen extends React.Component {
     }
 }
   render() {
+    const options = [
+      {label:'ขออนุมัติ',value:'appr' },
+      {label:'ขอยกเลิก',value:'cancel' }
+    ];
     return (
       
       <View style={{backgroundColor: '#ffe9d4',flex:1}}>
@@ -257,6 +296,7 @@ export default class PersonalStatScreen extends React.Component {
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
             </View> */}
            <PTRView onRefresh={this._refresh}>
+              {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}
               {!this.state.loading  ? this.renderList() 
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}

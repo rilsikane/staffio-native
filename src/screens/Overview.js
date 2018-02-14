@@ -17,9 +17,13 @@ import CardCheckin from '../components/cardCheckin/Cardcheckin';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../assets/fonts/config.json';
+import {} from '../utils/staffioUtils'
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 export default class Overview extends React.Component {
+    componentWillMount(){
+		disbackButton();
+	}
     constructor(props) {
         super(props);
         this.onContactSelected = this.onContactSelected.bind(this);

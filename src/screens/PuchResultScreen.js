@@ -20,8 +20,11 @@ import store from 'react-native-simple-store';
 import {post} from '../api';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import I18n from '../utils/i18n';
-
+import {disbackButton} from '../utils/staffioUtils'
 export default class PunchResultScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   constructor(props){
     super(props);
      this.goBack = this.goBack.bind(this);

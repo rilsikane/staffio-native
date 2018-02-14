@@ -34,7 +34,7 @@ export default {
     LoadData: 'Download',
 
     //cardTimeRecord
-    History: 'History enter time',
+    HistoryTime: 'History punch time',
     Month: 'Month',
     Absence: 'Absence',
     Late: 'Late',
@@ -62,7 +62,7 @@ export default {
     staff:'Search Staff',
 
     //DetailCard
-    Type: 'Type of leave',
+    TypeLeve: 'Type of leave',
     Cause: 'Cause',
     Specify: 'Not specify',
     Since: 'Since',
@@ -88,14 +88,14 @@ export default {
     Day: 'Day',
 
     //LeaveCard
-    Type: 'Type of leave',
+    TypeLeve: 'Type of leave',
     Since: 'Since',
     To: 'To',
     Day: 'Day',
 
     //LeavePersonalCard
     TransactionDate: 'Transaction Date',
-    Day: 'Day(s)',
+    LeaveDay: 'Day',
     Since: 'Since',
     To: 'To',
     Status: 'Status',
@@ -227,6 +227,7 @@ export default {
     SpecifyCause: 'Specify cause',
     SendBack: 'Send back',
     Consider: 'Consider leave',
+    approveLeave: 'Approved',
 
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
@@ -243,6 +244,7 @@ export default {
     Decline:'Decline',
     Reject:'Reject',
     Approve:'Approve',
+    LeaveStatistics: 'Leave Statistics',
     
     //MenuScreen
     HomeS: 'Home',
@@ -253,8 +255,8 @@ export default {
     Dashboard: 'Dashboard',
     ApproveLeave: 'Approve Leave',
     Warning: 'Warning',
-    Confirm: 'comfirm',
-    Cancel: 'cancel',
+    ConfirmLogout: 'comfirm',
+    CancelLogout: 'cancel',
     WarningDetail: 'You confirm to logout',
 
     //PersonalStatScreen
@@ -267,14 +269,13 @@ export default {
     //PrivacyScreen
     Warning: 'Warning',
 	Message: 'Do you want to confirm sign out?',
-	Confirm: 'Set password',
-    Cancel: 'Set password',
+	Confirm: 'Confirm',
+    Cancel: 'Cancel',
     
     //ProfileScreen
     Warning: 'Warning',
 	Message: 'Do you want to confirm sign out?',
-	Confirm: 'Set password',
-    Cancel: 'Set password',
+
     
     //PuchResultScreen
     Comment: 'Comment',

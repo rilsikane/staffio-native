@@ -224,11 +224,11 @@ export default class LeaveDetailScreen extends React.Component {
           img={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}}/>
           {!this.state.loading ? <DetailCard type={this.props.leaveStore.leaveData.type} cause={this.props.leaveStore.leaveData.reasonName} 
           start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  
-          total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} 
+          total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} requestStatus={this.props.leaveStore.leaveData.requestStatus}
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }
-          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={'สถิติการลา'} date={''} data={this.state.leaveBalances}/>}
+          {(!this.state.loading && this.props.isAppr) && <LeaveStatCard title={`${I18n.t('LeaveStatistics')}`} date={''} data={this.state.leaveBalances}/>}
 
         </Content>
          {this.props.isAppr &&

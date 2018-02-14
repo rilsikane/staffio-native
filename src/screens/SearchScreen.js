@@ -12,7 +12,7 @@ import FriendListScreen from './FriendListScreen'
 import { StackNavigator } from 'react-navigation';
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import { NavigationActions } from 'react-navigation';
-
+import {disbackButton} from '../utils/staffioUtils'
 
 let SearchStackNavigator = StackNavigator(
  
@@ -29,6 +29,9 @@ let SearchStackNavigator = StackNavigator(
   }
 );
 class SearchScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   static navigationOptions = {
     header: null,
   };

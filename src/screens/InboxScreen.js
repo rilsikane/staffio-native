@@ -12,7 +12,7 @@ import InboxDetailScreen from './InboxDetailScreen'
 import { StackNavigator } from 'react-navigation';
 import PunchResultScreen from './PuchResultScreen';
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
-
+import {disbackButton} from '../utils/staffioUtils'
 let InboxStackNavigator = StackNavigator(
  
   {
@@ -30,6 +30,9 @@ let InboxStackNavigator = StackNavigator(
   }
 );
 class InboxScreen extends React.Component {
+  componentWillMount(){
+		disbackButton();
+	}
   static navigationOptions = {
     header: null,
   };

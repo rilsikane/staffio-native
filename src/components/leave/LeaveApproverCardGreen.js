@@ -20,26 +20,26 @@ export default class LeaveApproverCardGreen extends React.Component {
         // (        
             <Card style={{marginBottom:0}}>
                 <View style={{flexDirection: 'row',flex:1}}>
-                <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:'#BECC9A',borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
-                <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5), borderLeftWidth:responsiveWidth(2.5),flex:3}}>
+                <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:this.props.info.color,borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
+                <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5),flex:3}}>
                     <Left style={{flex:1,backgroundColor:'transparent'}}>
                         <Thumbnail source={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}} />
                     </Left>
                     <Body style={{flex:4}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>JUTHA SUBHAMA</Text>)}
-                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#BECC9A',flex:1.5, fontSize:responsiveFontSize(1.8)}}>ลาป่วย</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:'#BECC9A',borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`2 ${I18n.t('Day')}`}</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.name}</Text>)}
+                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:this.props.info.color,flex:1.5, fontSize:responsiveFontSize(1.8)}}>{this.props.info.type}</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:this.props.info.color,borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} ${I18n.t('LeaveDay')}`}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:0,textAlign:'center'}}>ID: 004901</Text>)}
-                            {(<Text style={{fontFamily:'Kanit', color:'#777779',flex:1.5, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>Post. Solution Specialist</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:0,textAlign:'center'}}>ID: {this.props.info.empId}</Text>)}
+                            {(<Text style={{fontFamily:'Kanit', color:'#777779',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>Post. {this.props.info.positions}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
                             {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('Since')}</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>05 กันยายน 2017</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.startDate}</Text>)}
                             {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('To')}</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>06 กันยายน 2017</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.endDate}</Text>)}
                             
                         </View>
                     </Body>

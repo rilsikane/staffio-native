@@ -24,7 +24,7 @@ export default class CardTimeRecord extends React.Component {
         return(
             <Card style={[this.props.style,styles.cardContainer]}>
                     <CardItem style={styles.cardContainer2}>
-                    <Text allowFontScaling={false}style={styles.titleText}>{I18n.t('History')}</Text>
+                    <Text allowFontScaling={false}style={styles.titleText}>{I18n.t('HistoryTime')}</Text>
                     <Text allowFontScaling={false}style={styles.noteText}>{`  (${I18n.t('Month')}`}</Text>
                     <Text allowFontScaling={false}style={styles.noteText}> {getmonth()}</Text>
                     <Text allowFontScaling={false}style={styles.noteText}> {getyear()} )</Text>
