@@ -102,6 +102,7 @@ export default {
     To: 'ถึง',
     Status: 'สถานะรายการ',
     Waiting: 'รอพิจารณา',
+    cancelLeavePer: 'ยกเลิก',
 
     //ToggleLeave
     Type: 'ประเภทรายการ',

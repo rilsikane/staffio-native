@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CardPunchInfo from '../cardPunchInfo'
 import Calendar from '../staffioCalendar/calendar'
 import {LocaleConfig} from 'react-native-calendars';
-
+import I18n from '../../utils/i18n'
 export default class CustomCalendar extends Calendar {
   constructor(props){
       super(props)

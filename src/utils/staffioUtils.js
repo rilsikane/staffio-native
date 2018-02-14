@@ -95,8 +95,8 @@ export function getmonth(){
     }
   }
 
-export function getConfirmModal(okFunc,cancelFunc,Data){
-  this.props.navigator.showLightBox({
+export function getConfirmModal(okFunc,cancelFunc,Data,navigator){
+  navigator.showLightBox({
     screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
     passProps: {title:`${I18n.t('ConfirmApprove')} : ${Data.type}`,msg: `${I18n.t('approveLeave')}`
     ,msg2: `${Data.name}` ,cancel:cancelModal(cancelFunc)

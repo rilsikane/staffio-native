@@ -101,6 +101,7 @@ export default {
     To: 'To',
     Status: 'Status',
     Waiting: 'Wait consider',
+    cancelLeavePer: 'cancel',
 
     //ToggleLeave
     Type: 'Type of list',
