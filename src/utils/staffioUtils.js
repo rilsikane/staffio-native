@@ -140,7 +140,7 @@ function okModal(func){
 }
 
 export function disbackButton(){
-  if(Platform.OS='android'){
+  if(Platform.OS=='android'){
     BackHandler.addEventListener('hardwareBackPress', function() {
     return true;
   });

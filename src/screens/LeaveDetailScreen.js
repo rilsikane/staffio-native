@@ -170,7 +170,7 @@ export default class LeaveDetailScreen extends React.Component {
           style: modalStyle,
           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
         });
-      },1000);
+      },500);
 
     }
   }
@@ -185,6 +185,7 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/RejectLeaveRequest",params);
     if(response){
+      setTimeout(() => {
       this.props.navigator.showLightBox({
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
         passProps: {title:`${I18n.t('Reject')} : ${data.type}`,msg:`${I18n.t('RejectSuccess')}`
@@ -192,6 +193,7 @@ export default class LeaveDetailScreen extends React.Component {
         style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
        });
+      },500);
     }
   }
   async returnLeave(data){
@@ -205,13 +207,15 @@ export default class LeaveDetailScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     let response = await post("ESSServices/ReturnLeaveRequest",params);
     if(response){
-      this.props.navigator.showLightBox({
-        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
-        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: modalStyle,
-        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-       });
+      setTimeout(() => {
+        this.props.navigator.showLightBox({
+          screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+          passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
+          ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+          style: modalStyle,
+          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+        });
+      },500);
     }
   }
 

@@ -107,9 +107,9 @@ export default  styles = {
   TextPut:{
     //backgroundColor:"red",
     marginLeft: responsiveWidth(1),
-    fontSize: responsiveFontSize(5),
+    fontSize: responsiveFontSize(3.3),
     // height: em(2.8),
-    width: responsiveWidth(10),
+    width: responsiveFontSize(3.7),
     color:"#ffff",
     justifyContent:'center',
     alignItems:'center'

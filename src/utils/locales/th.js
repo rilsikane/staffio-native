@@ -209,7 +209,7 @@ export default {
     Cancel: 'ยกเลิก' ,
 
     //InqInboxScreen
-    History: 'ประวัติ',
+    HistoryTime: 'ประวัติการลงเวลา',
     Normal:'ปกติ',
     Late:'สาย',
     Earlyend:'กลับก่อน',

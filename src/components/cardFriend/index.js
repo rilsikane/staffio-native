@@ -6,9 +6,14 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import  Icon  from 'react-native-vector-icons/FontAwesome' ;
 import {em,window} from '../../constants/Layout';
 import Communications from 'react-native-communications';
+import app from '../../stores/app';
+
 
 export default class CardFriend extends React.Component {
-    
+    constructor(props){
+      super(props);
+      this.app = app;
+    }
     render() {
     const {employee} = this.props
     return(
@@ -26,7 +31,7 @@ export default class CardFriend extends React.Component {
         </Col>
         <Col size={75} style>
             <Row size={20} >
-            <Text allowFontScaling={false}style={styles.titleText}>{employee.FULL_NAME_TH} </Text>
+            <Text allowFontScaling={false}style={styles.titleText}>{this.app && this.app.locale=='en'? employee.FULL_NAME_EN : employee.FULL_NAME_TH} </Text>
             </Row>
             <Row size={10} style={{zIndex:8888}}>
                 <Text allowFontScaling={false}style={[styles.noteText,{ marginLeft:-5}]}> {employee.EMP_CODE} {employee.POSITION_NAME} </Text>

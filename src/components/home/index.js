@@ -25,7 +25,8 @@ export default class Home extends Component {
   }
   rendePunchIn(){
     if(this.state.isLoadPunchIn)
-    return  (<PunchIn punchPress={this.props.punchPress} user={this.props.user} shiftData={this.props.shiftData}/>)
+    return  (<PunchIn punchPress={this.props.punchPress} user={this.props.user} 
+      shiftData={this.props.shiftData} app={this.props.app}/>)
   }
   rendePunchHoliday(){
     return  (<PunchIn isHoliDay={true} user={this.props.user} shiftData={this.props.shiftData}/>)

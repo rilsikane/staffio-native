@@ -402,7 +402,7 @@ export default class InboxScreen extends React.Component {
   render() {
     return (
       <View  style={{backgroundColor:Colors.backgroundColor,flex:1}}>
-       <CardHeader title={`${I18n.t('History')}`}/>   
+       <CardHeader title={`${I18n.t('HistoryTime')}`}/>   
            <Loading visible={this.state.isLoading}/>
            <View style={{height:responsiveHeight(10),marginTop:5,flexDirection:"row",alignItems:"center",marginLeft:10}}>
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
