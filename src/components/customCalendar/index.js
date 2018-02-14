@@ -18,11 +18,11 @@ export default class CustomCalendar extends Calendar {
   constructor(props){
       super(props)
       LocaleConfig.locales['th'] = {
-    monthNames: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-    monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
-    dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
-    dayNamesShort: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.']
-    };
+        monthNames: [`${I18n.t('January')}`,`${I18n.t('February')}`,`${I18n.t('March')}`,`${I18n.t('April')}`,`${I18n.t('May')}`,`${I18n.t('June')}`,`${I18n.t('July')}`,`${I18n.t('August')}`,`${I18n.t('September')}`,`${I18n.t('October')}`,`${I18n.t('November')}`,`${I18n.t('December')}`],
+        monthNamesShort: [`${I18n.t('Jan')}`,`${I18n.t('Feb')}`,`${I18n.t('Mar')}`,`${I18n.t('Apr')}`,`${I18n.t('May')}`,`${I18n.t('Jun')}`,`${I18n.t('Jul')}`,`${I18n.t('Aug')}`,`${I18n.t('Sep')}`,`${I18n.t('Oct')}`,`${I18n.t('Nov')}`,`${I18n.t('Dec')}`],
+        dayNames: [`${I18n.t('Sunday')}`,`${I18n.t('Monday')}`,`${I18n.t('Tuesday')}`,`${I18n.t('Wednesday')}`,`${I18n.t('Thursday')}`,`${I18n.t('Friday')}`,`${I18n.t('Saturday')}`],
+        dayNamesShort: [`${I18n.t('Sun')}`,`${I18n.t('Mon')}`,`${I18n.t('Tue')}`,`${I18n.t('Wed')}`,`${I18n.t('Thu')}`,`${I18n.t('Fri')}`,`${I18n.t('Sat')}`]
+        };
 
     LocaleConfig.defaultLocale = 'th';
   }

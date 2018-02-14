@@ -35,8 +35,6 @@ export default class ConfirmModal extends Component {
                 , fontSize: responsiveFontSize(2),textAlign:'center'}}>{this.props.msg}</Text>
                 <Text style={{fontFamily: 'Kanit', color: '#5f504b'
                 , fontSize: responsiveFontSize(2),textAlign:'center'}}>{this.props.msg2}</Text>
-                 <Text style={{fontFamily: 'Kanit', color: '#5f504b'
-                , fontSize: responsiveFontSize(2),textAlign:'center'}}>{I18n.t('YesorNo')}</Text>
             </View>
         </Modal>
     );

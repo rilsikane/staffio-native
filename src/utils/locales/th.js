@@ -118,10 +118,19 @@ export default {
     Back: 'กลับก่อน',
     Missing: 'ขาด',
 
+    //punchCard-stampPunch
+    saveoutsideStampPunch: 'บันทึกเวลานอกสถานที่',
+    RemarkStampPunch: 'หมายเหตุ',
+    RetakeStampPunch: 'ถ่ายใหม่',
+    cancelStampPunch: 'ยกเลิก',
+    okStampPunch: 'ตกลง',
+
     //punchCard-stampResult
     ok:'ตกลง',
     Cancel:'ยกเลิก',
-
+    remarkStampResult: 'หมายเหตุ',
+    notspecifyStampResult: 'ไม่ได้ระบุ',
+    commentStampResult: 'คอมเมนท์',
 
     ///////////////SCREEN///////////////
     //Modal-confirmModal

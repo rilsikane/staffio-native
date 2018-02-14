@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import * as Animatable from 'react-native-animatable';
 import {convertPunch} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import I18N from '../../utils/i18n'
 class StampPunch extends React.Component {
   constructor(props) {
       super(props);
@@ -99,7 +99,7 @@ class StampPunch extends React.Component {
                 <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
                        <CheckBox checked={true}/>
                         <Text allowFontScaling={false}style={{marginLeft:10,fontSize:responsiveFontSize(2),color:"#9a9c9e",fontFamily:'Kanit'}}> 
-                            {this.props.area_flag ? this.props.shiftData.branch_name :'บันทึกเวลานอกสถานที่ี่'} </Text>
+                            {this.props.area_flag ? this.props.shiftData.branch_name :`${I18N.t('saveoutsideStampPunch')}`} </Text>
                 </View>
                
              </View>)
@@ -143,7 +143,7 @@ class StampPunch extends React.Component {
                 {this.renderLocation()}
                 <Animatable.View ref="view" style={{marginTop:responsiveHeight(0.2),marginLeft:10,marginRight:10,flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
                        <Item style={!this.state.error ? {borderColor:"#D9D5DC"}:{borderColor:"red"}} floatingLabel={true}>
-                            <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(0.8)}}>หมายเหตุ {this.props.showRemark && <Text allowFontScaling={false}style={{color:"red",fontFamily:'Kanit',fontSize:responsiveFontSize(1),paddingLeft:20}}>*</Text>}</Label>
+                            <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(0.8)}}>{I18N.t('RemarkStampPunch')} {this.props.showRemark && <Text allowFontScaling={false}style={{color:"red",fontFamily:'Kanit',fontSize:responsiveFontSize(1),paddingLeft:20}}>*</Text>}</Label>
                             {/*{this.renderError()}*/}
                             <Input style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(1.5),lineHeight:responsiveFontSize(1.5)}} name="remark" value={this.state.remark} onChangeText={this.onChange}/>
                         </Item>
@@ -153,13 +153,13 @@ class StampPunch extends React.Component {
                 ,alignItems:"flex-end",borderTopWidth:1,borderTopColor:"#737373"}}>
                      <View style={{flexDirection:"row",alignItems:"flex-end",zIndex:9999,}}>
                          <Button transparent onPress={this.retry}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>ถ่ายใหม่ </Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('RetakeStampPunch')}</Text>
                         </Button>
                         <Button transparent onPress={this.cancel}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> ยกเลิก </Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('cancelStampPunch')}</Text>
                         </Button>
                         <Button transparent onPress={this.ok}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> ตกลง </Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('okStampPunch')}</Text>
                         </Button>
                     </View>
                 </View>
