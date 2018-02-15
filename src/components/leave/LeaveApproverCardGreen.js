@@ -28,8 +28,8 @@ export default class LeaveApproverCardGreen extends React.Component {
                     <Body style={{flex:4}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                             {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.name}</Text>)}
-                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:this.props.info.color,flex:1.5, fontSize:responsiveFontSize(1.8)}}>{this.props.info.type}</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:this.props.info.color,borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} ${I18n.t('LeaveDay')}`}</Text>)}
+                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:this.props.info.color,flex:2, fontSize:responsiveFontSize(1.8)}}>{this.props.info.type}</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:this.props.info.color,borderRadius: responsiveWidth(2), color:'white',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`${this.props.info.total} ${I18n.t('LeaveDay')}`}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
                             {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:0,textAlign:'center'}}>ID: {this.props.info.empId}</Text>)}

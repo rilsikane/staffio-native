@@ -29,7 +29,7 @@ export default class LeaveApproverCardRed extends React.Component {
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                             {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>JUTHA SUBHAMA</Text>)}
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:'#f4a692',flex:1.5, fontSize:responsiveFontSize(1.8)}}>ลาอื่นๆ</Text>)}
-                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:'#f4a692',borderRadius: responsiveWidth(2), color:'white',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`2 ${I18n.t('Day')}`}</Text>)}
+                            {(<Text style={{fontFamily: 'Kanit-Medium',backgroundColor:'#f4a692',borderRadius: responsiveWidth(2), color:'white',flex:1.5, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{`2 ${I18n.t('Day')}`}</Text>)}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
                             {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:0,textAlign:'center'}}>ID: 004901</Text>)}

@@ -162,8 +162,8 @@ export default class ConfirmPunchScreen extends React.Component {
         this.setState({isLoading:false});
         TimerMixin.setTimeout( () => { 
           Alert.alert(
-            `${I18n.t('EnterTime')}`,
-            `${I18n.t('EnterTimess')}`,
+            `${I18n.t('EnterTimeCon')}`,
+            `${I18n.t('EnterTimesuccessed')}`,
             [
               {text: `${I18n.t('ok')}`, onPress: () => this.success()},
             ],

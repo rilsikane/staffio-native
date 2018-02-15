@@ -153,13 +153,13 @@ class StampPunch extends React.Component {
                 ,alignItems:"flex-end",borderTopWidth:1,borderTopColor:"#737373"}}>
                      <View style={{flexDirection:"row",alignItems:"flex-end",zIndex:9999,}}>
                          <Button transparent onPress={this.retry}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('RetakeStampPunch')}</Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> {I18N.t('RetakeStampPunch')} </Text>
                         </Button>
                         <Button transparent onPress={this.cancel}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('cancelStampPunch')}</Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> {I18N.t('cancelStampPunch')} </Text>
                         </Button>
                         <Button transparent onPress={this.ok}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}>{I18N.t('okStampPunch')}</Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit"}}> {I18N.t('okStampPunch')} </Text>
                         </Button>
                     </View>
                 </View>

@@ -143,7 +143,7 @@ export default class LeaveDetailScreen extends React.Component {
   onReturnPress(data){
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      passProps: {title:`${I18n.t('ReturnLeaveDetail')} : ${data.type}`,remark:`${I18n.t('Cause')}`
       ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: modalStyle,
@@ -188,7 +188,7 @@ export default class LeaveDetailScreen extends React.Component {
       setTimeout(() => {
       this.props.navigator.showLightBox({
         screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`${I18n.t('Reject')} : ${data.type}`,msg:`${I18n.t('RejectSuccess')}`
+        passProps: {title:`${I18n.t('ReturnLeaveDetail')} : ${data.type}`,msg:`${I18n.t('ReturnSuccess')}`
         ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
         style: modalStyle,
         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -210,7 +210,7 @@ export default class LeaveDetailScreen extends React.Component {
       setTimeout(() => {
         this.props.navigator.showLightBox({
           screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-          passProps: {title:`${I18n.t('SendBack')} : ${data.type}`,msg:`${I18n.t('SendBackSuccess')}`
+          passProps: {title:`${I18n.t('Reject')} : ${data.type}`,msg:`${I18n.t('RejectSuccess')}`
           ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
           style: modalStyle,
           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -237,15 +237,15 @@ export default class LeaveDetailScreen extends React.Component {
         </Content>
          {this.props.isAppr &&
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
-             {!this.props.isCancel && <ActionButton.Item marginRight={-responsiveWidth(3)} marginBottom={-responsiveHeight(4.8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
+             {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Decline')}</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>}
-            {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(21.9)} marginBottom={-(responsiveHeight(0.5))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
+            {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
             </ActionButton.Item>}
-           <ActionButton.Item marginRight={responsiveWidth(31)} marginBottom={-(responsiveHeight(17))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
+           <ActionButton.Item marginRight={responsiveWidth(28)} marginBottom={-(responsiveHeight(16))} buttonColor='transparent'  onPress={() => this.onApprovePress(this.props.leaveStore.leaveData)}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>

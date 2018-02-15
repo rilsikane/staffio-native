@@ -138,8 +138,8 @@ export default {
     YesorNo:'ใช่หรือไม่ ?',
 
     //Modal-modal
-    ok:'ตกลง',
-    Cancel:'ยกเลิก',
+    OkModal:'ตกลง',
+    CancelModal:'ยกเลิก',
 
     //AuthenPincodeScreen
     EnterPassword:'กรอกรหัสผ่าน',
@@ -155,11 +155,12 @@ export default {
     EnterBefore:'คุณลงเวลาออกงานก่อนเวลา คุณต้องการยืนยันที่จะลงเวลา ใช่หรือไม่ ?',
     Confirm:'ยืนยัน',
     Cancel:'ยกเลิก',
-    EnterTime:'ลงเวลา',
-    EnterTimess:'ลงเวลาสำเร็จ',
+    EnterTimeCon:'ลงเวลา',
+    EnterTimesuccessed:'ลงเวลาสำเร็จ',
 
     //DashBoradProject
     Fetch: 'ดึงข้อมูลล่าสุด',
+    enterTimeDashborad:'การลงเวลาเข้างาน',
 
     //FindFriendsScreen
     SearchData:'กำลังค้นหาข้อมูล...',
@@ -234,7 +235,7 @@ export default {
     //LeaveApprScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
-    Reject: 'ปฏิเสธรายการ',
+    ReturnLeaveApp: 'ปฏิเสธรายการ',
     Cause: 'สาเหตุ',
     SpecifyCause: 'ระบุเหตุผล',
     SendBack: 'ส่งคืนรายการ',
@@ -244,17 +245,15 @@ export default {
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
-    Reject: 'ปฏิเสธรายการ',
+    ReturnLeaveDetail: 'ปฏิเสธรายการ',
     Cause: 'สาเหตุ',
     SpecifyCause: 'ระบุเหตุผล',
-    SendBack: 'ส่งคืนรายการ',
+    Reject: 'ส่งคืนรายการ',
     Approve: 'อนุมัติรายการ',
     ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
-    RejectSuccess: 'ปฏิเสธรายการเรียบร้อย',
-    SendBackSuccess: 'ส่งคืนรายการเรียบร้อย',
+    ReturnSuccess: 'ปฏิเสธรายการเรียบร้อย',
+    RejectSuccess: 'ส่งคืนรายการเรียบร้อย',
     title: 'ข้อมูลการลา',
-    Decline:'Decline',
-    Reject: 'ปฏิเสธรายการ',
     Approve:'อนุมัติรายการ',
     LeaveStatistics: 'สถิติการลา',
     ReqType:'ประเภทใบคำขอ',
@@ -271,6 +270,9 @@ export default {
     ConfirmLogout: 'ยืนยัน',
     CancelLogout: 'ยกเลิก',
     WarningDetail: 'คุณต้องการยืนยันที่จะออกจากระบบ ใช่หรือไม่ ?',
+
+    //Overview
+    overViewOverView: 'ภาพรวม',
 
     //PersonalStatScreen
     Stat: 'สถิติการลา',

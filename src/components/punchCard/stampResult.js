@@ -80,12 +80,12 @@ class StampResult extends React.Component {
                 </View>
                
                 <View style={{marginLeft:10,marginRight:10}}>
-                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2), backgroundColor:"transparent"}}>`${I18n.t('remarkStampResult')}  :`</Label>
+                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2), backgroundColor:"transparent"}}>{`${I18n.t('remarkStampResult')}  :`}</Label>
                     <Label style={{color:"#9a9c9e",fontFamily:'Kanit',fontSize:em(1), backgroundColor:"transparent"}}>{this.props.punch.remark || `${I18n.t('notspecifyStampResult')}`}</Label>
                 </View>
 
                 <View style={{marginLeft:10,marginRight:10,marginTop:responsiveHeight(2),borderTopWidth:1,borderTopColor:"#f58020"}}>
-                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2),marginTop:responsiveHeight(2),backgroundColor:"transparent"}}>`${I18n.t('commentStampResult')}  :`</Label>
+                    <Label style={{color:"#f58020",fontFamily:'Kanit',fontSize:em(1.2),marginTop:responsiveHeight(2),backgroundColor:"transparent"}}>{`${I18n.t('commentStampResult')}  :`}</Label>
                      {this.props.punch.leaderCode == this.props.empCode && <Item inlineLabel last style={{height:responsiveHeight(3)}}>
                         <Input name="comment" value={this.state.comment} onChangeText={this.onChange} returnKeyType="send" onSubmitEditing={this.ok}
                         style={{color:"#9a9c9e",fontFamily:'Kanit',height:responsiveHeight(8),fontSize:responsiveFontSize(2),lineHeight:responsiveFontSize(1.8), backgroundColor:"transparent"}}/>
@@ -97,10 +97,10 @@ class StampResult extends React.Component {
                 ,alignItems:"flex-end",borderTopWidth:1,borderTopColor:"#737373"}}>
                      <View style={{flexDirection:"row",alignItems:"flex-end",zIndex:9999,}}>
                         <Button transparent onPress={this.ok}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}>{I18n.t('ok')}</Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}> {I18n.t('ok')} </Text>
                         </Button>
                         <Button transparent onPress={this.cancel}>
-                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}>{I18n.t('Cancel')}</Text>
+                            <Text allowFontScaling={false} style={{color:"#f58020",fontSize:responsiveFontSize(2),fontFamily:"Kanit", backgroundColor:"transparent"}}> {I18n.t('Cancel')} </Text>
                         </Button>
                     </View>
                 </View>

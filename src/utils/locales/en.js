@@ -137,8 +137,8 @@ export default {
     YesorNo:'Yes or No?',
 
     //Modal-modal
-    Ok:'Ok',
-    Cancel:'Cancel',
+    OkModal:'Ok',
+    CancelModal:'Cancel',
 
     //AuthenPincodeScreen
     EnterPassword:'Enter Password',
@@ -154,11 +154,12 @@ export default {
     EnterBefore:'You enter time before finish working you need to enter time. Yes or no?',
     Confirm:'Confirm',
     Cancel:'Cancel',
-    EnterTime:'Enter time',
-    EnterTimess:'Enter time success',
+    EnterTimeCon:'Enter time',
+    EnterTimesuccessed:'Enter time success',
 
     //DashBoradProject
     Fetch: 'Fetch latest',
+    enterTimeDashborad:'Enter Time of work',
 
     //FindFriendsScreen
     SearchData:'Searching Data…',
@@ -233,7 +234,7 @@ export default {
     //LeaveApprScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',
-    Reject: 'Reject',
+    ReturnLeaveApp: 'Return',
     Cause: 'Cause',
     SpecifyCause: 'Specify cause',
     SendBack: 'Send back',
@@ -243,16 +244,14 @@ export default {
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',
-    Reject: 'Reject',
+    ReturnLeaveDetail: 'Return',
     Cause: 'Cause',
     SpecifyCause: 'Specify cause',
-    SendBack: 'Send back',
     Approve: 'Approve',
     ApproveSuccess: 'Approved successfully',
-    RejectSuccess: 'Rejected successfully',
-    SendBackSuccess: 'Send back successfully',
+    ReturnSuccess: 'Returned successfully',
+    RejectSuccess: 'Send back successfully',
     title: 'Leave Information',
-    Decline:'Decline',
     Reject:'Reject',
     Approve:'Approve',
     LeaveStatistics: 'Leave Statistics',
@@ -270,6 +269,9 @@ export default {
     ConfirmLogout: 'comfirm',
     CancelLogout: 'cancel',
     WarningDetail: 'You confirm to logout',
+
+    //overview
+    overViewOverView: 'Overview',
 
     //PersonalStatScreen
     Stat: 'Statistics of leave',

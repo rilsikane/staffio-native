@@ -33,12 +33,12 @@ export default class Modal extends Component {
             <View style={styles.bottom}>
               <View style={styles.buttonContent}>
                 <Button transparent  onPress={this.okPress}>
-                  <Text style={styles.buttonstyle}>{I18n.t('Ok')}</Text>
+                  <Text style={styles.buttonstyle}>{I18n.t('OkModal')}</Text>
                 </Button>
               </View>
               {this.props.cancel && <View style={styles.buttonContent}>
                 <Button transparent onPress={this.cancelPress}>
-                  <Text style={styles.buttonstyle}>{I18n.t('Cancel')}</Text>
+                  <Text style={styles.buttonstyle}>{I18n.t('CancelModal')}</Text>
                 </Button>
               </View>}
             </View>

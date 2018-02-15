@@ -448,7 +448,7 @@ export default class InboxScreen extends React.Component {
               <Icon name="search" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('search')}</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(18)} marginBottom={-(responsiveHeight(10))} buttonColor='transparent' onPress={this.clearTags}>
+            <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={this.clearTags}>
               <Icon name="trash" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Clear')}</Text>
             </ActionButton.Item>

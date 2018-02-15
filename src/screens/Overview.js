@@ -17,7 +17,9 @@ import CardCheckin from '../components/cardCheckin/Cardcheckin';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontelloConfig from '../../assets/fonts/config.json';
-import {} from '../utils/staffioUtils'
+import {disbackButton} from '../utils/staffioUtils'
+import I18n from '../utils/i18n'
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
 export default class Overview extends React.Component {
@@ -91,7 +93,7 @@ export default class Overview extends React.Component {
                                 , fontSize: responsiveFontSize(2.5)}} onPress={this.closeDialog} />
                             </Left>
                             <Body>
-                                <Text style={styles.Text}>ภาพรวม</Text>
+                                <Text style={styles.Text}>{I18n.t('overViewOverView')}</Text>
                             </Body>
                             <Right>
                                 {/*<Icon name='menu' style={{ color: 'white' }} />*/}

@@ -123,7 +123,7 @@ export default class DashBoradProject extends React.Component {
                                         <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),flex:1,paddingLeft:0,paddingRight:0}}>
                                             <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),justifyContent:"flex-start",paddingLeft:10}} >
                                                 <Icon name='calendar' style={{color:"#785e52"}}/>
-                                                <Text style={styles.headerFont1}>การลงเวลาเข้างาน</Text>
+                                                <Text style={styles.headerFont1}>{I18n.t('enterTimeDashborad')}</Text>
                                             </CardItem>
                                             <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
                                                 <Icon name='refresh' style={{color: "#989898"}}/>
