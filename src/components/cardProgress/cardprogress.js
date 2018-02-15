@@ -91,10 +91,10 @@ export default class CardProgress extends React.Component {
                         <Body style={{ justifyContent: 'center' }}>
                             <Text style={styles.Text1}>    {this.props.isProj ? this.props.data.projectName : this.props.data.orgName}</Text>
                             {this.props.isProj && (<CardItem style={{paddingTop:6,backgroundColor:'transparent'}}>
-                                <Text style={styles.Text2}>{I18n.t('PlaceWork')}</Text>
+                                {/* <Text style={styles.Text2}>{I18n.t('PlaceWork')}</Text> */}
                                 <IconTello  name="hhmm-15" style={{fontSize : responsiveFontSize(1.6),color:"#ffa83e"}}>
                                 </IconTello>
-                                <Text style={styles.Text3}> {this.props.data.branchName}</Text>
+                                <Text numberOfLines={1} ellipsizeMode="tail" style={styles.Text3}> {this.props.data.branchName}</Text>
                             </CardItem>)}
                             <CardItem style={this.props.isProj ? { height: responsiveHeight(0.1) ,paddingTop:6} :{ height: responsiveHeight(0.1) ,paddingTop:20}}>
                                 <Icon name='user' style={styles.Text1}/>
@@ -128,7 +128,8 @@ const styles = ({
         fontFamily: 'Kanit',
         fontSize: responsiveFontSize(1.5),
         backgroundColor:'transparent',
-        color:"#ffa83e"
+        color:"#ffa83e",
+        flex:1
        
     },
     Text4: {

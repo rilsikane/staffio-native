@@ -21,18 +21,18 @@ export default class LeavePersonalCard extends React.Component {
         (
             <Card style={{marginBottom:0}}>
             <View style={{flexDirection: 'row',flex:1}}>
-            <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:'#f4a692',borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
-            <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5), borderLeftWidth:responsiveWidth(2.5),flex:3}}>
+            <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:this.props.info.color,borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
+            <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5),flex:3}}>
                 <Body style={{flex:4}}>
                    <View style={{flexDirection: 'row', alignItems:'center'}}>
-                    <View style={{flex:0.7,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),}}>
+                    {this.props.info.flag=='2' && <View style={{flex:0.7,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),}}>
                         <FontAwesome name='circle' size={responsiveWidth(2)} color='white' style={{flex:1,marginLeft:responsiveWidth(0.5)}}/>
                         {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
-                    </View>
+                    </View>}
                   
-                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:'#f4a692',flex:1.2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{this.props.info.type}</Text>)}
+                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:this.props.info.color,flex:1.2, fontSize:responsiveFontSize(1.8),textAlign:'left',paddingLeft:5}}>{this.props.info.type}</Text>)}
                     {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0.5, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Status')}</Text>)}
-                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{this.props.info.requestStatus}</Text>)}
+                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.requestStatus}</Text>)}
                     <View style={{flex:1,flexDirection: 'row', alignItems:'center'}}>
                         <FontAwesome name='calendar' color='#fbaa3e' style={{flex:1}}/>
                         {(<Text style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.createDate}</Text>)}

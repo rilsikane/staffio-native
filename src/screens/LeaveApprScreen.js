@@ -21,7 +21,7 @@ import LeaveApprover from '../components/leave/LeaveApproverCardGreen';
 import CardHeader from '../components/cardHeader';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormat, disbackButton, styleConfirmModal, styleInputModal} from '../utils/staffioUtils';
+import {convertByFormatShort, disbackButton, styleConfirmModal, styleInputModal} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import Swipeable from 'react-native-swipeable';
@@ -92,10 +92,11 @@ export default class LeaveApprScreen extends React.Component {
       info.positions = list[i].PositionNameEN;
       info.type = list[i].LEAVE_TYPE_NAME_TH;
       info.typeCode = list[i].LEAVE_TYPE_CODE;
-      info.startDate = convertByFormat(new Date(list[i].LeaveStartDate).getTime(),"DD MMM ");
-      info.endDate = convertByFormat(new Date(list[i].LeaveEndDate).getTime(),"DD MMM ");
+      info.startDate = convertByFormatShort(new Date(list[i].LeaveStartDate).getTime(),"DD MMM ");
+      info.endDate = convertByFormatShort(new Date(list[i].LeaveEndDate).getTime(),"DD MMM ");
+      info.createDate = convertByFormatShort(new Date(list[i].CreatedLeaveDate).getTime(),"DD MMM ");
       info.total = list[i].TOTAL_LEAVEDAY;
-      info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
+      info.requestLeaveNo = list[i].REQUEST_LEAVE_NO; 
       info.reasonName = list[i].LeaveReasonNameTH;
       info.orgCode = list[i].OrgCode;
       info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
@@ -266,12 +267,11 @@ export default class LeaveApprScreen extends React.Component {
               <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>),  
           ]}>
-            {(!this.state.isCancel && (info.requestStatusCode != 'C')
-            || this.state.isCancel && (info.requestStatusCode == 'C')) &&
+           
            <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>  
             <LeaveApprover  info={info} openDetail={this.openLeaveDetail}/>
            </TouchableOpacity>
-            }
+            
          </Swipeable> 
       );
     }else{
@@ -297,7 +297,7 @@ export default class LeaveApprScreen extends React.Component {
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
             </View> */}
            <PTRView onRefresh={this._refresh}>
-              {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}
+              {/* {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>} */}
               {!this.state.loading  ? this.renderList() 
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}

@@ -24,6 +24,9 @@ export default class MenuScreen extends React.Component {
     }
     async componentWillMount(){
         let locale = await store.get("locale");
+        if(!locale){
+            locale = 'th'
+        }
         I18n.locale = locale;
         let localeIndex = locale =='th' ? 0:1;
         this.setState({localeIndex:localeIndex});

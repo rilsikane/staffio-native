@@ -5,10 +5,11 @@ import th from './locales/th';
 
 
 I18n.fallbacks = true;
-
+I18n.locale ='th';
 I18n.translations = {
-  en,
-  th
+  th,
+  en
+  
 };
 
 export default I18n;

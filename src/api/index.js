@@ -179,9 +179,10 @@ export async function get(path,param){
   console.log("param: "+JSON.stringify(param));
   const userData = await store.get("USER");
   const endpoint = await getEndpoint();
+  let lang = await store.get("locale");
   let requestURL = `${endpoint}${path}`;
       try{
-          const response = await  axios.get(requestURL,{params:param},{headers: {token:userData.token}});
+          const response = await  axios.get(requestURL,{params:param},{headers: {token:userData.token,lang:lang}});
           if(response.status=='200' && (response.data.Success || response.data.Complete)){
             console.log("postService"+JSON.stringify(response));
             return response.data;

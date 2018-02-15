@@ -21,7 +21,7 @@ import LeavePersonalCard from '../components/leave/LeavePersonalCard'
 import ToggleLeave from '../components/leave/ToggleLeave';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormat, disbackButton} from '../utils/staffioUtils';
+import {convertByFormatShort, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
@@ -93,15 +93,16 @@ export default class PersonalStatScreen extends React.Component {
       info.positions = list[i].PositionNameEN;
       info.type = list[i].LEAVE_TYPE_NAME;
       info.typeCode = list[i].LEAVE_TYPE_CODE;
-      info.startDate = convertByFormat(new Date(list[i].START_DATE).getTime(),"DD MMM ");
-      info.endDate = convertByFormat(new Date(list[i].END_DATE).getTime(),"DD MMM ");
-      info.createDate = convertByFormat(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
+      info.startDate = convertByFormatShort(new Date(list[i].START_DATE).getTime(),"DD MMM ");
+      info.endDate = convertByFormatShort(new Date(list[i].END_DATE).getTime(),"DD MMM ");
+      info.createDate = convertByFormatShort(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
       info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
       info.requestStatus = list[i].REQUEST_STATUS_SHOW;
       info.requestStatusCode = list[i].REQUEST_STATUS;
+      info.flag = list[i].flag;
       infos.push(info);
   }
     return infos;
@@ -183,7 +184,7 @@ export default class PersonalStatScreen extends React.Component {
               
               {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>)}
-              {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}  
+              {/* {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}   */}
               {!this.state.loading  && this.renderList()}
           </PTRView>
       </Container>

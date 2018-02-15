@@ -17,6 +17,16 @@ export function convertDate(tmpDate) {
 
     return dateFormat(tmpDate,"dd/mm/yyyy");
 }
+export function convertByFormatShort(tmpDate,format) {
+  store.get('locale')
+  .then((res) =>
+    {localeTmp = res;}
+  )
+   let dayMonth = moment(tmpDate).locale(localeTmp, localization).format(format);
+   let year = moment(tmpDate).locale(localeTmp, localization).format("YYYY");
+  // return dateFormat(tmpDate,format);
+  return dayMonth+((parseInt(year)+(localeTmp=='th'? 543:0))+"").substr(2,4);
+}
 export function convertByFormat(tmpDate,format) {
     store.get('locale')
     .then((res) =>
@@ -97,11 +107,13 @@ export function getmonth(){
   }
 export const styleConfirmModal = {
   backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-  backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+  backgroundColor: "rgba(0,0,0,0.6)", // tint color for the background, you can specify alpha here (optional)
+  height:responsiveHeight(70),
+  width:responsiveWidth(90)
 }
 export const styleInputModal ={
   backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-  backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+  backgroundColor: "rgba(0,0,0,0.6)", // tint color for the background, you can specify alpha here (optional)
   height:responsiveHeight(70),
   width:responsiveWidth(90)
 }
@@ -113,7 +125,7 @@ export function getConfirmModal(okFunc,cancelFunc,Data,navigators){
     ,ok:okModal(okFunc,navigators),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
     style: {
       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-      backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+      backgroundColor: "rgba(0,0,0,0.6)", // tint color for the background, you can specify alpha here (optional)
     },
     adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
    });
@@ -127,7 +139,7 @@ export function getInputModal(Title,okFunc,cancelFunc,Data,AdjustSoftInput,navig
     ,ok:okModal(okFunc,navigators),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
     style: {
       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-      backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+      backgroundColor: "rgba(0,0,0,0.6)", // tint color for the background, you can specify alpha here (optional)
       height:responsiveHeight(70),
       width:responsiveWidth(90)
     },
