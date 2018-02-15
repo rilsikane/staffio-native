@@ -237,7 +237,7 @@ export default {
     ReturnLeaveApp: 'Return',
     Cause: 'Cause',
     SpecifyCause: 'Specify cause',
-    SendBack: 'Send back',
+    Reject: 'Reject',
     Consider: 'Consider leave',
     approveLeave: 'Approved',
 
@@ -250,7 +250,7 @@ export default {
     Approve: 'Approve',
     ApproveSuccess: 'Approved successfully',
     ReturnSuccess: 'Returned successfully',
-    RejectSuccess: 'Send back successfully',
+    RejectSuccess: 'Reject successfully',
     title: 'Leave Information',
     Reject:'Reject',
     Approve:'Approve',

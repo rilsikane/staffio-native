@@ -115,7 +115,7 @@ export default class LeaveDetailScreen extends React.Component {
     
   }
   onApprovePress(data){
-    
+    //getConfirmModal(this.approveLeave,this.cancelModal,data,this.props.navigator);
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
       passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg:`${I18n.t('ConfirmApproveLeave')}`
@@ -130,7 +130,7 @@ export default class LeaveDetailScreen extends React.Component {
     this.props.navigator.dismissLightBox();
   }
   onRejectPress(data){
-   
+    //getInputModal(I18n.t('Reject'),this.rejectLeave,this.cancelModal,data,"resize",this.props.navigator)    
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
       passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
@@ -141,6 +141,7 @@ export default class LeaveDetailScreen extends React.Component {
      });
   }
   onReturnPress(data){
+    //getInputModal(I18n.t('ReturnLeaveDetail'),this.returnLeave,this.cancelModal,data,"resize",this.props.navigator)
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
       passProps: {title:`${I18n.t('ReturnLeaveDetail')} : ${data.type}`,remark:`${I18n.t('Cause')}`

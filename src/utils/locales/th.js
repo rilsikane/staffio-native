@@ -238,7 +238,7 @@ export default {
     ReturnLeaveApp: 'ปฏิเสธรายการ',
     Cause: 'สาเหตุ',
     SpecifyCause: 'ระบุเหตุผล',
-    SendBack: 'ส่งคืนรายการ',
+    Reject: 'ส่งคืนรายการ',
     Consider: 'พิจารณาการลา',
     approveLeave: 'อนุมัติรายการเรียบร้อย',
 

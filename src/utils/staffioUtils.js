@@ -2,6 +2,7 @@ import moment from 'moment';
 import localization from 'moment/locale/th'
 import I18n from './i18n'
 import {BackHandler,Platform} from 'react-native'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 import store from 'react-native-simple-store';
 var dateFormat = require('dateformat');
@@ -94,13 +95,22 @@ export function getmonth(){
       return  localeTmp=='th'?'ธันวาคม':'December'
     }
   }
-
-export function getConfirmModal(okFunc,cancelFunc,Data,navigator){
-  navigator.showLightBox({
+export const styleConfirmModal = {
+  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+  backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+}
+export const styleInputModal ={
+  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+  backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+  height:responsiveHeight(70),
+  width:responsiveWidth(90)
+}
+export function getConfirmModal(okFunc,cancelFunc,Data,navigators){
+  navigators.showLightBox({
     screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
     passProps: {title:`${I18n.t('ConfirmApprove')} : ${Data.type}`,msg: `${I18n.t('approveLeave')}`
-    ,msg2: `${Data.name}` ,cancel:cancelModal(cancelFunc)
-    ,ok:okModal(okFunc),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
+    ,msg2: `${Data.name}` ,cancel:(cancelFunc,navigators)=> this.cancelModal
+    ,ok:okModal(okFunc,navigators),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
     style: {
       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
       backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
@@ -109,13 +119,12 @@ export function getConfirmModal(okFunc,cancelFunc,Data,navigator){
    });
 }
 
-export function getInputModal(Title,okFunc,cancelFunc,Data,AdjustSoftInput){
-  
-  this.props.navigator.showLightBox({
+export function getInputModal(Title,okFunc,cancelFunc,Data,AdjustSoftInput,navigators){
+  navigators.showLightBox({
     screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
     passProps: {title:`${Title} : ${Data.type}`,remark:`${I18n.t('Cause')}`
-    ,cancel:cancelModal(cancelFunc),placeholder:`${I18n.t('SpecifyCause')}`
-    ,ok:okModal(okFunc),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
+    ,cancel:cancelModal(cancelFunc,navigators),placeholder:`${I18n.t('SpecifyCause')}`
+    ,ok:okModal(okFunc,navigators),data:Data}, // simple serializable object that will pass as props to the lightbox (optional)
     style: {
       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
       backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
@@ -126,17 +135,17 @@ export function getInputModal(Title,okFunc,cancelFunc,Data,AdjustSoftInput){
    });
 }
 
-function cancelModal(func){
+function cancelModal(func,navi){
   if(func){
     func();
   }
-  this.props.navigator.dismissLightBox();    
+  navi.dismissLightBox();    
 }
-function okModal(func){
+function okModal(func,navi){
   if(func){
     func();
   }
-  this.props.navigator.dismissLightBox();    
+  navi.dismissLightBox();    
 }
 
 export function disbackButton(){
