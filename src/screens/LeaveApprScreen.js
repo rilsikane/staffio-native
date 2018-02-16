@@ -172,7 +172,7 @@ export default class LeaveApprScreen extends React.Component {
 
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ReturnLeaveApp')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
       ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.rejectLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleInputModal,
@@ -190,7 +190,7 @@ export default class LeaveApprScreen extends React.Component {
 
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('Reject')} : ${data.type}`,remark:`${I18n.t('Cause')}`
+      passProps: {title:`${I18n.t('ReturnLeaveDetail')} : ${data.type}`,remark:`${I18n.t('Cause')}`
       ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleInputModal,
@@ -257,12 +257,12 @@ export default class LeaveApprScreen extends React.Component {
                 <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>,
 
-            !this.state.isCancel && (<TouchableOpacity style={[styles.rightSwipeItem ]}
+            info.requestStatusCode=='L'  && (<TouchableOpacity style={[styles.rightSwipeItem ]}
             onPress={()=>this.onReturnPress(info)}>
                 <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>),
 
-            !this.state.isCancel && (<TouchableOpacity style={[styles.rightSwipeItem]} disabled={this.state.isCancel}
+            info.requestStatusCode=='L' && (<TouchableOpacity style={[styles.rightSwipeItem]} disabled={this.state.isCancel}
             onPress={()=>this.onRejectPress(info)}>
               <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white' }} />
             </TouchableOpacity>),  
