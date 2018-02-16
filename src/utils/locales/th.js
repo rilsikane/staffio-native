@@ -226,7 +226,7 @@ export default {
     Late:'สาย',
     Earlyend:'กลับก่อน',
     Absence:'ขาด',
-    Entertimeoutside:'Enter time outside',
+    Entertimeoutside:'Out of office',
     search:'ค้นหา',
     Clear:'ล้างการค้นหา',
     //LeaveApprDetailScreen

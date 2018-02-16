@@ -84,22 +84,25 @@ const styles={
     backgroundColor:"transparent"
   },
   TextStyle1:{
-    fontSize:responsiveFontSize(2.2),
+    fontSize:responsiveFontSize(2),
     fontFamily:'Kanit',
-    backgroundColor:"transparent"
+    backgroundColor:"transparent",
+    textAlign: 'center'
   },
   TextStyle2:{
     marginTop:10,
     fontSize:responsiveFontSize(1.8),
     color:'#a9a9a9',
     fontFamily:'Kanit',
-    backgroundColor:"transparent"
+    backgroundColor:"transparent",
+    textAlign: 'center'
   },
   TextStyle3:{
     fontSize:responsiveFontSize(1.8),
     color:'#a9a9a9',
     fontFamily:'Kanit',
-    backgroundColor:"transparent"
+    backgroundColor:"transparent",
+    textAlign: 'center'
   },
   buttonStyle1:{
     borderRadius: 5,
