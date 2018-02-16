@@ -46,7 +46,7 @@ const TimeIn =({record,punchRecord,onPressItem}) => {
       <View style={styles.ContainerStyle}>
           <Grid>
             <Col size={12} style={styles.center}>
-              <Text allowFontScaling={false}style={styles.TextColor2}>{punchRecord.shiftNameTH}</Text>
+              <Text numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false}style={styles.TextColor2}>{punchRecord.shiftNameTH}</Text>
             </Col>
             <Col size={27} style={styles.center}>
               <View style={{ flexDirection: 'row',alignItems:"center",justifyContent:"center"}}>

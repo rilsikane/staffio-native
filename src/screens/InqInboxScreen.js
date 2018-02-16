@@ -29,6 +29,8 @@ import AnimatedOverlay from 'react-native-animated-overlay';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import I18n from '../utils/i18n';
+import moment from 'moment';
+import app from '../stores/app';
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
@@ -58,6 +60,8 @@ export default class InboxScreen extends React.Component {
      this.onEndReached = this.onEndReached.bind(this);
      this.closeDialog = this.closeDialog.bind(this);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+     this.app = app;
+     moment.locale(this.app.locale);
   }
   static navigationOptions = {
     header: null,
