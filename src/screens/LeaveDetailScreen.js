@@ -238,11 +238,11 @@ export default class LeaveDetailScreen extends React.Component {
         </Content>
          {this.props.isAppr &&
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
-             {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
+             {this.props.leaveStore.leaveData.requestStatusCode=='L' && <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent'   onPress={() => this.onRejectPress(this.props.leaveStore.leaveData)}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>}
-            {!this.props.isCancel && <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
+            {this.props.leaveStore.leaveData.requestStatusCode=='L' && <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent'  onPress={() => this.onReturnPress(this.props.leaveStore.leaveData)}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
             </ActionButton.Item>}

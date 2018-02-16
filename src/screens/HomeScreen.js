@@ -59,9 +59,11 @@ class HomeScreen extends React.Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.closeDialog = this.closeDialog.bind(this);
     this.gotoInbox = this.gotoInbox.bind(this);
-    this.watchID = navigator.geolocation.watchPosition((position) => {
+    if(navigator.geolocation){
+      this.watchID = navigator.geolocation.watchPosition((position) => {
       
-    });
+      });
+    }
     this.props.naviStore.navigation = this.props.navigator;
   }
    
@@ -330,9 +332,9 @@ class HomeScreen extends React.Component {
   componentWillUnmount() {
     console.log("componentWillUnmount");
     AppState.removeEventListener('change', this._handleAppStateChange);
-    // if(navigator){
-    //   navigator.geolocation.clearWatch(this.watchID);
-    // }
+    if(navigator.geolocation){
+      navigator.geolocation.clearWatch(this.watchID);
+    }
     BackgroundTimer.clearTimeout(intervalId);
     intervalId = null;
   }
