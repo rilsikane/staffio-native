@@ -240,7 +240,8 @@ export default {
     Reject: 'Reject',
     Consider: 'Consider leave',
     approveLeave: 'Approved',
-
+    CancelApprove: 'Cancel approve',
+    CancelapproveLeave: 'Cancel approved',
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',

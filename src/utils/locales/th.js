@@ -241,6 +241,8 @@ export default {
     Reject: 'ส่งคืนรายการ',
     Consider: 'พิจารณาการลา',
     approveLeave: 'อนุมัติรายการเรียบร้อย',
+    CancelApprove: 'ยืนยันอนุมัติการยกเลิก',
+    CancelapproveLeave: 'ยืนยันอนุมัติการยกเลิกเรียบร้อยแล้ว',
 
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',

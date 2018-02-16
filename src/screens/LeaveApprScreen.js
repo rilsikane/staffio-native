@@ -150,18 +150,32 @@ export default class LeaveApprScreen extends React.Component {
   }
   onApprovePress(data){
     this.setState({loading:true});
-    
-    this.props.navigator.showLightBox({
-      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
-      ,msg2: `${data.name}` ,cancel:this.cancelModal
-      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: styleConfirmModal
-        // backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        // backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
-      ,
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    if(data.requestStatus!='L'){
+      this.props.navigator.showLightBox({
+        screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`${I18n.t('CancelApprove')} : ${data.type}`,msg: `${I18n.t('CancelapproveLeave')}`
+        ,msg2: `${data.name}` ,cancel:this.cancelModal
+        ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: styleConfirmModal
+          // backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          // backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        ,
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }else{
+      this.props.navigator.showLightBox({
+        screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
+        ,msg2: `${data.name}` ,cancel:this.cancelModal
+        ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: styleConfirmModal
+          // backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          // backgroundColor: "transparent", // tint color for the background, you can specify alpha here (optional)
+        ,
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }
+   
   }
   cancelModal(){
     this.setState({loading:false});
