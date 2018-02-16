@@ -225,7 +225,7 @@ export default {
     Late:'Late',
     Earlyend:'Early end',
     Absence:'Absence',
-    Entertimeoutside:'Enter time outside',
+    Entertimeoutside:'Out of office',
     search:'Search',
     Clear:'Clear',
     //LeaveApprDetailScreen
@@ -240,7 +240,8 @@ export default {
     Reject: 'Reject',
     Consider: 'Consider leave',
     approveLeave: 'Approved',
-
+    CancelApprove: 'Cancel approve',
+    CancelapproveLeave: 'Cancel approved',
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',

@@ -241,6 +241,8 @@ export default {
     Reject: 'ส่งคืนรายการ',
     Consider: 'พิจารณาการลา',
     approveLeave: 'อนุมัติรายการเรียบร้อย',
+    CancelApprove: 'ยืนยันอนุมัติการยกเลิก',
+    CancelapproveLeave: 'ยืนยันอนุมัติการยกเลิกเรียบร้อยแล้ว',
 
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
@@ -248,10 +250,10 @@ export default {
     ReturnLeaveDetail: 'ส่งคืนรายการ',
     Cause: 'สาเหตุ',
     SpecifyCause: 'ระบุเหตุผล',
-    Reject: 'ไม่อนุมัติรายการ',
+    Reject: 'ส่งคืนรายการ',
     Approve: 'อนุมัติรายการ',
     ApproveSuccess: 'อนุมัติรายการเรียบร้อย',
-    ReturnSuccess: 'ไม่อนุมัติรายการเรียบร้อย',
+    ReturnSuccess: 'ปฏิเสธรายการเรียบร้อย',
     RejectSuccess: 'ส่งคืนรายการเรียบร้อย',
     title: 'ข้อมูลการลา',
     Approve:'อนุมัติรายการ',
