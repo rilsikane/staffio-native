@@ -25,6 +25,12 @@ export default class LeaveApproverCardGreen extends React.Component {
                 <CardItem style={{paddingRight:responsiveWidth(1.5),flex:3}}>
                     <Left style={{flex:0.7,backgroundColor:'transparent',alignItems:'center',marginLeft:-responsiveWidth(2),marginRight:responsiveWidth(2)}}>
                         <Thumbnail source={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}} />
+                        {/* <View style={styles.CheckSelected}>
+                            <FontAwesome name="check" size={responsiveWidth(5)} color='#FBAB3E' />
+                        </View> */}
+                        <View style={styles.CheckSelect}>
+                            <FontAwesome name="check" size={responsiveWidth(5)} color='#BCBEC0' />
+                        </View>
                     </Left>
                     <Body style={{flex:4}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
@@ -63,5 +69,24 @@ export default class LeaveApproverCardGreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-   
+   CheckSelected : {
+    position: 'absolute',
+    alignSelf:'flex-start',
+    backgroundColor:'#FECA89',
+    width:responsiveWidth(7),
+    height:responsiveWidth(7),
+    borderWidth:responsiveWidth(0.7),
+    borderColor:'#FBAB3E',
+    borderRadius:responsiveWidth(3.5)
+   },
+   CheckSelect : {
+    position: 'absolute',
+    alignSelf:'flex-start',
+    backgroundColor:'#FFF',
+    width:responsiveWidth(7),
+    height:responsiveWidth(7),
+    borderWidth:responsiveWidth(0.7),
+    borderColor:'#BCBEC0',
+    borderRadius:responsiveWidth(3.5)
+   }
 });
