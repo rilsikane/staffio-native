@@ -4,6 +4,7 @@ import { Container, Header, Content, Thumbnail, Text, Left, Right, Button, Icon,
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { em, round } from '../../constants/Layout';
 import moment from 'moment';
+import app from '../../stores/app';
 import { convertByFormat } from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 //import Image from 'react-native-image-progress';
@@ -14,6 +15,8 @@ export default class CardPunchInfo extends React.Component {
   constructor(props) {
     super(props);
     this.onPress = this.onPress.bind(this);
+    this.app = app;
+    moment.locale(this.app.locale)
   }
   onPress() {
     this.props.onPress(this.props.timeRecord);
@@ -60,13 +63,13 @@ export default class CardPunchInfo extends React.Component {
                 <Col size={30}>
                   <View style={{ flexDirection: 'row', alignItems: "center", borderRightWidth: 0.5, borderRightColor: '#9fa1a3', marginTop: 2, backgroundColor:'transparent' }}>
                     <Text allowFontScaling={false} style={styles.noteTimeText}>•</Text>
-                    <Text allowFontScaling={false} style={styles.noteTimeText}>{moment(timeRecord.dateRecord.replace("00:00:00", timeRecord.timeRecord)).fromNow()}</Text>
+                    <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteTimeText}>{moment(timeRecord.dateRecord.replace("00:00:00", timeRecord.timeRecord)).fromNow()}</Text>
                   </View>
                 </Col>
                 <Col size={70}>
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 5 }}>
                     <Icon name="navigate" style={styles.icon} />
-                    <Text allowFontScaling={false} style={[styles.litelText, this.changcolorborder(timeRecord.area_flag)]} numberOfLines={1}>
+                    <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={[styles.litelText, this.changcolorborder(timeRecord.area_flag)]} numberOfLines={1}>
                       {timeRecord.branchName}
                     </Text>
                   </View>
@@ -77,13 +80,13 @@ export default class CardPunchInfo extends React.Component {
             <Col size={25}>
               <Row size={10} style={{ flex: 1, justifyContent: 'center' }}>
                 <Icon name="calendar" style={styles.iconCa} />
-                <Text allowFontScaling={false} style={styles.bacisText}>{convertByFormat(timeRecord.dateRecord, "DD MMM ")}</Text>
+                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.bacisText}>{convertByFormat(timeRecord.dateRecord, "DD MMM ")}</Text>
               </Row>
               <Row size={35} style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: "transparent", marginTop: -responsiveHeight(3), zIndex: 9999 }}>
-                <Text allowFontScaling={false} style={"NM" == timeRecord.status ? styles.numberText : styles.numberLate}>{`${timeRecord.timeRecord.split(":")[0]}:${timeRecord.timeRecord.split(":")[1]}`} </Text>
+                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={"NM" == timeRecord.status ? styles.numberText : styles.numberLate}>{`${timeRecord.timeRecord.split(":")[0]}:${timeRecord.timeRecord.split(":")[1]}`} </Text>
               </Row>
               <Row size={55} style={{ flex: 1, justifyContent: 'center', marginTop: -responsiveHeight(1) }}>
-                <Text allowFontScaling={false} style={styles.noteText} note> {this.renderWorkTime(timeRecord)} </Text><Text allowFontScaling={false} style={styles.noteText} note>{`(${timeRecord.shiftNameTH})`}</Text>
+                <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteText} note> {this.renderWorkTime(timeRecord)} </Text><Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.noteText} note>{`(${timeRecord.shiftNameTH})`}</Text>
               </Row>
             </Col>
           </Grid>
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
     color: '#9fa1a3',
     fontSize: responsiveFontSize(1.5),
     fontFamily: 'Kanit',
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
   },
   noteTimeText: {
     color: '#9fa1a3',
@@ -122,7 +125,8 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(1.5),
    // color: '#ff8c00',
     fontFamily: 'Kanit',
-     backgroundColor:'transparent'
+     backgroundColor:'transparent',
+     flex:1
   },
   bacisText: {
     fontSize: responsiveFontSize(1.4),

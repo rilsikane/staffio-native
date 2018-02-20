@@ -21,6 +21,7 @@ import {post} from '../api';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import I18n from '../utils/i18n';
 import {disbackButton} from '../utils/staffioUtils'
+import app from '../stores/app';
 export default class PunchResultScreen extends React.Component {
   componentWillMount(){
 		disbackButton();
@@ -31,6 +32,7 @@ export default class PunchResultScreen extends React.Component {
      this.onChangeText = this.onChangeText.bind(this);
      this.state = {comment:""};
      this.donePress = this.donePress.bind(this);
+     this.app = app;
   }
   static navigationOptions = {
     header: null,
@@ -94,7 +96,7 @@ export default class PunchResultScreen extends React.Component {
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
              <ScrollView style={{flex:1}}>
-                <StampResult punch={this.props.puchRecordData} onChangeText={this.onChangeText} 
+                <StampResult locale={this.app.locale} punch={this.props.puchRecordData} onChangeText={this.onChangeText} 
                 goBack={this.goBack} donePress={this.donePress} empCode={this.props.empCode}></StampResult>
              </ScrollView>
        </View>

@@ -21,6 +21,8 @@ import getTheme from '../../native-base-theme/components';
 import CardHeader from '../components/cardHeader';
 import I18n from '../utils/i18n';
 import {disbackButton} from '../utils/staffioUtils'
+import app from '../stores/app';
+import moment from 'moment';
 export default class DashBoradProject extends React.Component {
     componentWillMount(){
 		disbackButton();
@@ -34,6 +36,8 @@ export default class DashBoradProject extends React.Component {
         this.cancelDialog = this.cancelDialog.bind(this);
         this.DashBorad = this.DashBorad.bind(this);
         this.changeTab = this.changeTab.bind(this);
+        this.app = app;
+        moment.locale = app.locale;
     }
 
     async  componentWillMount() {
@@ -128,7 +132,7 @@ export default class DashBoradProject extends React.Component {
                                             <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
                                                 <Icon name='refresh' style={{color: "#989898"}}/>
                                                 <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>{I18n.t('Fetch')} </Text>
-                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>: 21 นาทีที่แล้ว </Text>
+                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>:{moment().fromNow()} </Text>
                                             </CardItem>
                                         </CardItem>
 

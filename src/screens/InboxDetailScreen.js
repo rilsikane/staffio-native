@@ -25,6 +25,7 @@ import {post} from '../api';
 import Loading from '../components/loading';
 import store from 'react-native-simple-store';
 import I18n from '../utils/i18n';
+import app from '../stores/app';
 
 @inject('punchStore')
 @observer
@@ -37,6 +38,8 @@ export default class InboxDetailScreen extends React.Component {
      this.closeDialog =this.closeDialog.bind(this);
      this.commentComplete = this.commentComplete.bind(this);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+     this.app = app;
+     moment.locale(this.app.locale);
   }
   static navigationOptions = {
     header: null,

@@ -1,7 +1,6 @@
 import { observable } from 'mobx';
 import store from 'react-native-simple-store';
 import I18n from '../utils/i18n';
-import { locale } from 'moment';
 
 class AppStore {
   @observable root = undefined; // 'login' / 'after-login'
