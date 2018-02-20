@@ -116,14 +116,25 @@ export default class LeaveDetailScreen extends React.Component {
   }
   onApprovePress(data){
     //getConfirmModal(this.approveLeave,this.cancelModal,data,this.props.navigator);
-    this.props.navigator.showLightBox({
-      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg:`${I18n.t('ConfirmApproveLeave')}`
-      ,msg2: `${data.name}` ,cancel:this.cancelModal
-      ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: modalStyle,
-      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-     });
+    if(data.requestStatusCode=='L'){
+      this.props.navigator.showLightBox({
+        screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg:`${I18n.t('ConfirmApproveLeave')}`
+        ,msg2: `${data.name}` ,cancel:this.cancelModal
+        ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: modalStyle,
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }else{
+      this.props.navigator.showLightBox({
+        screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`${I18n.t('CancelApprove')} : ${data.type}`,msg:`${I18n.t('CancelapproveLeave')}`
+        ,msg2: `${data.name}` ,cancel:this.cancelModal
+        ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: modalStyle,
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+    }
   }
   cancelModal(){
     this.setState({loading:false});
@@ -164,13 +175,23 @@ export default class LeaveDetailScreen extends React.Component {
     let response = await post("ESSServices/ApproveLeaveRequest",params);
     if(response){
       setTimeout(() => {
-        this.props.navigator.showLightBox({
-          screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-          passProps: {title:`${I18n.t('Approve')} : ${data.type}`,msg:`${I18n.t('ApproveSuccess')}`
-          ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-          style: modalStyle,
-          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-        });
+        if(data.requestStatusCode=='L'){
+          this.props.navigator.showLightBox({
+            screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+            passProps: {title:`${I18n.t('Approve')} : ${data.type}`,msg:`${I18n.t('ApproveSuccess')}`
+            ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+            style: modalStyle,
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
+        }else{
+          this.props.navigator.showLightBox({
+            screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+            passProps: {title:`${I18n.t('CancelApproveD')} : ${data.type}`,msg:`${I18n.t('CancelapproveLeaveD')}`
+            ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+            style: modalStyle,
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
+        }
       },500);
 
     }
@@ -228,8 +249,8 @@ export default class LeaveDetailScreen extends React.Component {
           <Profile name={this.props.leaveStore.leaveData.name} positions={this.props.leaveStore.leaveData.positions} 
           img={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}}/>
           {!this.state.loading ? <DetailCard type={this.props.leaveStore.leaveData.type} cause={this.props.leaveStore.leaveData.reasonName} 
-          start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate} isCancel={this.props.leaveStore.leaveData.requestStatusCode!='L'}  
-          total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} requestStatus={this.props.leaveStore.leaveData.requestStatus}
+          start={this.props.leaveStore.leaveData.startDate} end={this.props.leaveStore.leaveData.endDate}  
+          total={this.props.leaveStore.leaveData.total} total={this.props.leaveStore.leaveData.total} requestStatus={this.props.leaveStore.leaveData.requestStatus} requestStatusCode={this.props.leaveStore.leaveData.requestStatusCode}
           remain = {this.state.leaveBalance.REMAIN||0} max={this.state.leaveBalance.MAX_DAY+this.state.leaveBalance.BRING_FORWARD} docRef={'ทดสอบ'} typedoc={'ทดสอบ'}/>
           :<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>
           }

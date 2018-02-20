@@ -257,6 +257,8 @@ export default {
     Approve:'Approve',
     LeaveStatistics: 'Leave Statistics',
     ReqType:'Request Type',
+    CancelApproveD: 'Cancel Approved',
+    CancelapproveLeaveD: 'Cancel Approved successfully',
     
     //MenuScreen
     HomeS: 'Home',
