@@ -42,7 +42,7 @@ export default class LeaveApprScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,selected:'1'}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
     this.cancelModal = this.cancelModal.bind(this);
@@ -69,7 +69,7 @@ export default class LeaveApprScreen extends React.Component {
     params.PAGE = 1;
     params.PAGE_SIZE =  1000;
     const response = await post("ESSServices/GetListApproveLeaveByApprover",params);
-    const infos = this.transformToInfos(response.objData);
+     infos = this.transformToInfos(response.objData);
     
 
     this.setState({leaveList:infos,loading:false});
@@ -104,6 +104,8 @@ export default class LeaveApprScreen extends React.Component {
       info.requestStatus = list[i].flaq == 'L' ? I18n.t('ToggleApprove'):I18n.t('ToggleCancel');
       info.requestStatusCode = list[i].flaq;
       info.isCancel = list[i].flaq != 'L';
+      info.index = i
+      info.selected = '1'
       infos.push(info);
   }
     return infos;
@@ -265,29 +267,38 @@ export default class LeaveApprScreen extends React.Component {
     }
   }
 
+  onSelected(index){
+    if(infos[index].selected =='1'){
+      infos[index].selected = '2'
+    }else if(infos[index].selected=='2'){
+      infos[index].selected = '1'
+    }
+    console.log(infos[index].selected)
+    this.setState({loading:false});
+  }
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
         <Swipeable  key={info.requestLeaveNo} rightButtons={[
             <TouchableOpacity style={[styles.rightSwipeItem]} onPress={()=>this.onApprovePress(info)} >
-                <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' }} />
+                <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
             </TouchableOpacity>,
 
             info.requestStatusCode=='L'  && (<TouchableOpacity style={[styles.rightSwipeItem ]}
             onPress={()=>this.onReturnPress(info)}>
-                <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white' }} />
+                <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
             </TouchableOpacity>),
 
             info.requestStatusCode=='L' && (<TouchableOpacity style={[styles.rightSwipeItem]} disabled={this.state.isCancel}
             onPress={()=>this.onRejectPress(info)}>
-              <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white' }} />
+              <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
             </TouchableOpacity>),  
           ]}>
            
-           <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>  
-            <LeaveApprover  info={info} openDetail={this.openLeaveDetail}/>
+           {/* <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>   */}
+           <TouchableOpacity style={{flex:1}} onPress={(e) => this.onSelected(info.index)}>  
+            <LeaveApprover selected={this.state.selected}  info={info} openDetail={this.openLeaveDetail}/>
            </TouchableOpacity>
-            
          </Swipeable> 
       );
     }else{
