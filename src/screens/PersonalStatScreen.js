@@ -25,7 +25,7 @@ import {convertByFormatShort, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
-
+import LeavePersonalCardNew from '../components/leave/LeavePersonalCard(Fix-style)'
 @inject('leaveStore')
 @observer
 
@@ -162,7 +162,7 @@ export default class PersonalStatScreen extends React.Component {
       return this.state.leaveList.map(info =>
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
-       <LeavePersonalCard info={info} />
+       <LeavePersonalCardNew info={info} />
       </TouchableOpacity>
       );
     }else{
