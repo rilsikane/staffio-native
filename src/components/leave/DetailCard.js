@@ -14,9 +14,9 @@ export default class DetailLeave extends React.Component {
             <CardItem>
                 <Body style={{flex:4}}>
                     <View style={{flexDirection: 'row', alignItems:'center' }}>
-                            {this.props.requestStatusCode!='L'&& <View style={{flex:0.7,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),marginRight:responsiveWidth(2)}}>
+                            {this.props.isCancel && <View style={{flex:1,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),marginRight:responsiveWidth(2)}}>
                             <FontAwesome name='circle' size={responsiveWidth(2)} color='white' style={{flex:1,marginLeft:responsiveWidth(0.5)}}/>
-                            {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
+                            {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:4,marginRight:2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
                             </View>}
                         <Text style={{fontFamily: 'Kanit-Medium', color:'#777779',flex:1.5, fontSize:responsiveFontSize(2.2),textAlign:'left'}}>{I18n.t('TypeLeve')}</Text>
                         <Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(2.2)}}>{this.props.type}</Text>

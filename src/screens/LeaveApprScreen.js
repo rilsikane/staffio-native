@@ -102,6 +102,7 @@ export default class LeaveApprScreen extends React.Component {
       info.color = this.getLeaveColor(list[i].LEAVE_TYPE_CODE);
       info.requestStatus = list[i].flaq == 'L' ? I18n.t('ToggleApprove'):I18n.t('ToggleCancel');
       info.requestStatusCode = list[i].flaq;
+      info.isCancel = list[i].flaq != 'L';
       infos.push(info);
   }
     return infos;
@@ -153,7 +154,7 @@ export default class LeaveApprScreen extends React.Component {
     if(data.requestStatusCode=='L'){
       this.props.navigator.showLightBox({
         screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('approveLeave')}`
+        passProps: {title:`${I18n.t('ConfirmApprove')} : ${data.type}`,msg: `${I18n.t('ConfirmApproveLeave')}`
         ,msg2: `${data.name}` ,cancel:this.cancelModal
         ,ok:this.approveLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
         style: styleConfirmModal

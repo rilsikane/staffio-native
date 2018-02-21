@@ -36,11 +36,15 @@ export default class Overview extends React.Component {
 
     async  componentWillMount() {
         const userData = await store.get("USER");
-        const dataperson = await this.dataperson(userData, this.props.data)
-
-        this.setState({ data: dataperson })
+        if(this.props.isProj){
+            let dataperson = await this.dataperson(userData, this.props.data)
+            this.setState({ data: dataperson })
+        }else{
+            let dataperson = await this.datapersonOrg(userData, this.props.data)
+            this.setState({ data: dataperson })
+        }    
+       
         this.setState({ user: userData });
-        console.log('นี่this.state.data' + JSON.stringify(this.state.data));
         if (userData) {
             TimerMixin.setTimeout(() => {
                 this.setState({ isLoading: false });
@@ -67,6 +71,14 @@ export default class Overview extends React.Component {
         const response2 = response.EmpDetails;
         return response2;
 
+    }
+    datapersonOrg = async(user, data) =>{
+        params = {}
+        params.orgCode = user.ORG_CODE;
+        params.unitCode = data.orgCode;
+        params.shftDate = new Date().toISOString();
+        const response = await post("GetDashBoradOrgDetail", params);
+        return response.empDetail
     }
     closeDialog() {
         this.props.navigator.pop({
@@ -102,7 +114,7 @@ export default class Overview extends React.Component {
                       <Content style={{flex:1}}>
                         <View style={{paddingTop:5,flex:1}}>
                             <View style={{marginLeft:responsiveWidth(1.5),marginRight:responsiveWidth(1.5)}}>
-                                <CardProgress  data={this.props.data}  isProj={true}></CardProgress>
+                                <CardProgress  data={this.props.data}  isProj={this.props.isProj}></CardProgress>
                             </View>
                             <ScrollView>
                                 <View style={{ alignItems: 'center', justifyContent: 'center',paddingTop:5}}>

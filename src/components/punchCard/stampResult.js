@@ -77,7 +77,7 @@ class StampResult extends React.Component {
             <KeyboardAvoidingView behavior='padding' style={styles.ViewStyle}>
                 <View style={styles.workShiftContainerStyle}>
                          <Image source={{ uri: `${this.props.punch.imagepath_tempMobile}` }} style={{width: responsiveWidth(52),height:responsiveHeight(39)}} />
-                         <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit', backgroundColor:"transparent"}}>{this.app.locale == 'th' ? this.props.punch.fullNameTH:this.props.punch.fullNameEN}</Text>
+                         <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit', backgroundColor:"transparent"}}>{this.props.punch.fullNameTH}</Text>
                 </View>
                
                 <View style={{marginLeft:10,marginRight:10}}>

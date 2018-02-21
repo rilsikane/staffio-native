@@ -26,7 +26,7 @@ export default class Checkin extends React.Component {
         this.props.onContactSelected(url);
     }
     changcolorborder(checkin) {
-        if (checkin == null) {
+        if (checkin == null || checkin=='') {
             return { borderTopColor: '#bf1e2d' }
         } else {
             return { borderTopColor: '#2bb673' }

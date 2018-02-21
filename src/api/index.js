@@ -141,12 +141,14 @@ export async function authen(path,param){
       }
 }
 export async function post(path,param){
-  console.log("param: "+JSON.stringify(param));
+  
   const userData = await store.get("USER");
   const endpoint = await getEndpoint();
   let lang = await store.get("locale");
   let requestURL = `${endpoint}${path}`;
       try{
+          param.CUSTOMER_CODE = userData.CUSTOMER_CODE;
+          console.log("param: "+JSON.stringify(param));
           const response = await  axios.post(requestURL, param,{headers: {token:userData.token,lang:lang}});
           if(response.status=='200' && (response.data.Success || response.data.Complete)){
             console.log("postService"+JSON.stringify(response));

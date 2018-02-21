@@ -30,12 +30,12 @@ export default class LeavePersonalCard extends React.Component {
                         {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:4, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
                     </View>}
                   
-                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:this.props.info.color,flex:1.2, fontSize:responsiveFontSize(1.8),textAlign:'left',paddingLeft:5}}>{this.props.info.type}</Text>)}
+                    {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:this.props.info.color,flex:0.8, fontSize:responsiveFontSize(1.8),textAlign:'left',paddingLeft:5}}>{this.props.info.type}</Text>)}
                     {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0.5, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{I18n.t('Status')}</Text>)}
                     {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.requestStatus}</Text>)}
                     <View style={{flex:1,flexDirection: 'row', alignItems:'center'}}>
-                        <FontAwesome name='calendar' color='#fbaa3e' style={{flex:1}}/>
-                        {(<Text style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.createDate}</Text>)}
+                        <FontAwesome name='calendar' color='#fbaa3e' style={{flex:1,textAlign: 'right', paddingRight: responsiveWidth(2)}}/>
+                        {(<Text style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:-2.5, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.createDate}</Text>)}
                     </View>
                    </View>
                    <View style={{flexDirection: 'row', alignItems:'center'}}>
@@ -43,8 +43,8 @@ export default class LeavePersonalCard extends React.Component {
                     {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.startDate}</Text>)}
                     {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560',flex:0, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('To')}</Text>)}
                     {(<Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.5),flex:3,textAlign:'center'}}>{this.props.info.endDate}</Text>)}
-                    {(<Text style={{fontFamily: 'Kanit-Medium',borderRadius: responsiveWidth(2), color:'gray',flex:1, fontSize:responsiveFontSize(3),textAlign:'center'}}>{`${this.props.info.total}`}</Text>)}
-                    {(<Text style={{fontFamily: 'Kanit-Medium',borderRadius: responsiveWidth(2), color:'gray',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('Day')}</Text>)}
+                    {(<Text style={{fontFamily: 'Kanit-Medium',borderRadius: responsiveWidth(2), color:'gray',flex:0, fontSize:responsiveFontSize(3),textAlign:'center'}}>{`${this.props.info.total}`}</Text>)}
+                    {(<Text style={{fontFamily: 'Kanit-Medium',borderRadius: responsiveWidth(2), color:'gray',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('Day')}</Text>)}
                    </View>
                 </Body>
             </CardItem>

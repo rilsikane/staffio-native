@@ -39,6 +39,7 @@ export default class PersonalStatScreen extends React.Component {
     this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
+    this.filterBalance = this.filterBalance.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -49,13 +50,14 @@ export default class PersonalStatScreen extends React.Component {
      this.setState({userData:userData});
     
   }
-  async getLeaveList(user){
+  async getLeaveList(user,leaveTypeCode){
     let params  = {};
     params.param = {};
     params.param.EMP_CODE = user.EMP_CODE;
     params.param.PAGE = 1;
     params.param.PAGE_SIZE =  100;
-    
+    params.param.ReqStatus= "01";
+    params.param.LEAVE_TYPE_CODE = leaveTypeCode;
     const response = await post("ESSServices/SearchLeaveListforEmp",params);
     const infos = this.transformToInfos(response.objData);
     const leaveBalances = await this.getLeaveBalance(user);
@@ -70,6 +72,11 @@ export default class PersonalStatScreen extends React.Component {
     // const response = await this.GetTimeRecordHistory(userData,null,null);
     // this.setState({listTimeReocords:response,isLoading:false})
     await this.getLeaveList(userData);
+  }
+  async filterBalance(leaveTypeCode){
+    this.setState({loading:true});
+    const userData = await store.get("USER");
+    await this.getLeaveList(userData,leaveTypeCode)
   }
   async getLeaveBalance(user){
     let params  = {};
@@ -103,6 +110,7 @@ export default class PersonalStatScreen extends React.Component {
       info.requestStatus = list[i].REQUEST_STATUS_SHOW;
       info.requestStatusCode = list[i].REQUEST_STATUS;
       info.flag = list[i].flag;
+      info.isCancel = list[i].flag == 2;
       infos.push(info);
   }
     return infos;
@@ -182,7 +190,8 @@ export default class PersonalStatScreen extends React.Component {
             </View> */}
             <PTRView onRefresh={this._refresh}>
               
-              {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
+              {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard filter={this.filterBalance}
+              title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>)}
               {/* {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}   */}
               {!this.state.loading  && this.renderList()}

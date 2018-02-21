@@ -14,6 +14,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import Bounceable from "react-native-bounceable";
 import I18n from '../../utils/i18n';
 import app  from '../../stores/app';
+import moment from 'moment';
 
 class PunchIn extends React.Component {
 
@@ -23,6 +24,9 @@ class PunchIn extends React.Component {
     this.state = {punchInTime:"00:00",DateTime:new Date().toDateString().split(' ')
     ,WORK_START_TM:"",WORK_END_TM:"",branch_name:"",punchOutTime:"",updateShift:"I",timeRecordType:""};
     this.app = app;
+    if(this.app.locale && moment){
+    moment().locale(this.app.locale);
+    }
   }
 
   punchIn(){

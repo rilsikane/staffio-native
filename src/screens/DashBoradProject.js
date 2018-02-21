@@ -23,6 +23,7 @@ import I18n from '../utils/i18n';
 import {disbackButton} from '../utils/staffioUtils'
 import app from '../stores/app';
 import moment from 'moment';
+import PTRView from 'react-native-pull-to-refresh';
 export default class DashBoradProject extends React.Component {
     componentWillMount(){
 		disbackButton();
@@ -73,8 +74,9 @@ export default class DashBoradProject extends React.Component {
         this.props.navigator.push({
             screen: 'staffio.Overview', // unique ID registered with Navigation.registerScreen
             title: undefined, // navigation bar title of the pushed screen (optional)
-            passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
-                DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the pushed screen (optional)
+            passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,isProj:this.state.tabIndex == 0,
+                DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent
+                ,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the pushed screen (optional)
             animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
             animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
             navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
@@ -118,10 +120,10 @@ export default class DashBoradProject extends React.Component {
             return (
                 <StyleProvider  style={getTheme()}>  
                     
-                    <Container >
+                    <View style={{flex:1}}>
                     <CardHeader title="Dashboard"/>  
                         <Content style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
-                            <ScrollView>
+                           
                                 <View style={{ backgroundColor: '#fee2c8' }}>
                                     <Body style={{ backgroundColor: '#fee2c8' }}>
                                         <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),flex:1,paddingLeft:0,paddingRight:0}}>
@@ -145,6 +147,7 @@ export default class DashBoradProject extends React.Component {
                                                 <Text style={styles.tabLabel2}>  มุมมองของโครงการ</Text>
                                                 </View>
                                             </TabHeading>}>
+                                            <ScrollView style={{height:responsiveHeight(80)}}>
                                                 {(this.state.projectView && this.state.projectView.length > 0) && this.state.projectView.map((val) => {
 
                                                     return (
@@ -157,7 +160,7 @@ export default class DashBoradProject extends React.Component {
                                                 })}
                                                 {this.state.projectView.length == 0 && (<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
                                                         ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
-                                            
+                                             </ScrollView>
                                             </Tab>
                                             <Tab   style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
                                             <TabHeading style={styles.tabHeading2}>
@@ -167,21 +170,25 @@ export default class DashBoradProject extends React.Component {
                                                     <Text style={styles.tabLabel2}>  เรียงตามโครงสร้างองค์กร</Text>
                                                 </View>
                                             </TabHeading>}>
+                                            <PTRView style={{flex:1,marginBottom:10}}>
+                                                <View style={{flex:1}}>
                                                 {this.state.orgView.length > 0 ? this.state.orgView.map((val) => {
                                                     return (
-                                                        <View key={val.projectName} style={{paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)}}>
+                                                        <View key={val.orgCode} style={{paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)}}>
                                                         <CardProgress  data={val} DashBorad={this.DashBorad} isOrg={true}>
                                                         </CardProgress>
                                                         </View>
                                                         );
                                                 }):(<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
                                                         ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
+                                                </View>
+                                             </PTRView>
                                             </Tab>
                                         </Tabs>
                                     
                                     </Body>
                                 </View>
-                            </ScrollView>
+                           
                         </Content>
                         {/* <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
                             <View >
@@ -190,7 +197,7 @@ export default class DashBoradProject extends React.Component {
                                 </Button>
                             </View>
                         </Footer> */}
-                    </Container>
+                    </View>
                 </StyleProvider>
             );
     }

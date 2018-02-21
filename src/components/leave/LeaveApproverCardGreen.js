@@ -33,11 +33,11 @@ export default class LeaveApproverCardGreen extends React.Component {
                             {/* {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily:'Kanit', color:'#777779',flex:3, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{this.props.info.positions}</Text>)} */}
                         </View>
                         <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                            {this.props.info.requestStatusCode!='L' && <View style={{flex:1.1,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),}}>
-                                <FontAwesome name='circle' size={responsiveWidth(2)} color='white' style={{flex:0.5,marginLeft:responsiveWidth(0.5)}}/>
-                                {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
+                            {this.props.info.requestStatusCode!='L' && <View style={{flex:1,flexDirection: 'row', alignItems:'center',backgroundColor:'red',borderRadius:responsiveWidth(1),}}>
+                                <FontAwesome name='circle' size={responsiveWidth(2)} color='white' style={{marginLeft:responsiveWidth(0.5)}}/>
+                                {(<Text style={{fontFamily:'Kanit-Medium', color:'white',flex:1,marginRight:2, fontSize:responsiveFontSize(1.8),textAlign:'center'}}>{I18n.t('cancelLeavePer')}</Text>)}
                             </View>}
-                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:this.props.info.color,flex:2, fontSize:responsiveFontSize(1.8),textAlign:'left',paddingLeft:5}}>{this.props.info.type}</Text>)}
+                            {(<Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit-Medium', color:this.props.info.color,flex:this.props.info.requestStatusCode=='L'?2:1, fontSize:responsiveFontSize(1.8),textAlign:'left',paddingLeft:5}}>{this.props.info.type}</Text>)}
                             <View style={{flex:2,flexDirection: 'row', alignItems:'center'}}>
                                 <FontAwesome name='calendar' color='#fbaa3e'/>
                                 {(<Text style={{fontFamily:'Kanit-Medium', color:'#fbaa3e',flex:2,paddingLeft:5, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.createDate}</Text>)}

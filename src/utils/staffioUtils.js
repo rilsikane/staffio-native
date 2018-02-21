@@ -5,6 +5,8 @@ import {BackHandler,Platform} from 'react-native'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 import store from 'react-native-simple-store';
+import app  from '../stores/app';
+
 var dateFormat = require('dateformat');
 var localeTmp = 'en';
 
@@ -38,10 +40,7 @@ export function convertByFormat(tmpDate,format) {
     return dayMonth+(parseInt(year)+(localeTmp=='th'? 543:0));
 }
 export function convertPunch(tmpDate) {
-    store.get('locale')
-    .then((res) =>
-      {localeTmp = res;}
-    )
+    localeTmp = app.locale;
      let day = moment(tmpDate).locale(localeTmp, localization).format("dd");
      let date = moment(tmpDate).locale(localeTmp, localization).format("DD");
      let month = moment(tmpDate).locale(localeTmp, localization).format("MMM");

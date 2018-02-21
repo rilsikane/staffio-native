@@ -48,6 +48,7 @@ export default class FindFriendsScreen extends React.Component {
       }
   }
   async searchFirends(){
+
     let params  = {};
     params.param = this.state.searchtext;
     params.page = 1;

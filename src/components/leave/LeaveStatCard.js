@@ -5,7 +5,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import LeaveStatContent from "./LeaveStatContent";
 export default class LeaveStatCard extends React.Component {
     renderHistory() {
-        return this.props.data.map(infoHis => <LeaveStatContent key={infoHis.id} infoHis={infoHis} />);
+        return this.props.data.map(infoHis => <LeaveStatContent filter={this.props.filter} key={infoHis.id} infoHis={infoHis} />);
     }
     render() {
         console.log(this.props.data);
