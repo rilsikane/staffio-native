@@ -66,7 +66,8 @@ export default class LeaveApprScreen extends React.Component {
     let params  = {};
     params.ApproveBy = user.EMP_CODE;
     params.LeaveGroupCode = "ALL";
-    
+    params.PAGE = 1;
+    params.PAGE_SIZE =  1000;
     const response = await post("ESSServices/GetListApproveLeaveByApprover",params);
     const infos = this.transformToInfos(response.objData);
     

@@ -13,6 +13,7 @@ import fontelloConfig from '../../../assets/fonts/config.json'
 import { em } from '../../constants/Layout'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import I18n from '../../utils/i18n';
+import Colors from '../../constants/Colors'
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 
@@ -71,13 +72,13 @@ export default class Checkin extends React.Component {
                             </Body>
                             <Right>
                                  {(data.mobileNo && data.mobileNo !="") && <Button style={[styles.icon]} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
-                                    <IconTello style={{ color: "#fbaa3e" }} size={responsiveFontSize(3.5)} name="hhmm-17" />
+                                    <IconTello style={{ color: "red"}} size={responsiveFontSize(3)} name="hhmm-17" />
                                 </Button>}
                                 {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
-                                    <IconTello style={{ color: "#3c5b9a" }} size={responsiveFontSize(3.5)} name="hhmm-18" />
+                                    <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-18" />
                                 </Button>}
                                 {(data.lineid && data.lineid !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.lineid)} >
-                                    <IconTello style={{ color: "#37b54a" }} size={responsiveFontSize(3.5)} name="hhmm-20" />
+                                    <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-20" />
                                 </Button>}
                             </ Right>
                         </CardItem>
@@ -142,13 +143,12 @@ const styles = ({
         backgroundColor: 'transparent'
     },
     icon: {
-        height: responsiveHeight(4),
-        width: responsiveWidth(8),
-        borderRadius: responsiveWidth(8 / 2),
+        width:responsiveWidth(8),
+        height:responsiveHeight(4),
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'transparent',
-        marginRight: responsiveWidth(5)
+        marginRight: responsiveWidth(2),
+        backgroundColor:"transparent"
     },
     box1: {
         zIndex:999,

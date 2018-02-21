@@ -55,7 +55,7 @@ export default class PersonalStatScreen extends React.Component {
     params.param = {};
     params.param.EMP_CODE = user.EMP_CODE;
     params.param.PAGE = 1;
-    params.param.PAGE_SIZE =  100;
+    params.param.PAGE_SIZE =  1000;
     params.param.ReqStatus= "01";
     params.param.LEAVE_TYPE_CODE = leaveTypeCode;
     const response = await post("ESSServices/SearchLeaveListforEmp",params);

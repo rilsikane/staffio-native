@@ -150,8 +150,12 @@ class HomeScreen extends React.Component {
   async loadItems(day) {
 
     const userData = await store.get("USER");
-    const startOfMonth = moment(day.dateString).startOf('month').toDate();
-    const endOfMonth = moment(day.dateString).endOf('month').toDate();
+
+    const startOfMonth = moment(day.dateString).subtract(8,'week').toDate();
+    const endOfMonth = moment(day.dateString).add(8,'week').toDate();
+
+    
+
     const shiftPattern =  await this.getShiftPatternByPersonal(userData,startOfMonth,endOfMonth);
     if(shiftPattern && shiftPattern.length>0){
        for (let i = 0; i < shiftPattern.length; i++) {
