@@ -52,6 +52,7 @@ export default class LeaveApprScreen extends React.Component {
     this.onApprovePress = this.onApprovePress.bind(this);
     this.onRejectPress = this.onRejectPress.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
+    this.onSelected = this.onSelected.bind(this);
     this.navigator = this.props.navigator
   }
   static navigationOptions = {
@@ -266,15 +267,14 @@ export default class LeaveApprScreen extends React.Component {
       this.getLeaveList(userData);
     }
   }
-
+  
   onSelected(index){
     if(infos[index].selected =='1'){
       infos[index].selected = '2'
     }else if(infos[index].selected=='2'){
       infos[index].selected = '1'
     }
-    console.log(infos[index].selected)
-    this.setState({loading:false});
+    this.setState({loading:false})
   }
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
@@ -294,11 +294,7 @@ export default class LeaveApprScreen extends React.Component {
               <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
             </TouchableOpacity>),  
           ]}>
-           
-           {/* <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>   */}
-           <TouchableOpacity style={{flex:1}} onPress={(e) => this.onSelected(info.index)}>  
-            <LeaveApprover selected={this.state.selected}  info={info} openDetail={this.openLeaveDetail}/>
-           </TouchableOpacity>
+            <LeaveApprover selected={this.state.selected}  info={info} openDetail={this.openLeaveDetail} onSelect={this.onSelected}/>
          </Swipeable> 
       );
     }else{
