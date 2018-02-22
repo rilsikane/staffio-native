@@ -206,7 +206,6 @@ export default class LeaveApprScreen extends React.Component {
   }
   onReturnPress(data){
     this.setState({loading:true});
-
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
       passProps: {title:`${I18n.t('ReturnLeaveDetail')} : ${data.type}`,remark:`${I18n.t('Cause')}`
@@ -221,6 +220,66 @@ export default class LeaveApprScreen extends React.Component {
       // },
       adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
      });
+  }
+
+  onRejectPressAll(data){
+    this.setState({loading:true});
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('RejectAll')} : ${data.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+      ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleInputModal,
+      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  onReturnPressAll(data){
+    this.setState({loading:true});
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('ReturnLeaveAll')} : ${data.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
+      ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
+      ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleInputModal,
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  onApprovePressAll(data){
+    this.setState({loading:true});
+      this.props.navigator.showLightBox({
+        screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+        passProps: {title:`${I18n.t('ConfirmApproveAll')} : ${data.length} ${I18n.t('itemAppr')}`,msg: `${I18n.t('ConfirmApproveLeave')} ${data.length} ${I18n.t('itemAppr')}`
+        ,msg2: `` ,cancel:this.cancelModal
+        ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+        style: styleConfirmModal,
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+  }
+
+  countItemsSelected(status){
+    let datas = []
+    const userData = store.get("USER");
+    for(let i=0;i<infos.length;i++){
+      if(infos[i].selected=='2'){
+        let data={}
+        data.ApproveBy = userData.EMP_CODE;
+        data.EMP_CODE = infos[i].empId;
+        data.LEAVE_TYPE_CODE = infos[i].typeCode;
+        data.OrgCode = infos[i].orgCode;
+        data.REQUEST_LEAVE_NO = infos[i].requestLeaveNo;
+        data.ApproveStatus = status
+        datas.push(data);
+      }
+    }
+    return datas
+  }
+  async approveLeaveAll(data){
+    this.props.navigator.dismissLightBox();
+    this.setState({loading:true});
+    let response = await post("ESSServices/ApproveAllLeaveRequest",data);
+    if(response){
+      this.getLeaveList(userData);
+    }
   }
   async approveLeave(data){
     this.props.navigator.dismissLightBox();
@@ -325,20 +384,20 @@ export default class LeaveApprScreen extends React.Component {
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}
           </PTRView>
-          {/* <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-responsiveWidth(14)} marginBottom={-responsiveHeight(5.8)} buttonColor='transparent'   onPress={() => console.log("notes tapped!")}>
-              <Icon name="times" style={[styles.actionButtonIcon,{marginRight:responsiveWidth(12)}]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5),width:100}}>ปฏิเสธทั้งหมด</Text>
+          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
+             <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent' onPress={() => this.onRejectPressAll(this.countItemsSelected('Reject'))}>
+              <Icon name="times" style={[styles.actionButtonIcon]} />
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(13)} marginBottom={-(responsiveHeight(5))} buttonColor='transparent'  onPress={() => {}}>
+           <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent' onPress={()=>this.onReturnPressAll(this.countItemsSelected('Return'))}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ส่งคืนทั้งหมด</Text>
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
             </ActionButton.Item>
-            <ActionButton.Item marginRight={responsiveWidth(24)} marginBottom={-(responsiveHeight(17))} buttonColor='transparent' onPress={() => {}}>
+           <ActionButton.Item marginRight={responsiveWidth(28)} marginBottom={-(responsiveHeight(16))} buttonColor='transparent' onPress={()=>this.onApprovePressAll(this.countItemsSelected('Approve'))}>
               <Icon name="check" style={styles.actionButtonIcon} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>อนุมัติทั้งหมด</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>
-          </ActionButton> */}
+          </ActionButton>
       </View>
     );
   }

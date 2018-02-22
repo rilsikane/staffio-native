@@ -242,6 +242,11 @@ export default {
     approveLeave: 'Approved',
     CancelApprove: 'Cancel approve',
     CancelapproveLeave: 'Cancel approved',
+    ReturnLeaveAll: 'Return all',
+    RejectAll: 'Reject all',
+    ConfirmApproveAll:'Confirm approval all',
+    itemAppr: 'item(s)',
+
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',

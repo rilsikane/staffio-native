@@ -243,7 +243,10 @@ export default {
     approveLeave: 'อนุมัติรายการเรียบร้อย',
     CancelApprove: 'ยืนยันอนุมัติการยกเลิก',
     CancelapproveLeave: 'ยืนยันอนุมัติการยกเลิกของ',
-
+    ReturnLeaveAll: 'ส่งคืนรายการลาทั้งหมด',
+    RejectAll: 'ไม่อนุมัติรายการทั้งหมด',
+    ConfirmApproveAll:'ยืนยันการอนุมัติการลา',
+    itemAppr: 'รายการ',
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
