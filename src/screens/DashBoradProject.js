@@ -38,7 +38,7 @@ export default class DashBoradProject extends React.Component {
         this.DashBorad = this.DashBorad.bind(this);
         this.changeTab = this.changeTab.bind(this);
         this.app = app;
-        moment.locale = app.locale;
+        moment().locale(this.app.locale);
     }
 
     async  componentWillMount() {
@@ -132,9 +132,9 @@ export default class DashBoradProject extends React.Component {
                                                 <Text style={styles.headerFont1}>{I18n.t('enterTimeDashborad')}</Text>
                                             </CardItem>
                                             <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
-                                                <Icon name='refresh' style={{color: "#989898"}}/>
+                                                <Icon name='refresh' style={{color: "#989898",backgroundColor:"transparent"}}/>
                                                 <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>{I18n.t('Fetch')} </Text>
-                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>:{moment().fromNow()} </Text>
+                                                <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>:{moment().locale(this.app.locale).fromNow()} </Text>
                                             </CardItem>
                                         </CardItem>
 
@@ -151,7 +151,7 @@ export default class DashBoradProject extends React.Component {
                                                 {(this.state.projectView && this.state.projectView.length > 0) && this.state.projectView.map((val) => {
 
                                                     return (
-                                                        <View key={val.projectName} style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
+                                                        <View key={val.projectCode} style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
                                                         ,paddingTop:responsiveHeight(1)}}>
                                                         <CardProgress  data={val} DashBorad={this.DashBorad} isProj={true}>
                                                         </CardProgress>

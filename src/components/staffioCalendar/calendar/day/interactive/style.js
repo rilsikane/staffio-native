@@ -39,7 +39,7 @@ export default function styleConstructor(theme={}) {
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '300',
       color: appStyle.dayTextColor || '#2d4150',
-      backgroundColor: 'rgba(255, 255, 255, 0)'
+      backgroundColor: 'transparent'
     },
     todayText: {
       fontWeight: '500',

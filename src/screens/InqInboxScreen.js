@@ -61,7 +61,7 @@ export default class InboxScreen extends React.Component {
      this.closeDialog = this.closeDialog.bind(this);
      this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
      this.app = app;
-     moment.locale(this.app.locale);
+     moment().locale(this.app.locale);
   }
   static navigationOptions = {
     header: null,
@@ -172,10 +172,11 @@ export default class InboxScreen extends React.Component {
     params.location = locationSearch;
     params.status = statuses && statuses.length > 0 ? statuses : undefined;
     params.EmpCode = staffs&& staffs.length >0 ? staffs:undefined;
-    params.pagesize = 100;
+    params.pagesize = 10;
     params.areaFlag = area_flag;
     params.page=this.state.page;
     params.flag="m";
+    this.setState({page:this.state.page+1});
     const response = await post("ESSServices/GetTimeRecordHistory",params);
     // const response = customData2;
     return response.ListTimeReocords;
@@ -412,9 +413,10 @@ export default class InboxScreen extends React.Component {
                 <TagInput  onChange={(tags) => this.onCriteriaChange(tags)}
                 value={this.state.tags} />
             </View>
-          <PTRView onRefresh={this._refresh} style={{marginTop:5}}>
-              <InboxList onEndReached={this.onEndReached} onPressItem={this.onPressItem} listTimeReocords={this.state.listTimeReocords}/>
-         </PTRView>
+          {/* <PTRView onRefresh={this._refresh} style={{marginTop:5}}>
+              
+         </PTRView> */}
+         <InboxList onEndReached={this.onEndReached} onPressItem={this.onPressItem} listTimeReocords={this.state.listTimeReocords}/>
          
          {/*<Fab
             active={this.state.active}

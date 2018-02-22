@@ -41,11 +41,11 @@ export default class CardProgress extends React.Component {
 
     color(color) {
         if (color < 31) {
-            return { color: "#ad262b", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
+            return { color: "#ad262b", fontSize: responsiveFontSize(2.2) ,fontWeight:"500",backgroundColor:"transparent"}
         } else if (color <= 79) {
-            return { color: "#f8c618", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
+            return { color: "#f8c618", fontSize: responsiveFontSize(2.2) ,fontWeight:"500",backgroundColor:"transparent"}
         } else if (color >= 80) {
-            return { color: "#37b078", fontSize: responsiveFontSize(2.2) ,fontWeight:"500"}
+            return { color: "#37b078", fontSize: responsiveFontSize(2.2) ,fontWeight:"500",backgroundColor:"transparent"}
         }
     }
     DashBorad(data) {
