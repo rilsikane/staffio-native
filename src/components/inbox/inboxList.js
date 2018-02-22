@@ -62,13 +62,13 @@ export default class InboxList extends React.Component {
                     </CardPunchInfo>
                   }
                 /> */}
-               <FlatList
+               <OptimizedFlatList
                 data={this.props.listTimeReocords}
                 renderItem={ ({item}) =>  <CardPunchInfo key={item.temp_mobile_id} onPress={this.onPress} timeRecord={item}>
                 </CardPunchInfo>}
                  keyExtractor={item => item.temp_mobile_id}
                 onEndReached={this.onEndReached}
-                onEndReachedThreshold={0}
+                onEndReachedThreshold={0.5}
                 />
         </View>
     );
