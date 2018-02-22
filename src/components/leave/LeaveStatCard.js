@@ -5,7 +5,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import LeaveStatContent from "./LeaveStatContent";
 export default class LeaveStatCard extends React.Component {
     renderHistory() {
-        return this.props.data.map(infoHis => <LeaveStatContent filter={this.props.filter} key={infoHis.id} infoHis={infoHis} />);
+        return this.props.data.map(infoHis => <LeaveStatContent filter={this.props.filter} key={infoHis.id} infoHis={infoHis} readOnly={this.props.readOnly}/>);
     }
     render() {
         console.log(this.props.data);
@@ -31,7 +31,7 @@ export default class LeaveStatCard extends React.Component {
 
 
 const styles = StyleSheet.create({
-    viewHistory: { flexDirection: 'row', flex: 1, alignItems: "center", justifyContent: "center", paddingTop: 10, paddingBottom: 5 },
-    dateTxt: { fontFamily: 'Kanit', color: '#a9a9a9', fontSize: responsiveFontSize(1.5), paddingTop: 3 },
-    titleText: { fontFamily: 'Kanit-Medium', color: '#7e6560', fontSize: responsiveFontSize(2),},
+    viewHistory: { flexDirection: 'row', flex: 1, alignItems: "center", justifyContent: "center", paddingTop: 10, paddingBottom: 5,backgroundColor:"transparent" },
+    dateTxt: { fontFamily: 'Kanit', color: '#a9a9a9', fontSize: responsiveFontSize(1.5), paddingTop: 3,backgroundColor:"transparent" },
+    titleText: { fontFamily: 'Kanit-Medium', color: '#7e6560', fontSize: responsiveFontSize(2),backgroundColor:"transparent"},
 })

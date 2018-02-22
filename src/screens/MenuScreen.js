@@ -10,6 +10,7 @@ import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/homeBG.png';
 import I18n from '../utils/i18n';
 import SwitchSelector from 'react-native-switch-selector'
+import { backgroundColor } from '../components/staffioCalendar/style';
 
 @inject('naviStore')
 @observer 
@@ -190,7 +191,8 @@ const styles = {
         color:'#7e6560',
         fontSize: 20,
         paddingLeft: 15,
-        paddingRight: 20
+        paddingRight: 20,
+        backgroundColor:"transparent"
     },
     textPosition: {
         color: '#fbaa3e', 

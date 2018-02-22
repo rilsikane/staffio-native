@@ -3,7 +3,7 @@ import {
   Platform,
   StyleSheet,
   View,
-  Text,ScrollView,TouchableOpacity,ListView
+  Text,ScrollView,TouchableOpacity,ListView,FlatList
 } from 'react-native';
 // import LeaveCalendar from '../components/LeaveCalendar'
 import Colors from '../../constants/Colors'
@@ -12,6 +12,7 @@ import {Content,Tabs,Tab,TabHeading} from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CardPunchInfo from '../cardPunchInfo'
 import SGListView from 'react-native-sglistview';
+import {OptimizedFlatList} from 'react-native-optimized-flatlist'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class InboxList extends React.Component {
@@ -40,14 +41,14 @@ export default class InboxList extends React.Component {
   }
   render() {
     return (
-       <Content style={{backgroundColor:Colors.backgroundColor,marginTop:5}}>
+       <View style={{backgroundColor:Colors.backgroundColor,marginTop:5}}>
                {/*{ this.props.listTimeReocords.map((val) => {
                   return (
                     <CardPunchInfo key={val.temp_mobile_id} onPress={this.onPress} timeRecord={val}>
                     </CardPunchInfo>);
                 })}
             */}
-             <SGListView
+             {/* <SGListView
                   dataSource={this.getDataSource()} //data source
                   ref={'listview'}
                   initialListSize={100}
@@ -60,8 +61,16 @@ export default class InboxList extends React.Component {
                     <CardPunchInfo key={item.temp_mobile_id} onPress={this.onPress} timeRecord={item}>
                     </CardPunchInfo>
                   }
+                /> */}
+               <FlatList
+                data={this.props.listTimeReocords}
+                renderItem={ ({item}) =>  <CardPunchInfo key={item.temp_mobile_id} onPress={this.onPress} timeRecord={item}>
+                </CardPunchInfo>}
+                 keyExtractor={item => item.temp_mobile_id}
+                onEndReached={this.onEndReached}
+                onEndReachedThreshold={0}
                 />
-        </Content>
+        </View>
     );
   }
 

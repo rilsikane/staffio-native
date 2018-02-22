@@ -296,7 +296,7 @@ export default class LeaveApprScreen extends React.Component {
           ]}>
            
            {/* <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>   */}
-           <TouchableOpacity style={{flex:1}} onPress={(e) => this.onSelected(info.index)}>  
+           <TouchableOpacity style={{flex:1}} onPress={(e) => this.openLeaveDetail(info)}>  
             <LeaveApprover selected={this.state.selected}  info={info} openDetail={this.openLeaveDetail}/>
            </TouchableOpacity>
          </Swipeable> 

@@ -7,6 +7,7 @@ import  Icon  from 'react-native-vector-icons/FontAwesome' ;
 import {em,window} from '../../constants/Layout';
 import Communications from 'react-native-communications';
 import app from '../../stores/app';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 
 export default class CardFriend extends React.Component {
@@ -31,7 +32,7 @@ export default class CardFriend extends React.Component {
         </Col>
         <Col size={75} style>
             <Row size={20} >
-            <Text allowFontScaling={false}style={styles.titleText}>{employee.FULL_NAME_TH} </Text>
+            <Text ellipsizeMode='tail' numberOfLines={1} allowFontScaling={false}style={styles.titleText}>{employee.FULL_NAME_TH} </Text>
             </Row>
             <Row size={10} style={{zIndex:8888}}>
                 <Text allowFontScaling={false}style={[styles.noteText,{ marginLeft:-5}]}> {employee.EMP_CODE} {employee.POSITION_NAME} </Text>
@@ -79,13 +80,13 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: '#6E6E6E',
-    fontSize: em(1.2),
+    fontSize: responsiveFontSize(2),
     fontFamily:'Kanit',
     backgroundColor:"transparent"
   },
   headText: {
     color: '#f58020',
-    fontSize: em(1.2),
+    fontSize: responsiveFontSize(1.4),
     fontFamily:'Kanit',
     backgroundColor:"transparent"
   },

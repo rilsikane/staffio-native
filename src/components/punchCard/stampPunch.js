@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import {convertPunch} from '../../utils/staffioUtils';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import I18N from '../../utils/i18n'
+import app from '../../stores/app'
 class StampPunch extends React.Component {
   constructor(props) {
       super(props);
@@ -21,6 +22,7 @@ class StampPunch extends React.Component {
     this.ok = this.ok.bind(this);
     this.state = {DateTime:"",punchInTime: "",timeCount:0,remark:"",error:false};
     this.onChange = this.onChange.bind(this);  
+    this.app = app;
   }
   retry(){
       this.props.retry();
@@ -91,14 +93,14 @@ class StampPunch extends React.Component {
         return (<View style={{marginTop:5,alignItems:"center"}}>
                     <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
                         <Icon style={styles.label} name='location-arrow' size={20} color='#f58020'/>
-                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2),color:"#f58020",fontFamily:'Kanit'}}> {this.props.shiftData.branch_name} </Text>
+                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2),color:"#f58020",fontFamily:'Kanit',backgroundColor:"transparent"}}> {this.props.shiftData.branch_name} </Text>
                     </View>
                 </View>)
     else
      return (<View style={{marginTop:5,alignItems:"center"}}>
                 <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
                        <CheckBox checked={true}/>
-                        <Text allowFontScaling={false}style={{marginLeft:10,fontSize:responsiveFontSize(2),color:"#9a9c9e",fontFamily:'Kanit'}}> 
+                        <Text allowFontScaling={false}style={{marginLeft:10,fontSize:responsiveFontSize(2),color:"#9a9c9e",fontFamily:'Kanit',backgroundColor:"transparent"}}> 
                             {this.props.area_flag ? this.props.shiftData.branch_name :`${I18N.t('saveoutsideStampPunch')}`} </Text>
                 </View>
                
@@ -109,7 +111,7 @@ class StampPunch extends React.Component {
      if(this.props.lateCondition){
         fontcolor = "red";
      }
-     return  (<Text allowFontScaling={false}style={{fontSize:responsiveFontSize(6),fontFamily:'Kanit',color:fontcolor,marginTop:-responsiveHeight(3)}}> {this.state.punchInTime}</Text>)
+     return  (<Text allowFontScaling={false}style={{fontSize:responsiveFontSize(6),fontFamily:'Kanit',color:fontcolor,marginTop:-responsiveHeight(3),backgroundColor:"transparent"}}> {this.state.punchInTime}</Text>)
  } 
 
   render(){
@@ -123,21 +125,21 @@ class StampPunch extends React.Component {
                         <Image source={{uri:`data:image/jpeg;base64,${this.props.imgPath}`}} style={{width: responsiveWidth(60),height:responsiveHeight(45)}} />
                 </View>
                 <View style={{marginTop:responsiveHeight(0.5),alignItems:"center"}}>
-                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit'}}>{this.props.user.FULL_NAME_TH}</Text>
-                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2),fontFamily:'Kanit',color:"#9a9c9e"}}>{`ID:${this.props.shiftData.empCode}  ${this.props.user.POSITION_NAME}`}</Text>
+                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit',backgroundColor:"transparent"}}>{this.app.locale =='th' ? this.props.user.FULL_NAME_TH:this.props.user.FULL_NAME_EN}</Text>
+                        <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2),fontFamily:'Kanit',color:"#9a9c9e",backgroundColor:"transparent"}}>{`ID:${this.props.shiftData.empCode}  ${this.props.user.POSITION_NAME||'-'}`}</Text>
                 </View>
                 <View style={{marginTop:responsiveHeight(0.2),alignItems:"center",backgroundColor:"#f6f6f6",marginLeft:5,marginRight:5}}>
                         <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",zIndex:9999}}>
-                            <Icon style={{fontSize:responsiveFontSize(2),fontFamily:'Kanit',color:"#737373"}} name='calendar'/>
-                            <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit',color:"#737373"}}> {`${this.state.DateTime[2]} ${this.state.DateTime[1]} ${this.state.DateTime[3]}`}</Text>
+                            <Icon style={{fontSize:responsiveFontSize(2),fontFamily:'Kanit',color:"#737373",backgroundColor:"transparent"}} name='calendar'/>
+                            <Text allowFontScaling={false}style={{fontSize:responsiveFontSize(2.5),fontFamily:'Kanit',color:"#737373",backgroundColor:"transparent"}}> {`${this.state.DateTime[2]} ${this.state.DateTime[1]} ${this.state.DateTime[3]}`}</Text>
                         </View>
                         <View style={{flexDirection:"row",alignItems:"baseline"}}>
                            {this.renderPunchTime()}
                         </View>
                         <View style={{flexDirection:"row",alignItems:"center",marginTop:-responsiveHeight(2),marginLeft:10}}>
-                            <Icon style={{fontSize:responsiveFontSize(2),color:"#c6c8c9"}} name='caret-down'/>
-                            <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(2),color:"#c6c8c9",fontFamily:'Kanit'}}> {this.state.work_tm}</Text>
-                            <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(2),color:"#737373",fontFamily:'Kanit'}}> {`(${this.props.shiftData.shift_name})`}</Text>
+                            <Icon style={{fontSize:responsiveFontSize(2),color:"#c6c8c9",backgroundColor:"transparent"}} name='caret-down'/>
+                            <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(2),color:"#c6c8c9",fontFamily:'Kanit',backgroundColor:"transparent"}}> {this.state.work_tm}</Text>
+                            <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(2),color:"#737373",fontFamily:'Kanit',backgroundColor:"transparent"}}> {`(${this.props.shiftData.shift_name})`}</Text>
                         </View>
                 </View>
                 {this.renderLocation()}

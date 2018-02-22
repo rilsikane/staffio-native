@@ -41,6 +41,7 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.app = app;
+    this.months = [];
     this.state = {
       items: {},
       user:{},
@@ -151,33 +152,50 @@ class HomeScreen extends React.Component {
 
     const userData = await store.get("USER");
 
-    const startOfMonth = moment(day.dateString).subtract(8,'week').toDate();
-    const endOfMonth = moment(day.dateString).add(8,'week').toDate();
+    const startOfMonth = moment(day.dateString).startOf('month').toDate();
+    const endOfMonth = moment(day.dateString).add(1,'month').endOf('month').toDate();
 
     
-
+    if(!this.checkDupMonth(startOfMonth,endOfMonth)){
     const shiftPattern =  await this.getShiftPatternByPersonal(userData,startOfMonth,endOfMonth);
-    if(shiftPattern && shiftPattern.length>0){
-       for (let i = 0; i < shiftPattern.length; i++) {
-        let strTime = shiftPattern[i].DAY_DATE.split("T")[0];
-        if (!this.state.items[strTime]) {
-            this.state.items[strTime] = [];
-            this.state.items[strTime].push({
-              textColor : "green",
-              textLabel : shiftPattern[i].SHFT_NAME_TH
-            })
-        }else{
-          if(!this.state.items[strTime][0].textLabel.includes(shiftPattern[i].SHFT_NAME_TH)){
-            this.state.items[strTime][0].textLabel += ","+shiftPattern[i].SHFT_NAME_TH
+      if(shiftPattern && shiftPattern.length>0){
+        for (let i = 0; i < shiftPattern.length; i++) {
+          let strTime = shiftPattern[i].DAY_DATE.split("T")[0];
+          if (!this.state.items[strTime]) {
+              this.state.items[strTime] = [];
+              this.state.items[strTime].push({
+                textColor : "green",
+                textLabel : shiftPattern[i].SHFT_NAME_TH
+              })
+          }else{
+            if(!this.state.items[strTime][0].textLabel.includes(shiftPattern[i].SHFT_NAME_TH)){
+              this.state.items[strTime][0].textLabel += ","+shiftPattern[i].SHFT_NAME_TH
+            }
           }
         }
+        const newItems = {};
+        Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+        this.setState({
+          items: newItems
+        });
+        
       }
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
-      this.setState({
-        items: newItems
-      });
-      
+    }
+
+  }
+  checkDupMonth(start,end){
+    if(this.months.indexOf(start.toISOString()) != -1 || this.months.indexOf(end.toISOString()) != -1){
+      return true;
+    }else{
+      if(this.months.length == 0){
+        this.months.push(start.toISOString());
+        this.months.push(end.toISOString());
+        return false;
+      }else{
+        this.months.push(start.toISOString());
+        this.months.push(end.toISOString());
+        return false;
+      }
     }
 
   }

@@ -24,10 +24,12 @@ export default class CardHeader extends React.Component {
         return(
             <Header style={{backgroundColor:Colors.baseColor,height:responsiveHeight(8)}}>
               <Left  style={{flex:1,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
-                {this.props.goBack ? (<Button transparent onPress={()=>this.props.goBack()}>
-                  <Icon style={styles.HeaderIcon} name='chevron-left' size={20}/>
-                </Button>): <Button transparent onPress={this.toggleMenu}>
-                  <Icon style={styles.HeaderIcon} name='bars' size={20}/>
+                {this.props.goBack ? (
+                <Button style={{backgroundColor:"transparent"}} transparent onPress={()=>this.props.goBack()}>
+                  <Icon style={styles.HeaderIcon} name='chevron-left'/>
+                </Button>): 
+                <Button style={{backgroundColor:"transparent"}} transparent onPress={this.toggleMenu}>
+                  <Icon style={styles.HeaderIcon} name='bars'/>
                 </Button>}
               </Left>
               <Body style={{flex:3,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   HeaderIcon:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2.5),
+    fontSize:responsiveFontSize(3.5),
     backgroundColor:'transparent',
     fontWeight:'400',
     flex:1,

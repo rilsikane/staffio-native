@@ -3,7 +3,7 @@ import {
     Container, Header, Left, Body, Right, Button, Title, Text,  Content, List, ListItem, Thumbnail, CardItem, Card, Footer, FooterTab, Badge
 
 } from 'native-base';
-import { ScrollView,View, Image } from 'react-native';
+import { ScrollView,View, Image,TouchableOpacity } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
 import CardCheckin from './Cardcheckin';
@@ -66,20 +66,32 @@ export default class Checkin extends React.Component {
                                 <Text note style={styles.Text2}>     { data.empCode}  { data.positionNameTh}</Text>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems:'center',paddingTop:5}}>
-                                <Icon style={{color:"#989898", marginLeft: responsiveWidth(4.5)}}  name="clock-o"/>
+                                <Icon style={{color:"#989898", marginLeft: responsiveWidth(4.5),backgroundColor:"transparent"}}  name="clock-o"/>
                                 <Text note style={[styles.Text2,{paddingLeft:responsiveWidth(2)}]}>{data.timeRecord ? `${data.timeRecord}` :`${I18n.t('didntEntertime')}` }</Text>
                                 </View>
                             </Body>
                             <Right>
-                                 {(data.mobileNo && data.mobileNo !="") && <Button style={[styles.icon]} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)} >
-                                    <IconTello style={{ color: "red"}} size={responsiveFontSize(3)} name="hhmm-17" />
-                                </Button>}
-                                {(data.facebook && data.facebook !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.facebook)}>
-                                    <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-18" />
-                                </Button>}
-                                {(data.lineid && data.lineid !="") &&  <Button style={styles.icon}  onPress={(e) => this.onContactSelected(data.lineid)} >
-                                    <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-20" />
-                                </Button>}
+                                 {(data.mobileNo && data.mobileNo !="") && 
+                                <TouchableOpacity style={styles.badge} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)}>
+                                    <Text allowFontScaling={false}style={{backgroundColor:"transparent"}}>
+                                    <IconTello name="hhmm-17" color='#fbaa3e' size={responsiveFontSize(3)}/>
+                                    </Text>
+                                </TouchableOpacity>
+                                }
+                                {(data.facebook && data.facebook !="") &&
+                                <TouchableOpacity style={styles.badge} onPress={(e) => this.onContactSelected(data.facebook)}>
+                                    <Text allowFontScaling={false}style={{marginTop:-em(0.2),backgroundColor:"transparent"}}>
+                                        <IconTello style={{ color: "#3c5b9a" }} size={responsiveFontSize(1)} name="hhmm-18" />
+                                    </Text>
+                                </TouchableOpacity>
+                                }
+                                {
+                                    (data.lineid && data.lineid !="") &&  
+                                <TouchableOpacity style={styles.badge}  onPress={(e) => this.onContactSelected(data.lineid)} >
+                                    <Text allowFontScaling={false}style={{marginTop:-em(0.2),backgroundColor:"transparent"}}>
+                                        <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-20" />
+                                    </Text>
+                                </TouchableOpacity>}
                             </ Right>
                         </CardItem>
                         {/* <View style={{marginTop : responsiveHeight(2) , width :responsiveWidth(60)}}>
@@ -172,5 +184,14 @@ const styles = ({
         borderRightWidth:1,
         marginTop:responsiveHeight(1),
         marginLeft : responsiveWidth(2)
+    },
+    badge :{
+        height:responsiveHeight(9),
+        width:responsiveWidth(9),
+        borderRadius: responsiveWidth(1.5),
+        marginRight: responsiveWidth(2),
+        backgroundColor:"transparent",
+        marginTop:responsiveHeight(5)
     }
+
 });

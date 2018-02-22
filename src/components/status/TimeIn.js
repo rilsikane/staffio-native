@@ -70,7 +70,7 @@ const TimeIn =({record,punchRecord,onPressItem}) => {
                 <Body style={{justifyContent:"center"}}>
                   <View style={styles.ViewStyle}>
                       <Icon name={record.timeRecordType.indexOf("I") !== -1 ? 'caret-up':'caret-down'} size={responsiveFontSize(1.5)}/>
-                      <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(1)}}>{record.timeRecordType.indexOf("I") !== -1 
+                      <Text allowFontScaling={false}note style={{fontSize:responsiveFontSize(1),backgroundColor:"transparent"}}>{record.timeRecordType.indexOf("I") !== -1 
                         ? record.workStartTM.replace(":00","") : record.workEndTM.replace(":00","")}</Text>
                   </View>
                 </Body>
@@ -80,10 +80,10 @@ const TimeIn =({record,punchRecord,onPressItem}) => {
               {renderFormStatus(record.status)}
             </Col>
             <Col size={5} style={{justifyContent:"center",marginLeft:5}}>
-              {'Y'==record.remark_flag && <Icon name='edit' size={responsiveFontSize(2)} color='#ff7f50' />}
+              {'Y'==record.remark_flag && <Icon style={this.styles.icon} name='edit' size={responsiveFontSize(2)} color='#ff7f50' />}
             </Col>
             <Col size={5} style={{justifyContent:"center",marginLeft:5}}>
-              {'Y'==record.comment_flag && <Icon name='comment' size={responsiveFontSize(2)} color='#ff7f50'/>}
+              {'Y'==record.comment_flag && <Icon style={this.styles.icon} name='comment' size={responsiveFontSize(2)} color='#ff7f50'/>}
             </Col>
             <Col size={5} style={{justifyContent:"center",alignItems:"flex-end"}}>
               <Icon name='chevron-right' size={responsiveFontSize(2)} color='#a9a9a9' style={{marginTop:5}}/>
@@ -170,6 +170,9 @@ const styles={
     backgroundColor:'transparent'
 
   },
+  icon:{
+    backgroundColor:"transparent"
+  }
 }
 
 export default TimeIn;

@@ -23,7 +23,7 @@ export default class LeaveApproverCardGreen extends React.Component {
                 <View style={{flexDirection: 'row',flex:1}}>
                 <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:this.props.info.color,borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
                 <CardItem style={{paddingRight:responsiveWidth(1.5),flex:3}}>
-                    <Left style={{flex:1,backgroundColor:'transparent',alignItems:'center'}}>
+                    {/* <Left style={{flex:1,backgroundColor:'transparent',alignItems:'center'}}>
                         <Thumbnail source={{uri: 'http://bonniesomerville.nz/wp-content/uploads/2015/08/profile-icon.png'}} />
                         {this.props.info.selected=='2' && <View style={styles.CheckSelected}>
                             <FontAwesome name="check" size={responsiveWidth(5)} color='#FBAB3E' style={{backgroundColor:'transparent'}}/>
@@ -31,7 +31,7 @@ export default class LeaveApproverCardGreen extends React.Component {
                         {this.props.info.selected=='1' && <View style={styles.CheckSelect}>
                             <FontAwesome name="check" size={responsiveWidth(5)} color='#BCBEC0' style={{backgroundColor:'transparent'}}/>
                         </View>}
-                    </Left>
+                    </Left> */}
                     <Body style={{flex:4}}>
                         <View style={{flexDirection: 'row', alignItems:'center'}}>
                             {(<Text ellipsizeMode='tail' numberOfLines={1} style={{backgroundColor:'transparent',fontFamily:'Kanit-Medium', color:'#7e6560',flex:1, fontSize:responsiveFontSize(1.8),textAlign:'left'}}>{this.props.info.name}</Text>)}
