@@ -42,7 +42,7 @@ export default class LeaveApprScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,selected:'1'}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,checkSelect:false,selected:false}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
     this.cancelModal = this.cancelModal.bind(this);
@@ -53,6 +53,8 @@ export default class LeaveApprScreen extends React.Component {
     this.onRejectPress = this.onRejectPress.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.onSelected = this.onSelected.bind(this);
+    this.approveLeaveAll = this.approveLeaveAll.bind(this);
+    this.onSelectAll = this.onSelectAll.bind(this);
     this.navigator = this.props.navigator
   }
   static navigationOptions = {
@@ -273,6 +275,22 @@ export default class LeaveApprScreen extends React.Component {
     }
     return datas
   }
+
+  onSelectAll(){
+    if(this.state.checkSelect){
+      this.setState({checkSelect:false});
+      for(let i=0;i<infos.length;i++){
+        infos[i].selected = '1'
+      }
+    }else{
+      this.setState({checkSelect:true});
+      for(let i=0;i<infos.length;i++){
+        infos[i].selected = '2'
+      }
+    }
+    
+  }
+
   async approveLeaveAll(data){
     this.props.navigator.dismissLightBox();
     this.setState({loading:true});
@@ -330,6 +348,7 @@ export default class LeaveApprScreen extends React.Component {
   onSelected(index){
     if(infos[index].selected =='1'){
       infos[index].selected = '2'
+      this.setState({selected:true})
     }else if(infos[index].selected=='2'){
       infos[index].selected = '1'
     }
@@ -373,7 +392,7 @@ export default class LeaveApprScreen extends React.Component {
       
       <View style={{backgroundColor: '#ffe9d4',flex:1}}>
          
-          <CardHeader title={`${I18n.t('Consider')}`}/>
+          <CardHeader title={`${I18n.t('Consider')}`} iconRight='check' funcSelectAll={this.onSelectAll}/>
             {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>

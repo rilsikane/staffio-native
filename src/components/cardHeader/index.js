@@ -32,11 +32,14 @@ export default class CardHeader extends React.Component {
                   <Icon style={styles.HeaderIcon} name='bars'/>
                 </Button>}
               </Left>
-              <Body style={{flex:3,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
+              <Body style={{flex:5,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                 <Title style={styles.HeaderFont}>{this.props.title}</Title>
               </Body>
                <Right>
-
+                <Button style={{flex:1,backgroundColor:"transparent"}} transparent onPress={()=> this.props.funcSelectAll()}>
+                  <Icon style={styles.HeaderIcon} name={this.props.iconRight}/>
+                  {/* <Title style={styles.HeaderFont}>{this.props.iconRight}</Title> */}
+                </Button>
               </Right>
             </Header>
         )
