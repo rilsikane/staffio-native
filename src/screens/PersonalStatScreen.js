@@ -26,6 +26,11 @@ import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
 import LeavePersonalCardNew from '../components/leave/LeavePersonalCard(Fix-style)'
+import ActionButton from '../components/stffioActionButton/ActionButton';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../../assets/fonts/config.json'
+import ToggleLeave1 from '../components/leave/ToggleLeave1'
+const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
 
@@ -157,6 +162,18 @@ export default class PersonalStatScreen extends React.Component {
       });
   }
 
+  openCreateLeave(){
+     this.props.navigator.push({
+        screen: 'staffio.CreateLeave', // unique ID registered with Navigation.registerScreen
+        title: undefined, // navigation bar title of the pushed screen (optional)
+        passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
+        animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+        navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+        navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+      });
+  }
+
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
@@ -168,7 +185,7 @@ export default class PersonalStatScreen extends React.Component {
     }else{
       return (
         <View style={{flex:1,marginTop:10,marginLeft:2.5,marginRight:2.5}}> 
-            <CardNone /> 
+            <ToggleLeave1 /> 
         </View>
       )
     }
@@ -196,8 +213,25 @@ export default class PersonalStatScreen extends React.Component {
               {/* {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}   */}
               {!this.state.loading  && this.renderList()}
           </PTRView>
+          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
+             <ActionButton.Item marginRight={responsiveWidth(5)} marginBottom={-responsiveHeight(1)} buttonColor='transparent' onPress={(e) => this.openCreateLeave()}>
+              <Icon name="file" style={[styles.actionButtonIcon]} />
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('CreateLeave')}</Text>
+            </ActionButton.Item>
+           <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => this.openCreateLeave()}>
+              <Icon name="search" style={styles.actionButtonIcon} />
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('searchLeave')}</Text>
+            </ActionButton.Item>
+          </ActionButton>
       </Container>
     );
   }
 
 }
+const styles = StyleSheet.create({
+  actionButtonIcon: {
+    fontSize: responsiveFontSize(3),
+    height: 22,
+    color: 'white',
+  },
+});

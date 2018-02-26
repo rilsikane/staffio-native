@@ -22,6 +22,7 @@ import PersonalStatScreen from './PersonalStatScreen';
 import LeaveDetailScreen from './LeaveDetailScreen';
 import MenuScreen from './MenuScreen';
 import LeaveApprScreen from './LeaveApprScreen';
+import CreateLeave from './CreateLeave';
 
 //Modal
 import InputModalScreen from './Modal/inputModal';
@@ -52,7 +53,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.LeaveDetailScreen', () => LeaveDetailScreen, Store, Provider);
   Navigation.registerComponent('staffio.MenuScreen', () => MenuScreen, Store, Provider);
   Navigation.registerComponent('staffio.LeaveApprScreen', () => LeaveApprScreen, Store, Provider);
-
+  Navigation.registerComponent('staffio.CreateLeave',() => CreateLeave, Store, Provider);
   //Modal
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);

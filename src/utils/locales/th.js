@@ -109,6 +109,13 @@ export default {
     ToggleApprove: 'ขออนุมัติ',
     ToggleCancel: 'ขอยกเลิก',
 
+    //ToggleLeave1
+    Toggle1Allday:'ทั้งวัน',
+    Toggle1Edit:'ปรับแต่ง',
+    ga: 'กะ',
+    LeaveToggle:'ลา',
+    notLeaveToggle:'ไม่ลา',
+
     //status-IdName
     Code: 'รหัส',
     Position: 'ตำแหน่ง',
@@ -157,6 +164,15 @@ export default {
     Cancel:'ยกเลิก',
     EnterTimeCon:'ลงเวลา',
     EnterTimesuccessed:'ลงเวลาสำเร็จ',
+
+    //CreateLeave
+    titleCreate:'สร้างใบลา',
+    sickLeave:'ลาป่วย',
+    errandLeave:'ลากิจ',
+    vacationLeave:'ลาพักร้อน',
+    otherLeave:'ลาอื่นๆ',
+    backCreate:'กลับ',
+    nextCreate:'ต่อไป',
 
     //DashBoradProject
     Fetch: 'ดึงข้อมูลล่าสุด',
@@ -284,6 +300,8 @@ export default {
     //PersonalStatScreen
     Stat: 'สถิติการลา',
     History: 'ประวัติการลา',
+    CreateLeave: 'สร้างใบลา',
+    searchLeave: 'ค้นหาใบลา',
 
     //PincodeScreen
     SetPass: 'ตั้งรหัสผ่าน',
