@@ -32,11 +32,14 @@ export default class CardHeader extends React.Component {
                   <Icon style={styles.HeaderIcon} name='bars'/>
                 </Button>}
               </Left>
-              <Body style={{flex:3,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
+              <Body style={{flex:2,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                 <Title style={styles.HeaderFont}>{this.props.title}</Title>
+               
               </Body>
-               <Right>
-
+               <Right style={{flex:1,flexDirection:"column",alignItems:'flex-end'}}>
+                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.toggleMenu}>
+                    <Icon style={styles.HeaderRightIcon} name='bell'/>
+                  </Button>
               </Right>
             </Header>
         )
@@ -63,5 +66,17 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:'center',alignItems:'center',alignContent:'center',
     marginTop: Platform.OS === 'android' ? 1 : 2,
+  },
+  HeaderRightIcon:{
+    color:"#FFFF",
+    fontFamily:"Kanit",
+    fontSize:responsiveFontSize(2.8),
+    backgroundColor:'transparent',
+    fontWeight:'400',
+    flex:1,
+    justifyContent:'flex-start',alignItems:'flex-start',alignContent:'flex-start',
+    marginTop: Platform.OS === 'android' ? 1 : 2,
+    flexDirection:"column",
+    marginTop:-2
   }
 });
