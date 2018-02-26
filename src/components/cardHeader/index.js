@@ -36,11 +36,15 @@ export default class CardHeader extends React.Component {
                 <Title style={styles.HeaderFont}>{this.props.title}</Title>
                
               </Body>
-               <Right style={{flex:1,flexDirection:"column",alignItems:'flex-end'}}>
+               <Right>
+                <Button style={{flex:1,backgroundColor:"transparent"}} transparent onPress={()=> this.props.funcSelectAll()}>
+                  <Icon style={styles.HeaderIcon} name={this.props.iconRight}/>
+                  {/* <Title style={styles.HeaderFont}>{this.props.iconRight}</Title> */}
+                </Button>
                 <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.toggleMenu}>
                     <Icon style={styles.HeaderRightIcon} name='bell'/>
-                  </Button>
-              </Right>
+                </Button>
+               </Right>
             </Header>
         )
     }

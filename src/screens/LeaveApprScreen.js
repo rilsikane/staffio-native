@@ -42,7 +42,7 @@ export default class LeaveApprScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,selected:'1'}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,checkSelect:false,selected:false}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
     this.cancelModal = this.cancelModal.bind(this);
@@ -53,6 +53,8 @@ export default class LeaveApprScreen extends React.Component {
     this.onRejectPress = this.onRejectPress.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.onSelected = this.onSelected.bind(this);
+    this.approveLeaveAll = this.approveLeaveAll.bind(this);
+    this.onSelectAll = this.onSelectAll.bind(this);
     this.navigator = this.props.navigator
   }
   static navigationOptions = {
@@ -226,7 +228,7 @@ export default class LeaveApprScreen extends React.Component {
     this.setState({loading:true});
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('RejectAll')} : ${data.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
+      passProps: {title:`${I18n.t('RejectAll')} : ${data.req.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
       ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleInputModal,
@@ -237,7 +239,7 @@ export default class LeaveApprScreen extends React.Component {
     this.setState({loading:true});
     this.props.navigator.showLightBox({
       screen: "staffio.InputModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ReturnLeaveAll')} : ${data.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
+      passProps: {title:`${I18n.t('ReturnLeaveAll')} : ${data.req.length} ${I18n.t('itemAppr')}`,remark:`${I18n.t('Cause')}`
       ,cancel:this.cancelModal,placeholder:`${I18n.t('SpecifyCause')}`
       ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleInputModal,
@@ -248,7 +250,7 @@ export default class LeaveApprScreen extends React.Component {
     this.setState({loading:true});
       this.props.navigator.showLightBox({
         screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:`${I18n.t('ConfirmApproveAll')} : ${data.length} ${I18n.t('itemAppr')}`,msg: `${I18n.t('ConfirmApproveLeave')} ${data.length} ${I18n.t('itemAppr')}`
+        passProps: {title:`${I18n.t('ConfirmApproveAll')} : ${data.req.length} ${I18n.t('itemAppr')}`,msg: `${I18n.t('ConfirmApproveLeave')} ${data.req.length} ${I18n.t('itemAppr')}`
         ,msg2: `` ,cancel:this.cancelModal
         ,ok:this.approveLeaveAll,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
         style: styleConfirmModal,
@@ -258,11 +260,11 @@ export default class LeaveApprScreen extends React.Component {
 
   countItemsSelected(status){
     let datas = []
+    let param = {}
     const userData = store.get("USER");
     for(let i=0;i<infos.length;i++){
       if(infos[i].selected=='2'){
         let data={}
-        data.ApproveBy = userData.EMP_CODE;
         data.EMP_CODE = infos[i].empId;
         data.LEAVE_TYPE_CODE = infos[i].typeCode;
         data.OrgCode = infos[i].orgCode;
@@ -271,8 +273,28 @@ export default class LeaveApprScreen extends React.Component {
         datas.push(data);
       }
     }
-    return datas
+    param.req= datas;
+    param.ApproveBy = userData.EMP_CODE;
+    param.Status = status
+    param.Remark = "string"
+    return param
   }
+
+  onSelectAll(){
+    if(this.state.checkSelect){
+      this.setState({checkSelect:false});
+      for(let i=0;i<infos.length;i++){
+        infos[i].selected = '1'
+      }
+    }else{
+      this.setState({checkSelect:true});
+      for(let i=0;i<infos.length;i++){
+        infos[i].selected = '2'
+      }
+    }
+    
+  }
+
   async approveLeaveAll(data){
     this.props.navigator.dismissLightBox();
     this.setState({loading:true});
@@ -330,6 +352,7 @@ export default class LeaveApprScreen extends React.Component {
   onSelected(index){
     if(infos[index].selected =='1'){
       infos[index].selected = '2'
+      this.setState({selected:true})
     }else if(infos[index].selected=='2'){
       infos[index].selected = '1'
     }
@@ -373,7 +396,7 @@ export default class LeaveApprScreen extends React.Component {
       
       <View style={{backgroundColor: '#ffe9d4',flex:1}}>
          
-          <CardHeader title={`${I18n.t('Consider')}`}/>
+          <CardHeader title={`${I18n.t('Consider')}`} iconRight='check' funcSelectAll={this.onSelectAll}/>
             {/* <View style={{height:responsiveHeight(30)}}>
             <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
               img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
@@ -385,15 +408,15 @@ export default class LeaveApprScreen extends React.Component {
                 <Loading mini={true}/></View>)}
           </PTRView>
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
-             <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent' onPress={() => this.onRejectPressAll(this.countItemsSelected('Reject'))}>
+             <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent' onPress={() => this.onRejectPressAll(this.countItemsSelected('R'))}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>
-           <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent' onPress={()=>this.onReturnPressAll(this.countItemsSelected('Return'))}>
+           <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent' onPress={()=>this.onReturnPressAll(this.countItemsSelected('T'))}>
               <Icon name="repeat" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
             </ActionButton.Item>
-           <ActionButton.Item marginRight={responsiveWidth(28)} marginBottom={-(responsiveHeight(16))} buttonColor='transparent' onPress={()=>this.onApprovePressAll(this.countItemsSelected('Approve'))}>
+           <ActionButton.Item marginRight={responsiveWidth(28)} marginBottom={-(responsiveHeight(16))} buttonColor='transparent' onPress={()=>this.onApprovePressAll(this.countItemsSelected('A'))}>
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>
