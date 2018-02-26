@@ -185,7 +185,7 @@ export default class PersonalStatScreen extends React.Component {
     }else{
       return (
         <View style={{flex:1,marginTop:10,marginLeft:2.5,marginRight:2.5}}> 
-            <ToggleLeave1 /> 
+            <CardNone /> 
         </View>
       )
     }
