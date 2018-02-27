@@ -29,7 +29,8 @@ import LeavePersonalCardNew from '../components/leave/LeavePersonalCard(Fix-styl
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
-import ToggleLeave1 from '../components/leave/ToggleLeave1'
+import Swipeable from 'react-native-swipeable';
+
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
@@ -178,9 +179,26 @@ export default class PersonalStatScreen extends React.Component {
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
-      || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
+      || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
+      <Swipeable  key={info.requestLeaveNo} rightButtons={[
+        <TouchableOpacity onPress={()=>this.onApprovePress(info)} >
+          <View style={[styles.rightSwipeItem]}>
+            <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+          </View>
+          <Text style={{marginLeft:responsiveWidth(3),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>แก้ไขคำขอ</Text>
+        </TouchableOpacity>,
+
+        <TouchableOpacity onPress={()=>this.onReturnPress(info)}>
+          <View style={[styles.rightSwipeItem]}>
+            <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+          </View>
+          <Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>ยกเลิกคำขอ</Text>
+        </TouchableOpacity>,  
+      ]}>
+      <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
        <LeavePersonalCardNew info={info} />
       </TouchableOpacity>
+      </Swipeable>
       );
     }else{
       return (
