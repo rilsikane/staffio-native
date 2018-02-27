@@ -300,7 +300,11 @@ export default {
     History: 'History of leave',
     CreateLeave: 'Create Leave',
     searchLeave: 'Search Leave',
-
+    specifycauseTitle: 'Specify cause of cancal',
+    otherCause: 'Other cause',
+    causeOfcanncel: 'Cause of cancal',
+    specifymo: 'Please specify',
+    
     //PincodeScreen
     SetPass: 'Set password',
 

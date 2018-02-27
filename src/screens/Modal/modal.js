@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: responsiveWidth(2),
     marginBottom: responsiveWidth(2),
     borderColor: 'gray',
-    width:responsiveWidth(70)
+    // width:responsiveWidth(80)
   },
   content: {
     marginLeft: responsiveWidth(6),

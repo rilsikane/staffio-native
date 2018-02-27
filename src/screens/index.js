@@ -28,7 +28,7 @@ import CreateLeave from './CreateLeave';
 import InputModalScreen from './Modal/inputModal';
 import ConfirmModalScreen from './Modal/confirmModal';
 import MsgModalScreen from './Modal/msgModal';
-
+import InputCancelModal from './Modal/inputCancelModal'
 
 
 // register all screens of the app (including internal ones)
@@ -58,6 +58,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.MsgModalScreen', () => MsgModalScreen, Store, Provider);
+  Navigation.registerComponent('staffio.InputCancelModal', () => InputCancelModal, Store, Provider);
 }
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

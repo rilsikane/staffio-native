@@ -174,6 +174,20 @@ export default class PersonalStatScreen extends React.Component {
         navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
       });
   }
+   onCancelModal(data){
+    this.setState({loading:true});
+    this.props.navigator.showLightBox({
+      screen: "staffio.InputCancelModal", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('specifycauseTitle')}`,remark1:`${I18n.t('otherCause')}`,label:`${I18n.t('causeOfcanncel')}`,remark2:`(${I18n.t('specifymo')})`
+      ,cancel:this.cancelModal
+      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleInputModal,
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
+  }
+  onEditModal(data){
+   
+  }
 
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
@@ -181,16 +195,16 @@ export default class PersonalStatScreen extends React.Component {
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
       <Swipeable  key={info.requestLeaveNo} rightButtons={[
-        <TouchableOpacity onPress={()=>this.onApprovePress(info)} >
+        <TouchableOpacity onPress={()=>this.onEditModal(info)}>
           <View style={[styles.rightSwipeItem]}>
-            <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+            <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
           </View>
           <Text style={{marginLeft:responsiveWidth(3),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>แก้ไขคำขอ</Text>
         </TouchableOpacity>,
 
-        <TouchableOpacity onPress={()=>this.onReturnPress(info)}>
+        <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
-            <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+            <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
           </View>
           <Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>ยกเลิกคำขอ</Text>
         </TouchableOpacity>,  

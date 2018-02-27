@@ -302,6 +302,10 @@ export default {
     History: 'ประวัติการลา',
     CreateLeave: 'สร้างใบลา',
     searchLeave: 'ค้นหาใบลา',
+    specifycauseTitle: 'ระบุสาเหตุยกเลิกรายการ',
+    otherCause: 'สาเหตุอื่นๆ',
+    causeOfcanncel: 'สาเหตุยกเลิกรายการ',
+    specifymo: 'โปรดระบุ',
 
     //PincodeScreen
     SetPass: 'ตั้งรหัสผ่าน',
