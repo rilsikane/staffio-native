@@ -114,7 +114,10 @@ export default {
     ga: 'กะ',
     LeaveToggle:'Leave',
     notLeaveToggle:'Not Leave',
-    
+    morning:'morning',
+    afternoon:'afternoon',
+    custom:'custom',
+
     //status-IdName
     Code: 'Code',
     Position: 'Position',

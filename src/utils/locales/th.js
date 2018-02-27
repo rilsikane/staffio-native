@@ -115,6 +115,9 @@ export default {
     ga: 'กะ',
     LeaveToggle:'ลา',
     notLeaveToggle:'ไม่ลา',
+    morning:'เช้า',
+    afternoon:'บ่าย',
+    custom:'กำหนดเอง',
 
     //status-IdName
     Code: 'รหัส',
