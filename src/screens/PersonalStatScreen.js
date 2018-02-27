@@ -30,7 +30,6 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
-import ToggleLeave1 from '../components/leave/ToggleLeave1'
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
@@ -218,7 +217,7 @@ export default class PersonalStatScreen extends React.Component {
     }else{
       return (
         <View style={{flex:1,marginTop:10,marginLeft:2.5,marginRight:2.5}}> 
-            <ToggleLeave1 /> 
+            <CardNone /> 
         </View>
       )
     }
