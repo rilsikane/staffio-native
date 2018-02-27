@@ -118,6 +118,7 @@ export default {
     morning:'เช้า',
     afternoon:'บ่าย',
     custom:'กำหนดเอง',
+    dateToggle: 'วันที่',
 
     //status-IdName
     Code: 'รหัส',

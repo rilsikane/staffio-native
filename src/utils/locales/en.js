@@ -117,6 +117,7 @@ export default {
     morning:'morning',
     afternoon:'afternoon',
     custom:'custom',
+    dateToggle: 'Date',
 
     //status-IdName
     Code: 'Code',

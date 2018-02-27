@@ -72,7 +72,7 @@ export default class CreateLeave extends React.Component {
           </View>
           <View style={{flexDirection: 'row', alignItems:'center'}}>
             <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton(color.otherL)}>
-              <View style={[styles.btn,{backgroundColor:'white'}]}>
+              <View style={[styles.btn,{backgroundColor:'#f1f2f6'}]}>
                 <Text style={[styles.textStyle,{fontSize:responsiveFontSize(2.2)}]}>{I18n.t('backCreate')}</Text>
               </View>
             </TouchableOpacity>
