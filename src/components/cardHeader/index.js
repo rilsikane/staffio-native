@@ -12,6 +12,7 @@ export default class CardHeader extends React.Component {
     constructor(props){
       super(props);
       this.toggleMenu = this.toggleMenu.bind(this);
+      this.openNotifications = this.openNotifications.bind(this);
     }
     toggleMenu() {
       this.props.naviStore.navigation.toggleDrawer({
@@ -20,28 +21,37 @@ export default class CardHeader extends React.Component {
         to: 'open' // optional, 'open' = open the drawer, 'closed' = close it, missing = the opposite of current state
       });
     }
+    openNotifications(){
+      this.props.naviStore.navigation.showModal({
+        screen: "staffio.NotiModalScreen", // unique ID registered with Navigation.registerScreen
+        title: "Modal", // title of the screen as appears in the nav bar (optional)
+        passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+        animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+      });
+    }
     render() {
         return(
             <Header style={{backgroundColor:Colors.baseColor,height:responsiveHeight(8)}}>
               <Left  style={{flex:1,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
-                {this.props.goBack ? (
+                {!this.props.isModal && (this.props.goBack ? (
                 <Button style={{backgroundColor:"transparent"}} transparent onPress={()=>this.props.goBack()}>
                   <Icon style={styles.HeaderIcon} name='chevron-left'/>
                 </Button>): 
                 <Button style={{backgroundColor:"transparent"}} transparent onPress={this.toggleMenu}>
                   <Icon style={styles.HeaderIcon} name='bars'/>
-                </Button>}
+                </Button>)}
               </Left>
               <Body style={{flex:2,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                 <Title style={styles.HeaderFont}>{this.props.title}</Title>
                
               </Body>
                <Right>
-                <Button style={{flex:1,backgroundColor:"transparent"}} transparent onPress={()=> this.props.funcSelectAll()}>
-                  <Icon style={styles.HeaderIcon} name={this.props.iconRight}/>
+                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={()=> this.props.funcSelectAll()}>
+                  <Icon style={styles.HeaderRightIcon} name={this.props.iconRight}/>
                   {/* <Title style={styles.HeaderFont}>{this.props.iconRight}</Title> */}
                 </Button>
-                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.toggleMenu}>
+                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.openNotifications}>
                     <Icon style={styles.HeaderRightIcon} name='bell'/>
                 </Button>
                </Right>
@@ -79,8 +89,8 @@ const styles = StyleSheet.create({
     fontWeight:'400',
     flex:1,
     justifyContent:'flex-start',alignItems:'flex-start',alignContent:'flex-start',
-    marginTop: Platform.OS === 'android' ? 1 : 2,
+    marginTop: Platform.OS === 'android' ? 1 : 2.5,
     flexDirection:"column",
-    marginTop:-2
+
   }
 });

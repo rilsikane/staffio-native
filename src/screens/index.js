@@ -27,6 +27,7 @@ import LeaveApprScreen from './LeaveApprScreen';
 import InputModalScreen from './Modal/inputModal';
 import ConfirmModalScreen from './Modal/confirmModal';
 import MsgModalScreen from './Modal/msgModal';
+import NotiModalScreen from './Modal/notiModal';
 
 
 
@@ -57,6 +58,8 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.MsgModalScreen', () => MsgModalScreen, Store, Provider);
+  Navigation.registerComponent('staffio.NotiModalScreen', () => NotiModalScreen, Store, Provider);
+  
 }
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

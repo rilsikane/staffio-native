@@ -18,7 +18,7 @@ export default class NotiModal extends Component {
 
   render() {
     return (
-       <View style={{flex:1}}>
+       <View style={{flex:1,marginTop:10}}>
             <NotificationCard />
        </View>
     );
