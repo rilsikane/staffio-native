@@ -365,18 +365,22 @@ export default class LeaveApprScreen extends React.Component {
     if(this.state.leaveList && this.state.leaveList.length >0){
       return this.state.leaveList.map(info =>
         <Swipeable  key={info.requestLeaveNo} rightButtons={[
-            <TouchableOpacity style={[styles.rightSwipeItem]} onPress={()=>this.onApprovePress(info)} >
+            <TouchableOpacity onPress={()=>this.onApprovePress(info)} >
+              <View style={[styles.rightSwipeItem]}>
                 <Icon name="check" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+              </View>
             </TouchableOpacity>,
 
-            info.requestStatusCode=='L'  && (<TouchableOpacity style={[styles.rightSwipeItem ]}
-            onPress={()=>this.onReturnPress(info)}>
+            info.requestStatusCode=='L'  && (<TouchableOpacity onPress={()=>this.onReturnPress(info)}>
+              <View style={[styles.rightSwipeItem]}>
                 <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+              </View>
             </TouchableOpacity>),
 
-            info.requestStatusCode=='L' && (<TouchableOpacity style={[styles.rightSwipeItem]} disabled={this.state.isCancel}
-            onPress={()=>this.onRejectPress(info)}>
-              <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+            info.requestStatusCode=='L' && (<TouchableOpacity disabled={this.state.isCancel} onPress={()=>this.onRejectPress(info)}>
+              <View style={[styles.rightSwipeItem]}>
+                <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+              </View>
             </TouchableOpacity>),  
           ]}>
             <LeaveApprover selected={this.state.selected}  info={info} openDetail={this.openLeaveDetail} onSelect={this.onSelected}/>

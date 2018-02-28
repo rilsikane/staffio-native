@@ -108,6 +108,17 @@ export default {
     ToggleApprove: 'Approve',
     ToggleCancel: 'Cancel',
 
+    //ToggleLeave1
+    Toggle1Allday:'All day',
+    Toggle1Edit:'Edit',
+    ga: 'กะ',
+    LeaveToggle:'Leave',
+    notLeaveToggle:'Not Leave',
+    morning:'morning',
+    afternoon:'afternoon',
+    custom:'custom',
+    dateToggle: 'Date',
+
     //status-IdName
     Code: 'Code',
     Position: 'Position',
@@ -156,6 +167,13 @@ export default {
     Cancel:'Cancel',
     EnterTimeCon:'Enter time',
     EnterTimesuccessed:'Enter time success',
+
+    //CreateLeave
+    titleCreate:'Create Leave',
+    sickLeave:'sick leave',
+    errandLeave:'errand leave',
+    vacationLeave:'vacation leave',
+    otherLeave:'other leave',
 
     //DashBoradProject
     Fetch: 'Fetch latest',
@@ -284,7 +302,13 @@ export default {
     //PersonalStatScreen
     Stat: 'Statistics of leave',
     History: 'History of leave',
-
+    CreateLeave: 'Create Leave',
+    searchLeave: 'Search Leave',
+    specifycauseTitle: 'Specify cause of cancal',
+    otherCause: 'Other cause',
+    causeOfcanncel: 'Cause of cancal',
+    specifymo: 'Please specify',
+    
     //PincodeScreen
     SetPass: 'Set password',
 
