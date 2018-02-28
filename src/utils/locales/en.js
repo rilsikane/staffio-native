@@ -285,7 +285,7 @@ export default {
     
     //MenuScreen
     HomeS: 'Home',
-    Inbox: 'Inbox',
+    Inbox: 'TA: History',
     StatLeave: 'Leave Statistics',
     Logout: 'Logout',
     FindFriend: 'Find Friends',

@@ -287,7 +287,7 @@ export default {
 
     //MenuScreen
     HomeS: 'ลงเวลาเข้างาน',
-    Inbox: 'กล่องข้อความ',
+    Inbox: 'ประวัติการลงเวลา',
     StatLeave: 'สถิติการลา',
     Logout: 'ออกจากระบบ',
     FindFriend: 'ค้นหาเพื่อน',
