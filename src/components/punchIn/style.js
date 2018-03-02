@@ -82,6 +82,14 @@ export default styles={
     color:'#ffff',
     
   },
+  TextNameStyle1EN:{
+    fontFamily:"Kanit",
+    fontSize:em(1),
+    marginTop : 1,
+    marginLeft:5,
+    color:'#ffff',
+    
+  },
   TextNameStyle2:{
     fontFamily:"Kanit",
     fontSize:em(0.8),

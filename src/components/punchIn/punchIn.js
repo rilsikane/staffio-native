@@ -224,7 +224,7 @@ class PunchIn extends React.Component {
                 </Bounceable>
               </Col>
               <Col size={75}>
-                <Text allowFontScaling={false}style={styles.TextNameStyle1}>{this.app && this.app.locale=='en'? this.props.user.FULL_NAME_EN : this.props.user.FULL_NAME_TH}</Text>
+              {this.app && this.app.locale=='en'?<Text allowFontScaling={false}style={styles.TextNameStyle1EN} numberOfLines={1}>{this.app && this.app.locale=='en'? this.props.user.FULL_NAME_EN : this.props.user.FULL_NAME_TH}</Text>:<Text allowFontScaling={false}style={styles.TextNameStyle1} numberOfLines={1}>{this.app && this.app.locale=='en'? this.props.user.FULL_NAME_EN : this.props.user.FULL_NAME_TH}</Text>}
                 <Text allowFontScaling={false}style={styles.TextNameStyle2}>{this.props.user.POSITION_NAME}</Text>
               </Col>
             </Row>
