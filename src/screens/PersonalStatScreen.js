@@ -31,6 +31,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
 import app from '../stores/app'
+import moment from 'moment';
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
@@ -47,6 +48,9 @@ export default class PersonalStatScreen extends React.Component {
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
     this.app = app
+    if(this.app.locale && moment){
+      moment().locale(this.app.locale);
+      }
   }
   static navigationOptions = {
     header: null,
