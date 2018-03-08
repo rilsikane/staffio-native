@@ -30,7 +30,7 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
-
+import app from '../stores/app'
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
@@ -46,6 +46,7 @@ export default class PersonalStatScreen extends React.Component {
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
+    this.app = app
   }
   static navigationOptions = {
     header: null,
@@ -155,16 +156,16 @@ export default class PersonalStatScreen extends React.Component {
   getLeaveColor(typeCode){
     switch (typeCode) {
       case 'SC_1':
-        return "#ED5565";
+        return "#fa6575";
         break;
       case 'VC':
-        return "#8BC34A";
+        return "#8BC34C";
         break;
       case 'PERS-01':
-        return "#23c6c8";
+        return "#1abbbd";
         break;
       default:
-       return "#F5DC0B";
+       return "#f5dc0f";
     }
   }
   onSwitch(value){
@@ -219,14 +220,14 @@ export default class PersonalStatScreen extends React.Component {
           <View style={[styles.rightSwipeItem]}>
             <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
           </View>
-          <Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>
+          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
         </TouchableOpacity>,
 
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
             <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
           </View>
-          <Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>
+          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
         </TouchableOpacity>,  
       ]}>
       <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
