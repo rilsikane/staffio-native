@@ -175,10 +175,10 @@ export default {
 
     //CreateLeave
     titleCreate:'Create Leave',
-    sickLeave:'sick leave',
-    errandLeave:'personal leave',
-    vacationLeave:'vacation leave',
-    otherLeave:'other leave',
+    sickLeave:'Sick Leave',
+    errandLeave:'Personal Leave',
+    vacationLeave:'Vacation Leave',
+    otherLeave:'Other Leave',
     selectOne:'Select one day',
     nextCreate:'Next',
 
