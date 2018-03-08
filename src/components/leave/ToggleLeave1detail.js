@@ -4,13 +4,18 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import I18n from '../../utils/i18n';
 import SwitchSelector from 'react-native-switch-selector'
+import app  from '../../stores/app';
+import moment from 'moment';
 
 export default class ToggleLeave1detail extends React.Component {
   constructor(props) {
         super(props);
         this.statusbutton = {allday: true, morning:false, afternoon: false,custom: false};
         this.state = { pressStsus: 0,workStart:"",workEnd:"",statusbutton:this.statusbutton}
-        
+        this.app = app;
+        if(this.app.locale && moment){
+            moment().locale(this.app.locale);
+            }
   }
 onClickbutton(index){
     let statButtn = this.statusbutton;
@@ -84,22 +89,22 @@ renderWorkTime(shiftData){
                 <View style={{flexDirection: 'row', alignItems:'center',flex:1}}>
                     <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(1)}>
                         <View style={ this.state.statusbutton.allday ? styles.buttonTimePress : styles.buttonTime } >
-                            {(<Text style={ this.state.statusbutton.allday ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('Toggle1Allday')}</Text>)}
+                        {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.allday ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('Toggle1Allday')}</Text>):(<Text style={ this.state.statusbutton.allday ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('Toggle1Allday')}</Text>)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(2)}>
                         <View style={ this.state.statusbutton.morning ? styles.buttonTimePress : styles.buttonTime } >
-                            {(<Text style={ this.state.statusbutton.morning ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('morning')}</Text>)}
+                        {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.morning ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('morning')}</Text>):(<Text style={ this.state.statusbutton.morning ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('morning')}</Text>)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(3)}>
                         <View style={ this.state.statusbutton.afternoon ? styles.buttonTimePress : styles.buttonTime } >
-                            {(<Text style={ this.state.statusbutton.afternoon ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('afternoon')}</Text>)}
+                        {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.afternoon ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('afternoon')}</Text>):(<Text style={ this.state.statusbutton.afternoon ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('afternoon')}</Text>)}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(4)}>
                         <View style={ this.state.statusbutton.custom ? styles.buttonTimePress : styles.buttonTime } >
-                            {(<Text style={ this.state.statusbutton.custom ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('custom')}</Text>)}
+                        {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.custom ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('custom')}</Text>):(<Text style={ this.state.statusbutton.custom ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('custom')}</Text>)}
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -119,10 +124,11 @@ const styles = StyleSheet.create({
     borderRadius:responsiveWidth(2.3),
     borderColor:'#fbaa3e',
     height:responsiveHeight(6),
-    margin:responsiveWidth(2),
+    margin:responsiveWidth(0.5),
+    marginTop:responsiveHeight(1),
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#f1f2f6'
+    backgroundColor: '#f5f6fa'
    },
    buttonTimePress: {
     alignItems: 'center',
@@ -131,7 +137,8 @@ const styles = StyleSheet.create({
     borderRadius:responsiveWidth(2.3),
     borderColor:'#fbaa3e',
     height:responsiveHeight(6),
-    margin:responsiveWidth(2),
+    margin:responsiveWidth(0.5),
+    marginTop:responsiveHeight(1),
     flexDirection: 'row',
     justifyContent: 'center',
     backgroundColor: '#fbaa3e'
@@ -146,6 +153,18 @@ const styles = StyleSheet.create({
     fontFamily:'Kanit-Medium', 
     color: 'white', 
     fontSize:responsiveFontSize(2),
+    textAlign:'left',
+   },
+   textbuttonTimeEn: {
+    fontFamily:'Kanit-Medium', 
+    color: '#fbaa3e', 
+    fontSize:responsiveFontSize(1.7),
+    textAlign:'left',
+   },
+   textbuttonTimePressEn: {
+    fontFamily:'Kanit-Medium', 
+    color: 'white', 
+    fontSize:responsiveFontSize(1.7),
     textAlign:'left',
    },
 });
