@@ -66,16 +66,19 @@ renderWorkTime(shiftData){
            <View style={{flex:1}}>
                 <View style={{borderTopWidth:responsiveHeight(0.1),borderColor:'#bdc3c7',marginLeft:responsiveWidth(3),marginRight:responsiveWidth(3),flex:1}}>
                     <View style={{flexDirection: 'row', alignItems:'center',flex:1,marginTop:responsiveHeight(2)}}>
+                        {(<Text style={{flex:1,fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2.3),textAlign:'left'}}>{this.props.shiftData.SHFT_NAME_TH}</Text>)}
+                        {(<Text style={{flex:1,fontFamily:'Kanit-Medium', color:'#fbaa3e', fontSize:responsiveFontSize(2.3),textAlign:'right'}}>
+                        {this.renderWorkTime(this.props.shiftData)}
+                        </Text>)}
+                    </View>
+                    <View style={{flexDirection: 'row', alignItems:'center',flex:1,marginTop:responsiveHeight(2)}}>
                         {(<Text style={{flex:0,fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2),textAlign:'left'}}>{I18n.t('LeaveToggle')}</Text>)}
                         <View style={{width:responsiveWidth(18),marginLeft:10,marginRight:10}}>
                         <SwitchSelector options={options} initial={this.state.localeIndex} borderColor="#333" buttonColor="#fbaa3e" height={25} 
-                                fontSize={responsiveFontSize(2)}  onPress={this.onSwitch} backgroundColor="#feddb4" hasPadding={false}/>
+                                fontSize={responsiveFontSize(1)}  onPress={this.onSwitch} backgroundColor="#feddb4" hasPadding={false}/>
                         </View>
                         {(<Text style={{flex:0,fontFamily: 'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2),textAlign:'center'}}>{I18n.t('notLeaveToggle')}</Text>)}
-                        {(<Text style={{flex:3,fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2.3),textAlign:'center'}}>{this.props.shiftData.SHFT_NAME_TH}</Text>)}
-                        {(<Text style={{flex:0,fontFamily:'Kanit-Medium', color:'#fbaa3e', fontSize:responsiveFontSize(2.3),textAlign:'right'}}>
-                        {this.renderWorkTime(this.props.shiftData)}
-                        </Text>)}
+                        
                     </View>
                 </View>
                 <View style={{flexDirection: 'row', alignItems:'center',flex:1}}>

@@ -83,7 +83,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
             <View style={{marginLeft: responsiveWidth(3),marginRight: responsiveWidth(3),marginTop: responsiveWidth(2),marginBottom: responsiveWidth(2),}}>
               <Text ellipsizeMode='tail' numberOfLines={1} style={{fontSize: responsiveFontSize(2.5),fontFamily:'Kanit-Regular',color:'#fbaa3e'}}>{this.props.leaveStore.leaveReqLeaveType.LEAVE_TYPE_NAME}</Text> 
               <View style={{flexDirection:'row', alignItems:'center',marginBottom:responsiveHeight(1),marginTop:10}}>
-                <Text style={{flex:1,fontSize: responsiveFontSize(2.2),fontFamily:'Kanit-Regular',color:'#5f504b'}}>วันที่ลา</Text> 
+                <Text style={{flex:1,fontSize: responsiveFontSize(2.2),fontFamily:'Kanit-Regular',color:'#5f504b'}}>{I18n.t('dateOfLeave')}</Text> 
                 <Text style={{flex:3,fontSize: responsiveFontSize(2),fontFamily:'Kanit-Regular',color:'#5f504b',textAlign:'center'}}>{`${convertByFormatShort(new Date(this.props.leaveStore.leaveReqData.LeaveReq.START_DATE).getTime(),"DD MMM ")} - ${convertByFormatShort(new Date(this.props.leaveStore.leaveReqData.LeaveReq.END_DATE).getTime(),"DD MMM ")}`}</Text> 
                 {/* <Icon style={{flex:1,textAlign:'right',color:'#5f504b'}} name='angle-down' size={responsiveFontSize(2)} /> */}
               </View>
@@ -91,10 +91,10 @@ export default class LeaveWorkshiftScreen extends React.Component {
           </View>
           <View style={{margin:responsiveHeight(3),marginTop:6}}>
             {this.state.reasons.length >0 && 
-            <Dropdown label='สาเหตุ' data={this.state.reasons} valueExtractor={item => item.id} labelExtractor={item => item.title}
+            <Dropdown label={I18n.t('causeLeaveCon')} data={this.state.reasons} valueExtractor={item => item.id} labelExtractor={item => item.title}
             style={[{marginTop:5,textAlign:'left',fontFamily:"Kanit"}]} onChangeText={(value) => this.setState({reason:value})}/>
             }
-            <Text style={{fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.2)}}>หมายเหตุ</Text> 
+            <Text style={{fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.2)}}>{I18n.t('remarkLeaveConfirm')}</Text> 
             <View style={{backgroundColor:'#f5f6fa',borderColor: '#fbaa3e', borderWidth: 1, borderRadius:1,marginTop:responsiveHeight(2)}}>
               <TextInput style={styles.textAreaStyle} editable = {true} maxLength = {100} multiline = {true} numberOfLines = {4} 
               underlineColorAndroid='transparent' onChangeText={(text) => this.setState({remark:text})}/>
