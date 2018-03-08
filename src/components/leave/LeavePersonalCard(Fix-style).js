@@ -17,7 +17,6 @@ export default class LeavePersonalCard extends React.Component {
  
   render() {
     return (
-        this.props.info.total && 
         (
             <Card style={{marginBottom:0}}>
             <View style={{flexDirection: 'row',flex:1}}>

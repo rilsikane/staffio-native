@@ -23,6 +23,8 @@ import LeaveDetailScreen from './LeaveDetailScreen';
 import MenuScreen from './MenuScreen';
 import LeaveApprScreen from './LeaveApprScreen';
 import CreateLeave from './CreateLeave';
+import LeaveWorkShiftScreen from './LeaveWorkshiftScreen';
+import LeaveConfirmScreen from './LeaveConfirmScreen'
 
 //Modal
 import InputModalScreen from './Modal/inputModal';
@@ -55,6 +57,8 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.MenuScreen', () => MenuScreen, Store, Provider);
   Navigation.registerComponent('staffio.LeaveApprScreen', () => LeaveApprScreen, Store, Provider);
   Navigation.registerComponent('staffio.CreateLeave',() => CreateLeave, Store, Provider);
+  Navigation.registerComponent('staffio.LeaveWorkShiftScreen',() => LeaveWorkShiftScreen, Store, Provider);
+  Navigation.registerComponent('staffio.LeaveConfirmScreen',() => LeaveConfirmScreen, Store, Provider);
   //Modal
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image,Platform } from 'react-native';
+import { StyleSheet, View, Image,Platform,Text } from 'react-native';
 import { Header,Left, Right, Button,Body,Title} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../constants/Colors'
@@ -32,7 +32,7 @@ export default class CardHeader extends React.Component {
     }
     render() {
         return(
-            <Header style={{backgroundColor:Colors.baseColor,height:responsiveHeight(8)}}>
+            <Header style={{backgroundColor:Colors.baseColor,height:responsiveHeight(11)}}>
               <Left  style={{flex:1,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                 {!this.props.isModal && (this.props.goBack ? (
                 <Button style={{backgroundColor:"transparent"}} transparent onPress={()=>this.props.goBack()}>
@@ -42,19 +42,24 @@ export default class CardHeader extends React.Component {
                   <Icon style={styles.HeaderIcon} name='bars'/>
                 </Button>)}
               </Left>
-              <Body style={{flex:2,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
+              <Body style={{flex:2,justifyContent:'flex-end',alignItems:'flex-end',flexDirection:"row"}}>
                 <Title style={styles.HeaderFont}>{this.props.title}</Title>
-               
               </Body>
-               <Right>
+               {!this.props.next ?<Right style={{flex:1,justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                 <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={()=> this.props.funcSelectAll()}>
                   <Icon style={styles.HeaderRightIcon} name={this.props.iconRight}/>
                   {/* <Title style={styles.HeaderFont}>{this.props.iconRight}</Title> */}
                 </Button>
-                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.openNotifications}>
+                {/* <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",paddingRight:5}} transparent onPress={this.openNotifications}>
                     <Icon style={styles.HeaderRightIcon} name='bell'/>
+                </Button> */}
+               </Right>:
+               <Right style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignContent:'flex-end'}}>
+                <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end"}} transparent onPress={()=>this.props.next()}>
+                    {!this.props.titleNext ? <Icon style={styles.HeaderRightIcon} name='chevron-right'/>
+                    : <Text style={styles.HeaderFontRight}>{this.props.titleNext}</Text>}
                 </Button>
-               </Right>
+               </Right>}
             </Header>
         )
     }
@@ -64,33 +69,41 @@ const styles = StyleSheet.create({
   HeaderFont:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2.5),
+    fontSize:responsiveFontSize(3),
     backgroundColor:'transparent',
     fontWeight:'400',
     flex:1,
     justifyContent:'center',alignItems:'center',alignContent:'center',
-    marginTop: Platform.OS === 'android' ? responsiveHeight(1.5) : 1,
   },
   HeaderIcon:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(3.5),
+    fontSize:responsiveFontSize(3),
     backgroundColor:'transparent',
     fontWeight:'400',
     flex:1,
     justifyContent:'center',alignItems:'center',alignContent:'center',
-    marginTop: Platform.OS === 'android' ? 1 : 2,
+    marginTop: Platform.OS === 'android' ? 1 : 5,
   },
   HeaderRightIcon:{
     color:"#FFFF",
     fontFamily:"Kanit",
-    fontSize:responsiveFontSize(2.8),
+    fontSize:responsiveFontSize(3),
     backgroundColor:'transparent',
     fontWeight:'400',
     flex:1,
-    justifyContent:'flex-start',alignItems:'flex-start',alignContent:'flex-start',
-    marginTop: Platform.OS === 'android' ? 1 : 2.5,
-    flexDirection:"column",
-
+    justifyContent:'center',alignItems:'center',alignContent:'center',
+    marginTop: Platform.OS === 'android' ? 1 : 8,
+  },
+  HeaderFontRight:{
+    color:"#FFFF",
+    fontFamily:"Kanit",
+    fontSize:responsiveFontSize(2.4),
+    backgroundColor:'transparent',
+    fontWeight:'400',
+    flex:1,
+    justifyContent:'center',alignItems:'center',alignContent:'center',
+    marginTop:5,
+    marginLeft:responsiveWidth(4)
   }
 });

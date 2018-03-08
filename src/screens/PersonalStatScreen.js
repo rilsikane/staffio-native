@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,Alert
 } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Text } from 'native-base';
 // import LeaveCalendar from '../components/LeaveCalendar'
@@ -30,7 +30,6 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
-import ToggleLeave1 from '../components/leave/ToggleLeave1'
 
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
@@ -51,26 +50,46 @@ export default class PersonalStatScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-  async componentWillMount(){
+  async componentDidMount(){
+   
      const userData = await store.get("USER");
      this.getLeaveList(userData);
      this.setState({userData:userData});
-    
+   
   }
   async getLeaveList(user,leaveTypeCode){
+    try{
     let params  = {};
     params.param = {};
     params.param.EMP_CODE = user.EMP_CODE;
     params.param.PAGE = 1;
     params.param.PAGE_SIZE =  1000;
-    params.param.ReqStatus= "01";
+    // params.param.ReqStatus= "01";
     params.param.LEAVE_TYPE_CODE = leaveTypeCode;
+
+    // params.user = {};
+    // params.user.LOGIN_CUSTOMER_CODE = user.CUSTOMER_CODE;
+    // params.user.LOGIN_ORG_CODE = user.ORG_CODE;
+    // params.user.LOGIN_UNIT_CODE = user.UNIT_CODE;
+    // params.user.LOGIN_USER_NAME = user.USER_NAME;
+    // params.user.LOGIN_USER_ID = user.USER_ID;
+    // params.user.LOGIN_EMP_CODE = user.EMP_CODE;
+
     const response = await post("ESSServices/SearchLeaveListforEmp",params);
     const infos = this.transformToInfos(response.objData);
     const leaveBalances = await this.getLeaveBalance(user);
 
     this.setState({leaveList:infos,leaveBalances:this.transFormStatHis(leaveBalances),loading:false});
-   
+      }catch(e){
+        console.log(e);
+        Alert.alert(
+          'เกิดข้อผิดพลาด',
+          'ไม่สามารถเชื่อมต่อระบบได้',
+          [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        )
+    }
   }
   async _refresh(){
     this.setState({loading:true});
@@ -170,7 +189,7 @@ export default class PersonalStatScreen extends React.Component {
         title: undefined, // navigation bar title of the pushed screen (optional)
         passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
-        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+        animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
         navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
         navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
       });
@@ -251,10 +270,10 @@ export default class PersonalStatScreen extends React.Component {
               <Icon name="file" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('CreateLeave')}</Text>
             </ActionButton.Item>
-           <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => this.openCreateLeave()}>
+           {/* <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => console.log()}>
               <Icon name="search" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('searchLeave')}</Text>
-            </ActionButton.Item>
+            </ActionButton.Item> */}
           </ActionButton>
       </Container>
     );

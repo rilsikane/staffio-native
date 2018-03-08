@@ -177,6 +177,8 @@ export default {
     otherLeave:'ลาอื่นๆ',
     backCreate:'กลับ',
     nextCreate:'ต่อไป',
+    selectOne:'ลาวันเดียว',
+    
 
     //DashBoradProject
     Fetch: 'ดึงข้อมูลล่าสุด',
@@ -280,7 +282,7 @@ export default {
     RejectSuccess: 'ไม่อนุมัติรายการเรียบร้อย',
     title: 'ข้อมูลการลา',
     Approve:'อนุมัติรายการ',
-    LeaveStatistics: 'สถิติการลา',
+    LeaveStatistics: 'การลา',
     ReqType:'ประเภทใบคำขอ',
     CancelApproveD: 'ยืนยันอนุมัติการยกเลิก',
     CancelapproveLeaveD: 'ยืนยันอนุมัติการยกเลิกเรียบร้อยแล้ว',
@@ -288,7 +290,7 @@ export default {
     //MenuScreen
     HomeS: 'ลงเวลาเข้างาน',
     Inbox: 'ประวัติการลงเวลา',
-    StatLeave: 'สถิติการลา',
+    StatLeave: 'การลา',
     Logout: 'ออกจากระบบ',
     FindFriend: 'ค้นหาเพื่อน',
     Dashboard: 'Dashboard เข้างาน',
@@ -302,7 +304,7 @@ export default {
     overViewOverView: 'ภาพรวม',
 
     //PersonalStatScreen
-    Stat: 'สถิติการลา',
+    Stat: 'การลา',
     History: 'ประวัติการลา',
     CreateLeave: 'สร้างใบลา',
     searchLeave: 'ค้นหาใบลา',
@@ -330,5 +332,10 @@ export default {
     Comment: 'คอมเมนท์',
     CommentSuccess: 'คอมเมนท์เรียบร้อย',
     OK: 'ตกลง',
-    Mistake: 'เกิดข้อผิดพลาด'
+    Mistake: 'เกิดข้อผิดพลาด',
+
+    //LeaveReqScreen
+    next : 'ถัดไป',
+    leaveSuccess:'ระบบได้ทำการบันทึกข้อมูลลาเรียบร้อยแล้ว'
+
 };

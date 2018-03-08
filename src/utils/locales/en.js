@@ -152,7 +152,7 @@ export default {
     CancelModal:'Cancel',
 
     //AuthenPincodeScreen
-    EnterPassword:'Enter Password',
+    EnterPassword:'Enter Pincode',
 
     //ConfirmPincodeScreen
     SetPass: 'Confirm Password',
@@ -174,6 +174,8 @@ export default {
     errandLeave:'errand leave',
     vacationLeave:'vacation leave',
     otherLeave:'other leave',
+    selectOne:'Select one day',
+    nextCreate:'Next',
 
     //DashBoradProject
     Fetch: 'Fetch latest',
@@ -278,7 +280,7 @@ export default {
     title: 'Leave Information',
     Reject:'Reject',
     Approve:'Approve',
-    LeaveStatistics: 'Leave Statistics',
+    LeaveStatistics: 'Leave Module',
     ReqType:'Request Type',
     CancelApproveD: 'Cancel Approved',
     CancelapproveLeaveD: 'Cancel Approved successfully',
@@ -286,7 +288,7 @@ export default {
     //MenuScreen
     HomeS: 'Home',
     Inbox: 'TA: History',
-    StatLeave: 'Leave Statistics',
+    StatLeave: 'Leave Module',
     Logout: 'Logout',
     FindFriend: 'Find Friends',
     Dashboard: 'Dashboard',
@@ -300,7 +302,7 @@ export default {
     overViewOverView: 'Overview',
 
     //PersonalStatScreen
-    Stat: 'Statistics of leave',
+    Stat: 'Leave Module',
     History: 'History of leave',
     CreateLeave: 'Create Leave',
     searchLeave: 'Search Leave',
@@ -327,5 +329,9 @@ export default {
     Comment: 'Comment',
 	CommentSuccess: 'Commented successfully',
 	OK: 'OK',
-	Mistake: 'Mistake'
+    Mistake: 'Mistake',
+    
+     //LeaveReqScreen
+     next : 'Next',
+     leaveSuccess:'Request Leave Success'
 };

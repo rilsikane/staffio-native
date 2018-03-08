@@ -111,7 +111,8 @@ export default class MenuScreen extends React.Component {
                 <Text style={styles.textPosition}>{this.state.userData.POSITION_NAME}</Text>
             </View>
             <View style={{alignItems:"center",flex:1,justifyContent:"center",alignContent:"center",paddingRight:responsiveWidth(5)}}>
-            {this.state.localeIndex!==undefined && <SwitchSelector options={options} initial={this.state.localeIndex} buttonColor="#fbaa3e" fontSize={12} height={25}
+            {this.state.localeIndex!==undefined && <SwitchSelector options={options} initial={this.state.localeIndex} buttonColor="#fbaa3e" 
+            fontSize={responsiveFontSize(2)} style={{height:responsiveHeight(1),width:responsiveWidth(4)}}
             onPress={this.switchLang}  hasPadding={false}/>}
             </View>
          </View>          

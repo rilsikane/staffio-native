@@ -41,18 +41,17 @@ export default class DashBoradProject extends React.Component {
         moment().locale(this.app.locale);
     }
 
-    async  componentWillMount() {
+    async  componentDidMount() {
         const userData = await store.get("USER");
         const projectView = await this.projectView(userData)
-  
-
-    
-        this.setState({projectView : projectView})
-        this.setState({ user: userData });
-        if (userData) {
-            TimerMixin.setTimeout(() => {
-                this.setState({ isLoading: false });
-            }, 1000);
+        if(projectView && projectView.length>0){
+            this.setState({projectView : projectView})
+            this.setState({ user: userData });
+            if (userData) {
+                TimerMixin.setTimeout(() => {
+                    this.setState({ isLoading: false });
+                }, 1000);
+            }
         }
     }
     async changeTab(i, ref){      

@@ -108,6 +108,7 @@ export async function authen(path,param){
            
             return response;
           }else{
+              await store.delete("endpointNew"); 
               if(response.data.UrlDL && ""!=response.data.UrlDL){
                 Alert.alert(
                   'เกิดข้อผิดพลาด',
@@ -147,14 +148,55 @@ export async function post(path,param){
   let lang = await store.get("locale");
   let requestURL = `${endpoint}${path}`;
       try{
+          param.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+          param.LOGIN_ORG_CODE = userData.ORG_CODE;
+          param.LOGIN_UNIT_CODE = userData.UNIT_CODE;
+          param.LOGIN_USER_NAME = userData.USER_NAME;
+          param.LOGIN_USER_ID = userData.USER_ID;
           param.CUSTOMER_CODE = userData.CUSTOMER_CODE;
           console.log("param: "+JSON.stringify(param));
           const response = await  axios.post(requestURL, param,{headers: {token:userData.token,lang:lang}});
+          if(response.status=='200' && (response.data.Success || response.data.Complete) || (!response.data.Msg && !response.data.Message && !response.Message)){
+            console.log("postService"+JSON.stringify(response));
+            return response.data;
+          }else{
+              console.log(response.data.Msg||response.data.Message);
+              Alert.alert(
+                  'เกิดข้อผิดพลาด',
+                  response.data.Msg,
+                  [
+                  {text: 'OK', onPress: () => console.log('OK Pressed!')},
+                  ]
+              )
+              return false;
+          }
+      }catch(e){
+    console.log(e);
+     console.error(e);
+     Alert.alert(
+      'เกิดข้อผิดพลาด',
+      'ไม่สามารถเชื่อมต่อระบบได้',
+      [
+      {text: 'OK', onPress: () => console.log('OK Pressed!')},
+      ]
+    )
+          return e;
+      }
+}
+export async function post2(path,param){
+  
+  const userData = await store.get("USER");
+  const endpoint = await getEndpoint();
+  let lang = await store.get("locale");
+  let requestURL = `${endpoint}${path}`;
+      try{
+          console.log("param: "+JSON.stringify(param));
+          const response = await  axios.post(requestURL, {params:param},{headers: {token:userData.token,lang:lang}});
           if(response.status=='200' && (response.data.Success || response.data.Complete)){
             console.log("postService"+JSON.stringify(response));
             return response.data;
           }else{
-              console.log(response.data.Msg);
+              console.log(response.data.Msg||response.data.Message);
               Alert.alert(
                   'เกิดข้อผิดพลาด',
                   response.data.Msg,
