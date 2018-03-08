@@ -28,8 +28,8 @@ export default class CreateLeave extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={color:'#1abbbd',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false};
-    this.color ={sickL:'#1abbbd',errandL:'#8BC34C',vacationL:'#fa6575',otherL:'#f5dc0f'};
+    this.state={color:'#ED5565',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false};
+    this.color ={sickL:'#ED5565',errandL:'#23c6c8',vacationL:'#8BC34A',otherL:'#F5DC0B'};
     this.onDayPress = this.onDayPress.bind(this);
     this.dayList = [];
     this.oneMask = {startingDay: true,endingDay: true, color: this.color[this.state.color],textColor:"#fff"};
@@ -143,23 +143,23 @@ export default class CreateLeave extends React.Component {
           <CardHeader title={`${I18n.t('titleCreate')}`}/>
           <View style={{flexDirection: 'row', alignItems:'center', height:responsiveHeight(10),marginBottom:responsiveHeight(2),marginTop:responsiveHeight(1)}}>
             <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton({color:this.color.sickL,id:"SC_1"})}>
-              <View style={[styles.buttonstyle,{borderColor:this.color.sickL}]}>
-                <Text style={[styles.textStyle,{color:this.color.sickL},this.state.leaveType.LEAVE_TYPE_CODE=="SC_1"&&{borderColor:this.color.sickL,borderBottomWidth:responsiveHeight(1)}]}>{I18n.t('sickLeave')}</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton({color:this.color.errandL,id:"PERS-01"})}>
-              <View style={[styles.buttonstyle,{borderColor:this.color.errandL}]}>
-                <Text style={[styles.textStyle,{color:this.color.errandL}]}>{I18n.t('errandLeave')}</Text>
+              <View style={[styles.buttonstyle,this.state.leaveType.LEAVE_TYPE_CODE=="SC_1"&&{borderColor:this.color.sickL,borderBottomWidth:responsiveHeight(1)}]}>
+                <Text style={[styles.textStyle,{color:this.color.sickL}]}>{I18n.t('sickLeave')}</Text>
               </View>
             </TouchableOpacity>
             
             <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton({color:this.color.vacationL,id:"VC"})}>
-              <View style={[styles.buttonstyle,{borderColor:this.color.vacationL}]}>
+            <View style={[styles.buttonstyle,this.state.leaveType.LEAVE_TYPE_CODE=="VC"&&{borderColor:this.color.vacationL,borderBottomWidth:responsiveHeight(1)}]}>
                 <Text style={[styles.textStyle,{color:this.color.vacationL}]}>{I18n.t('vacationLeave')}</Text>
               </View>
             </TouchableOpacity>
 
+            <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton({color:this.color.errandL,id:"PERS-01"})}>
+            <View style={[styles.buttonstyle,this.state.leaveType.LEAVE_TYPE_CODE=="PERS-01"&&{borderColor:this.color.errandL,borderBottomWidth:responsiveHeight(1)}]}>
+                <Text style={[styles.textStyle,{color:this.color.errandL}]}>{I18n.t('errandLeave')}</Text>
+              </View>
+            </TouchableOpacity>
+          
             <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton(this.color.otherL)}>
               <View style={[styles.buttonstyle,{borderColor:this.color.otherL}]}>
                 <Text style={[styles.textStyle,{color:this.color.otherL}]}>{I18n.t('otherLeave')}</Text>
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     height:responsiveHeight(10),
     margin:2.5,
     // borderRadius: responsiveWidth(1),
-    borderBottomWidth:responsiveHeight(1),
+    // borderBottomWidth:responsiveHeight(1),
     justifyContent: 'center',
   },
   textStyle: {

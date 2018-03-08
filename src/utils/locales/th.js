@@ -1,4 +1,9 @@
 export default {  
+    ///////////////API/////////////////////
+    //index
+    Error:'เกิดข้อผิดพลาด',
+    notconnect:'ไม่สามารถเชื่อมต่อระบบได้',
+    clickforUpdate: 'กดเพื่อทำการอัพเดท',
     ///////////////COMPONENT///////////////
     //Cardcheckin
     didntEntertime:'ยังไม่ได้ลงเวลา',
@@ -269,6 +274,12 @@ export default {
     RejectAll: 'ไม่อนุมัติรายการทั้งหมด',
     ConfirmApproveAll:'ยืนยันการอนุมัติการลา',
     itemAppr: 'รายการ',
+
+    //LeaveConfirmScreen
+    dateOfLeave:'วันที่ลา',
+    remarkLeaveConfirm:'หมายเหตุ',
+    causeLeaveCon:'สาเหตุ',
+
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
     ConfirmApproveLeave: 'ยืนยันการอุนมัติการลาของ',
@@ -312,6 +323,8 @@ export default {
     otherCause: 'สาเหตุอื่นๆ',
     causeOfcanncel: 'สาเหตุยกเลิกรายการ',
     specifymo: 'โปรดระบุ',
+    editReq:'แก้ไขคำขอ',
+    canreq:'ยกเลิกคำขอ',
 
     //PincodeScreen
     SetPass: 'ตั้งรหัสผ่าน',

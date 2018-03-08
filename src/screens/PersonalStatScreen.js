@@ -30,7 +30,8 @@ import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
-
+import app from '../stores/app'
+import moment from 'moment';
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
@@ -46,6 +47,10 @@ export default class PersonalStatScreen extends React.Component {
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
+    this.app = app
+    if(this.app.locale && moment){
+      moment().locale(this.app.locale);
+      }
   }
   static navigationOptions = {
     header: null,
@@ -83,8 +88,8 @@ export default class PersonalStatScreen extends React.Component {
       }catch(e){
         console.log(e);
         Alert.alert(
-          'เกิดข้อผิดพลาด',
-          'ไม่สามารถเชื่อมต่อระบบได้',
+          `${I18n.t('Error')}`,
+          `${I18n.t('notconnect')}`,
           [
           {text: 'OK', onPress: () => console.log('OK Pressed!')},
           ]
@@ -219,14 +224,14 @@ export default class PersonalStatScreen extends React.Component {
           <View style={[styles.rightSwipeItem]}>
             <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
           </View>
-          <Text style={{marginLeft:responsiveWidth(3),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>แก้ไขคำขอ</Text>
+          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
         </TouchableOpacity>,
 
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
             <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
           </View>
-          <Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>ยกเลิกคำขอ</Text>
+          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
         </TouchableOpacity>,  
       ]}>
       <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
@@ -285,5 +290,16 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(3),
     height: 22,
     color: 'white',
+  },
+  rightSwipeItem: {
+    justifyContent: 'center',
+    backgroundColor: '#fbaa3e',
+    borderWidth:responsiveWidth(1),
+    borderColor: 'white',
+    borderRadius:responsiveWidth(7.5),
+    alignItems: 'center',
+    width: responsiveWidth(15),
+    height: responsiveWidth(15),
+    marginTop:responsiveHeight(1.5),
   },
 });

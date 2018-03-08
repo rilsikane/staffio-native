@@ -1,4 +1,9 @@
 export default {  
+    ///////////////API/////////////////////
+    //index
+    Error:'Error',
+    notconnect:'Can not connect system',
+    clickforUpdate: 'click for update',
     ///////////////COMPONENT///////////////
     //Cardcheckin
     didntEntertime:'Did not enter time',
@@ -111,12 +116,12 @@ export default {
     //ToggleLeave1
     Toggle1Allday:'All day',
     Toggle1Edit:'Edit',
-    ga: 'กะ',
+    ga: 'Shift(s)',
     LeaveToggle:'Leave',
     notLeaveToggle:'Not Leave',
-    morning:'morning',
-    afternoon:'afternoon',
-    custom:'custom',
+    morning:'1st Half-day',
+    afternoon:'2nd Half-day',
+    custom:'Custom',
     dateToggle: 'Date',
 
     //status-IdName
@@ -170,10 +175,10 @@ export default {
 
     //CreateLeave
     titleCreate:'Create Leave',
-    sickLeave:'sick leave',
-    errandLeave:'errand leave',
-    vacationLeave:'vacation leave',
-    otherLeave:'other leave',
+    sickLeave:'Sick Leave',
+    errandLeave:'Personal Leave',
+    vacationLeave:'Vacation Leave',
+    otherLeave:'Other Leave',
     selectOne:'Select one day',
     nextCreate:'Next',
 
@@ -267,6 +272,11 @@ export default {
     ConfirmApproveAll:'Confirm approval all',
     itemAppr: 'item(s)',
 
+    //LeaveConfirmScreen
+    dateOfLeave:'Leave date',
+    remarkLeaveConfirm:'Remark',
+    causeLeaveCon:'Cause',
+
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
     ConfirmApproveLeave: 'Confirm approval of leave',
@@ -310,7 +320,9 @@ export default {
     otherCause: 'Other cause',
     causeOfcanncel: 'Cause of cancal',
     specifymo: 'Please specify',
-    
+    editReq:'Edit',
+    canreq:'Cancel',
+
     //PincodeScreen
     SetPass: 'Set password',
 

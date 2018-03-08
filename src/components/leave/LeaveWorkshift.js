@@ -35,7 +35,7 @@ export default class LeaveWorkshift extends React.Component {
             <View style={{padding:responsiveWidth(2),backgroundColor:"#fff"
                 ,height:responsiveHeight(13),marginLeft:5,marginRight:5,marginTop:2}}>
                 <View style={{marginTop:responsiveHeight(0.5), marginBottom:responsiveHeight(2),marginLeft:responsiveWidth(3),marginRight:responsiveWidth(3),flex:1}}>
-                    <View style={{flex:1,flexDirection: 'row' ,alignItems:"center",justifyContent:'flex-end'}}>
+                    <View style={{flex:1,flexDirection: 'row' ,alignItems:"center",justifyContent:'flex-end',marginTop:responsiveHeight(2)}}>
                         {(<Text style={{fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.5),textAlign:'left',paddingRight:10}}>{I18n.t('Toggle1Allday')}</Text>)}
                         {/* <Switch onTintColor='#feddb4' tintColor='#feddb4' 
                         thumbTintColor='#fbaa3e' value={this.state.custom} onValueChange={this.onSwitch} /> */}

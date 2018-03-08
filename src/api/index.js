@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import I18n from '../utils/i18n';
 
 
 
@@ -35,7 +35,7 @@ async function getEndpointService(param){
         return response.data;
       }else{
             Alert.alert(
-              'เกิดข้อผิดพลาด',
+              `${I18n.t('Error')}`,
               response.data.Msg,
               [
               {text: 'OK', onPress: () => console.log('OK Pressed!')},
@@ -46,8 +46,8 @@ async function getEndpointService(param){
   }catch(e){
       console.error(e);
         Alert.alert(
-        'เกิดข้อผิดพลาด',
-        'ไม่สามารถเชื่อมต่อระบบได้',
+          `${I18n.t('Error')}`,
+          `${I18n.t('notconnect')}`,
         [
         {text: 'OK', onPress: () => console.log('OK Pressed!')},
         ]
@@ -111,15 +111,15 @@ export async function authen(path,param){
               await store.delete("endpointNew"); 
               if(response.data.UrlDL && ""!=response.data.UrlDL){
                 Alert.alert(
-                  'เกิดข้อผิดพลาด',
+                  `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
-                  {text: 'กดเพื่อทำการอัพเดท', onPress: () => Linking.openURL(response.data.UrlDL)},
+                  {text: `${I18n.t('clickforUpdate')}`, onPress: () => Linking.openURL(response.data.UrlDL)},
                   ]
                 )
               }else{
                 Alert.alert(
-                  'เกิดข้อผิดพลาด',
+                  `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
                   {text: 'OK', onPress: () => console.log('OK Pressed!')},
@@ -132,8 +132,8 @@ export async function authen(path,param){
         await store.delete("endpointNew"); 
           console.error(e);
             Alert.alert(
-            'เกิดข้อผิดพลาด',
-            'ไม่สามารถเชื่อมต่อระบบได้',
+              `${I18n.t('Error')}`,
+              `${I18n.t('notconnect')}`,
             [
             {text: 'OK', onPress: () => console.log('OK Pressed!')},
             ]
@@ -162,7 +162,7 @@ export async function post(path,param){
           }else{
               console.log(response.data.Msg||response.data.Message);
               Alert.alert(
-                  'เกิดข้อผิดพลาด',
+                `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
                   {text: 'OK', onPress: () => console.log('OK Pressed!')},
@@ -174,8 +174,8 @@ export async function post(path,param){
     console.log(e);
      console.error(e);
      Alert.alert(
-      'เกิดข้อผิดพลาด',
-      'ไม่สามารถเชื่อมต่อระบบได้',
+      `${I18n.t('Error')}`,
+      `${I18n.t('notconnect')}`,
       [
       {text: 'OK', onPress: () => console.log('OK Pressed!')},
       ]
@@ -198,7 +198,7 @@ export async function post2(path,param){
           }else{
               console.log(response.data.Msg||response.data.Message);
               Alert.alert(
-                  'เกิดข้อผิดพลาด',
+                `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
                   {text: 'OK', onPress: () => console.log('OK Pressed!')},
@@ -210,8 +210,8 @@ export async function post2(path,param){
     console.log(e);
      console.error(e);
      Alert.alert(
-      'เกิดข้อผิดพลาด',
-      'ไม่สามารถเชื่อมต่อระบบได้',
+      `${I18n.t('Error')}`,
+      `${I18n.t('notconnect')}`,
       [
       {text: 'OK', onPress: () => console.log('OK Pressed!')},
       ]
@@ -233,7 +233,7 @@ export async function get(path,param){
           }else{
               console.log(response.data.Msg);
               Alert.alert(
-                  'เกิดข้อผิดพลาด',
+                `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
                   {text: 'OK', onPress: () => console.log('OK Pressed!')},
@@ -245,8 +245,8 @@ export async function get(path,param){
     console.log(e);
      console.error(e);
      Alert.alert(
-      'เกิดข้อผิดพลาด',
-      'ไม่สามารถเชื่อมต่อระบบได้',
+      `${I18n.t('Error')}`,
+      `${I18n.t('notconnect')}`,
       [
       {text: 'OK', onPress: () => console.log('OK Pressed!')},
       ]
