@@ -13,7 +13,17 @@ import { Dropdown } from 'react-native-material-dropdown';
 import Colors from '../constants/Colors';
 import { observer, inject } from 'mobx-react';
 import {convertByFormatShort} from '../utils/staffioUtils';
-
+import ImagePicker from 'react-native-image-picker'
+var options = {
+  title: 'แนบเอกสาร',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 @inject('leaveStore')
 @observer
 export default class LeaveWorkshiftScreen extends React.Component {
@@ -22,6 +32,17 @@ export default class LeaveWorkshiftScreen extends React.Component {
         this.state = {reasons:[],remark:"",reason:""}
         this.submit = this.submit.bind(this);
         this.closeScreen = this.closeScreen.bind(this);
+        this.selectImage = this.selectImage.bind(this);
+  }
+  selectImage(){
+    
+    ImagePicker.openPicker({
+      cropping: true,
+      openCameraOnStart:true,
+      minCompressSize:200
+    }).then(images => {
+      console.log(images);
+    });
   }
   closeScreen(){
     this.props.navigator.dismissLightBox();
@@ -100,6 +121,15 @@ export default class LeaveWorkshiftScreen extends React.Component {
               underlineColorAndroid='transparent' onChangeText={(text) => this.setState({remark:text})}/>
             </View>
           </View>
+          {this.props.leaveStore.leaveReqLeaveType.DOCUMENT_CODE && <View style={{flexDirection:'row',alignItems:'center',margin:responsiveHeight(3)}}>
+              <Text style={{flex:0,fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.5)}}>เอกสารแนบ</Text> 
+              <TouchableOpacity style={{flex:3}} onPress={()=> this.selectImage()}>
+                <View style={[styles.btn1,{backgroundColor:'#f5f6fa'}]}>
+                  <Text style={[styles.textStyle1,{color:'#fbaa3e',fontSize:responsiveFontSize(2.2)}]}>เอกสารใบรับรองแพทย์</Text>
+                </View>
+              </TouchableOpacity>
+              <Icon style={{flex:0,textAlign:'right',color:'#fbaa3e'}} name='angle-down' size={responsiveFontSize(2)} />
+            </View>}
          
         </View>
         
