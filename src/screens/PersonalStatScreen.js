@@ -155,16 +155,16 @@ export default class PersonalStatScreen extends React.Component {
   getLeaveColor(typeCode){
     switch (typeCode) {
       case 'SC_1':
-        return "#fa6575";
+        return "#ED5565";
         break;
       case 'VC':
-        return "#8BC34C";
+        return "#8BC34A";
         break;
       case 'PERS-01':
-        return "#1abbbd";
+        return "#23c6c8";
         break;
       default:
-       return "#f5dc0f";
+       return "#F5DC0B";
     }
   }
   onSwitch(value){

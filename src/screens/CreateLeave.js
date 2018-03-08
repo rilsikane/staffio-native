@@ -29,7 +29,7 @@ export default class CreateLeave extends React.Component {
   constructor(props){
     super(props);
     this.state={color:'#1abbbd',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false};
-    this.color ={sickL:'#1abbbd',errandL:'#8BC34C',vacationL:'#fa6575',otherL:'#f5dc0f'};
+    this.color ={sickL:'#ED5565',errandL:'#23c6c8',vacationL:'#8BC34A',otherL:'#F5DC0B'};
     this.onDayPress = this.onDayPress.bind(this);
     this.dayList = [];
     this.oneMask = {startingDay: true,endingDay: true, color: this.color[this.state.color],textColor:"#fff"};
