@@ -119,9 +119,9 @@ export default {
     ga: 'Shift(s)',
     LeaveToggle:'Leave',
     notLeaveToggle:'Not Leave',
-    morning:'morning',
-    afternoon:'afternoon',
-    custom:'custom',
+    morning:'1st Half-day',
+    afternoon:'2nd Half-day',
+    custom:'Custom',
     dateToggle: 'Date',
 
     //status-IdName
