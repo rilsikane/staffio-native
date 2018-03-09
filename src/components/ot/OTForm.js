@@ -40,7 +40,7 @@ export default class OTForm extends React.Component {
                 <ListItem style={styles.listItemStyle}>
                     <Text style={styles.textInput}>Master กะ</Text>
                 </ListItem>
-                <Item style={{borderColor: '#FFFFFF'}}>
+                <Item style={{borderColor: '#FFFFFF',marginBottom:responsiveHeight(1)}}>
                     <Input style={styles.inputStyle3} placeholder='9:00'/>
                     <Text style={styles.textInput2}>ถึง</Text>
                     <Input style={styles.inputStyle3} placeholder='18:00'/>
