@@ -3,9 +3,21 @@ import RadioButton from 'react-native-radio-button'
 import { StyleSheet, View,TextInput, TouchableOpacity,} from 'react-native';
 import { Container, Content, Text, Card,CardItem,Input} from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class TimeBeforeAffter extends React.Component {
- 
+    state = {
+        isDateTimePickerVisible: false,
+      };
+    
+      _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+    
+      _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+    
+      _handleDatePicked = (date) => {
+        console.log('A date has been picked: ', date);
+        this._hideDateTimePicker();
+      };
   render() {
     return (
         <Card>
@@ -16,9 +28,9 @@ export default class TimeBeforeAffter extends React.Component {
                 <View style={{flex:3}}>
                     <Text style={{flex:1,fontFamily:'Kanit', color:'#7e6560',fontSize:responsiveFontSize(1.8)}}>ก่อน</Text>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Input style={styles.inputStyle3} placeholder=''/>
+                        <Input style={styles.inputStyle3} onFocus={this._showDateTimePicker} placeholder=''/>
                         <Text style={{flex:0.5,fontFamily:'Kanit', color:'#fbaa3e',textAlign:'center',fontSize:responsiveFontSize(1.8)}}>ถึง</Text>
-                        <Input style={styles.inputStyle3} placeholder=''/>
+                        <Input style={styles.inputStyle3} onFocus={this._showDateTimePicker} placeholder=''/>
                     </View>
                 </View>
             </View>
@@ -30,12 +42,13 @@ export default class TimeBeforeAffter extends React.Component {
                 <View style={{flex:3}}>
                     <Text style={{flex:1,fontFamily:'Kanit', color:'#7e6560',fontSize:responsiveFontSize(1.8)}}>หลัง</Text>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Input style={styles.inputStyle3} placeholder=''/>
+                        <Input style={styles.inputStyle3} onFocus={this._showDateTimePicker} placeholder=''/>
                         <Text style={{flex:0.5,fontFamily:'Kanit', color:'#fbaa3e',textAlign:'center',fontSize:responsiveFontSize(1.8)}}>ถึง</Text>
-                        <Input style={styles.inputStyle3} placeholder=''/>
+                        <Input style={styles.inputStyle3} onFocus={this._showDateTimePicker} placeholder=''/>
                     </View>
                 </View>
-            </View>   
+            </View>  
+            <DateTimePicker mode='time' isVisible={this.state.isDateTimePickerVisible} onConfirm={this._handleDatePicked} onCancel={this._hideDateTimePicker}/> 
         </Card>
     );
   }
