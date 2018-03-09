@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Container, Header, Content, Thumbnail, Text, Left, Right, Button, Icon, Title, Body, Card, CardItem, Badge, Form, Item, Input, Label, Footer, FooterTab, ListItem, List } from 'native-base';
+import { Container, Header, Content, Thumbnail, Text, Left, Right, Button, Title, Body, Card, CardItem, Badge, Form, Item, Input, Label, Footer, FooterTab, ListItem, List } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { em, round } from '../../constants/Layout';
 import moment from 'moment';
@@ -10,6 +10,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 //import Image from 'react-native-image-progress';
 //import * as Progress from 'react-native-progress';
 import Colors from '../../constants/Colors'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class CardPunchInfo extends React.Component {
   constructor(props) {
@@ -44,7 +45,48 @@ export default class CardPunchInfo extends React.Component {
 
       <TouchableOpacity onPress={this.onPress}>
         <Card style={{ marginTop: 2 }}>
-          <Grid height={70}>
+          <View style={{flexDirection:'row',alignItems:'center',margin:responsiveWidth(3)}}>
+            <View style={{flex:1.5}}>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                  <Icon name="calendar" style={styles.iconCa} />
+                  <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.bacisText}>{convertByFormat(timeRecord.dateRecord, "DD MMM ")}</Text>
+              </View>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                  <Icon name="location-arrow" style={[styles.icon,{fontSize:responsiveFontSize(2)}]} />
+                  <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={[styles.litelText, this.changcolorborder(timeRecord.area_flag)]} numberOfLines={1}>
+                  {`  ${timeRecord.branchName}`}
+                  </Text>
+              </View>
+            </View>
+
+            <View style={{flex:1}}>
+              <View style={{flexDirection:'row',alignItems:'center',marginLeft:responsiveWidth(4)}}>
+                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={"NM" == timeRecord.status ? styles.numberText : styles.numberLate}>{`${timeRecord.timeRecord.split(":")[0]}:${timeRecord.timeRecord.split(":")[1]}`} </Text>
+              </View>
+              <View style={{flexDirection:'row',alignItems:'center',marginLeft:responsiveWidth(4)}}>
+                  <Icon name="chevron-up" style={[styles.icon,{color:'#9fa1a3'}]} />
+                  <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteText} note> {this.renderWorkTime(timeRecord)} </Text>
+              </View>
+            </View>
+
+            <View style={{flex:1,borderLeftWidth:responsiveWidth(0.5),borderColor:'gray'}}>
+              <View style={{flexDirection:'row',alignItems:'center',marginLeft:responsiveWidth(4)}}>
+                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={"NM" == timeRecord.status ? styles.numberText : styles.numberLate}>{`${timeRecord.timeRecord.split(":")[0]}:${timeRecord.timeRecord.split(":")[1]}`} </Text>
+              </View>
+              <View style={{flexDirection:'row',alignItems:'center',marginLeft:responsiveWidth(4)}}>
+                  <Icon name="chevron-down" style={[styles.icon,{color:'#9fa1a3'}]} />
+                  <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteText} note> {this.renderWorkTime(timeRecord)} </Text>
+              </View>
+            </View>
+
+            <View style={{flex:0.7}}>
+              <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'red',height:responsiveHeight(5),borderRadius:responsiveWidth(3)}}>
+                <Text style={{flex:0,fontSize:responsiveFontSize(5),color:'white',textAlign:'center'}}>•</Text>
+                <Text style={{flex:1,fontSize:responsiveFontSize(2),color:'white',textAlign:'center',fontFamily: 'Kanit'}}>Late</Text>
+              </View>
+            </View>
+          </View>
+          {/* <Grid height={70}>
             <Col size={2} style={timeRecord.timeRecordType.indexOf("I") !== -1 ? { backgroundColor: "green" } : { backgroundColor: "red" }}></Col>
             <Col size={20} >
               <View style={{ flex: 1, alignItems: 'flex-start' }}>
@@ -66,30 +108,10 @@ export default class CardPunchInfo extends React.Component {
                     <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteTimeText}>{moment(timeRecord.dateRecord.replace("00:00:00", timeRecord.timeRecord)).fromNow()}</Text>
                   </View>
                 </Col>
-                <Col size={70}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 5 }}>
-                    <Icon name="navigate" style={styles.icon} />
-                    <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={[styles.litelText, this.changcolorborder(timeRecord.area_flag)]} numberOfLines={1}>
-                      {timeRecord.branchName}
-                    </Text>
-                  </View>
-                </Col>
 
               </Row>
             </Col>
-            <Col size={25}>
-              <Row size={10} style={{ flex: 1, justifyContent: 'center' }}>
-                <Icon name="calendar" style={styles.iconCa} />
-                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.bacisText}>{convertByFormat(timeRecord.dateRecord, "DD MMM ")}</Text>
-              </Row>
-              <Row size={35} style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: "transparent", marginTop: -responsiveHeight(3), zIndex: 9999 }}>
-                <Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={"NM" == timeRecord.status ? styles.numberText : styles.numberLate}>{`${timeRecord.timeRecord.split(":")[0]}:${timeRecord.timeRecord.split(":")[1]}`} </Text>
-              </Row>
-              <Row size={55} style={{ flex: 1, justifyContent: 'center', marginTop: -responsiveHeight(1) }}>
-                <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteText} note> {this.renderWorkTime(timeRecord)} </Text><Text  numberOfLines={1} ellipsizeMode="tail" allowFontScaling={false} style={styles.noteText} note>{`(${timeRecord.shiftNameTH})`}</Text>
-              </Row>
-            </Col>
-          </Grid>
+          </Grid> */}
         </Card>
       </TouchableOpacity>
     );
@@ -105,7 +127,7 @@ const styles = StyleSheet.create({
   },
   headText: {
     color: '#ff8c00',
-    fontSize: responsiveFontSize(1.8),
+    fontSize: responsiveFontSize(2),
     fontFamily: 'Kanit',
     backgroundColor:'transparent'
   },
@@ -122,26 +144,26 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   litelText: {
-    fontSize: responsiveFontSize(1.5),
+    fontSize: responsiveFontSize(2),
    // color: '#ff8c00',
     fontFamily: 'Kanit',
      backgroundColor:'transparent',
      flex:1
   },
   bacisText: {
-    fontSize: responsiveFontSize(1.4),
+    fontSize: responsiveFontSize(2),
     color: '#818283',
     fontFamily: 'Kanit',
     backgroundColor:'transparent'
   },
   numberText: {
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(3),
     color: '#6d6e71',
     fontFamily: 'Kanit',
     backgroundColor:'transparent'
   },
   numberLate: {
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(3),
     color: 'red',
     fontFamily: 'Kanit',
     backgroundColor:'transparent'
@@ -163,7 +185,7 @@ const styles = StyleSheet.create({
   },
   iconCa: {
     marginRight: 3,
-    fontSize: responsiveFontSize(1.6),
+    fontSize: responsiveFontSize(2),
     color: '#818283',
     justifyContent: 'center',
     backgroundColor:'transparent'
