@@ -234,7 +234,6 @@ export default class PersonalStatScreen extends React.Component {
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
       <Swipeable  key={info.requestLeaveNo} rightButtons={[
-<<<<<<< HEAD
         // <TouchableOpacity onPress={()=>this.onEditModal(info)}>
         //   <View style={[styles.rightSwipeItem]}>
         //     <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
@@ -242,15 +241,6 @@ export default class PersonalStatScreen extends React.Component {
         //   {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
         // </TouchableOpacity>,
         
-=======
-        <TouchableOpacity onPress={()=>this.onEditModal(info)}>
-          <View style={[styles.rightSwipeItem]}>
-            <Icon name="pencil-square-o" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
-          </View>
-          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
-        </TouchableOpacity>,
-
->>>>>>> c6a00e7e1d1869987b090011b7642c95754392e3
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
             <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
