@@ -38,7 +38,7 @@ export default class MenuScreen extends React.Component {
         let menus = [
             {name: `${I18n.t('HomeS')}`, icon: "calendar",link:"staffio.HomeScreen",active:true,show:true},
             {name: `${I18n.t('Inbox')}`, icon: "inbox",link:"staffio.InqInboxScreen",active:false,show:true},
-            {name: `${I18n.t('StatLeave')}`, icon: "bar-chart",link:"staffio.PersonalStatScreen",active:false,show:userData.canLeave},
+            {name: `${I18n.t('StatLeave')}`, icon: "calendar-times-o",link:"staffio.PersonalStatScreen",active:false,show:userData.canLeave},
             {name: `${I18n.t('FindFriend')}`, icon: "book",link:"staffio.FindFriendScreen",active:false,show:true}
           ];
         let menuAppr = [

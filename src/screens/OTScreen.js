@@ -7,48 +7,42 @@ import {
   TouchableOpacity,Alert
 } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Text } from 'native-base';
-// import LeaveCalendar from '../components/LeaveCalendar'
 import Colors from '../constants/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { observer, inject } from 'mobx-react';
 import {post,get} from '../api';
 import Loading from '../components/loading';
-import Profile from '../components/leave/Profile';
-import LeaveCard from '../components/leave/LeaveCard';
-import LeaveStatCard from '../components/leave/LeaveStatCard';
 import CardHeader from '../components/cardHeader';
-import LeavePersonalCard from '../components/leave/LeavePersonalCard'
-import ToggleLeave from '../components/leave/ToggleLeave';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormatShort, disbackButton,styleConfirmModal,modalStyle} from '../utils/staffioUtils';
+import {convertByFormatShort, disbackButton} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
-import LeavePersonalCardNew from '../components/leave/LeavePersonalCard(Fix-style)'
 import ActionButton from '../components/stffioActionButton/ActionButton';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import fontelloConfig from '../../assets/fonts/config.json'
 import Swipeable from 'react-native-swipeable';
 import app from '../stores/app'
 import moment from 'moment';
+import OTPersonalCard from '../components/ot/OTPersonalCard'
+import OTTimeRecord from '../components/ot/OTTimeRecord'
 const IconTello = createIconSetFromFontello(fontelloConfig);
 @inject('leaveStore')
 @observer
 
-export default class PersonalStatScreen extends React.Component {
+export default class OTScreen extends React.Component {
   componentWillMount(){
 		disbackButton();
 	}
   constructor(props){
     super(props);
-    this.openLeaveDetail = this.openLeaveDetail.bind(this);
+    this.openOTDetail = this.openOTDetail.bind(this);
     this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
     this.app = app
-    this.cancelReqLeave = this.cancelReqLeave.bind(this);
     if(this.app.locale && moment){
       moment().locale(this.app.locale);
       }
@@ -65,7 +59,6 @@ export default class PersonalStatScreen extends React.Component {
   }
   async getLeaveList(user,leaveTypeCode){
     try{
-    
     let params  = {};
     params.param = {};
     params.param.EMP_CODE = user.EMP_CODE;
@@ -144,7 +137,6 @@ export default class PersonalStatScreen extends React.Component {
       info.requestStatusCode = list[i].REQUEST_STATUS;
       info.flag = list[i].flag;
       info.isCancel = list[i].flag == 2;
-      info.AttachUrl = list[i].AttachUrl;
       infos.push(info);
   }
     return infos;
@@ -178,10 +170,10 @@ export default class PersonalStatScreen extends React.Component {
   onSwitch(value){
     this.setState({isCancel:value});
   }
-  openLeaveDetail(data){
+  openOTDetail(data){
     this.props.leaveStore.leaveData = data;
      this.props.navigator.push({
-        screen: 'staffio.LeaveDetailScreen', // unique ID registered with Navigation.registerScreen
+        screen: 'staffio.OTDetailScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
         passProps: {}, // simple serializable object that will pass as props to the pushed screen (optional)
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
@@ -191,7 +183,7 @@ export default class PersonalStatScreen extends React.Component {
       });
   }
 
-  openCreateLeave(){
+  openCreateOT(){
      this.props.navigator.push({
         screen: 'staffio.CreateLeave', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
@@ -202,26 +194,15 @@ export default class PersonalStatScreen extends React.Component {
         navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
       });
   }
-  async cancelReqLeave(data){
-    const userData = await store.get("USER");
-    const response = await post(`ESSServices/CancelESSLeaveRequsetByRequestNo?REQUEST_LEAVE_NO=${data.requestLeaveNo}&user=${userData.EMP_CODE}`,{});
-    if(response.Complete){
-      this.props.navigator.dismissLightBox();
-      this.setState({loading:true,leaveList:[]});
-      await this.getLeaveList(userData);
-      this.setState({loading:false})
-    }else{
-      this.props.navigator.dismissLightBox();
-    }
-    // const infos = response.objData;
-  }
    onCancelModal(data){
+    this.setState({loading:true});
     this.props.navigator.showLightBox({
-      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`,msg: `${I18n.t('ConfirmCancelMsg')}`
-      ,ok:this.cancelReqLeave,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: styleConfirmModal
-        // backgroundBlur: "dar
+      screen: "staffio.InputCancelModal", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('specifycauseTitle')}`,remark1:`${I18n.t('otherCause')}`,label:`${I18n.t('causeOfcanncel')}`,remark2:`(${I18n.t('specifymo')})`
+      ,cancel:this.cancelModal
+      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleInputModal,
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
      });
   }
   onEditModal(data){
@@ -234,23 +215,13 @@ export default class PersonalStatScreen extends React.Component {
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
       <Swipeable  key={info.requestLeaveNo} rightButtons={[
-<<<<<<< HEAD
-        // <TouchableOpacity onPress={()=>this.onEditModal(info)}>
-        //   <View style={[styles.rightSwipeItem]}>
-        //     <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
-        //   </View>
-        //   {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
-        // </TouchableOpacity>,
-        
-=======
         <TouchableOpacity onPress={()=>this.onEditModal(info)}>
           <View style={[styles.rightSwipeItem]}>
-            <Icon name="pencil-square-o" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+            <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
           </View>
           {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
         </TouchableOpacity>,
 
->>>>>>> c6a00e7e1d1869987b090011b7642c95754392e3
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
             <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
@@ -258,8 +229,8 @@ export default class PersonalStatScreen extends React.Component {
           {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
         </TouchableOpacity>,  
       ]}>
-      <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
-       <LeavePersonalCardNew info={info} />
+      <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openOTDetail(info)}>  
+       <OTPersonalCard info={info} />
       </TouchableOpacity>
       </Swipeable>
       );
@@ -282,27 +253,21 @@ export default class PersonalStatScreen extends React.Component {
          
           <CardHeader title={`${I18n.t('Stat')}`}/>
 
-            {/* <View style={{height:responsiveHeight(30)}}>
-            <Profile name={this.state.userData.FULL_NAME_TH} positions={this.state.userData.POSITION_NAME} 
-              img={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>
-            </View> */}
             <PTRView onRefresh={this._refresh}>
               
-              {!this.state.loading  ? (<View style={{paddingTop:5}}><LeaveStatCard filter={this.filterBalance}
-              title={`${I18n.t('History')}`} date={''} data={this.state.leaveBalances}/></View>)
+              {!this.state.loading  ? (<View style={{paddingTop:5}}><OTTimeRecord/></View>)
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}><Loading mini={true}/></View>)}
-              {/* {!this.state.loading  && <ToggleLeave options={options} onSwitch={this.onSwitch}/>}   */}
               {!this.state.loading  && this.renderList()}
           </PTRView>
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
-             <ActionButton.Item marginRight={responsiveWidth(5)} marginBottom={-responsiveHeight(1)} buttonColor='transparent' onPress={(e) => this.openCreateLeave()}>
-              <Icon name="file" style={[styles.actionButtonIcon]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('CreateLeave')}</Text>
+             <ActionButton.Item marginRight={responsiveWidth(5)} marginBottom={-responsiveHeight(1)} buttonColor='transparent' onPress={(e) => this.openCreateOT()}>
+              <Icon name="clock-o" style={[styles.actionButtonIcon]} />
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ขอ OT</Text>
             </ActionButton.Item>
-           {/* <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => console.log()}>
+           <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => console.log()}>
               <Icon name="search" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('searchLeave')}</Text>
-            </ActionButton.Item> */}
+             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>ค้นหา OT</Text>
+            </ActionButton.Item>
           </ActionButton>
       </Container>
     );

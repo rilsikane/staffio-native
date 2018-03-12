@@ -86,32 +86,6 @@ export default class CardPunchInfo extends React.Component {
               </View>
             </View>
           </View>
-          {/* <Grid height={70}>
-            <Col size={2} style={timeRecord.timeRecordType.indexOf("I") !== -1 ? { backgroundColor: "green" } : { backgroundColor: "red" }}></Col>
-            <Col size={20} >
-              <View style={{ flex: 1, alignItems: 'flex-start' }}>
-
-                <Image source={{ uri: `${timeRecord.imagepath_tempMobile}` }} style={styles.imageHead}></Image>
-              </View>
-            </Col>
-            <Col size={55} >
-              <Row size={30} >
-                <Text allowFontScaling={false} style={styles.titleText}>{timeRecord.fullNameTH} </Text>
-              </Row>
-              <Row size={25} style={{ marginTop: 0, justifyContent: 'flex-start' }}>
-                <Text allowFontScaling={false} style={styles.noteText} numberOfLines={1}> {timeRecord.empCode}  {timeRecord.positionName} </Text>
-              </Row>
-              <Row size={45} style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginTop: 0 }}>
-                <Col size={30}>
-                  <View style={{ flexDirection: 'row', alignItems: "center", borderRightWidth: 0.5, borderRightColor: '#9fa1a3', marginTop: 2, backgroundColor:'transparent' }}>
-                    <Text allowFontScaling={false} style={styles.noteTimeText}>•</Text>
-                    <Text numberOfLines={1} ellipsizeMode="tail"  allowFontScaling={false} style={styles.noteTimeText}>{moment(timeRecord.dateRecord.replace("00:00:00", timeRecord.timeRecord)).fromNow()}</Text>
-                  </View>
-                </Col>
-
-              </Row>
-            </Col>
-          </Grid> */}
         </Card>
       </TouchableOpacity>
     );

@@ -25,7 +25,9 @@ import LeaveApprScreen from './LeaveApprScreen';
 import CreateLeave from './CreateLeave';
 import LeaveWorkShiftScreen from './LeaveWorkshiftScreen';
 import LeaveConfirmScreen from './LeaveConfirmScreen'
-
+import OTScreen from './OTScreen'
+import OTDetailScreen from './OTDetailScreen'
+import OTCreating from './OTCreating'
 //Modal
 import InputModalScreen from './Modal/inputModal';
 import ConfirmModalScreen from './Modal/confirmModal';
@@ -59,6 +61,10 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.CreateLeave',() => CreateLeave, Store, Provider);
   Navigation.registerComponent('staffio.LeaveWorkShiftScreen',() => LeaveWorkShiftScreen, Store, Provider);
   Navigation.registerComponent('staffio.LeaveConfirmScreen',() => LeaveConfirmScreen, Store, Provider);
+  Navigation.registerComponent('staffio.OTScreen', () => OTScreen, Store, Provider);
+  Navigation.registerComponent('staffio.OTDetailScreen', () => OTDetailScreen, Store, Provider);
+  Navigation.registerComponent('staffio.OTCreating', () => OTCreating, Store, Provider);
+
   //Modal
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmModalScreen', () => ConfirmModalScreen, Store, Provider);
@@ -67,6 +73,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.NotiModalScreen', () => NotiModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ImageModal', () => ImageModelScreen, Store, Provider);
   
+
 }
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

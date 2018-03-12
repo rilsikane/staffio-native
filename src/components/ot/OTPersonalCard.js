@@ -9,10 +9,10 @@ export default class OTPersonalCard extends React.Component {
  
   render() {
     return (
-        <Card style={{marginBottom:0}}>
+        <Card style={{flex:1,marginBottom:0}}>
         <View style={{flexDirection: 'row',flex:1}}>
         <View style={{flex:0,width:responsiveWidth(2.5),backgroundColor:'#ED5565',borderTopLeftRadius:responsiveWidth(0.5),borderBottomLeftRadius:responsiveWidth(0.5)}}/>
-        <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5), borderLeftWidth:responsiveWidth(2.5),flex:3}}>
+        <CardItem style={{paddingLeft:responsiveWidth(1.5),paddingRight:responsiveWidth(1.5),flex:3}}>
             <Body style={{flex:4}}>
                 <View style={{flexDirection: 'row', alignItems:'center'}}>
                     <Text style={{flex:1.2,fontFamily:'Kanit-Medium',color:'#7e6560',fontSize:responsiveFontSize(1.8),textAlign:'left'}}>OT. ก่อนทำงาน</Text>
