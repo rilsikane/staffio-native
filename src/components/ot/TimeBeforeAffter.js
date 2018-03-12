@@ -1,7 +1,7 @@
 import React from 'react';
 import RadioButton from 'react-native-radio-button'
 import { StyleSheet, View,TextInput, TouchableOpacity,} from 'react-native';
-import { Container, Content, Text, Card,CardItem,Input} from 'native-base';
+import { Input, Item, Grid, Col, ListItem, CheckBox, Container, Content, Text, Card, CardItem} from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
@@ -20,8 +20,36 @@ export default class TimeBeforeAffter extends React.Component {
       };
   render() {
     return (
-        <Card>
-            <View style={{flexDirection:'row',alignItems:'center',marginTop:responsiveHeight(1)}}>
+        <Card style={{paddingBottom: responsiveHeight(2), paddingTop: responsiveHeight(1)}}>
+
+        <Grid>
+            <Col >
+                <ListItem style={styles.listItemStyle2}>
+                    <Text style={styles.textInput}>ก่อน</Text>
+                </ListItem>
+                <ListItem style={styles.listItemStyle}>
+                    <RadioButton size={12} animation={'bounceIn'} isSelected={true} innerColor='#fbaa3e' outerColor='#fbaa3e'/>
+                <Item style={{borderColor: '#FFFFFF'}}>
+                    <Input style={styles.inputStyle} onFocus={this._showDateTimePicker} placeholder=''/>
+                    <Text style={styles.textInput2}>ถึง</Text>
+                    <Input style={styles.inputStyle} onFocus={this._showDateTimePicker} placeholder=''/>
+                </Item>
+                </ListItem>    
+
+                <ListItem style={styles.listItemStyle2}>
+                    <Text style={styles.textInput}>หลัง</Text>
+                </ListItem>
+                <ListItem style={styles.listItemStyle}>
+                    <RadioButton size={12} animation={'bounceIn'} isSelected={true} innerColor='#f5f6fa' outerColor='#fbaa3e'/>
+                <Item style={{borderColor: '#FFFFFF'}}>
+                    <Input style={styles.inputStyle} onFocus={this._showDateTimePicker} placeholder=''/>
+                    <Text style={styles.textInput2}>ถึง</Text>
+                    <Input style={styles.inputStyle} onFocus={this._showDateTimePicker} placeholder=''/>
+                </Item>
+                </ListItem>                                                    
+            </Col>
+        </Grid>
+            {/* <View style={{flexDirection:'row',alignItems:'center',marginTop:responsiveHeight(1)}}>
                 <View style={{flex:1}}>
                     <RadioButton  animation={'bounceIn'} isSelected={true} innerColor='#fbaa3e' outerColor='#fbaa3e'/>
                 </View>
@@ -47,7 +75,7 @@ export default class TimeBeforeAffter extends React.Component {
                         <Input style={styles.inputStyle3} onFocus={this._showDateTimePicker} placeholder=''/>
                     </View>
                 </View>
-            </View>  
+            </View>   */}
             <DateTimePicker mode='time' isVisible={this.state.isDateTimePickerVisible} onConfirm={this._handleDatePicked} onCancel={this._hideDateTimePicker}/> 
         </Card>
     );
@@ -55,26 +83,24 @@ export default class TimeBeforeAffter extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    textAreaStyle: {
-        fontFamily: "Kanit",
-        fontSize: responsiveFontSize(1.8),
-        height:80,
-        marginTop:5,
-        borderRadius: responsiveWidth(1.5),
-        backgroundColor:'#f5f6fa',
-        borderWidth: responsiveWidth(0.5),
-        flex:2,
-        borderColor:'#fbaa3e',
-        height:responsiveHeight(5),
-        marginLeft: responsiveWidth(1),
-        marginRight: responsiveWidth(1)
-      },
-      inputStyle3: {
-        // marginLeft: responsiveWidth(2),
-        // marginRight: responsiveWidth(2),
+    listItemStyle: {
+        borderColor: '#ffffff', 
+        height: responsiveHeight(6),
+        marginTop: responsiveHeight(0.5),
+        marginBottom: responsiveHeight(0.5),
+    },
+    listItemStyle2: {
+        borderColor: '#ffffff', 
+        height: responsiveHeight(1),
+        paddingBottom: responsiveHeight(2),
+        paddingTop: responsiveHeight(2)
+    },
+    inputStyle: {
+        marginLeft: responsiveWidth(5),
+        marginRight: responsiveWidth(5),
         borderRadius: 1,
         borderRadius: 5,
-        backgroundColor: "#F2F2F2",
+        backgroundColor: "#f5f6fa",
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: "#FAAA3E",
@@ -84,5 +110,16 @@ const styles = StyleSheet.create({
         color: '#FAAA3E',
         paddingLeft: responsiveWidth(5)
     },
+    textInput: {
+        fontFamily: "Kanit",
+        fontSize: responsiveFontSize(1.8),
+        color: '#7e6560',
+        marginLeft: responsiveWidth(11),
+    },
+    textInput2: {
+        fontFamily: "Kanit",
+        fontSize: responsiveFontSize(1.8),
+        color: '#FAAA3E'
+    }
   });
   

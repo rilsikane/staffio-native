@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   },
   inlineImg: {
     position:'absolute',
-    marginTop:10,
+    marginTop:30,
     justifyContent:'flex-end',
 		marginLeft:DEVICE_WIDTH - 75,
 		alignItems:'flex-end',

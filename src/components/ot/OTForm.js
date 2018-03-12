@@ -21,7 +21,7 @@ export default class OTForm extends React.Component {
       };
   render() {
     return (
-        <Card>
+        <Card style={{paddingBottom: responsiveHeight(2), paddingTop: responsiveHeight(1)}}>
 
         <Grid>
             <Col >
@@ -79,33 +79,35 @@ const styles = StyleSheet.create({
         marginRight: responsiveWidth(5),
         borderRadius: 1,
         borderRadius: 5,
-        backgroundColor: "#F2F2F2",
+        backgroundColor: "#f5f6fa",
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: "#FAAA3E",
         fontFamily: "Kanit",
         fontSize: responsiveFontSize(1.8),
-        height: responsiveHeight(6)
+        height: responsiveHeight(6),
+        paddingLeft: responsiveWidth(5)
     },
     inputStyle2: {
         marginLeft: responsiveWidth(5),
         marginRight: responsiveWidth(15),
         borderRadius: 1,
         borderRadius: 5,
-        backgroundColor: "#F2F2F2",
+        backgroundColor: "#f5f6fa",
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: "#FAAA3E",
         fontFamily: "Kanit",
         fontSize: responsiveFontSize(1.8),
-        height: responsiveHeight(6)
+        height: responsiveHeight(6),
+        paddingLeft: responsiveWidth(5)
     },
     inputStyle3: {
         marginLeft: responsiveWidth(5),
         marginRight: responsiveWidth(5),
         borderRadius: 1,
         borderRadius: 5,
-        backgroundColor: "#F2F2F2",
+        backgroundColor: "#f5f6fa",
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: "#FAAA3E",
