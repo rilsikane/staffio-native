@@ -5,7 +5,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import I18n from '../utils/i18n';
 import LeaveWorkshift from '../components/leave/LeaveWorkshift';
 import CardHeader from '../components/cardHeader';
-import {post,get,} from '../api';
+import {post,get,uploadFile} from '../api';
 import store from 'react-native-simple-store';
 import {convertDate, disbackButton} from '../utils/staffioUtils';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,14 +14,16 @@ import Colors from '../constants/Colors';
 import { observer, inject } from 'mobx-react';
 import {convertByFormatShort} from '../utils/staffioUtils';
 import ImagePicker from 'react-native-image-picker'
+import * as Animatable from 'react-native-animatable';
+
 var options = {
   title: 'แนบเอกสาร',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
+  title: 'Select',
+  noData:true,
+  mediaType:'mixed',
   storageOptions: {
-    skipBackup: true,
-    path: 'images'
+      skipBackup: true,
+      path: 'construction cloud'
   }
 };
 @inject('leaveStore')
@@ -29,19 +31,26 @@ var options = {
 export default class LeaveWorkshiftScreen extends React.Component {
   constructor(props) {
         super(props);
-        this.state = {reasons:[],remark:"",reason:""}
+        this.state = {reasons:[],remark:"",reason:"",file:{}}
         this.submit = this.submit.bind(this);
         this.closeScreen = this.closeScreen.bind(this);
         this.selectImage = this.selectImage.bind(this);
+        this.openFile = this.openFile.bind(this);
   }
   selectImage(){
     
-    ImagePicker.openPicker({
-      cropping: true,
-      openCameraOnStart:true,
-      minCompressSize:200
-    }).then(images => {
-      console.log(images);
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+    
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else {
+        this.setState({file:response});
+      }
     });
   }
   closeScreen(){
@@ -59,24 +68,63 @@ export default class LeaveWorkshiftScreen extends React.Component {
     
   }
   async submit(){
-    let params = this.props.leaveStore.leaveReqData;
-    params.LeaveReq.LEAVE_REASON = this.state.reason;
-    params.LeaveReq.REMARK = this.state.remark;
-    let response = await post("ESSServices/CreateESSLeaveRequest",params);
-    if(response){
-      this.props.navigator.showLightBox({
-        screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-        passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
-        ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-        style: {
-          backgroundBlur: "dark",
-          backgroundColor: "rgba(0,0,0,.5)",
-          height:responsiveHeight(70),
-          width:responsiveWidth(90)
-        },
-        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-      });
+    if(this.validateSubmit()){
+      let params = this.props.leaveStore.leaveReqData;
+      params.LeaveReq.LEAVE_REASON = this.state.reason;
+      params.LeaveReq.REMARK = this.state.remark;
+      if(this.state.file.fileName){
+        // let files = [
+        //   {name: 'file[]', filename:this.state.file.fileName,filepath:this.state.file.path,filetype:this.state.file.type}
+        // ]
+        let response = await uploadFile("FileManager/UploadFilesAttachment",this.state.file,params);
+        if(response){
+          this.props.navigator.showLightBox({
+            screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+            passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
+            ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+            style: {
+              backgroundBlur: "dark",
+              backgroundColor: "rgba(0,0,0,.5)",
+              height:responsiveHeight(70),
+              width:responsiveWidth(90)
+            },
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
+        }
+      }else{
+        let response = await post("ESSServices/CreateESSLeaveRequest",params);
+        if(response){
+          this.props.navigator.showLightBox({
+            screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+            passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
+            ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+            style: {
+              backgroundBlur: "dark",
+              backgroundColor: "rgba(0,0,0,.5)",
+              height:responsiveHeight(70),
+              width:responsiveWidth(90)
+            },
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
+        }
+      }
     }
+  }
+  validateSubmit(){
+    let invalid = false;
+    if(this.props.leaveStore.leaveReqLeaveType.REQUEST_DOCUMENT=="Y" && this.props.leaveStore.leaveReqLeaveType.DAY_OF_REQ_DOCUMENT <= this.props.leaveStore.leaveReqData.LeaveReq.TOTAL_LEAVEDAY){
+      if(!this.state.file.fileName){
+        this.refs.attach.bounce(800);
+        invalid = true;
+      }
+    }
+    if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
+      if(this.state.reason==""){
+        this.refs.reason.bounce(800);
+        invalid = true;
+      }
+    }
+    return !invalid;
   }
   async componentDidMount(){
     const user = await store.get("USER");
@@ -93,6 +141,20 @@ export default class LeaveWorkshiftScreen extends React.Component {
       this.setState({reasons:reasons});
     }
   }
+  renderAttach(){
+    let isReq = this.props.leaveStore.leaveReqLeaveType.REQUEST_DOCUMENT=="Y" && this.props.leaveStore.leaveReqLeaveType.DAY_OF_REQ_DOCUMENT < this.props.leaveStore.leaveReqData.LeaveReq.TOTAL_LEAVEDAY;
+    return isReq
+  }
+  openFile = () => {
+    console.log(this.state.file.imgUri)
+    this.props.navigator.showModal({
+      screen: "staffio.ImageModal", // unique ID registered with Navigation.registerScreen
+      title: "Modal", // title of the screen as appears in the nav bar (optional)
+      passProps: {imgUri:this.state.file.uri,navigator:this.props.navigator}, // simple serializable object that will pass as props to the modal (optional)
+      navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+      animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+    });
+  }
   
   render() {
   
@@ -102,18 +164,21 @@ export default class LeaveWorkshiftScreen extends React.Component {
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={{marginLeft: responsiveWidth(3),marginRight: responsiveWidth(3),marginTop: responsiveWidth(2),marginBottom: responsiveWidth(2),}}>
-              <Text ellipsizeMode='tail' numberOfLines={1} style={{fontSize: responsiveFontSize(2.5),fontFamily:'Kanit-Regular',color:'#fbaa3e'}}>{this.props.leaveStore.leaveReqLeaveType.LEAVE_TYPE_NAME}</Text> 
+              <Text ellipsizeMode='tail' numberOfLines={1} style={{fontSize: responsiveFontSize(2.5),fontFamily:'Kanit-Regular',color:'#fbaa3e'}}>{`${this.props.leaveStore.leaveReqLeaveType.LEAVE_TYPE_NAME} ${I18n.t('Total')}  ${this.props.leaveStore.leaveReqData.LeaveReq.TOTAL_LEAVEDAY} ${I18n.t('Day')}`}</Text> 
               <View style={{flexDirection:'row', alignItems:'center',marginBottom:responsiveHeight(1),marginTop:10}}>
                 <Text style={{flex:1,fontSize: responsiveFontSize(2.2),fontFamily:'Kanit-Regular',color:'#5f504b'}}>{I18n.t('dateOfLeave')}</Text> 
                 <Text style={{flex:3,fontSize: responsiveFontSize(2),fontFamily:'Kanit-Regular',color:'#5f504b',textAlign:'center'}}>{`${convertByFormatShort(new Date(this.props.leaveStore.leaveReqData.LeaveReq.START_DATE).getTime(),"DD MMM ")} - ${convertByFormatShort(new Date(this.props.leaveStore.leaveReqData.LeaveReq.END_DATE).getTime(),"DD MMM ")}`}</Text> 
+               
                 {/* <Icon style={{flex:1,textAlign:'right',color:'#5f504b'}} name='angle-down' size={responsiveFontSize(2)} /> */}
               </View>
             </View>
           </View>
           <View style={{margin:responsiveHeight(3),marginTop:6}}>
             {this.state.reasons.length >0 && 
-            <Dropdown label={I18n.t('causeLeaveCon')} data={this.state.reasons} valueExtractor={item => item.id} labelExtractor={item => item.title}
-            style={[{marginTop:5,textAlign:'left',fontFamily:"Kanit"}]} onChangeText={(value) => this.setState({reason:value})}/>
+            <Animatable.View ref="reason">
+              <Dropdown label={I18n.t('causeLeaveCon')} data={this.state.reasons} valueExtractor={item => item.id} labelExtractor={item => item.title}
+              style={[{marginTop:5,textAlign:'left',fontFamily:"Kanit"}]} onChangeText={(value) => this.setState({reason:value})}/>
+            </Animatable.View>
             }
             <Text style={{fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.2)}}>{I18n.t('remarkLeaveConfirm')}</Text> 
             <View style={{backgroundColor:'#f5f6fa',borderColor: '#fbaa3e', borderWidth: 1, borderRadius:1,marginTop:responsiveHeight(2)}}>
@@ -121,15 +186,18 @@ export default class LeaveWorkshiftScreen extends React.Component {
               underlineColorAndroid='transparent' onChangeText={(text) => this.setState({remark:text})}/>
             </View>
           </View>
-          {this.props.leaveStore.leaveReqLeaveType.DOCUMENT_CODE && <View style={{flexDirection:'row',alignItems:'center',margin:responsiveHeight(3)}}>
-              <Text style={{flex:0,fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.5)}}>เอกสารแนบ</Text> 
+          {this.renderAttach() && 
+          <Animatable.View ref="attach" style={{flexDirection:'row',alignItems:'center',margin:responsiveHeight(3)}}>
+              <Text style={{flex:0,fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.5)}}>{I18n.t('attachDoc')}</Text> 
               <TouchableOpacity style={{flex:3}} onPress={()=> this.selectImage()}>
                 <View style={[styles.btn1,{backgroundColor:'#f5f6fa'}]}>
-                  <Text style={[styles.textStyle1,{color:'#fbaa3e',fontSize:responsiveFontSize(2.2)}]}>เอกสารใบรับรองแพทย์</Text>
+                  <Text style={[styles.textStyle1,{color:'#fbaa3e',fontSize:responsiveFontSize(2.2)}]}>{this.props.leaveStore.leaveReqLeaveType.DOCUMENT_NAME}</Text>
                 </View>
               </TouchableOpacity>
-              <Icon style={{flex:0,textAlign:'right',color:'#fbaa3e'}} name='angle-down' size={responsiveFontSize(2)} />
-            </View>}
+              {this.state.file.fileName && <TouchableOpacity onPress={this.openFile}>
+                <Icon style={{flex:0,textAlign:'right',color:'#fbaa3e',fontSize:20}} name='file-archive-o' size={responsiveFontSize(2)} />
+              </TouchableOpacity>}
+            </Animatable.View>}
          
         </View>
         

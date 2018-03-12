@@ -21,7 +21,7 @@ import LeavePersonalCard from '../components/leave/LeavePersonalCard'
 import ToggleLeave from '../components/leave/ToggleLeave';
 import store from 'react-native-simple-store';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import {convertByFormatShort, disbackButton} from '../utils/staffioUtils';
+import {convertByFormatShort, disbackButton,styleConfirmModal,modalStyle} from '../utils/staffioUtils';
 import CardNone from '../components/cardProgress/cardNone';
 import PTRView from 'react-native-pull-to-refresh';
 import I18n from '../utils/i18n';
@@ -48,6 +48,7 @@ export default class PersonalStatScreen extends React.Component {
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
     this.app = app
+    this.cancelReqLeave = this.cancelReqLeave.bind(this);
     if(this.app.locale && moment){
       moment().locale(this.app.locale);
       }
@@ -64,6 +65,7 @@ export default class PersonalStatScreen extends React.Component {
   }
   async getLeaveList(user,leaveTypeCode){
     try{
+    
     let params  = {};
     params.param = {};
     params.param.EMP_CODE = user.EMP_CODE;
@@ -142,6 +144,7 @@ export default class PersonalStatScreen extends React.Component {
       info.requestStatusCode = list[i].REQUEST_STATUS;
       info.flag = list[i].flag;
       info.isCancel = list[i].flag == 2;
+      info.AttachUrl = list[i].AttachUrl;
       infos.push(info);
   }
     return infos;
@@ -199,15 +202,26 @@ export default class PersonalStatScreen extends React.Component {
         navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
       });
   }
+  async cancelReqLeave(data){
+    const userData = await store.get("USER");
+    const response = await post(`ESSServices/CancelESSLeaveRequsetByRequestNo?REQUEST_LEAVE_NO=${data.requestLeaveNo}&user=${userData.EMP_CODE}`,{});
+    if(response.Complete){
+      this.props.navigator.dismissLightBox();
+      this.setState({loading:true,leaveList:[]});
+      await this.getLeaveList(userData);
+      this.setState({loading:false})
+    }else{
+      this.props.navigator.dismissLightBox();
+    }
+    // const infos = response.objData;
+  }
    onCancelModal(data){
-    this.setState({loading:true});
     this.props.navigator.showLightBox({
-      screen: "staffio.InputCancelModal", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('specifycauseTitle')}`,remark1:`${I18n.t('otherCause')}`,label:`${I18n.t('causeOfcanncel')}`,remark2:`(${I18n.t('specifymo')})`
-      ,cancel:this.cancelModal
-      ,ok:this.returnLeave,data:data}, // simple serializable object that will pass as props to the lightbox (optional)
-      style: styleInputModal,
-      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+      screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`,msg: `${I18n.t('ConfirmCancelMsg')}`
+      ,ok:this.cancelReqLeave,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleConfirmModal
+        // backgroundBlur: "dar
      });
   }
   onEditModal(data){
@@ -220,13 +234,13 @@ export default class PersonalStatScreen extends React.Component {
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
       <Swipeable  key={info.requestLeaveNo} rightButtons={[
-        <TouchableOpacity onPress={()=>this.onEditModal(info)}>
-          <View style={[styles.rightSwipeItem]}>
-            <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
-          </View>
-          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
-        </TouchableOpacity>,
-
+        // <TouchableOpacity onPress={()=>this.onEditModal(info)}>
+        //   <View style={[styles.rightSwipeItem]}>
+        //     <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+        //   </View>
+        //   {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
+        // </TouchableOpacity>,
+        
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
             <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />

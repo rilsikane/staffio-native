@@ -107,8 +107,9 @@ export default class LeaveApprScreen extends React.Component {
       info.requestStatus = list[i].flaq == 'L' ? I18n.t('ToggleApprove'):I18n.t('ToggleCancel');
       info.requestStatusCode = list[i].flaq;
       info.isCancel = list[i].flaq != 'L';
-      info.index = i
-      info.selected = '1'
+      info.index = i;
+      info.selected = '1';
+      info.AttachUrl = list[i].EmpImg;
       infos.push(info);
   }
     return infos;
@@ -371,11 +372,11 @@ export default class LeaveApprScreen extends React.Component {
               </View>
             </TouchableOpacity>,
 
-            info.requestStatusCode=='L'  && (<TouchableOpacity onPress={()=>this.onReturnPress(info)}>
-              <View style={[styles.rightSwipeItem]}>
-                <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
-              </View>
-            </TouchableOpacity>),
+            // info.requestStatusCode=='L'&&false  && (<TouchableOpacity onPress={()=>this.onReturnPress(info)}>
+            //   <View style={[styles.rightSwipeItem]}>
+            //     <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+            //   </View>
+            // </TouchableOpacity>),
 
             info.requestStatusCode=='L' && (<TouchableOpacity disabled={this.state.isCancel} onPress={()=>this.onRejectPress(info)}>
               <View style={[styles.rightSwipeItem]}>
@@ -420,8 +421,8 @@ export default class LeaveApprScreen extends React.Component {
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
             </ActionButton.Item>
            <ActionButton.Item marginRight={responsiveWidth(20)} marginBottom={-(responsiveHeight(3.5))} buttonColor='transparent' onPress={(e)=>this.onReturnPressAll()}>
-              <Icon name="repeat" style={styles.actionButtonIcon} />
-             <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
+              <Icon name="repeat" style={[styles.actionButtonIcon,{color:"transparent"}]} />
+             <Text style={{fontFamily: 'Kanit-Medium', color:'transparent', fontSize:responsiveFontSize(1.5)}}>{I18n.t('ReturnLeaveDetail')}</Text>
             </ActionButton.Item>
            <ActionButton.Item marginRight={responsiveWidth(28)} marginBottom={-(responsiveHeight(16))} buttonColor='transparent' onPress={(e)=>this.onApprovePressAll()}>
               <Icon name="check" style={styles.actionButtonIcon} />

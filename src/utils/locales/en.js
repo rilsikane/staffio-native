@@ -276,6 +276,7 @@ export default {
     dateOfLeave:'Leave date',
     remarkLeaveConfirm:'Remark',
     causeLeaveCon:'Cause',
+    attachDoc:'Document Attachment',
 
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',
@@ -322,6 +323,9 @@ export default {
     specifymo: 'Please specify',
     editReq:'Edit',
     canreq:'Cancel',
+    ConfirmCancelMsg : 'Do you want to confirm cancel Leave Request',
+    ConfirmCancelTitle: 'To Confirm Cancel',
+    CancelComplete: 'Cancel Leave request complete',
 
     //PincodeScreen
     SetPass: 'Set password',

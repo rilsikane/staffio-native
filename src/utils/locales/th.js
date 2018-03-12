@@ -279,6 +279,7 @@ export default {
     dateOfLeave:'วันที่ลา',
     remarkLeaveConfirm:'หมายเหตุ',
     causeLeaveCon:'สาเหตุ',
+    attachDoc:'เอกสารแนบ',
 
     //LeaveDetailScreen
     ConfirmApprove: 'ยืนยันการอนุมัติ',
@@ -325,6 +326,9 @@ export default {
     specifymo: 'โปรดระบุ',
     editReq:'แก้ไขคำขอ',
     canreq:'ยกเลิกคำขอ',
+    ConfirmCancelMsg : 'คุณต้องการยืนยันที่จะยกเลิกใบคำขอ ใช่หรือไม่ ?',
+    ConfirmCancelTitle: 'ยืนยันการยกเลิกใบคำขอ',
+    CancelComplete: 'ยกเลิกใบคำขอเรียบร้อยแล้ว',
 
     //PincodeScreen
     SetPass: 'ตั้งรหัสผ่าน',

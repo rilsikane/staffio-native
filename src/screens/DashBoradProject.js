@@ -46,7 +46,7 @@ export default class DashBoradProject extends React.Component {
         const projectView = await this.projectView(userData)
         if(projectView && projectView.length>0){
             this.setState({projectView : projectView})
-            this.setState({ user: userData });
+            this.setState({ user: userData,isLoading:false});
             if (userData) {
                 TimerMixin.setTimeout(() => {
                     this.setState({ isLoading: false });
@@ -57,7 +57,7 @@ export default class DashBoradProject extends React.Component {
     async changeTab(i, ref){      
       this.setState({tabIndex:i.i});
       if(i.i == 1){
-        if(this.state.orgView.length ==0){
+        if(this.state.orgView && this.state.orgView.length ==0){
             const userData = await store.get("USER");  
             const data = await this.orgView(userData);
             this.setState({orgView:data});
@@ -70,6 +70,7 @@ export default class DashBoradProject extends React.Component {
     }
 
     DashBorad(data){
+        if(this.state.tabIndex==0){
         this.props.navigator.push({
             screen: 'staffio.Overview', // unique ID registered with Navigation.registerScreen
             title: undefined, // navigation bar title of the pushed screen (optional)
@@ -81,14 +82,16 @@ export default class DashBoradProject extends React.Component {
             navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
             navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
           });
-        //   this.props.navigator.push({
-        //     screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
-        //     title: "Modal", // title of the screen as appears in the nav bar (optional)
-        //     passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
-        //     DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
-        //     navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-        //     animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
-        //   });
+        }else{
+          this.props.navigator.push({
+            screen: "staffio.Overview", // unique ID registered with Navigation.registerScreen
+            title: "Modal", // title of the screen as appears in the nav bar (optional)
+            passProps: {data:data,projectView : this.state.projectView,cancelDialog:this.cancelDialog,onDoneDialog:this.onDoneDialog,closeDialog:this.closeDialog,
+            DashBorad:this.DashBorad,navigation: this.props.navigator.setOnNavigatorEvent,locations:this.state.locations,statuses:this.state.statuses,users:this.state.users}, // simple serializable object that will pass as props to the modal (optional)
+            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+            animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+          });
+        }
       }
     
     
@@ -98,7 +101,7 @@ export default class DashBoradProject extends React.Component {
         params.empCode = user.EMP_CODE;
         params.orgCode = user.ORG_CODE;
         const response = await post("GetDashBoradProjectDetailsOrg", params);
-        const response2 = response.data;
+        const response2 = response.projectDetails;
         return response2;
     }
     orgView = async (user) => {
@@ -171,7 +174,7 @@ export default class DashBoradProject extends React.Component {
                                             </TabHeading>}>
                                             <PTRView style={{flex:1,marginBottom:10}}>
                                                 <View style={{flex:1}}>
-                                                {this.state.orgView.length > 0 ? this.state.orgView.map((val) => {
+                                                {this.state.orgView && this.state.orgView.length > 0 ? this.state.orgView.map((val) => {
                                                     return (
                                                         <View key={val.orgCode} style={{paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)}}>
                                                         <CardProgress  data={val} DashBorad={this.DashBorad} isOrg={true}>

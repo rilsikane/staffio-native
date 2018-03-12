@@ -19,18 +19,29 @@ export default class ToggleLeave1detail extends React.Component {
   }
 onClickbutton(index){
     let statButtn = this.statusbutton;
+    let shiftData = {...this.props.shiftData};
     if(index == 1){
         statButtn.allday = true
+        shiftData.LEAVE_ACTION = "FULLDAY";
+        shiftData.WORK_START_TM = this.props.shiftData.WORK_START_TM;
+        shiftData.WORK_END_TM = this.props.shiftData.WORK_END_TM;
+        
     }else{
         statButtn.allday = false
     }
     if(index == 2){
         statButtn.morning = true
+        shiftData.LEAVE_ACTION = "FORENOON";
+        shiftData.WORK_START_TM = this.props.shiftData.WORK_START_TM;
+        shiftData.WORK_END_TM = this.props.shiftData.REST_START_TM;
     }else{
         statButtn.morning = false
     }
     if(index == 3){
         statButtn.afternoon = true
+        shiftData.LEAVE_ACTION = "AFTERNOON";
+        shiftData.WORK_START_TM = this.props.shiftData.REST_END_TM;
+        shiftData.WORK_END_TM = this.props.shiftData.WORK_END_TM;
     }else{
         statButtn.afternoon = false
     }
@@ -39,6 +50,7 @@ onClickbutton(index){
     }else{
         statButtn.custom = false
     }
+    this.props.switchShiftDay(shiftData);
     this.setState({ pressStsus: index,statusbutton:statButtn})
 }
 renderWorkTime(shiftData){
@@ -79,7 +91,7 @@ renderWorkTime(shiftData){
                     <View style={{flexDirection: 'row', alignItems:'center',flex:1,marginTop:responsiveHeight(2)}}>
                         {(<Text style={{flex:0,fontFamily:'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2),textAlign:'left'}}>{I18n.t('LeaveToggle')}</Text>)}
                         <View style={{width:responsiveWidth(18),marginLeft:10,marginRight:10}}>
-                        <SwitchSelector options={options} initial={this.state.localeIndex} borderColor="#333" buttonColor="#fbaa3e" height={25} 
+                        <SwitchSelector disabled={this.props.disabled} options={options} initial={this.state.localeIndex} borderColor="#333" buttonColor="#fbaa3e" height={25} 
                                 fontSize={responsiveFontSize(1)}  onPress={this.onSwitch} backgroundColor="#feddb4" hasPadding={false}/>
                         </View>
                         {(<Text style={{flex:0,fontFamily: 'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(2),textAlign:'center'}}>{I18n.t('notLeaveToggle')}</Text>)}
@@ -102,11 +114,11 @@ renderWorkTime(shiftData){
                         {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.afternoon ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('afternoon')}</Text>):(<Text style={ this.state.statusbutton.afternoon ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('afternoon')}</Text>)}
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(4)}>
+                    {/* <TouchableOpacity style={{flex:1}} onPress={()=> this.onClickbutton(4)}>
                         <View style={ this.state.statusbutton.custom ? styles.buttonTimePress : styles.buttonTime } >
                         {this.app && this.app.locale=='en'?(<Text style={ this.state.statusbutton.custom ? styles.textbuttonTimePressEn : styles.textbuttonTimeEn }>{I18n.t('custom')}</Text>):(<Text style={ this.state.statusbutton.custom ? styles.textbuttonTimePress : styles.textbuttonTime }>{I18n.t('custom')}</Text>)}
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         

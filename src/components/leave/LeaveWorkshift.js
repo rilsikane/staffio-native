@@ -11,14 +11,19 @@ export default class LeaveWorkshift extends React.Component {
         super(props);
         this.state = {custom:false,pressStatus: false}
         this.onSwitch = this.onSwitch.bind(this);
+        this.switchShiftDay = this.switchShiftDay.bind(this);
 
   }
   onSwitch(value){  
     this.setState({custom:value});
   }
+  switchShiftDay(shiftData){
+      this.props.switchShiftDay(shiftData,this.props.id[0]);
+  }
   renderLeaveToggle(leavePattern){
     return leavePattern.shiftData.map(shift=>{
-        return (<ToggleLeave1detail shiftData={shift} key={shift.PATTERN_ID}/>)
+        return (<ToggleLeave1detail shiftData={shift} key={shift.PATTERN_ID} 
+            disabled={leavePattern.shiftData.length<2} switchShiftDay={this.switchShiftDay} />)
     });
   }
   render() {
@@ -40,7 +45,7 @@ export default class LeaveWorkshift extends React.Component {
                         {/* <Switch onTintColor='#feddb4' tintColor='#feddb4' 
                         thumbTintColor='#fbaa3e' value={this.state.custom} onValueChange={this.onSwitch} /> */}
                          <View style={{width:responsiveWidth(20)}}>
-                            <SwitchSelector options={options} initial={this.state.localeIndex} height={26}
+                            <SwitchSelector  options={options} initial={this.state.localeIndex} height={26}
                             borderColor="#333" buttonColor="#fbaa3e" ontSize={responsiveFontSize(2)}  onPress={this.onSwitch} backgroundColor="#feddb4" hasPadding={false}/>
                         </View>
                         {(<Text style={{fontFamily: 'Kanit-Medium', color:'#7e6560', fontSize:responsiveFontSize(1.5),textAlign:'center',paddingLeft:10}}>{I18n.t('Toggle1Edit')}</Text>)}

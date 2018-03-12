@@ -1,7 +1,7 @@
 import axios from 'axios';
 import I18n from '../utils/i18n';
-
-
+import RNFetchBlob from 'react-native-fetch-blob'
+import {Platform} from 'react-native';
 
 //dev
 
@@ -253,5 +253,81 @@ export async function get(path,param){
     )
           return e;
       }
+}
+export async function uploadFile(path,file,param){
+  const userData = await store.get("USER");
+  const endpoint = await getEndpoint();
+  let requestURL = `${endpoint}${path}`;
+  
+  // var obj = 
+  // {
+  //   uri:file.uri,
+  //   uploadUrl: requestURL,
+  //   fileName:file.fileName,
+	// 	data: {json: JSON.stringify(param)},                   // optional
+  // };
+  param.RequestMode = "A";
+  const filePath = file.uri.replace("file://", "");
+  const formData = [];
+  console.log("filePathfilePathfilePathfilePath" + JSON.stringify(file));
+  formData.push({
+    name: "file",
+    filename: file.fileName,
+    data: RNFetchBlob.wrap(Platform.OS === 'android' ? file.path :file.origURL)
+  });
+  formData.push({
+    name: "json",
+    data: JSON.stringify(param)
+  });
+  try{
+    let response = await RNFetchBlob.fetch(
+      "POST",
+      requestURL,
+      {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data"
+      },
+      formData
+    )
+    if(response){
+      let responseData = JSON.parse(response.data);
+      if(responseData.RET.Complete){
+        return true;
+      }else{
+        Alert.alert(
+          `${I18n.t('Error')}`,
+          `${responseData.RET.Messag}`,
+          [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        )
+      }
+    }
+ 
+}catch(e){
+  console.log(e);
+}
+  // RNFetchBlob.fetch('POST', requestURL, {
+  //   // this is required, otherwise it won't be process as a multipart/form-data request
+  //   Accept: "application/json",
+  //   "Content-Type": "multipart/form-data"
+  // }, [
+  //   // append field data from file path
+  //   {
+  //     name : 'file',
+  //     filename : file.fileName,
+  //     data: RNFetchBlob.wrap(filePath)
+  //   },
+  //   {
+  //     name : 'json',
+  //     filename : file.fileName,
+  //     data: JSON.stringify(param)
+  //   },
+  //   // elements without property `filename` will be sent as plain text
+  // ]).then((resp) => {
+  //   console.log(resp);
+  // }).catch((err) => {
+  //  console.log(err);
+  // });
 }
 
