@@ -1,13 +1,83 @@
 import React from 'react';
-import { StyleSheet ,View} from 'react-native';
+import { StyleSheet ,View,Platform,TouchableOpacity,ActivityIndicator,
+    NativeAppEventEmitter,
+    DeviceEventEmitter,
+    NativeModules,
+    NativeEventEmitter,} from 'react-native';
 import { Container, Card, CardItem, Text, Body } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import I18n from '../../utils/i18n';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import OpenFile from 'react-native-doc-viewer';
+import Loading from '../loading'
+var RNFS = require('react-native-fs');
+var SavePath = Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath;
 
 export default class DetailLeave extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { 
+            animating: false,
+            progress: "",
+            donebuttonclicked: false,
+            isLoading:false
+          }
+        this.openFile = this.openFile.bind(this);
+        this.eventEmitter = new NativeEventEmitter(NativeModules.RNReactNativeDocViewer);
+            this.eventEmitter.addListener('DoneButtonEvent', (data) => {
+            /*
+            *Done Button Clicked
+            * return true
+            */
+            console.log(data.close);
+            this.setState({donebuttonclicked: data.close,isLoading:false});
+        })
 
+    }
+    componentDidMount(){
+        // download progress
+        this.eventEmitter.addListener(
+          'RNDownloaderProgress',
+          (Event) => {
+            if(this.state.progress > 95){
+                this.setState({isLoading:false});
+            }
+          } 
+          
+        );
+    }
+    openFile(){
+        this.setState({isLoading:true});
+        if(Platform.OS === 'ios'){
+            //IOS
+            OpenFile.openDoc([{
+              url:this.props.AttachUrl,
+              fileNameOptional:"เอกสารประกอบ"
+            }], (error, url) => {
+               if (error) {
+                 console.error(error);
+               } else {
+                 console.log(url)
+               }
+             })
+          }else{
+            //Android
+            OpenFile.openDoc([{
+              url:this.props.AttachUrl,
+              fileName:this.props.AttachUrl,
+              cache:false,
+              fileType:'jpg'
+            }], (error, url) => {
+               if (error) {
+                 console.error(error);
+               } else {
+                 console.log(url)
+                 this.setState({isLoading:false});
+               }
+             })
+          }
+    }
   render() {
     return (
         <Card style={this.props.isAppr ? {height:responsiveHeight(29)} : {height:responsiveHeight(35)}}>
@@ -44,15 +114,17 @@ export default class DetailLeave extends React.Component {
                         <Text style={{fontFamily: 'Kanit-Medium', color:'#fbaa3e',flex:3, fontSize:responsiveFontSize(2.2)}}>{this.props.requestStatus}</Text> */}
                     </View>}
                     
-                    {/*<View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
-                        <Text style={{fontFamily:'Kanit-Medium',backgroundColor:"transparent", color:'#7e6560',flex:2, fontSize:responsiveFontSize(2.2)}}>เอกสารแนบ</Text>
-                        <Text ellipsizeMode='tail' numberOfLines={1} style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:3}}>{this.props.docRef}</Text>
-                        <Text style={{fontFamily: 'Kanit', color:'#a9a9a9', fontSize:responsiveFontSize(1.7),flex:1,textAlign:'center'}}>{this.props.typedoc}</Text>
-                        <Icon name="eye" size={25} style={{ color: '#fbaa3e',flex:0 }} />
-                    </View>*/}
+                    {this.props.AttachUrl && <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
+                        <Text style={{fontFamily:'Kanit-Medium',backgroundColor:"transparent", color:'#7e6560',flex:0.3, fontSize:responsiveFontSize(2.2)}}>เอกสารแนบ</Text>
+                        <TouchableOpacity onPress={this.openFile}>
+                            <Icon style={{flex:1,color:'#fbaa3e',fontSize:20}} name='file-archive-o' size={responsiveFontSize(2)} />
+                        </TouchableOpacity>
+                    </View>}
                 </Body>
             </CardItem>
+            <Loading visible={this.state.isLoading}/>
         </Card>
+        
 
     );
   }

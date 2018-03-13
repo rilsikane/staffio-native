@@ -10,7 +10,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import { Button, Item, Label, Input } from 'native-base';
 import * as Animatable from 'react-native-animatable';
 
-export default class MsgModal extends Component {
+export default class ImageModal extends Component {
   constructor(props){
     super(props);
     this.cancelPress = this.cancelPress.bind(this);

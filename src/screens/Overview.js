@@ -34,7 +34,7 @@ export default class Overview extends React.Component {
 
     }
 
-    async  componentWillMount() {
+    async  componentDidMount() {
         const userData = await store.get("USER");
         if(this.props.isProj){
             let dataperson = await this.dataperson(userData, this.props.data)
@@ -52,7 +52,7 @@ export default class Overview extends React.Component {
         }
     }
 
-    dataperson = async (user, data) => {
+    async dataperson(user, data){
         params = {}
         params.orgCode = user.ORG_CODE;
         params.projectCode = data.projectCode;
@@ -72,7 +72,7 @@ export default class Overview extends React.Component {
         return response2;
 
     }
-    datapersonOrg = async(user, data) =>{
+    async datapersonOrg(user, data){
         params = {}
         params.orgCode = user.ORG_CODE;
         params.unitCode = data.orgCode;
@@ -118,7 +118,7 @@ export default class Overview extends React.Component {
                             </View>
                             <ScrollView>
                                 <View style={{ alignItems: 'center', justifyContent: 'center',paddingTop:5}}>
-                                    {this.state.data.map((val) => {
+                                    {this.state.data && this.state.data.map((val) => {
                                         return (
                                             <CardCheckin key={val.empCode} data={val} onContactSelected={this.onContactSelected} >
                                             </CardCheckin>);

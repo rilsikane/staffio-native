@@ -160,11 +160,11 @@ export default class CreateLeave extends React.Component {
               </View>
             </TouchableOpacity>
           
-            <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton(this.color.otherL)}>
+            {/* <TouchableOpacity style={{flex:1}} onPress={(e) => this.onPressButton(this.color.otherL)}>
               <View style={[styles.buttonstyle,{borderColor:this.color.otherL}]}>
                 <Text style={[styles.textStyle,{color:this.color.otherL}]}>{I18n.t('otherLeave')}</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           {this.state.dayList.length > 0 && 
             (<View style={{flexDirection: 'row', alignItems:'center',position:'absolute',bottom:0,zIndex:99999}}>

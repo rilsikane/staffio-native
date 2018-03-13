@@ -18,6 +18,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
         this.state = {custom:false,pressStatus: false,leaveWorkshifts:[],startDate:"",endDate:""}
         this.onSwitch = this.onSwitch.bind(this);
         this.ok = this.ok.bind(this);
+        this.switchShiftDay = this.switchShiftDay.bind(this);
 
   }
   onSwitch(value){  
@@ -72,9 +73,18 @@ export default class LeaveWorkshiftScreen extends React.Component {
   }
   renderWorkShift(){
       return this.state.leaveWorkshifts.map(lw =>{
-        return <LeaveWorkshift key={Object.keys(lw)} id={Object.keys(lw)} leavePattern={lw}/>
+        return <LeaveWorkshift key={Object.keys(lw)} switchShiftDay={this.switchShiftDay}
+        id={Object.keys(lw)} leavePattern={lw}/>
       })
     
+  }
+  switchShiftDay(shiftData,id){
+    console.log("shiftDatashiftData"+shiftData+"----"+id);
+    let leaveWorkshifts  = [... this.state.leaveWorkshifts];
+    let index = leaveWorkshifts.findIndex(lw =>  Object.keys(lw) == id);
+    let lwIndex = leaveWorkshifts[index][id].shiftData.findIndex(el => el.PATTERN_ID === shiftData.PATTERN_ID);
+    leaveWorkshifts[index][id].shiftData[lwIndex] = shiftData;
+    this.setState({leaveWorkshifts:leaveWorkshifts});
   }
   async ok(){
     const user = await store.get("USER");
@@ -85,9 +95,10 @@ export default class LeaveWorkshiftScreen extends React.Component {
     LeaveReq.LEAVE_TYPE_CODE = this.props.leaveStore.leaveReqLeaveType.LEAVE_TYPE_CODE||"VC";
     LeaveReq.START_DATE = new Date(this.state.startDate)
     LeaveReq.END_DATE = new Date(this.state.endDate)
-    LeaveReq.TOTAL_LEAVEDAY = this.calculateDay(new Date(this.state.startDate),new Date(this.state.endDate))+1;
+   
     LeaveReq.PERIOD_YEAR = `${new Date().getFullYear()}`;
     let ListLeaveRequestDetail = [];
+    let sumMinute = 0;
     this.state.leaveWorkshifts.map(lw =>{
       let  leavePattern = lw[Object.keys(lw)];
       leavePattern.shiftData.map(shiftData =>{
@@ -98,13 +109,16 @@ export default class LeaveWorkshiftScreen extends React.Component {
             leaveReq.START_TIME = shiftData.WORK_START_TM.substring(0,5);
             leaveReq.END_DATE = shiftData.DAY_DATE;
             leaveReq.END_TIME = shiftData.WORK_END_TM.substring(0,5);
-            leaveReq.LEAVE_ACTION = "FULLDAY";
-            leaveReq.LEAVE_MINUTE = 480;
+            // leaveReq.LEAVE_ACTION = "FULLDAY";
+            leaveReq.LEAVE_MINUTE = this.calculateMinute(shiftData.WORK_START_TM,shiftData.WORK_END_TM);
+            sumMinute +=  leaveReq.LEAVE_MINUTE;
             leaveReq.SHFT_CODE = shiftData.SHFT_CODE;
             ListLeaveRequestDetail.push(leaveReq);
       })
    
     });
+    LeaveReq.TOTAL_LEAVEDAY =  Math.round(sumMinute/(8*60));
+
     let login = {};
     login.LOGIN_EMP_CODE = user.EMP_CODE;
     login.LOGIN_CUSTOMER_CODE = user.CUSTOMER_CODE;
@@ -131,6 +145,17 @@ export default class LeaveWorkshiftScreen extends React.Component {
     var oneDay = 24*60*60*1000;
     var diffDays = Math.round((secondDate- firstDate)/(oneDay));
     return diffDays;
+  }
+  calculateMinute(workStart,workEnd){
+    let startSplit = workStart.split(":");
+    let endSplit = workEnd.split(":");
+    let hour = Number(endSplit[0]) - Number(startSplit[0]);
+    let minute = Number(endSplit[1]) - Number(startSplit[1]);
+    let sec = Number(endSplit[2]) - Number(startSplit[2]);
+    
+    let summinute =  ((hour||0) * 60) + (minute||0)
+
+    return summinute;
   }
   render() {
     return (
