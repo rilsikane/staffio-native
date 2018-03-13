@@ -276,7 +276,7 @@ export default {
     dateOfLeave:'Leave date',
     remarkLeaveConfirm:'Remark',
     causeLeaveCon:'Cause',
-    attachDoc:'Document Attachment',
+    attachDoc:'Attachment',
 
     //LeaveDetailScreen
     ConfirmApprove: 'Confirm approval',

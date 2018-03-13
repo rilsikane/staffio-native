@@ -31,7 +31,7 @@ export default class DashBoradProject extends React.Component {
     constructor(props) {
         super(props);
         navigator = this.props.navigator
-        this.state = { isLoading: true,users:[],projectView:[],dataperson: [],tabIndex:0,orgView:[]};
+        this.state = { isLoading: false,users:[],projectView:[],dataperson: [],tabIndex:0,orgView:[]};
         this.progress = [{ location: 'the mail', staffcount: 50 }, { location: 'terminal 21', staffcount: 30 }, { location: 'terminal 22', staffcount: 80 }];
         //this.projectView
         this.cancelDialog = this.cancelDialog.bind(this);
@@ -42,8 +42,10 @@ export default class DashBoradProject extends React.Component {
     }
 
     async  componentDidMount() {
+        this.setState({ isLoading: true });
         const userData = await store.get("USER");
         const projectView = await this.projectView(userData)
+
         if(projectView && projectView.length>0){
             this.setState({projectView : projectView})
             this.setState({ user: userData,isLoading:false});
@@ -52,16 +54,22 @@ export default class DashBoradProject extends React.Component {
                     this.setState({ isLoading: false });
                 }, 1000);
             }
+        }else{
+            
+            this.setState({ isLoading: false });
         }
     }
     async changeTab(i, ref){      
       this.setState({tabIndex:i.i});
       if(i.i == 1){
+        this.setState({ isLoading: false });
         if(this.state.orgView && this.state.orgView.length ==0){
             const userData = await store.get("USER");  
             const data = await this.orgView(userData);
             this.setState({orgView:data});
         }
+      }else{
+        this.setState({ isLoading: false });
       }
     }
 
@@ -116,7 +124,7 @@ export default class DashBoradProject extends React.Component {
 
     render() {
         if (this.state.isLoading)
-            return  <Loading visible={this.state.isLoading} text="Loading..."/>
+            return  <Loading visible={this.state.isLoading} text="Loading..." mini={true}/>
             //return null;
         else
             return (

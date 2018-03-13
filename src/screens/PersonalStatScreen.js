@@ -233,7 +233,7 @@ export default class PersonalStatScreen extends React.Component {
       return this.state.leaveList.map(info =>
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
-      <Swipeable  key={info.requestLeaveNo} rightButtons={[
+      <Swipeable   key={info.requestLeaveNo} rightButtons={info.requestStatusCode=='03' ?[
         // <TouchableOpacity onPress={()=>this.onEditModal(info)}>
         //   <View style={[styles.rightSwipeItem]}>
         //     <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
@@ -247,7 +247,7 @@ export default class PersonalStatScreen extends React.Component {
           </View>
           {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
         </TouchableOpacity>,  
-      ]}>
+      ]:null}>
       <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
        <LeavePersonalCardNew info={info} />
       </TouchableOpacity>

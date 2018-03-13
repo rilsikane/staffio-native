@@ -165,7 +165,7 @@ export async function post(path,param){
                 `${I18n.t('Error')}`,
                   response.data.Msg,
                   [
-                  {text: 'OK', onPress: () => console.log('OK Pressed!')},
+                  {text: 'OK',},
                   ]
               )
               return false;

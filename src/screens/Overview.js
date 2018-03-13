@@ -29,7 +29,7 @@ export default class Overview extends React.Component {
     constructor(props) {
         super(props);
         this.onContactSelected = this.onContactSelected.bind(this);
-        this.state = { isLoading: true, data: [], modalVisible: false };
+        this.state = { isLoading: false, data: [], modalVisible: false };
         this.closeDialog = this.closeDialog.bind(this);
 
     }
@@ -66,10 +66,18 @@ export default class Overview extends React.Component {
         time = time.substring(16,21);
         //console.log('นี่ time นะ' + time);
         params.currentTime = time;
+
         const response = await post("GetDashBoradProjectDetail", params);
+        this.setState({isLoading:false})
+        if(response){
         // console.log('นี่response2นะ'+JSON.stringify(response));
         const response2 = response.EmpDetails;
         return response2;
+        }else{
+            this.setState({isLoading:false})
+            return null;
+        }
+        
 
     }
     async datapersonOrg(user, data){
@@ -77,7 +85,11 @@ export default class Overview extends React.Component {
         params.orgCode = user.ORG_CODE;
         params.unitCode = data.orgCode;
         params.shftDate = new Date().toISOString();
+
         const response = await post("GetDashBoradOrgDetail", params);
+        if(!response){
+            this.setState({isLoading:false})
+        }
         return response.empDetail
     }
     closeDialog() {
@@ -93,9 +105,6 @@ export default class Overview extends React.Component {
     }
 
     render() {
-        if (this.state.isLoading)
-            return <Loading visible={this.state.isLoading} text="Loading..." />;
-        else
             return (
                 
                 <Container style={{flex:1,backgroundColor: '#fee2c8'}}>
@@ -128,18 +137,12 @@ export default class Overview extends React.Component {
                             </ScrollView>
                         </View>
                     </Content>
+                    <Loading visible={this.state.isLoading} text="Loading..." />
                 </Container>
 
             );
     }
-    loading() {
-        if (this.state.isLoading)
-            return (<Spinner animation="fade" visible={this.state.isLoading} overlayColor="rgba(0, 0, 0, 0.4)">
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: -50 }}>
-                    <SpinnerKit size={80} type={"WanderingCubes"} color="#f58020" />
-                </View>
-            </Spinner>);
-    }
+
 
 }
 const styles = ({

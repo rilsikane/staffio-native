@@ -15,6 +15,8 @@ import { observer, inject } from 'mobx-react';
 import {convertByFormatShort} from '../utils/staffioUtils';
 import ImagePicker from 'react-native-image-picker'
 import * as Animatable from 'react-native-animatable';
+import Loading from '../components/loading';
+import ImageResizer from 'react-native-image-resizer';
 
 var options = {
   title: 'แนบเอกสาร',
@@ -31,15 +33,15 @@ var options = {
 export default class LeaveWorkshiftScreen extends React.Component {
   constructor(props) {
         super(props);
-        this.state = {reasons:[],remark:"",reason:"",file:{}}
+        this.state = {reasons:[],remark:"",reason:"",file:{},isLoading:false}
         this.submit = this.submit.bind(this);
         this.closeScreen = this.closeScreen.bind(this);
         this.selectImage = this.selectImage.bind(this);
         this.openFile = this.openFile.bind(this);
   }
-  selectImage(){
+  async selectImage(){
     
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, async (response) => {
       console.log('Response = ', response);
     
       if (response.didCancel) {
@@ -49,10 +51,21 @@ export default class LeaveWorkshiftScreen extends React.Component {
         console.log('ImagePicker Error: ', response.error);
       }
       else {
-        this.setState({file:response});
+        const {originalRotation } = response;
+        let rotation = 0
+        if ( originalRotation === 90 ) {
+          rotation = 90
+        } else if ( originalRotation === 270 ) {
+          rotation = -90
+        }
+
+        const fileResize = await ImageResizer.createResizedImage(response.uri, 720, 960, "JPEG",60,rotation);
+        this.setState({file:{path:fileResize.path,origURL:fileResize.path,fileName:fileResize.name,uri:fileResize.uri}});
+      
       }
     });
   }
+  
   closeScreen(){
     this.props.navigator.dismissLightBox();
     setTimeout(() => {
@@ -69,6 +82,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
   }
   async submit(){
     if(this.validateSubmit()){
+      this.setState({isLoading:true});
       let params = this.props.leaveStore.leaveReqData;
       params.LeaveReq.LEAVE_REASON = this.state.reason;
       params.LeaveReq.REMARK = this.state.remark;
@@ -78,6 +92,8 @@ export default class LeaveWorkshiftScreen extends React.Component {
         // ]
         let response = await uploadFile("FileManager/UploadFilesAttachment",this.state.file,params);
         if(response){
+          this.setState({isLoading:false});
+        setTimeout(()=>{
           this.props.navigator.showLightBox({
             screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
             passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
@@ -90,22 +106,27 @@ export default class LeaveWorkshiftScreen extends React.Component {
             },
             adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
           });
+        },500)  
+          
         }
       }else{
         let response = await post("ESSServices/CreateESSLeaveRequest",params);
         if(response){
-          this.props.navigator.showLightBox({
-            screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
-            passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
-            ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
-            style: {
-              backgroundBlur: "dark",
-              backgroundColor: "rgba(0,0,0,.5)",
-              height:responsiveHeight(70),
-              width:responsiveWidth(90)
-            },
-            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-          });
+          this.setState({isLoading:false});
+          setTimeout(()=>{
+            this.props.navigator.showLightBox({
+              screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
+              passProps: {title:'',msg:`${I18n.t('leaveSuccess')}`
+              ,ok:this.closeScreen}, // simple serializable object that will pass as props to the lightbox (optional)
+              style: {
+                backgroundBlur: "dark",
+                backgroundColor: "rgba(0,0,0,.5)",
+                height:responsiveHeight(70),
+                width:responsiveWidth(90)
+              },
+              adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+            });
+          },100)  
         }
       }
     }
@@ -142,7 +163,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
     }
   }
   renderAttach(){
-    let isReq = this.props.leaveStore.leaveReqLeaveType.REQUEST_DOCUMENT=="Y" && this.props.leaveStore.leaveReqLeaveType.DAY_OF_REQ_DOCUMENT < this.props.leaveStore.leaveReqData.LeaveReq.TOTAL_LEAVEDAY;
+    let isReq = this.props.leaveStore.leaveReqLeaveType.REQUEST_DOCUMENT=="Y" && this.props.leaveStore.leaveReqLeaveType.DAY_OF_REQ_DOCUMENT <= this.props.leaveStore.leaveReqData.LeaveReq.TOTAL_LEAVEDAY;
     return isReq
   }
   openFile = () => {
@@ -211,6 +232,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
               </View>
             </TouchableOpacity>
           </View>
+          <Loading visible={this.state.isLoading}/>
         </View>
     );
   }
