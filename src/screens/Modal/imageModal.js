@@ -32,7 +32,7 @@ export default class ImageModal extends Component {
                   {!this.props.titleNext ? <Icon style={styles.HeaderRightIcon} name='chevron-right'/>
                   : <Text style={styles.HeaderFontRight}>{this.props.titleNext}</Text>}
               </Button> */}
-                <View style={{justifyContent:"flex-end",flex:1,flexDirection:"row"}}>
+                <View style={{paddingTop: responsiveHeight(2),justifyContent:"flex-end",flex:1,flexDirection:"row"}}>
                   <Button style={{backgroundColor:"transparent",flexDirection:"column",flex:1,justifyContent:"flex-end",alignItems:"flex-end"}} transparent onPress={()=>this.cancelPress()}>
                     <Icon style={styles.HeaderRightIcon} name='times'/>
                   </Button>
