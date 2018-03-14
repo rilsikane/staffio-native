@@ -18,6 +18,7 @@ import * as Animatable from 'react-native-animatable';
 import Loading from '../components/loading';
 import ImageResizer from 'react-native-image-resizer';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 var options = {
   title: 'แนบเอกสาร',
   title: 'Select',
@@ -180,8 +181,10 @@ export default class LeaveWorkshiftScreen extends React.Component {
   render() {
   
     return (
+     
       <View style={{flex:1}}>
       <CardHeader goBack={()=>this.props.navigator.pop()} />
+      <KeyboardAwareScrollView>
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={{marginLeft: responsiveWidth(3),marginRight: responsiveWidth(3),marginTop: responsiveWidth(2),marginBottom: responsiveWidth(2),}}>
@@ -203,7 +206,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
             }
             <Text style={{fontFamily: 'Kanit', color: '#5f504b', fontSize: responsiveFontSize(2.2)}}>{I18n.t('remarkLeaveConfirm')}</Text> 
             <View style={{backgroundColor:'#f5f6fa',borderColor: '#fbaa3e', borderWidth: 1, borderRadius:1,marginTop:responsiveHeight(2)}}>
-              <TextInput style={styles.textAreaStyle} editable = {true} maxLength = {100} multiline = {true} numberOfLines = {4} 
+              <TextInput style={styles.textAreaStyle} editable = {true} maxLength = {100} multiline = {true} numberOfLines = {3} 
               underlineColorAndroid='transparent' onChangeText={(text) => this.setState({remark:text})}/>
             </View>
           </View>
@@ -221,7 +224,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
             </Animatable.View>}
          
         </View>
-        
+        </KeyboardAwareScrollView>
         <View style={{flexDirection: 'row', alignItems:'center',position:'absolute',bottom:0,zIndex:99999}}>
            
             <TouchableOpacity style={{flex:1}} onPress={(e) => this.submit()}>
@@ -234,6 +237,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
           </View>
           <Loading visible={this.state.isLoading}/>
         </View>
+        
     );
   }
 }
