@@ -23,8 +23,8 @@ onClickbutton(index){
     if(index == 1){
         statButtn.allday = true
         shiftData.LEAVE_ACTION = "FULLDAY";
-        shiftData.WORK_START_TM = this.props.shiftData.WORK_START_TM;
-        shiftData.WORK_END_TM = this.props.shiftData.WORK_END_TM;
+        shiftData.WORK_START_TM_EDIT = this.props.shiftData.WORK_START_TM;
+        shiftData.WORK_END_TM_EDIT = this.props.shiftData.WORK_END_TM;
         
     }else{
         statButtn.allday = false
@@ -32,16 +32,16 @@ onClickbutton(index){
     if(index == 2){
         statButtn.morning = true
         shiftData.LEAVE_ACTION = "FORENOON";
-        shiftData.WORK_START_TM = this.props.shiftData.WORK_START_TM;
-        shiftData.WORK_END_TM = this.props.shiftData.REST_START_TM;
+        shiftData.WORK_START_TM_EDIT = this.props.shiftData.WORK_START_TM;
+        shiftData.WORK_END_TM_EDIT = this.props.shiftData.REST_START_TM;
     }else{
         statButtn.morning = false
     }
     if(index == 3){
         statButtn.afternoon = true
         shiftData.LEAVE_ACTION = "AFTERNOON";
-        shiftData.WORK_START_TM = this.props.shiftData.REST_END_TM;
-        shiftData.WORK_END_TM = this.props.shiftData.WORK_END_TM;
+        shiftData.WORK_START_TM_EDIT = this.props.shiftData.REST_END_TM;
+        shiftData.WORK_END_TM_EDIT = this.props.shiftData.WORK_END_TM;
     }else{
         statButtn.afternoon = false
     }
@@ -54,10 +54,10 @@ onClickbutton(index){
     this.setState({ pressStsus: index,statusbutton:statButtn})
 }
 renderWorkTime(shiftData){
-    const workStart = shiftData.WORK_START_TM.substring(0,5);
-    const workEnd = shiftData.WORK_END_TM.substring(0,5);
-    const restStart = shiftData.REST_START_TM.substring(0,5);
-    const restEnd = shiftData.REST_END_TM.substring(0,5);
+    let workStart = shiftData.WORK_START_TM.substring(0,5);
+    let workEnd = shiftData.WORK_END_TM.substring(0,5);
+    let restStart = shiftData.REST_START_TM.substring(0,5);
+    let restEnd = shiftData.REST_END_TM.substring(0,5);
     switch (this.state.pressStsus) {
         case 1:
           return workStart+"-"+workEnd

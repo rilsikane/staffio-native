@@ -135,7 +135,7 @@ const styles={
       fontSize:responsiveFontSize(1.8),
       lineHeight:responsiveFontSize(2),
       fontFamily:"Kanit",
-      marginTop:Platform.OS=="ios" ? 0 : -5,
+      marginTop:Platform.OS=="ios" ? 0 : 0,
       backgroundColor:'transparent'
   },
   label:{

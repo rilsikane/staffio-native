@@ -42,7 +42,7 @@ export default class LeaveApprScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,checkSelect:false,selected:false}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,checkSelect:false,selected:false,isSelect:false}
     this._refresh = this._refresh.bind(this);
     this.approveLeave = this.approveLeave.bind(this);
     this.cancelModal = this.cancelModal.bind(this);
@@ -109,7 +109,7 @@ export default class LeaveApprScreen extends React.Component {
       info.isCancel = list[i].flaq != 'L';
       info.index = i;
       info.selected = '1';
-      info.AttachUrl = list[i].EmpImg;
+      info.AttachUrl = list[i].AttachUrl;
       infos.push(info);
   }
     return infos;
@@ -360,7 +360,8 @@ export default class LeaveApprScreen extends React.Component {
     }else if(infos[index].selected=='2'){
       infos[index].selected = '1'
     }
-    this.setState({loading:false})
+    let selecteds = infos.filter(info=> info.selected=='2')
+    this.setState({loading:false,isSelect:selecteds.length>0})
   }
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
@@ -415,7 +416,7 @@ export default class LeaveApprScreen extends React.Component {
               :(<View style={{flex:1,alignItems:"center",justifyContent:"center",marginTop:100}}>
                 <Loading mini={true}/></View>)}
           </PTRView>
-          <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
+          {this.state.isSelect && <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
              <ActionButton.Item marginRight={responsiveWidth(2)} marginBottom={-responsiveHeight(8)} buttonColor='transparent' onPress={(e) => this.onRejectPressAll()}>
               <Icon name="times" style={[styles.actionButtonIcon]} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Reject')}</Text>
@@ -428,7 +429,7 @@ export default class LeaveApprScreen extends React.Component {
               <Icon name="check" style={styles.actionButtonIcon} />
               <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('Approve')}</Text>
             </ActionButton.Item>
-          </ActionButton>
+          </ActionButton>}
       </View>
     );
   }

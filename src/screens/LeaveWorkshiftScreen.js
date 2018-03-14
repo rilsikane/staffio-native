@@ -99,6 +99,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
     LeaveReq.PERIOD_YEAR = `${new Date().getFullYear()}`;
     let ListLeaveRequestDetail = [];
     let sumMinute = 0;
+    LeaveReq.TOTAL_LEAVEDAY = 0.0;
     this.state.leaveWorkshifts.map(lw =>{
       let  leavePattern = lw[Object.keys(lw)];
       leavePattern.shiftData.map(shiftData =>{
@@ -106,18 +107,28 @@ export default class LeaveWorkshiftScreen extends React.Component {
             leaveReq.EMP_CODE = shiftData.EMP_CODE;
             leaveReq.EFFECTIVE_DATE = LeaveReq.START_DATE;
             leaveReq.START_DATE = shiftData.DAY_DATE;
-            leaveReq.START_TIME = shiftData.WORK_START_TM.substring(0,5);
+            leaveReq.START_TIME = shiftData.WORK_START_TM_EDIT ?shiftData.WORK_START_TM_EDIT.substring(0,5) : shiftData.WORK_START_TM.substring(0,5);
             leaveReq.END_DATE = shiftData.DAY_DATE;
-            leaveReq.END_TIME = shiftData.WORK_END_TM.substring(0,5);
+            leaveReq.END_TIME = shiftData.WORK_END_TM_EDIT ? shiftData.WORK_END_TM_EDIT.substring(0,5):shiftData.WORK_END_TM.substring(0,5);
             // leaveReq.LEAVE_ACTION = "FULLDAY";
-            leaveReq.LEAVE_MINUTE = this.calculateMinute(shiftData.WORK_START_TM,shiftData.WORK_END_TM);
+            if(!shiftData.LEAVE_ACTION){
+              shiftData.LEAVE_ACTION = "FULLDAY";
+              LeaveReq.LEAVE_ACTION = "FULLDAY";
+            }
+            if(shiftData.LEAVE_ACTION!="FULLDAY"){
+              LeaveReq.TOTAL_LEAVEDAY+=0.5
+            }else{
+              LeaveReq.TOTAL_LEAVEDAY+=1.0
+            }
+            leaveReq.LEAVE_MINUTE = this.calculateMinute(shiftData.WORK_START_TM_EDIT ? shiftData.WORK_START_TM_EDIT: shiftData.WORK_START_TM,shiftData.WORK_END_TM_EDIT ? shiftData.WORK_END_TM_EDIT :shiftData.WORK_END_TM);
             sumMinute +=  leaveReq.LEAVE_MINUTE;
             leaveReq.SHFT_CODE = shiftData.SHFT_CODE;
             ListLeaveRequestDetail.push(leaveReq);
+            
       })
    
     });
-    LeaveReq.TOTAL_LEAVEDAY =  Math.round(sumMinute/(8*60));
+    //LeaveReq.TOTAL_LEAVEDAY =  this.round51(sumMinute/(8*60));
 
     let login = {};
     login.LOGIN_EMP_CODE = user.EMP_CODE;
@@ -140,6 +151,14 @@ export default class LeaveWorkshiftScreen extends React.Component {
     // let response = await post("ESSServices/CreateESSLeaveRequest",params);
     // console.log(response);
 
+  }
+  round51(num){
+    let decimal =  num % 1;
+    if(decimal > 0.50){
+        return Math.ceil(num);
+    }else{
+         return Math.floor(num)+0.5;
+    }
   }
   calculateDay(firstDate,secondDate){
     var oneDay = 24*60*60*1000;

@@ -115,7 +115,7 @@ export default class DetailLeave extends React.Component {
                     </View>}
                     
                     {this.props.AttachUrl && <View style={{flexDirection: 'row', alignItems:'center', marginTop:responsiveHeight(2)}}>
-                        <Text style={{fontFamily:'Kanit-Medium',backgroundColor:"transparent", color:'#7e6560',flex:0.3, fontSize:responsiveFontSize(2.2)}}>เอกสารแนบ</Text>
+                        <Text style={{fontFamily:'Kanit-Medium',backgroundColor:"transparent", color:'#7e6560',flex:0.3, fontSize:responsiveFontSize(2.2)}}>{I18n.t('attachDoc')}</Text>
                         <TouchableOpacity onPress={this.openFile}>
                             <Icon style={{flex:1,color:'#fbaa3e',fontSize:20}} name='file-archive-o' size={responsiveFontSize(2)} />
                         </TouchableOpacity>

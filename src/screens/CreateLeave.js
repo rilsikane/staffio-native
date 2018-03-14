@@ -42,6 +42,7 @@ export default class CreateLeave extends React.Component {
     header: null,
   };
   async componentDidMount(){
+    this.dayList = [];
     this.setState({loading:true});
     const userData = await store.get("USER");
     const params = {};
@@ -104,6 +105,9 @@ export default class CreateLeave extends React.Component {
                 
               }
             }
+           let tmpDaylist = this.dayList[0];
+            this.dayList = [];
+            this.dayList.push(tmpDaylist);  
             this.dayList.push(day);
             this.setState({markeds:markeds,dayList:this.dayList});
           }else{
