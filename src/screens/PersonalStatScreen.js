@@ -287,7 +287,7 @@ export default class PersonalStatScreen extends React.Component {
           <ActionButton IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e" offsetX={0}>
              <ActionButton.Item marginRight={responsiveWidth(5)} marginBottom={-responsiveHeight(1)} buttonColor='transparent' onPress={(e) => this.openCreateLeave()}>
               <Icon name="file" style={[styles.actionButtonIcon]} />
-              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('CreateLeave')}</Text>
+              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.4)}}>{I18n.t('CreateLeave')}</Text>
             </ActionButton.Item>
            {/* <ActionButton.Item marginRight={responsiveWidth(25)} marginBottom={-(responsiveHeight(15))} buttonColor='transparent' onPress={(e) => console.log()}>
               <Icon name="search" style={styles.actionButtonIcon} />
