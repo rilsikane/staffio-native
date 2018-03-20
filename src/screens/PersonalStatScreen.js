@@ -224,6 +224,17 @@ export default class PersonalStatScreen extends React.Component {
         // backgroundBlur: "dar
      });
   }
+
+  onCancelAppModal(data){
+    this.props.navigator.showLightBox({
+      screen: "staffio.ConfirmReasonModalScreen", // unique ID registered with Navigation.registerScreen
+      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`
+      ,ok:this.cancelReqLeave,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: styleConfirmModal
+        // backgroundBlur: "dar
+     });
+  }
+
   onEditModal(data){
    
   }
@@ -247,7 +258,17 @@ export default class PersonalStatScreen extends React.Component {
           </View>
           {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
         </TouchableOpacity>,  
-      ]:null}>
+        
+      ]:null || info.requestStatusCode=='01' ?[
+
+        <TouchableOpacity onPress={()=>this.onCancelAppModal(info)}>
+        <View style={[styles.rightSwipeItem]}>
+          <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+        </View>
+        {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(3.5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>:<Text style={{marginLeft:responsiveWidth(1),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('canreq')}</Text>}
+        </TouchableOpacity> 
+
+      ]:null }>
       <TouchableOpacity  key={info.requestLeaveNo} onPress={(e) => this.openLeaveDetail(info)}>  
        <LeavePersonalCardNew info={info} />
       </TouchableOpacity>

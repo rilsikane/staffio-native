@@ -35,6 +35,7 @@ import MsgModalScreen from './Modal/msgModal';
 import InputCancelModal from './Modal/inputCancelModal'
 import NotiModalScreen from './Modal/notiModal';
 import ImageModelScreen from './Modal/imageModal';
+import ConfirmReasonModalScreen from './Modal/confirmReasonModal';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -72,6 +73,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.InputCancelModal', () => InputCancelModal, Store, Provider);
   Navigation.registerComponent('staffio.NotiModalScreen', () => NotiModalScreen, Store, Provider);
   Navigation.registerComponent('staffio.ImageModal', () => ImageModelScreen, Store, Provider);
+  Navigation.registerComponent('staffio.ConfirmReasonModalScreen', () => ConfirmReasonModalScreen, Store, Provider);
   
 
 }
