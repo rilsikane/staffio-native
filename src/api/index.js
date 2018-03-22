@@ -149,13 +149,15 @@ export async function post(path,param){
   let lang = await store.get("locale");
   let requestURL = `${endpoint}${path}`;
       try{
+          param.LOGIN_EMP_CODE = userData.EMP_CODE;
           param.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
           param.LOGIN_ORG_CODE = userData.ORG_CODE;
           param.LOGIN_UNIT_CODE = userData.UNIT_CODE;
           param.LOGIN_USER_NAME = userData.USER_NAME;
           param.LOGIN_USER_ID = userData.USER_ID;
           param.CUSTOMER_CODE = userData.CUSTOMER_CODE;
-          param.user = {};
+          param.user = {}; 
+          param.user.LOGIN_EMP_CODE = userData.EMP_CODE;
           param.user.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
           param.user.LOGIN_ORG_CODE = userData.ORG_CODE;
           param.user.LOGIN_UNIT_CODE = userData.UNIT_CODE;
