@@ -155,13 +155,13 @@ export async function post(path,param){
           param.LOGIN_USER_NAME = userData.USER_NAME;
           param.LOGIN_USER_ID = userData.USER_ID;
           param.CUSTOMER_CODE = userData.CUSTOMER_CODE;
-          param.login = {};
-          param.login.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
-          param.login.LOGIN_ORG_CODE = userData.ORG_CODE;
-          param.login.LOGIN_UNIT_CODE = userData.UNIT_CODE;
-          param.login.LOGIN_USER_NAME = userData.USER_NAME;
-          param.login.LOGIN_USER_ID = userData.USER_ID;
-          param.login.CUSTOMER_CODE = userData.CUSTOMER_CODE;
+          param.user = {};
+          param.user.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+          param.user.LOGIN_ORG_CODE = userData.ORG_CODE;
+          param.user.LOGIN_UNIT_CODE = userData.UNIT_CODE;
+          param.user.LOGIN_USER_NAME = userData.USER_NAME;
+          param.user.LOGIN_USER_ID = userData.USER_ID;
+          param.user.CUSTOMER_CODE = userData.CUSTOMER_CODE;
           console.log("param: "+JSON.stringify(param));
           const response = await  axios.post(requestURL, param,{headers: {token:userData.token,lang:lang}});
           if(response.status=='200' && (response.data.Success || response.data.Complete) || (!response.data.Msg && !response.data.Message && !response.Message)){
