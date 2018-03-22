@@ -301,10 +301,10 @@ export default class InboxScreen extends React.Component {
     this.props.punchStore.statusSearch = this.state.statusSelect;
     this.props.punchStore.locationSearch = this.state.locationSelect;
     this.props.punchStore.staffSearch = this.state.empSelect;
-    this.props.punchStore.dateSearch =  this.state.dateSelect;
-    this.props.navigator.dismissModal({
+    this.props.punchStore.dateSearch =  this.state.datthis.props.navigator.dismissModal({
       animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-    });
+    });eSelect;
+    
   }
   async clearTags(){
     this.setState({isLoading:true});

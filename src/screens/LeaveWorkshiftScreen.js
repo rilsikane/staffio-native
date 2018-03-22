@@ -113,7 +113,9 @@ export default class LeaveWorkshiftScreen extends React.Component {
             // leaveReq.LEAVE_ACTION = "FULLDAY";
             if(!shiftData.LEAVE_ACTION){
               shiftData.LEAVE_ACTION = "FULLDAY";
-              LeaveReq.LEAVE_ACTION = "FULLDAY";
+              leaveReq.LEAVE_ACTION = "FULLDAY";
+            }else{
+              leaveReq.LEAVE_ACTION = shiftData.LEAVE_ACTION;
             }
             if(shiftData.LEAVE_ACTION!="FULLDAY"){
               LeaveReq.TOTAL_LEAVEDAY+=0.5
