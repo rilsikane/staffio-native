@@ -43,7 +43,7 @@ export default class PersonalStatScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,reasons:[],reason:""}
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
@@ -52,6 +52,7 @@ export default class PersonalStatScreen extends React.Component {
     if(this.app.locale && moment){
       moment().locale(this.app.locale);
       }
+    this.cancelLeaveAppr = this.cancelLeaveAppr.bind(this);
   }
   static navigationOptions = {
     header: null,
@@ -61,6 +62,18 @@ export default class PersonalStatScreen extends React.Component {
      const userData = await store.get("USER");
      this.getLeaveList(userData);
      this.setState({userData:userData});
+
+     let param = {};
+     param.Code= "LEAVE_REASON";
+     param.CustomerCode = user.CUSTOMER_CODE;
+     param.orderFieldName = "CATEGORY_NAME_TH";
+     if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
+      let response = await post("DropDownListService/GetDDLCategoryByCode",param);
+      // console.log("GetDDLCategoryByCode",response);
+      // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
+      let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
+      this.setState({reasons:reasons});
+     }
    
   }
   async getLeaveList(user,leaveTypeCode){
@@ -215,6 +228,25 @@ export default class PersonalStatScreen extends React.Component {
     }
     // const infos = response.objData;
   }
+
+  async cancelLeaveAppr(data){
+    this.props.navigator.dismissLightBox();
+    this.setState({loading:true});
+    const userData = await store.get("USER");
+    let params = {};
+    params.REQUEST_LEAVE_NO = data.requestLeaveNo;
+    params.empCode = userData.EMP_CODE;
+    params.orgCode = userData.ORG_CODE;
+    params.reasonCode = reasons;
+    params.reasonOther = null;
+    params.unitCode = userData.UNIT_CODE;
+    let response = await post("ESSServices/CancelLeaveApprove",params);
+    if(response){
+      this.getLeaveList(userData);
+    }
+  }
+  // "CLV0001"
+
    onCancelModal(data){
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmModalScreen", // unique ID registered with Navigation.registerScreen
@@ -225,11 +257,12 @@ export default class PersonalStatScreen extends React.Component {
      });
   }
 
-  onCancelAppModal(data){
+  onCancelLeaveApprModal(data){
+
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmReasonModalScreen", // unique ID registered with Navigation.registerScreen
       passProps: {title:`${I18n.t('ConfirmCancelTitle')}`
-      ,ok:this.cancelReqLeave,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
+      ,ok:this.cancelLeaveAppr,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleConfirmModal
         // backgroundBlur: "dar
      });
@@ -261,7 +294,7 @@ export default class PersonalStatScreen extends React.Component {
         
       ]:null || info.requestStatusCode=='01' ?[
 
-        <TouchableOpacity onPress={()=>this.onCancelAppModal(info)}>
+        <TouchableOpacity onPress={()=>this.onCancelLeaveApprModal(info)}>
         <View style={[styles.rightSwipeItem]}>
           <Icon name="times" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
         </View>
