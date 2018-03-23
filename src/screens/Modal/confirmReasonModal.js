@@ -23,7 +23,8 @@ export default class ConfirmReasonModal extends Component {
     this.props.cancel();
   }
   okPress(){
-      this.props.ok(this.props.data);
+    this.props.data.reasons = this.state.reasons;
+    this.props.ok(this.props.data);
   }
 
 
@@ -36,8 +37,8 @@ export default class ConfirmReasonModal extends Component {
                 , fontSize: responsiveFontSize(2),textAlign:'center'}}>{this.props.msg}</Text>
                 {/* <Text style={{fontFamily: 'Kanit', color: '#5f504b'
                 , fontSize: responsiveFontSize(2),textAlign:'center'}}>{this.props.msg2}</Text> */}
-              <Dropdown label={I18n.t('causeLeaveCon')} data={this.props.reasons}
-              style={[{marginTop:5,textAlign:'left',fontFamily:"Kanit", color: '#5f504b', fontSize: responsiveFontSize(2)}]} />
+              <Dropdown label={I18n.t('causeLeaveCon')} data={this.props.reasons} valueExtractor={item => item.CODE} labelExtractor={item => item.DESC}
+              style={[{marginTop:5,textAlign:'left',fontFamily:"Kanit"}]} onChangeText={(value) => this.setState({reasons:value})}/>
             </View>
         </Modal>
     );
