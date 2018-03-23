@@ -87,7 +87,7 @@ export default async function startApplication(root) {
         return;
       case 'authen-pin':
        Navigation.startSingleScreenApp({
-            screen: { screen: 'staffio.PersonalStatScreen' },
+            screen: { screen: 'staffio.AuthenPinCodeScreen' },
             appStyle: {
             orientation: 'portrait',
             navBarBlur: false,

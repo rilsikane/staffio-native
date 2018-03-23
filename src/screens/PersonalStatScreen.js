@@ -63,17 +63,17 @@ export default class PersonalStatScreen extends React.Component {
      this.getLeaveList(userData);
      this.setState({userData:userData});
 
-     let param = {};
-     param.Code= "LEAVE_REASON";
-     param.CustomerCode = user.CUSTOMER_CODE;
-     param.orderFieldName = "CATEGORY_NAME_TH";
-     if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
-      let response = await post("DropDownListService/GetDDLCategoryByCode",param);
-      // console.log("GetDDLCategoryByCode",response);
-      // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
-      let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
-      this.setState({reasons:reasons});
-     }
+    //  let param = {};
+    //  param.Code= "LEAVE_REASON";
+    //  param.CustomerCode = user.CUSTOMER_CODE;
+    //  param.orderFieldName = "CATEGORY_NAME_TH";
+    //  if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
+    //   let response = await post("DropDownListService/GetDDLCategoryByCode",param);
+    //   // console.log("GetDDLCategoryByCode",response);
+    //   // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
+    //   let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
+    //   this.setState({reasons:reasons});
+    //  }
    
   }
   async getLeaveList(user,leaveTypeCode){
@@ -149,8 +149,8 @@ export default class PersonalStatScreen extends React.Component {
       info.startDate = convertByFormatShort(new Date(list[i].START_DATE).getTime(),"DD MMM ");
       info.endDate = convertByFormatShort(new Date(list[i].END_DATE).getTime(),"DD MMM ");
       info.createDate = convertByFormatShort(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
-      info.Datetimestart = Date(list[i].START_DATE);
-      info.Datetimeend = Date(list[i].END_DATE).getTime();
+      // info.Datetimestart = Date(list[i].START_DATE).getTime();
+      // info.Datetimeend = Date(list[i].END_DATE).getTime();
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
@@ -239,7 +239,7 @@ export default class PersonalStatScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     params.empCode = userData.EMP_CODE;
     params.orgCode = userData.ORG_CODE;
-    params.reasonCode = reasons;
+    params.reasonCode = "CLV0001";
     params.reasonOther = null;
     params.unitCode = userData.UNIT_CODE;
     let response = await post("ESSServices/CancelLeaveApprove",params);
@@ -270,21 +270,21 @@ export default class PersonalStatScreen extends React.Component {
      });
   }
 
-  async onEditModal(data){
-    let countDay = this.calculateDay(data.Datetimestart,data.Datetimeend);
-    alert(countDay)
-    // for(let i=0;i<=countDay;i++){
-    //     let dayAdd = moment(firstDay.timestamp).add(i,'day');
-    //     let dayFormat = dayAdd.format().split('T')[0];  
-    // }
-    // const userData = await store.get("USER");
-    // let params={}
-    // params.CompanyCode = userData.ORG_CODE;
-    // params.DayDate = 
-    // params.EmpCode = userData.EMP_CODE;
-    // params.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
-    // const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
-  }
+  // async onEditModal(data){
+  //   let countDay = this.calculateDay(data.Datetimestart,data.Datetimeend);
+  //   alert(countDay)
+  //   // for(let i=0;i<=countDay;i++){
+  //   //     let dayAdd = moment(firstDay.timestamp).add(i,'day');
+  //   //     let dayFormat = dayAdd.format().split('T')[0];  
+  //   // }
+  //   // const userData = await store.get("USER");
+  //   // let params={}
+  //   // params.CompanyCode = userData.ORG_CODE;
+  //   // params.DayDate = 
+  //   // params.EmpCode = userData.EMP_CODE;
+  //   // params.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+  //   // const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
+  // }
 
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
