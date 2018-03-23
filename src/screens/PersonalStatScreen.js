@@ -43,7 +43,7 @@ export default class PersonalStatScreen extends React.Component {
   constructor(props){
     super(props);
     this.openLeaveDetail = this.openLeaveDetail.bind(this);
-    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,reasons:[],reason:""}
+    this.state={isLoading:false,isFocus:false,userData:{}, leaveList:[],loading:true,leaveBalances:[],isCancel:false,reasons:[],leaveType:[]}
     this._refresh = this._refresh.bind(this);
     this.onSwitch = this.onSwitch.bind(this);
     this.filterBalance = this.filterBalance.bind(this);
@@ -63,17 +63,25 @@ export default class PersonalStatScreen extends React.Component {
      this.getLeaveList(userData);
      this.setState({userData:userData});
 
-    //  let param = {};
-    //  param.Code= "LEAVE_REASON";
-    //  param.CustomerCode = user.CUSTOMER_CODE;
-    //  param.orderFieldName = "CATEGORY_NAME_TH";
-    //  if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
-    //   let response = await post("DropDownListService/GetDDLCategoryByCode",param);
-    //   // console.log("GetDDLCategoryByCode",response);
-    //   // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
-    //   let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
-    //   this.setState({reasons:reasons});
-    //  }
+     let param = {};
+     param.Code= "LEAVE_REASON";
+     param.CustomerCode = userData.CUSTOMER_CODE;
+     param.orderFieldName = "CATEGORY_NAME_TH";
+     let login = {};
+     login.LOGIN_EMP_CODE = userData.EMP_CODE;
+     login.LOGIN_ORG_CODE = userData.ORG_CODE;
+     login.LOGIN_UNIT_CODE = userData.UNIT_CODE;
+     login.LOGIN_USER_NAME = userData.UserName;
+     login.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+     login.LOGIN_USER_ID = userData.USER_ID;
+     if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
+      let response = await post("DropDownListService/GetDDLCategoryByCode",param);
+      let leaveType = await post("ESSServices/GetListLeaveTypeForMobile",login);
+      // console.log("GetDDLCategoryByCode",response);
+      // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
+      // let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
+      this.setState({reasons:response,leaveType:leaveType});
+     }
    
   }
   async getLeaveList(user,leaveTypeCode){
@@ -239,7 +247,7 @@ export default class PersonalStatScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     params.empCode = userData.EMP_CODE;
     params.orgCode = userData.ORG_CODE;
-    params.reasonCode = "CLV0001";
+    params.reasonCode = reasons;
     params.reasonOther = null;
     params.unitCode = userData.UNIT_CODE;
     let response = await post("ESSServices/CancelLeaveApprove",params);
@@ -260,10 +268,11 @@ export default class PersonalStatScreen extends React.Component {
   }
 
   onCancelLeaveApprModal(data){
-
+    let leaveType = this.state.leaveType.filter(lp=>lp.LEAVE_TYPE_CODE == data.typeCode);
+    let reasons = this.state.reasons.filter(ddl=>ddl.DATA1 == leaveType[0].LEAVE_GROUP_CODE);
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmReasonModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`
+      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`,reasons: reasons
       ,ok:this.cancelLeaveAppr,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleConfirmModal
         // backgroundBlur: "dar
@@ -294,7 +303,7 @@ export default class PersonalStatScreen extends React.Component {
       <Swipeable   key={info.requestLeaveNo} rightButtons={info.requestStatusCode=='03' || info.requestStatusCode=='04' ?[
         info.requestStatusCode=='04' && (<TouchableOpacity onPress={()=>this.onEditModal(info)}>
           <View style={[styles.rightSwipeItem]}>
-            <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+            <Icon name="pencil" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
           </View>
           {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
       </TouchableOpacity>),
