@@ -149,6 +149,8 @@ export default class PersonalStatScreen extends React.Component {
       info.startDate = convertByFormatShort(new Date(list[i].START_DATE).getTime(),"DD MMM ");
       info.endDate = convertByFormatShort(new Date(list[i].END_DATE).getTime(),"DD MMM ");
       info.createDate = convertByFormatShort(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
+      info.Datetimestart = Date(list[i].START_DATE);
+      info.Datetimeend = Date(list[i].END_DATE).getTime();
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
@@ -268,8 +270,20 @@ export default class PersonalStatScreen extends React.Component {
      });
   }
 
-  onEditModal(data){
-   
+  async onEditModal(data){
+    let countDay = this.calculateDay(data.Datetimestart,data.Datetimeend);
+    alert(countDay)
+    // for(let i=0;i<=countDay;i++){
+    //     let dayAdd = moment(firstDay.timestamp).add(i,'day');
+    //     let dayFormat = dayAdd.format().split('T')[0];  
+    // }
+    // const userData = await store.get("USER");
+    // let params={}
+    // params.CompanyCode = userData.ORG_CODE;
+    // params.DayDate = 
+    // params.EmpCode = userData.EMP_CODE;
+    // params.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+    // const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
   }
 
    renderList(){
@@ -277,13 +291,13 @@ export default class PersonalStatScreen extends React.Component {
       return this.state.leaveList.map(info =>
       (!this.state.isCancel && (info.requestStatusCode != '06' && info.requestStatusCode != '05') 
       || this.state.isCancel && (info.requestStatusCode == '06' || info.requestStatusCode == '05')) && 
-      <Swipeable   key={info.requestLeaveNo} rightButtons={info.requestStatusCode=='03' ?[
-        // <TouchableOpacity onPress={()=>this.onEditModal(info)}>
-        //   <View style={[styles.rightSwipeItem]}>
-        //     <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
-        //   </View>
-        //   {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
-        // </TouchableOpacity>,
+      <Swipeable   key={info.requestLeaveNo} rightButtons={info.requestStatusCode=='03' || info.requestStatusCode=='04' ?[
+        info.requestStatusCode=='04' && (<TouchableOpacity onPress={()=>this.onEditModal(info)}>
+          <View style={[styles.rightSwipeItem]}>
+            <Icon name="pencil-alt" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+          </View>
+          {this.app && this.app.locale=='en'?<Text style={{marginLeft:responsiveWidth(5),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>:<Text style={{marginLeft:responsiveWidth(2),fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'#7e6560'}}>{I18n.t('editReq')}</Text>}
+      </TouchableOpacity>),
         
         <TouchableOpacity onPress={()=>this.onCancelModal(info)}>
           <View style={[styles.rightSwipeItem]}>
