@@ -28,7 +28,7 @@ export default class CreateLeave extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={color:'#ED5565',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false};
+    this.state={color:'#ED5565',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false,editmode:false};
     this.color ={sickL:'#ED5565',errandL:'#23c6c8',vacationL:'#8BC34A',otherL:'#F5DC0B'};
     this.onDayPress = this.onDayPress.bind(this);
     this.dayList = [];
@@ -37,7 +37,6 @@ export default class CreateLeave extends React.Component {
     this.betwMask = {color: this.color[this.state.color],textColor:"#fff"};
     this.endMask = {endingDay: true,color: this.color[this.state.color],textColor:"#fff"};
     this.submitDate = this.submitDate.bind(this);
-    this.edit = false
   }
   static navigationOptions = {
     header: null,
@@ -62,7 +61,7 @@ export default class CreateLeave extends React.Component {
       this.setState({loading:false});
     }
     if(this.props.data){
-      this.edit = true
+      this.setState({editmode:true});
       let data = this.props.data
       let color = data.color
       this.dayList = [];
@@ -184,7 +183,7 @@ export default class CreateLeave extends React.Component {
       this.props.navigator.push({
         screen: 'staffio.LeaveWorkShiftScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
-        passProps: {dayList:this.state.dayList},
+        passProps: {dayList:this.state.dayList, editmode:this.state.editmode},
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
         animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
         navigatorStyle: {}, // override the navigator style for the pushed screen (optional)

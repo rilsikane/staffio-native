@@ -9,7 +9,7 @@ import {post,get} from '../api';
 import store from 'react-native-simple-store';
 import {convertDate, disbackButton} from '../utils/staffioUtils';
 import { observer, inject } from 'mobx-react';
-
+import moment from 'moment';
 @inject('leaveStore')
 @observer
 export default class LeaveWorkshiftScreen extends React.Component {
@@ -35,28 +35,53 @@ export default class LeaveWorkshiftScreen extends React.Component {
     }else{
       endDate = this.props.dayList[this.props.dayList.length-1];
     }
-    let leaveWorkshifts = await this.getShiftPatternByPersonal(startDate.timestamp,endDate.timestamp);
-    let leaveList = [];
-    let leaveGroup = [];
-    let index = 0;
-    if(leaveWorkshifts && leaveWorkshifts.length >0){
-      leaveWorkshifts.map(leave =>{
-        if(leaveList.indexOf(leave.DAY_DATE) ==-1){
-            let shiftData = [];
-            shiftData.push(leave)
-            leaveGroup.push({[leave.DAY_DATE]:{shiftData :shiftData,id:leave.DAY_DATE}});
-            leaveList.push(leave.DAY_DATE);
-            index ++
-        }else{
-            // leaveGroup.push({[leave.DAY_DATE]:{shiftData : leaveGroup[leave.DAY_DATE].push(leave),leaveDate:leave.DAY_DATE}});
-            let leaveG = leaveGroup[index-1];
-            leaveG[leave.DAY_DATE].shiftData.push(leave);
-            leaveList.push(leave.DAY_DATE);
-        }
-      });
+    let leaveWorkshifts
+    if(this.props.editmode){    
+      leaveWorkshifts = await this.getShiftWorkDataByEmpCode(this.props.dayList);
+      let leaveList = [];
+      let leaveGroup = [];
+      let index = 0;
+      if(leaveWorkshifts && leaveWorkshifts.length >0){
+        leaveWorkshifts.map(leave =>{
+          if(leaveList.indexOf(leave.dayDate) ==-1){
+              let shiftData = [];
+              console.log(leave.EmpShiftDLL)
+              shiftData.push(leave.EmpShiftDLL)
+              leaveGroup.push({[leave.dayDate]:{shiftData :shiftData,id:leave.dayDate}});
+              leaveList.push(leave.dayDate);
+              index ++
+          }else{
+              let leaveG = leaveGroup[index-1];
+              leaveG[leave.dayDate].shiftData.push(leave.EmpShiftDLL);
+              leaveList.push(leave.dayDate);
+          }
+        });
+      }
+      this.setState({leaveWorkshifts:leaveGroup,startDate:startDate.getTime(),endDate:endDate.getTime()});  
+    }else{
+      leaveWorkshifts = await this.getShiftPatternByPersonal(startDate.timestamp,endDate.timestamp);
+      let leaveList = [];
+      let leaveGroup = [];
+      let index = 0;
+      if(leaveWorkshifts && leaveWorkshifts.length >0){
+        leaveWorkshifts.map(leave =>{
+          if(leaveList.indexOf(leave.DAY_DATE) ==-1){
+              let shiftData = [];
+              console.log(shiftData)
+              shiftData.push(leave)
+              leaveGroup.push({[leave.DAY_DATE]:{shiftData :shiftData,id:leave.DAY_DATE}});
+              leaveList.push(leave.DAY_DATE);
+              index ++
+          }else{
+              // leaveGroup.push({[leave.DAY_DATE]:{shiftData : leaveGroup[leave.DAY_DATE].push(leave),leaveDate:leave.DAY_DATE}});
+              let leaveG = leaveGroup[index-1];
+              leaveG[leave.DAY_DATE].shiftData.push(leave);
+              leaveList.push(leave.DAY_DATE);
+          }
+        });
+      }
+      this.setState({leaveWorkshifts:leaveGroup,startDate:startDate.timestamp,endDate:endDate.timestamp});  
     }
-
-    this.setState({leaveWorkshifts:leaveGroup,startDate:startDate.timestamp,endDate:endDate.timestamp});
   }
   getShiftPatternByPersonal = async (startDate,endDate)=>{
     const user = await store.get("USER");
@@ -70,6 +95,20 @@ export default class LeaveWorkshiftScreen extends React.Component {
     const response = await post("GetShiftPatternByPersonal",params);
     // const response = customData2;
     return response.data;
+  }
+  getShiftWorkDataByEmpCode = async (dayList)=>{
+    let dayDate = []
+    for(let i=0;i<dayList.length;i++){
+      dayDate[i] = new Date(dayList[i].getTime()).toISOString()
+    }
+    const user = await store.get("USER");
+    let params  = {};
+    params.CompanyCode = user.ORG_CODE;
+    params.DayDate = dayDate;
+    params.EmpCode = user.EMP_CODE;
+    params.LOGIN_CUSTOMER_CODE = user.CUSTOMER_CODE;
+    const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
+    return response.objData.listShift;
   }
   renderWorkShift(){
       return this.state.leaveWorkshifts.map(lw =>{
