@@ -37,6 +37,7 @@ export default class CreateLeave extends React.Component {
     this.betwMask = {color: this.color[this.state.color],textColor:"#fff"};
     this.endMask = {endingDay: true,color: this.color[this.state.color],textColor:"#fff"};
     this.submitDate = this.submitDate.bind(this);
+    this.edit = false
   }
   static navigationOptions = {
     header: null,
@@ -60,8 +61,58 @@ export default class CreateLeave extends React.Component {
     }else{
       this.setState({loading:false});
     }
+    if(this.props.data){
+      this.edit = true
+      let data = this.props.data
+      let color = data.color
+      this.dayList = [];
+      this.oneMask = {startingDay: true,endingDay: true, color: color,textColor:"#fff"};
+      this.firstMask = {startingDay: true, color: color,textColor:"#fff"};
+      this.betwMask = {color: color,textColor:"#fff"};
+      this.endMask = {endingDay: true,color: color, textColor:"#fff"};
+      this.setState({color:color,dayList:this.dayList,markeds:{},leaveType:data.typeCode});
+
+      let startdate = data.Datetimestart
+      let lastdate = data.Datetimeend
+      let firstdate = data.Datetimestart
+      let countDay = this.calculateDay2(startdate,lastdate);
+          if(countDay>0){
+              let markeds = {};
+              let firstDay = startdate;
+              for(let i=0;i<=countDay;i++){
+                if(i==0){
+                  let dayAdd = moment(startdate.getTime()).add(i,'day');
+                  let dayFormat = dayAdd.format().split('T')[0];
+                  markeds[dayFormat] = this.firstMask;
+                }else{ 
+                  let dayAdd = moment(startdate.getTime()).add(i,'day');
+                  let dayFormat = dayAdd.format().split('T')[0];
+                  if(i<countDay){
+                    markeds[dayFormat] = this.betwMask;
+                  }else{
+                    markeds[dayFormat] = this.endMask;
+                  }
+                }
+              }
+             let tmpDaylist = firstDay;
+              this.dayList = [];
+              this.dayList.push(tmpDaylist);  
+              this.dayList.push(lastdate);
+              this.setState({markeds:markeds,dayList:this.dayList});
+          }else{
+            this.dayList = [];
+            this.dayList.push(lastdate);
+            let dayAdd = moment(lastdate.getTime()).format().split('T')[0];
+            
+            this.setState({markeds:{[dayAdd]:this.oneMask},dayList:this.dayList});
+          }
+      }
   }
-  
+  calculateDay2(firstDate,secondDate){
+    var oneDay = 24*60*60*1000;
+    var diffDays = Math.round((secondDate.getTime() - firstDate.getTime())/(oneDay));
+    return diffDays;
+  }
   onPressButton(obj){
     let color = obj.color;
     this.dayList = [];
@@ -129,16 +180,16 @@ export default class CreateLeave extends React.Component {
     return diffDays;
   }
   submitDate(){
-    this.props.leaveStore.leaveReqLeaveType = this.state.leaveType;
-    this.props.navigator.push({
-      screen: 'staffio.LeaveWorkShiftScreen', // unique ID registered with Navigation.registerScreen
-      title: undefined, // navigation bar title of the pushed screen (optional)
-      passProps: {dayList:this.state.dayList},
-      animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
-      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
-      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
-      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
-    });
+      this.props.leaveStore.leaveReqLeaveType = this.state.leaveType;
+      this.props.navigator.push({
+        screen: 'staffio.LeaveWorkShiftScreen', // unique ID registered with Navigation.registerScreen
+        title: undefined, // navigation bar title of the pushed screen (optional)
+        passProps: {dayList:this.state.dayList},
+        animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+        navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+        navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+      });
   }
 
   render() {

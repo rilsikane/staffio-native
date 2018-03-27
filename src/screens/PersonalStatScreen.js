@@ -61,28 +61,10 @@ export default class PersonalStatScreen extends React.Component {
    
      const userData = await store.get("USER");
      this.getLeaveList(userData);
-     this.setState({userData:userData});
+     this.setState({userDat:userData});
 
-     let param = {};
-     param.Code= "LEAVE_REASON";
-     param.CustomerCode = userData.CUSTOMER_CODE;
-     param.orderFieldName = "CATEGORY_NAME_TH";
-     let login = {};
-     login.LOGIN_EMP_CODE = userData.EMP_CODE;
-     login.LOGIN_ORG_CODE = userData.ORG_CODE;
-     login.LOGIN_UNIT_CODE = userData.UNIT_CODE;
-     login.LOGIN_USER_NAME = userData.UserName;
-     login.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
-     login.LOGIN_USER_ID = userData.USER_ID;
-     if(this.props.leaveStore.leaveReqLeaveType.REQUEST_REASON=='Y'){
-      let response = await post("DropDownListService/GetDDLCategoryByCode",param);
-      let leaveType = await post("ESSServices/GetListLeaveTypeForMobile",login);
-      // console.log("GetDDLCategoryByCode",response);
-      // console.log("leaveReqLeaveType",this.props.leaveStore.leaveReqLeaveType);
-      // let reasons = response.filter(ddl=>ddl.DATA1 == this.props.leaveStore.leaveReqLeaveType.LEAVE_GROUP_CODE);
-      this.setState({reasons:response,leaveType:leaveType});
-     }
-   
+     const response = await post("DropDownListService/InitCombo_CancelLeaveReasonDDL?CUSTOMER_CODE=GABLE",{});
+     this.setState({reasons:response.objData});
   }
   async getLeaveList(user,leaveTypeCode){
     try{
@@ -157,8 +139,8 @@ export default class PersonalStatScreen extends React.Component {
       info.startDate = convertByFormatShort(new Date(list[i].START_DATE).getTime(),"DD MMM ");
       info.endDate = convertByFormatShort(new Date(list[i].END_DATE).getTime(),"DD MMM ");
       info.createDate = convertByFormatShort(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
-      // info.Datetimestart = Date(list[i].START_DATE).getTime();
-      // info.Datetimeend = Date(list[i].END_DATE).getTime();
+      info.Datetimestart = list[i].START_DATE ? new Date(list[i].START_DATE):null;
+      info.Datetimeend = list[i].END_DATE ? new Date(list[i].END_DATE):null;
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;
@@ -247,7 +229,7 @@ export default class PersonalStatScreen extends React.Component {
     params.REQUEST_LEAVE_NO = data.requestLeaveNo;
     params.empCode = userData.EMP_CODE;
     params.orgCode = userData.ORG_CODE;
-    params.reasonCode = reasons;
+    params.reasonCode = data.reasons;
     params.reasonOther = null;
     params.unitCode = userData.UNIT_CODE;
     let response = await post("ESSServices/CancelLeaveApprove",params);
@@ -255,7 +237,6 @@ export default class PersonalStatScreen extends React.Component {
       this.getLeaveList(userData);
     }
   }
-  // "CLV0001"
 
    onCancelModal(data){
     this.props.navigator.showLightBox({
@@ -268,32 +249,39 @@ export default class PersonalStatScreen extends React.Component {
   }
 
   onCancelLeaveApprModal(data){
-    let leaveType = this.state.leaveType.filter(lp=>lp.LEAVE_TYPE_CODE == data.typeCode);
-    let reasons = this.state.reasons.filter(ddl=>ddl.DATA1 == leaveType[0].LEAVE_GROUP_CODE);
+    // let leaveType = this.state.leaveType.filter(lp=>lp.LEAVE_TYPE_CODE == data.typeCode);
+    // let reasons = this.state.reasons.filter(ddl=>ddl.DATA1 == leaveType[0].LEAVE_GROUP_CODE);
     this.props.navigator.showLightBox({
       screen: "staffio.ConfirmReasonModalScreen", // unique ID registered with Navigation.registerScreen
-      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`,reasons: reasons
+      passProps: {title:`${I18n.t('ConfirmCancelTitle')}`,reasons: this.state.reasons
       ,ok:this.cancelLeaveAppr,cancel:()=>this.props.navigator.dismissLightBox(),data:data}, // simple serializable object that will pass as props to the lightbox (optional)
       style: styleConfirmModal
         // backgroundBlur: "dar
      });
   }
-
-  // async onEditModal(data){
-  //   let countDay = this.calculateDay(data.Datetimestart,data.Datetimeend);
-  //   alert(countDay)
-  //   // for(let i=0;i<=countDay;i++){
-  //   //     let dayAdd = moment(firstDay.timestamp).add(i,'day');
-  //   //     let dayFormat = dayAdd.format().split('T')[0];  
-  //   // }
-  //   // const userData = await store.get("USER");
-  //   // let params={}
-  //   // params.CompanyCode = userData.ORG_CODE;
-  //   // params.DayDate = 
-  //   // params.EmpCode = userData.EMP_CODE;
-  //   // params.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
-  //   // const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
-  // }
+  calculateDay(firstDate,secondDate){
+    var oneDay = 24*60*60*1000;
+    var diffDays = Math.round((secondDate.getTime()- firstDate.getTime())/(oneDay));
+    return diffDays;
+  }
+  async onEditModal(data){
+    this.props.navigator.push({
+      screen: 'staffio.CreateLeave', // unique ID registered with Navigation.registerScreen
+      title: undefined, // navigation bar title of the pushed screen (optional)
+      passProps: {data:data}, // simple serializable object that will pass as props to the pushed screen (optional)
+      animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+      animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+    });
+    // const userData = await store.get("USER");
+    // let params={}
+    // params.CompanyCode = userData.ORG_CODE;
+    // params.DayDate = 
+    // params.EmpCode = userData.EMP_CODE;
+    // params.LOGIN_CUSTOMER_CODE = userData.CUSTOMER_CODE;
+    // const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
+  }
 
    renderList(){
     if(this.state.leaveList && this.state.leaveList.length >0){
