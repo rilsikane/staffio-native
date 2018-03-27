@@ -9,7 +9,6 @@ import ConfirmPunchScreen from './ConfirmPuchScreen';
 import AuthenPinCodeScreen from './AuthenPincodeScreen';
 import CameraScreen from '../components/staffioCamera';
 import HomeScreen from './HomeScreen';
-import ProfileScreen from './ProfileScreen';
 import InqInboxScreen from './InqInboxScreen'
 import InboxDetailScreen from './InboxDetailScreen'
 import FindFriendScreen from './FindFriendsScreen'
@@ -46,7 +45,6 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.HomeScreen', () => HomeScreen, Store, Provider);
   Navigation.registerComponent('staffio.CameraScreen', () => CameraScreen, Store, Provider);
   Navigation.registerComponent('staffio.ConfirmPunchScreen', () => ConfirmPunchScreen, Store, Provider);
-  Navigation.registerComponent('staffio.ProfileScreen', () => ProfileScreen, Store, Provider);
   Navigation.registerComponent('staffio.InqInboxScreen', () => InqInboxScreen, Store, Provider);
   Navigation.registerComponent('staffio.InboxDetailScreen', () => InboxDetailScreen, Store, Provider);
   Navigation.registerComponent('staffio.FindFriendScreen', () => FindFriendScreen, Store, Provider);

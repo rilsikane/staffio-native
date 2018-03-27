@@ -3,7 +3,7 @@ import {View,Keyboard,TouchableWithoutFeedback,Text} from 'react-native';
 import PincodePress from '../components/pincode/PincodePress';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import { NavigationActions } from'react-navigation';
+
 import I18n from '../utils/i18n';
 import {disbackButton} from '../utils/staffioUtils'
 @inject('userStore')

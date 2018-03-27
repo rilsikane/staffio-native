@@ -113,7 +113,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
       }else{
         let response = await post("ESSServices/CreateESSLeaveRequest",params);
         if(response){
-          this.setState({isLoading:false});
+          //this.setState({isLoading:false});
           setTimeout(()=>{
             this.props.navigator.showLightBox({
               screen: "staffio.MsgModalScreen", // unique ID registered with Navigation.registerScreen
@@ -127,7 +127,7 @@ export default class LeaveWorkshiftScreen extends React.Component {
               },
               adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
             });
-          },100)  
+          },300)  
         }
       }
     }

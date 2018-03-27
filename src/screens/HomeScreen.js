@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {Card,CardItem,Thumbnail,Button}from 'native-base'
 import {Agenda} from '../components/staffioCalendar';
-import { NavigationActions } from'react-navigation';
+
 import store from 'react-native-simple-store';
 import {post} from '../api';
 import Spinner from 'react-native-loading-spinner-overlay';

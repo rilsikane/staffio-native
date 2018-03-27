@@ -12,7 +12,7 @@ import {
 import Camera from 'react-native-camera';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import { NavigationActions } from'react-navigation';
+
 import RNFS from 'react-native-fs'
 import ImageResizer from 'react-native-image-resizer';
 import { createIconSetFromFontello } from 'react-native-vector-icons';

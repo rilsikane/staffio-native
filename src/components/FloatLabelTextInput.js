@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 class FloatingLabel extends Component {
   constructor(props) {
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
   },
   inlineImg: {
     position:'absolute',
-    marginTop:(Platform.OS == 'ios' ? 5 : 30),
+    marginTop:(Platform.OS == 'ios' ? responsiveHeight(1.2) : 30),
     justifyContent:'flex-end',
 		marginLeft:DEVICE_WIDTH - 75,
 		alignItems:'flex-end',

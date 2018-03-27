@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import InboxList from '../components/inbox/inboxList'
 import * as Animatable from 'react-native-animatable';
 import TagInput from '../components/tagInput';
-import { NavigationActions } from'react-navigation';
+
 import store from 'react-native-simple-store';
 import {post} from '../api';
 import { observer, inject } from 'mobx-react';

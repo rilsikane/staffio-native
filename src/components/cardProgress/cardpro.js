@@ -7,7 +7,7 @@ import {
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import ProgressCircle from 'react-native-progress-circle'
 import { ScrollView } from 'react-native';
-import { NavigationActions } from'react-navigation';
+
 import store from 'react-native-simple-store';
 import { post } from '../../api';
 import Overview from'../../screens/Overview';

@@ -10,7 +10,7 @@ import CardProgress from '../components/cardProgress/cardprogress';
 import CardNone from '../components/cardProgress/cardNone';
 import CardPro from '../components/cardProgress/cardpro';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { NavigationActions } from'react-navigation';
+
 import TimerMixin from 'react-timer-mixin';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import store from 'react-native-simple-store';

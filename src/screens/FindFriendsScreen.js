@@ -8,7 +8,7 @@ import {
 // import LeaveCalendar from '../components/LeaveCalendar'
 import FindFriends from '../components/findFriends'
 import {em,x,y} from '../constants/Layout';
-import { NavigationActions } from 'react-navigation'
+
 import {post} from '../api';
 import { observer, inject } from 'mobx-react';
 import Loading from '../components/loading';

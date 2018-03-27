@@ -1,7 +1,7 @@
 import React from "react-native";
 import Dimensions from 'Dimensions';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 // Precalculate Device Dimensions for better performance
 const x = Dimensions.get('window').width;
 const y = Dimensions.get('window').height;
@@ -28,7 +28,13 @@ export default  styles = {
      backgroundColor:"transparent"
   },
   pinCodeContainer:{
-    backgroundColor:"#FCBA66"
+
+    backgroundColor:"#FCBA66",
+    ...ifIphoneX({
+      paddingTop: 50
+  }, {
+      paddingTop: 0
+  })
   },
   rowStyle: {
     marginTop:responsiveHeight(13),
@@ -136,6 +142,6 @@ export default  styles = {
     marginTop: responsiveHeight(4),
     marginBottom: responsiveHeight(5),
     height: responsiveHeight(18),
-    width: responsiveWidth(33),
+    width: responsiveHeight(18),
   }
 };

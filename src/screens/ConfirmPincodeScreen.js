@@ -3,7 +3,7 @@ import {View,Keyboard,TouchableWithoutFeedback,Text,Alert} from 'react-native';
 import PincodePress from '../components/pincode/PincodePress';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import { NavigationActions } from 'react-navigation'
+
 import store from 'react-native-simple-store';
 import axios from 'axios';
 import {authen} from '../api';

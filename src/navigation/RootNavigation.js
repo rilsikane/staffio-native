@@ -1,7 +1,6 @@
 
 import React from 'react';
 import {AppState,Platform,NativeAppEventEmitter,DeviceEventEmitter} from 'react-native';
-import { StackNavigator} from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import Login from '../containers/LoginScreen';
@@ -11,18 +10,16 @@ import ConfirmPunchScreen from '../containers/ConfirmPuchScreen';
 import AuthenPinCode from '../containers/AuthenPincodeScreen';
 import SearchScreen from '../containers/SearchScreen';
 import Camera from '../components/staffioCamera';
-import { NavigationActions } from'react-navigation';
+
 import store from 'react-native-simple-store';
 import BackgroundTimer from 'react-native-background-timer';
 import Spinner from 'react-native-loading-spinner-overlay';
 var SpinnerKit = require('react-native-spinkit');
-import { updateFocus } from 'react-navigation-is-focused-hoc'
 
 
 //for Debug
 import InboxScreen from '../containers/InboxScreen';
 import FindFriendsScreen from '../containers/FindFriendsScreen';
-import ProfileScreen from '../containers/ProfileScreen';
 import OverView from '../containers/Overview';
 
 const MainStackNavigator = StackNavigator(
