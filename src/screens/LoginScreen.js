@@ -9,6 +9,9 @@ import Wallpaper from '../components/Wallpaper';
 import bgSrc from '../../img/background.jpg';
 export default class LoginScreen extends Component {
 	
+
+	
+
 	render() {
 		const dismissKeyboard = require('dismissKeyboard');
 		return (

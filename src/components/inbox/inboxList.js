@@ -68,26 +68,30 @@ export default class InboxList extends React.Component {
                <OptimizedFlatList
                 data={this.props.listTimeReocords}
                 renderItem={ ({item}) => 
-                <Swipeable rightButtons={[
-                  <TouchableOpacity>
-                    <View style={[styles.rightSwipeItem]}>
-                      <Icon name="clock-o" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
-                      {this.app && this.app.locale=='en'?<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>{I18n.t('editReq')}</Text>:<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>OT Request</Text>}
-                    </View>
-                  </TouchableOpacity>,
+                // <Swipeable rightButtons={[
+                //   <TouchableOpacity>
+                //     <View style={[styles.rightSwipeItem]}>
+                //       <Icon name="clock-o" size={responsiveFontSize(2)} style={{ color: 'white' ,backgroundColor:'transparent'}} />
+                //       {this.app && this.app.locale=='en'?<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>{I18n.t('editReq')}</Text>:<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>OT Request</Text>}
+                //     </View>
+                //   </TouchableOpacity>,
           
-                  <TouchableOpacity>
-                    <View style={[styles.rightSwipeItem]}>
-                      <Icon name="calendar" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
-                      {this.app && this.app.locale=='en'?<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>{I18n.t('canreq')}</Text>:<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.3),color:'white'}}>Adjust Time</Text>}
-                    </View>
-                  </TouchableOpacity>,  
-                ]}>
-                <TouchableOpacity onPress={this.onPress}>  
-                  <CardPunchInfo key={item.temp_mobile_id}  timeRecord={item}>
+                //   <TouchableOpacity>
+                //     <View style={[styles.rightSwipeItem]}>
+                //       <Icon name="calendar" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+                //       {this.app && this.app.locale=='en'?<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.5),color:'white'}}>{I18n.t('canreq')}</Text>:<Text style={{fontFamily:'Kanit',fontSize:responsiveFontSize(1.3),color:'white'}}>Adjust Time</Text>}
+                //     </View>
+                //   </TouchableOpacity>,  
+                // ]}>
+                // <TouchableOpacity onPress={this.onPress}>  
+                //   <CardPunchInfo key={item.temp_mobile_id}  timeRecord={item}>
+                //   </CardPunchInfo>
+                // </TouchableOpacity>
+                // </Swipeable>
+                                // <TouchableOpacity onPress={this.onPress}>  
+                  <CardPunchInfo key={item.temp_mobile_id}  timeRecord={item} onPress={this.onPress}>
                   </CardPunchInfo>
-                </TouchableOpacity>
-                </Swipeable>
+                  // </TouchableOpacity>
                 }
                  keyExtractor={item => item.temp_mobile_id}
                 onEndReached={this.onEndReached}
