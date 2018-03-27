@@ -231,7 +231,7 @@ export default class PersonalStatScreen extends React.Component {
     params.orgCode = userData.ORG_CODE;
     params.reasonCode = data.reasons;
     params.reasonOther = null;
-    params.unitCode = userData.UNIT_CODE;
+    params.unitCode = userData.UNIT_CODE;\
     let response = await post("ESSServices/CancelLeaveApprove",params);
     if(response){
       this.getLeaveList(userData);

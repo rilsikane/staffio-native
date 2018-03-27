@@ -17,14 +17,15 @@ export default class ConfirmReasonModal extends Component {
     super(props);
     this.cancelPress = this.cancelPress.bind(this);
     this.okPress = this.okPress.bind(this);
-    this.state = {remark:"",error:false};
+    this.state = {remark:"",error:false,reasons:""};
   }
   cancelPress(){
     this.props.cancel();
   }
   okPress(){
-    this.props.data.reasons = this.state.reasons;
-    this.props.ok(this.props.data);
+    let data =  {...this.props.data};
+    data.reasons = this.state.reasons;
+    this.props.ok(data);
   }
 
 
