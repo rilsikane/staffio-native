@@ -36,53 +36,54 @@ export default class LeaveWorkshiftScreen extends React.Component {
       endDate = this.props.dayList[this.props.dayList.length-1];
     }
     let leaveWorkshifts
-    if(this.props.editmode){    
-      leaveWorkshifts = await this.getShiftWorkDataByEmpCode(this.props.dayList);
-      let leaveList = [];
-      let leaveGroup = [];
-      let index = 0;
-      if(leaveWorkshifts && leaveWorkshifts.length >0){
-        leaveWorkshifts.map(leave =>{
-          if(leaveList.indexOf(leave.dayDate) ==-1){
-              let shiftData = [];
-              console.log(leave.EmpShiftDLL)
-              shiftData.push(leave.EmpShiftDLL)
-              leaveGroup.push({[leave.dayDate]:{shiftData :shiftData,id:leave.dayDate}});
-              leaveList.push(leave.dayDate);
-              index ++
-          }else{
-              let leaveG = leaveGroup[index-1];
-              leaveG[leave.dayDate].shiftData.push(leave.EmpShiftDLL);
-              leaveList.push(leave.dayDate);
-          }
-        });
-      }
+    if(this.props.editmode){   
+      leaveWorkshifts = await this.getShiftPatternByPersonal(startDate.getTime(),endDate.getTime()); 
+      let leaveedit = await this.getESSLeaveRequest(this.props.data.requestLeaveNo);
+      let leaveGroup = this.leaveWorkshiftsfunc(leaveWorkshifts,leaveedit.ListLeaveRequestDetail);
       this.setState({leaveWorkshifts:leaveGroup,startDate:startDate.getTime(),endDate:endDate.getTime()});  
     }else{
       leaveWorkshifts = await this.getShiftPatternByPersonal(startDate.timestamp,endDate.timestamp);
-      let leaveList = [];
-      let leaveGroup = [];
-      let index = 0;
-      if(leaveWorkshifts && leaveWorkshifts.length >0){
-        leaveWorkshifts.map(leave =>{
-          if(leaveList.indexOf(leave.DAY_DATE) ==-1){
-              let shiftData = [];
-              console.log(shiftData)
-              shiftData.push(leave)
-              leaveGroup.push({[leave.DAY_DATE]:{shiftData :shiftData,id:leave.DAY_DATE}});
-              leaveList.push(leave.DAY_DATE);
-              index ++
-          }else{
-              // leaveGroup.push({[leave.DAY_DATE]:{shiftData : leaveGroup[leave.DAY_DATE].push(leave),leaveDate:leave.DAY_DATE}});
-              let leaveG = leaveGroup[index-1];
-              leaveG[leave.DAY_DATE].shiftData.push(leave);
-              leaveList.push(leave.DAY_DATE);
-          }
-        });
-      }
+      let leaveGroup = this.leaveWorkshiftsfunc(leaveWorkshifts);
       this.setState({leaveWorkshifts:leaveGroup,startDate:startDate.timestamp,endDate:endDate.timestamp});  
     }
   }
+
+  leaveWorkshiftsfunc(leaveWorkshifts,leaveedit){
+  let leaveList = [];
+  let leaveGroup = [];
+  let index = 0;
+  if(leaveWorkshifts && leaveWorkshifts.length >0){
+    leaveWorkshifts.map(leave =>{
+      if(leaveList.indexOf(leave.DAY_DATE) ==-1){
+          let shiftData = [];
+          // console.log(leaveedit)
+          if(leaveedit && leaveedit.length>0){
+            let leavele = leaveedit.find(le => le.START_DATE === leave.DAY_DATE && le.SHFT_CODE === leave.SHFT_CODE)
+            leave.WORK_START_TM = leavele.START_TIME
+            leave.WORK_END_TM = leavele.END_TIME
+            leave.LEAVE_ACTION = leavele.LEAVE_ACTION
+          }
+          shiftData.push(leave)
+          leaveGroup.push({[leave.DAY_DATE]:{shiftData :shiftData,id:leave.DAY_DATE,leaveAction:leave.LEAVE_ACTION}});
+          leaveList.push(leave.DAY_DATE);
+          index ++
+      }else{
+          // leaveGroup.push({[leave.DAY_DATE]:{shiftData : leaveGroup[leave.DAY_DATE].push(leave),leaveDate:leave.DAY_DATE}});
+          let leaveG = leaveGroup[index-1];
+          if(leaveedit && leaveedit.length>0){
+            let leavele = leaveedit.find(le => le.START_DATE === leave.DAY_DATE && le.SHFT_CODE === leave.SHFT_CODE)
+            leave.WORK_START_TM = leavele.START_TIME
+            leave.WORK_END_TM = leavele.END_TIME
+            leave.LEAVE_ACTION = leavele.LEAVE_ACTION
+          }
+          leaveG[leave.DAY_DATE].shiftData.push(leave);
+          leaveList.push(leave.DAY_DATE);
+      }
+    });
+  }
+  return leaveGroup;
+  }
+
   getShiftPatternByPersonal = async (startDate,endDate)=>{
     const user = await store.get("USER");
     let params  = {};
@@ -96,20 +97,24 @@ export default class LeaveWorkshiftScreen extends React.Component {
     // const response = customData2;
     return response.data;
   }
-  getShiftWorkDataByEmpCode = async (dayList)=>{
-    let dayDate = []
-    for(let i=0;i<dayList.length;i++){
-      dayDate[i] = new Date(dayList[i].getTime()).toISOString()
-    }
-    const user = await store.get("USER");
-    let params  = {};
-    params.CompanyCode = user.ORG_CODE;
-    params.DayDate = dayDate;
-    params.EmpCode = user.EMP_CODE;
-    params.LOGIN_CUSTOMER_CODE = user.CUSTOMER_CODE;
-    const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
-    return response.objData.listShift;
+  getESSLeaveRequest = async (RequestNo)=>{
+    const response = await post(`ESSServices/getESSLeaveRequest?REQUEST_LEAVE_NO=${RequestNo}`,{});
+    return response;
   }
+  // getShiftWorkDataByEmpCode = async (dayList)=>{
+  //   let dayDate = []
+  //   for(let i=0;i<dayList.length;i++){
+  //     dayDate[i] = new Date(dayList[i].getTime()).toISOString()
+  //   }
+  //   const user = await store.get("USER");
+  //   let params  = {};
+  //   params.CompanyCode = user.ORG_CODE;
+  //   params.DayDate = dayDate;
+  //   params.EmpCode = user.EMP_CODE;
+  //   params.LOGIN_CUSTOMER_CODE = user.CUSTOMER_CODE;
+  //   const response = await post("ESSServices/GetShiftWorkDataByEmpCode",params);
+  //   return response.objData.listShift;
+  // }
   renderWorkShift(){
       return this.state.leaveWorkshifts.map(lw =>{
         return <LeaveWorkshift key={Object.keys(lw)} switchShiftDay={this.switchShiftDay}

@@ -69,7 +69,8 @@ export default class CreateLeave extends React.Component {
       this.firstMask = {startingDay: true, color: color,textColor:"#fff"};
       this.betwMask = {color: color,textColor:"#fff"};
       this.endMask = {endingDay: true,color: color, textColor:"#fff"};
-      this.setState({color:color,dayList:this.dayList,markeds:{},leaveType:data.typeCode});
+      let leaveType = this.state.listLeaveType.find(lp=>lp.LEAVE_TYPE_CODE==data.typeCode);
+      this.setState({color:color,dayList:this.dayList,markeds:{},leaveType:leaveType});
 
       let startdate = data.Datetimestart
       let lastdate = data.Datetimeend
@@ -183,7 +184,7 @@ export default class CreateLeave extends React.Component {
       this.props.navigator.push({
         screen: 'staffio.LeaveWorkShiftScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
-        passProps: {dayList:this.state.dayList, editmode:this.state.editmode},
+        passProps: {dayList:this.state.dayList, editmode:this.state.editmode,data:this.props.data},
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
         animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
         navigatorStyle: {}, // override the navigator style for the pushed screen (optional)

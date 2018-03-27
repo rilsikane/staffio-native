@@ -16,6 +16,17 @@ export default class ToggleLeave1detail extends React.Component {
         if(this.app.locale && moment){
             moment().locale(this.app.locale);
             }
+        let index
+        switch (this.props.shiftData.LEAVE_ACTION) {
+            case "FULLDAY": index = 1
+            break;
+            case "FORENOON": index = 2
+            break;
+            case "AFTERNOON": index = 3
+            break;
+            default : index=1
+        }
+        this.onClickbutton(index)
   }
 onClickbutton(index){
     let statButtn = this.statusbutton;

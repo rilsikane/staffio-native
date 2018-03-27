@@ -9,9 +9,11 @@ import {convertByFormatShort} from '../../utils/staffioUtils';
 export default class LeaveWorkshift extends React.Component {
   constructor(props) {
         super(props);
-        this.state = {custom:false,pressStatus: false}
         this.onSwitch = this.onSwitch.bind(this);
         this.switchShiftDay = this.switchShiftDay.bind(this);
+        const  leavePattern = this.props.leavePattern[this.props.id];
+        let localeIndex = (!leavePattern.leaveAction||leavePattern.leaveAction=="FULLDAY")?0:1
+        this.state = {custom:localeIndex==1,pressStatus: false, localeIndex:localeIndex}
 
   }
   onSwitch(value){  
