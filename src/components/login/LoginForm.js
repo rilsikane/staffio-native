@@ -137,7 +137,7 @@ export default class LoginForm extends Component {
 						<View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
 							<Text style={{marginTop:responsiveHeight(0.1),color:"#FFFF"
 							,backgroundColor:"transparent",fontSize:responsiveFontSize(1.6)}}>
-								{`V.0.1.0-R${Constans.version}`}
+								{`V.0.2.0-R${Constans.version}`}
 							</Text>
 						</View>
 				</KeyboardAvoidingView>

@@ -373,11 +373,11 @@ export default class LeaveApprScreen extends React.Component {
               </View>
             </TouchableOpacity>,
 
-            // info.requestStatusCode=='L'&&false  && (<TouchableOpacity onPress={()=>this.onReturnPress(info)}>
-            //   <View style={[styles.rightSwipeItem]}>
-            //     <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
-            //   </View>
-            // </TouchableOpacity>),
+            info.requestStatusCode=='L'  && (<TouchableOpacity onPress={()=>this.onReturnPress(info)}>
+              <View style={[styles.rightSwipeItem]}>
+                <Icon name="repeat" size={responsiveFontSize(2)} style={{ color: 'white',backgroundColor:'transparent' }} />
+              </View>
+            </TouchableOpacity>),
 
             info.requestStatusCode=='L' && (<TouchableOpacity disabled={this.state.isCancel} onPress={()=>this.onRejectPress(info)}>
               <View style={[styles.rightSwipeItem]}>
