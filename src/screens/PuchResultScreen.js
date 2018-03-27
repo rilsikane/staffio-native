@@ -11,7 +11,7 @@ import {Grid,Col,Header,Body,Left,Button,Title,Right} from 'native-base';
 // import LeaveCalendar from '../components/LeaveCalendar'
 import StampResult from '../components/punchCard/stampResult';
 import {em,x,y} from '../constants/Layout';
-import { NavigationActions } from 'react-navigation'
+
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../constants/Colors';

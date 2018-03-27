@@ -10,7 +10,7 @@ import {
 import StampPunch from '../components/punchCard/stampPunch'
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import { NavigationActions } from 'react-navigation';
+;
 import Spinner from 'react-native-loading-spinner-overlay';
 import TimerMixin from 'react-timer-mixin';
 var SpinnerKit = require('react-native-spinkit');

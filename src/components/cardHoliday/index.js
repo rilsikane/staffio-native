@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontFamily:"Kanit",
     color: '#ffff',
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(1.8),
     justifyContent:"center",
     alignItems:"center",
     marginRight:responsiveWidth(1),

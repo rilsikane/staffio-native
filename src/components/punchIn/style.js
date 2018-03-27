@@ -192,11 +192,11 @@ export default styles={
     
   },
   bodyImage:{
-    height: responsiveHeight(6),
-    width: responsiveWidth(11),
+    height: responsiveWidth(13.5),
+    width: responsiveWidth(13.5),
     marginTop : responsiveHeight(1),
     marginLeft:responsiveWidth(1.5),
-    borderRadius:responsiveWidth(11/2)
+    borderRadius:responsiveWidth(13.5/2)
 
   },
   gridStyle:{

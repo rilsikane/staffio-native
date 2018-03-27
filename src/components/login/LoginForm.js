@@ -22,7 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonSubmit from '../ButtonSubmit';
 import axios from 'axios';
 import FloatLabelTextInput from '../FloatLabelTextInput';
-import { NavigationActions } from'react-navigation';
+
 import store from 'react-native-simple-store';
 import {authen} from '../../api';
 import Constans from '../../constants/Constants';

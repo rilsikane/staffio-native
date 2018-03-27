@@ -11,6 +11,7 @@ import bgSrc from '../../img/homeBG.png';
 import I18n from '../utils/i18n';
 import SwitchSelector from 'react-native-switch-selector'
 import { backgroundColor } from '../components/staffioCalendar/style';
+import { ifIphoneX,isIphoneX } from 'react-native-iphone-x-helper';
 
 @inject('naviStore')
 @observer 
@@ -103,7 +104,7 @@ export default class MenuScreen extends React.Component {
     ];
     return (
          <Wallpaper bgSrc={bgSrc} style={{width:responsiveWidth(50)}}>
-        <Container style={{flex:1,paddingTop:10}}>
+        <Container style={{flex:1,paddingTop:isIphoneX() ? 50:20}}>
         <View style={{flexDirection:"row"}}>
             <View style={{flex:2}}>
                 <Thumbnail small style={styles.imageStyle} source={{uri:`data:image/jpeg;base64,${this.state.userData.IMG_BASE}`}}/>

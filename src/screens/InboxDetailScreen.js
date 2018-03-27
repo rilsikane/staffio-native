@@ -13,7 +13,7 @@ import IdName from '../components/status/IdName';
 import ImageStatus from '../components/status/ImageStatus';
 import TimeIn from '../components/status/TimeIn';
 import {em,x,y} from '../constants/Layout';
-import { NavigationActions } from 'react-navigation'
+
 import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
