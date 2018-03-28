@@ -136,11 +136,11 @@ export default class PersonalStatScreen extends React.Component {
       info.positions = list[i].PositionNameEN;
       info.type = list[i].LEAVE_TYPE_NAME;
       info.typeCode = list[i].LEAVE_TYPE_CODE;
-      info.startDate = convertByFormatShort(new Date(list[i].START_DATE).getTime(),"DD MMM ");
-      info.endDate = convertByFormatShort(new Date(list[i].END_DATE).getTime(),"DD MMM ");
-      info.createDate = convertByFormatShort(new Date(list[i].CREATED_DATE).getTime(),"DD MMM ");
-      info.Datetimestart = list[i].START_DATE ? new Date(list[i].START_DATE):null;
-      info.Datetimeend = list[i].END_DATE ? new Date(list[i].END_DATE):null;
+      info.startDate = convertByFormatShort(moment(list[i].START_DATE),"DD MMM ");
+      info.endDate = convertByFormatShort(moment(list[i].END_DATE),"DD MMM ");
+      info.createDate = convertByFormatShort(moment(list[i].CREATED_DATE),"DD MMM ");
+      info.Datetimestart = list[i].START_DATE ? moment(list[i].START_DATE).toDate():null;
+      info.Datetimeend = list[i].END_DATE ? moment(list[i].END_DATE).toDate():null;
       info.total = list[i].TOTAL_LEAVEDAY;
       info.requestLeaveNo = list[i].REQUEST_LEAVE_NO;
       info.reasonName = list[i].REASON_NAME;

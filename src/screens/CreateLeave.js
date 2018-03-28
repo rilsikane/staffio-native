@@ -28,7 +28,7 @@ export default class CreateLeave extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={color:'#ED5565',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false,editmode:false};
+    this.state={color:'#ED5565',markeds:{},color:"sickL",dayList:[],leaveType:{},listLeaveType:[],loading:false,editmode:false,dayListE:[],daylitN:[],leaveTypeE:{},edit:false};
     this.color ={sickL:'#ED5565',errandL:'#23c6c8',vacationL:'#8BC34A',otherL:'#F5DC0B'};
     this.onDayPress = this.onDayPress.bind(this);
     this.dayList = [];
@@ -37,6 +37,8 @@ export default class CreateLeave extends React.Component {
     this.betwMask = {color: this.color[this.state.color],textColor:"#fff"};
     this.endMask = {endingDay: true,color: this.color[this.state.color],textColor:"#fff"};
     this.submitDate = this.submitDate.bind(this);
+    this.mode = false
+    this.dayListO = []
   }
   static navigationOptions = {
     header: null,
@@ -61,7 +63,6 @@ export default class CreateLeave extends React.Component {
       this.setState({loading:false});
     }
     if(this.props.data){
-      this.setState({editmode:true});
       let data = this.props.data
       let color = data.color
       this.dayList = [];
@@ -70,7 +71,7 @@ export default class CreateLeave extends React.Component {
       this.betwMask = {color: color,textColor:"#fff"};
       this.endMask = {endingDay: true,color: color, textColor:"#fff"};
       let leaveType = this.state.listLeaveType.find(lp=>lp.LEAVE_TYPE_CODE==data.typeCode);
-      this.setState({color:color,dayList:this.dayList,markeds:{},leaveType:leaveType});
+      this.setState({color:color,dayList:this.dayList,markeds:{},leaveType:leaveType,leaveTypeE:leaveType});
 
       let startdate = data.Datetimestart
       let lastdate = data.Datetimeend
@@ -98,16 +99,32 @@ export default class CreateLeave extends React.Component {
               this.dayList = [];
               this.dayList.push(tmpDaylist);  
               this.dayList.push(lastdate);
-              this.setState({markeds:markeds,dayList:this.dayList});
+              this.dayListO = [];
+              this.dayListO.push(tmpDaylist);  
+              this.dayListO.push(lastdate);
+              this.dayListE = [];
+              this.dayListE.push(tmpDaylist.getTime());  
+              this.dayListE.push(lastdate.getTime());
+              this.dayListN = [];
+              this.dayListN.push(tmpDaylist.getTime());  
+              this.dayListN.push(lastdate.getTime());
+              this.setState({markeds:markeds,dayList:this.dayList,dayListE:this.dayListE,dayListN:this.dayListN});
           }else{
             this.dayList = [];
             this.dayList.push(lastdate);
+            this.dayListO = [];
+            this.dayListO.push(lastdate);
+            this.dayListE = [];
+            this.dayListE.push(lastdate.getTime());
+            this.dayListN = [];
+            this.dayListN.push(lastdate.getTime());
             let dayAdd = moment(lastdate.getTime()).format().split('T')[0];
             
-            this.setState({markeds:{[dayAdd]:this.oneMask},dayList:this.dayList});
+            this.setState({markeds:{[dayAdd]:this.oneMask},dayList:this.dayList,dayListE:this.dayListE,dayListN:this.dayListN});
           }
       }
   }
+  
   calculateDay2(firstDate,secondDate){
     var oneDay = 24*60*60*1000;
     var diffDays = Math.round((secondDate.getTime() - firstDate.getTime())/(oneDay));
@@ -127,6 +144,7 @@ export default class CreateLeave extends React.Component {
     // this.setState({
     //   selected: day.dateString
     // });
+      this.setState({edit:true})
     if(this.dayList.length ==0){
       this.setState({markeds:{[day.dateString]:this.oneMask}});
       this.dayList.push(day);
@@ -135,7 +153,9 @@ export default class CreateLeave extends React.Component {
       if(this.state.markeds[day.dateString]){
           this.dayList = [];
           this.dayList.push(day);
-          this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList});
+          this.dayListN = []
+          this.dayListN.push(day.timestamp);
+          this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList,dayListN:this.dayListN});
       }else{
         let countDay = this.calculateDay(this.dayList[0],day);
         if(countDay>0){
@@ -160,16 +180,23 @@ export default class CreateLeave extends React.Component {
             this.dayList = [];
             this.dayList.push(tmpDaylist);  
             this.dayList.push(day);
-            this.setState({markeds:markeds,dayList:this.dayList});
+            this.dayListN = []
+            this.dayListN.push(tmpDaylist.timestamp);
+            this.dayListN.push(day.timestamp);
+            this.setState({markeds:markeds,dayList:this.dayList,dayListN:this.dayListN});
           }else{
             this.dayList = [];
             this.dayList.push(day);
-            this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList});
+            this.dayListN = []
+            this.dayListN.push(day.timestamp);
+            this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList,dayListN:this.dayListN});
           }
         }else{
           this.dayList = [];
           this.dayList.push(day);
-          this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList});
+          this.dayListN = []
+          this.dayListN.push(day.timestamp);
+          this.setState({markeds:{[day.dateString]:this.oneMask},dayList:this.dayList,dayListN:this.dayListN});
         }
       }
     }
@@ -179,12 +206,29 @@ export default class CreateLeave extends React.Component {
     var diffDays = Math.round((secondDate.timestamp- firstDate.timestamp)/(oneDay));
     return diffDays;
   }
+  calculateDay3(firstDate,secondDate){
+    var oneDay = 24*60*60*1000;
+    var diffDays = Math.round((secondDate- firstDate)/(oneDay));
+    return diffDays;
+  }
   submitDate(){
+    let day = []
+    let count = this.calculateDay3(this.state.dayListE,this.state.dayListN)
+    if(this.state.leaveTypeE === this.state.leaveType && count==0){
+      this.mode = true
+      if(this.state.edit){
+        day = this.dayListO
+      }
+     
+    }else{
+      this.mode = false
+      day = this.state.dayList
+    }
       this.props.leaveStore.leaveReqLeaveType = this.state.leaveType;
       this.props.navigator.push({
         screen: 'staffio.LeaveWorkShiftScreen', // unique ID registered with Navigation.registerScreen
         title: undefined, // navigation bar title of the pushed screen (optional)
-        passProps: {dayList:this.state.dayList, editmode:this.state.editmode,data:this.props.data},
+        passProps: {dayList:day, editmode:this.mode,data:this.props.data},
         animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
         animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
         navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
