@@ -27,6 +27,8 @@ import LeaveConfirmScreen from './LeaveConfirmScreen'
 import OTScreen from './OTScreen'
 import OTDetailScreen from './OTDetailScreen'
 import OTCreating from './OTCreating'
+import LeaveListScreen from './LeaveListScreen';
+
 //Modal
 import InputModalScreen from './Modal/inputModal';
 import ConfirmModalScreen from './Modal/confirmModal';
@@ -63,6 +65,7 @@ export function registerScreens() {
   Navigation.registerComponent('staffio.OTScreen', () => OTScreen, Store, Provider);
   Navigation.registerComponent('staffio.OTDetailScreen', () => OTDetailScreen, Store, Provider);
   Navigation.registerComponent('staffio.OTCreating', () => OTCreating, Store, Provider);
+  Navigation.registerComponent('staffio.LeaveListScreen', () => LeaveListScreen, Store, Provider);
 
   //Modal
   Navigation.registerComponent('staffio.InputModalScreen', () => InputModalScreen, Store, Provider);

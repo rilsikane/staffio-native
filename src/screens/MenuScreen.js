@@ -44,7 +44,8 @@ export default class MenuScreen extends React.Component {
           ];
         let menuAppr = [
              {name: `${I18n.t('Dashboard')}`, icon: "pie-chart",link:"staffio.DashBoradProject",active:false,show:true},
-             {name: `${I18n.t('ApproveLeave')}`, icon: "gavel",link:"staffio.LeaveApprScreen",active:false,show:userData.canLeave}
+             {name: `${I18n.t('ApproveLeave')}`, icon: "gavel",link:"staffio.LeaveApprScreen",active:false,show:userData.canLeave},
+             {name: 'ดูการลาผู้ใต้บังคับบัญชา',icon: 'list-alt',link: 'staffio.LeaveListScreen',active: false,show:userData.canLeave}
           ];
           let menuEtc = [
             // {name: "วิธีใช้งาน", icon: "question-circle"},
