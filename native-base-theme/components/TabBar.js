@@ -47,7 +47,7 @@ export default (variables = variable) => {
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "transparent",
     backgroundColor: variables.tabBgColor,
   };
 

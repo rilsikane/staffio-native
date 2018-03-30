@@ -2,7 +2,7 @@ import axios from 'axios';
 import I18n from '../utils/i18n';
 import RNFetchBlob from 'react-native-fetch-blob'
 import {Platform} from 'react-native';
-
+import app from '../stores/app';
 //dev
 
 //const endpoint = "http://172.20.14.212/api_mobile/api/";
@@ -62,9 +62,9 @@ async function getEndpoint(param){
     console.log(endpoint);
     endpointtmp = endpoint;
   }else{
-    //  endpoint  = await getEndpointService(param);
-
-     endpointtmp = "http://172.20.14.212/staffio_api/api/";
+     endpoint  = await getEndpointService(param);
+     endpointtmp = endpoint.endPoint;
+     //endpointtmp = "http://172.20.14.212/STARFFIO_API_TFS/api/";
      if(endpointtmp && endpointtmp!= ''){
       await store.save("endpointNew",endpointtmp);
      }else{
@@ -170,27 +170,30 @@ export async function post(path,param){
             console.log("postService"+JSON.stringify(response));
             return response.data;
           }else{
+              app.isLoading = false;
               console.log(response.data.Msg||response.data.Message);
-              Alert.alert(
-                `${I18n.t('Error')}`,
-                  response.data.Msg,
-                  [
-                  {text: 'OK',},
-                  ]
-              )
+              setTimeout(()=>{
+                Alert.alert(
+                  `${I18n.t('Error')}`,
+                    response.data.Msg,
+                    [
+                    {text: 'OK', onPress: () =>  app.isLoading = false},
+                    ]
+                )
+              },100)
               return false;
           }
       }catch(e){
-    console.log(e);
-     console.error(e);
-     Alert.alert(
-      `${I18n.t('Error')}`,
-      `${I18n.t('notconnect')}`,
-      [
-      {text: 'OK', onPress: () => console.log('OK Pressed!')},
-      ]
-    )
-          return e;
+        setTimeout(()=>{   
+          Alert.alert(
+            `${I18n.t('Error')}`,
+            `${I18n.t('notconnect')}`,
+            [
+            {text: 'OK', onPress: () =>  app.isLoading = false},
+            ]
+          )
+        },100);
+        return false;
       }
 }
 export async function post2(path,param){

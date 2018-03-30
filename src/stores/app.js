@@ -5,6 +5,7 @@ import I18n from '../utils/i18n';
 class AppStore {
   @observable root = undefined; // 'login' / 'after-login'
   @observable locale = 'th';
+  @observable isLoading = false;
   constructor() {}
 
   async appInitialized() {

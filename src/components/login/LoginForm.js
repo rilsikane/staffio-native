@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 	Image,Keyboard,
 	TouchableWithoutFeedback,
-    Alert,Text,Platform
+    Alert,Text,Platform,Linking
 } from 'react-native';
 
 import UserInput from '../UserInput';
@@ -128,6 +128,9 @@ export default class LoginForm extends Component {
                         <View style={{marginTop:2,flex:1}}>
 						<ButtonSubmit onPress={this.onPress}/>
                         </View>
+						<TouchableOpacity onPress={()=>Linking.openURL("https://goo.gl/NqqUCz")}>
+							<Text style={{color:"#fff",fontFamily: 'Kanit',fontSize:responsiveFontSize(2)}}>Register Account</Text>
+						</TouchableOpacity>
 						<View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
 							<Text style={{marginTop:responsiveHeight(10),color:"#FFFF",backgroundColor:"transparent"
 							,fontSize:responsiveFontSize(1.2)}}>

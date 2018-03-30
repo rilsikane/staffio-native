@@ -127,7 +127,7 @@ export default class Overview extends React.Component {
                             </View>
                             <ScrollView>
                                 <View style={{ alignItems: 'center', justifyContent: 'center',paddingTop:5}}>
-                                    {this.state.data && this.state.data.map((val) => {
+                                    {this.state.data && this.state.data.length>0 && this.state.data.map((val) => {
                                         return (
                                             <CardCheckin key={val.empCode} data={val} onContactSelected={this.onContactSelected} >
                                             </CardCheckin>);

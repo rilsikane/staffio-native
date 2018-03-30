@@ -119,7 +119,7 @@ export default class DashBoradProject extends React.Component {
         //params.shftDate = new Date("2018-01-23T13:00:00Z").toISOString();
         //console.log("GetDashBoradOrgParam",params);
         const response = await post("GetDashBoradOrg", params);
-        return response.data;
+        return response.projectDetails;
     }
 
     render() {
@@ -132,21 +132,22 @@ export default class DashBoradProject extends React.Component {
                     
                     <View style={{flex:1}}>
                     <CardHeader title="Dashboard"/>  
-                        <Content style={{paddingTop:22,flex:1, width: responsiveWidth(100), height: responsiveHeight(100), backgroundColor:  '#fee2c8'}}>
+                        <View style={{paddingTop:2,flex:1, backgroundColor:  '#fee2c8'}}>
                            
-                                <View style={{ backgroundColor: '#fee2c8' }}>
-                                    <Body style={{ backgroundColor: '#fee2c8' }}>
-                                        <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),flex:1,paddingLeft:0,paddingRight:0}}>
-                                            <CardItem style={{ backgroundColor: '#fee2c8', height: responsiveHeight(5),justifyContent:"flex-start",paddingLeft:10}} >
+                                <View style={{ backgroundColor: '#fee2c8' ,flex:1}}>
+                                    <View style={{ backgroundColor: '#fee2c8' ,flex:1}}>
+
+                                        <View style={{ backgroundColor: '#fee2c8',flex:0.1,paddingLeft:0,paddingRight:0,justifyContent: 'center',flexDirection: 'row',}}>
+                                            <View style={{ backgroundColor: '#fee2c8',flexDirection: 'row',justifyContent:"flex-start",alignItems: 'center',paddingLeft:10}} >
                                                 <Icon name='calendar' style={{color:"#785e52"}}/>
                                                 <Text style={styles.headerFont1}>{I18n.t('enterTimeDashborad')}</Text>
-                                            </CardItem>
-                                            <CardItem style={{ backgroundColor: '#fee2c8' ,justifyContent:"flex-end",flex:1,paddingRight:10}} >
+                                            </View>
+                                            <View style={{ backgroundColor: '#fee2c8',flexDirection: 'row' ,justifyContent:"center",paddingRight:10,alignItems: 'center',paddingLeft:20}} >
                                                 <Icon name='refresh' style={{color: "#989898",backgroundColor:"transparent"}}/>
                                                 <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', backgroundColor:'transparent',color: "#989898",paddingLeft:5,fontWeight:"500"}}>{I18n.t('Fetch')} </Text>
                                                 <Text style={{ fontSize: responsiveFontSize(1.5), fontFamily: 'Kanit', color: 'orange', backgroundColor:'transparent',fontWeight:"500"}}>:{moment().locale(this.app.locale).fromNow()} </Text>
-                                            </CardItem>
-                                        </CardItem>
+                                            </View>
+                                        </View>
 
                                         <Tabs onChangeTab={this.changeTab} initialPage={0} tabBarUnderlineStyle={{backgroundColor:"transparent"}}>
                                             <Tab style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
@@ -157,7 +158,8 @@ export default class DashBoradProject extends React.Component {
                                                 <Text style={styles.tabLabel2}>  มุมมองของโครงการ</Text>
                                                 </View>
                                             </TabHeading>}>
-                                            <ScrollView style={{height:responsiveHeight(80)}}>
+                                            <View style={{flex:1,marginBottom:10}}>
+                                            <ScrollView style={{flex:1}}>
                                                 {(this.state.projectView && this.state.projectView.length > 0) && this.state.projectView.map((val) => {
 
                                                     return (
@@ -171,6 +173,7 @@ export default class DashBoradProject extends React.Component {
                                                 {this.state.projectView.length == 0 && (<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
                                                         ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
                                              </ScrollView>
+                                             </View>
                                             </Tab>
                                             <Tab   style={{backgroundColor: '#fee2c8',marginTop:15}}  heading={
                                             <TabHeading style={styles.tabHeading2}>
@@ -181,7 +184,7 @@ export default class DashBoradProject extends React.Component {
                                                 </View>
                                             </TabHeading>}>
                                             <PTRView style={{flex:1,marginBottom:10}}>
-                                                <View style={{flex:1}}>
+                                                <ScrollView style={{flex:1}}>
                                                 {this.state.orgView && this.state.orgView.length > 0 ? this.state.orgView.map((val) => {
                                                     return (
                                                         <View key={val.orgCode} style={{paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)}}>
@@ -191,15 +194,15 @@ export default class DashBoradProject extends React.Component {
                                                         );
                                                 }):(<View style={{marginLeft:responsiveWidth(2.5),marginRight:responsiveWidth(2.5)
                                                         ,paddingTop:responsiveHeight(1)}}><CardNone /></View>)}
-                                                </View>
+                                                </ScrollView>
                                              </PTRView>
                                             </Tab>
                                         </Tabs>
                                     
-                                    </Body>
+                                    </View>
                                 </View>
                            
-                        </Content>
+                        </View>
                         {/* <Footer style={{ backgroundColor: '#fee2c8', borderColor: '#fee2c8' }}>
                             <View >
                                 <Button style={{ backgroundColor: '#f58020', alignItems: 'center', justifyContent: 'center', marginTop: 5, width: responsiveWidth(40), height: responsiveHeight(8) }} onPress={this.cancelDialog}>

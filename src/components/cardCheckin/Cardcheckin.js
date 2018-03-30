@@ -71,27 +71,27 @@ export default class Checkin extends React.Component {
                                 </View>
                             </Body>
                             <Right>
-                                 {(data.mobileNo && data.mobileNo !="") && 
+                                 {(data.mobileNo && data.mobileNo !="") ? 
                                 <TouchableOpacity style={styles.badge} onPress={() => Communications.phonecall(data.mobileNo.replace(/-/g,""), true)}>
                                     <Text allowFontScaling={false}style={{backgroundColor:"transparent"}}>
                                     <IconTello name="hhmm-17" color='#fbaa3e' size={responsiveFontSize(3)}/>
                                     </Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> :null
                                 }
-                                {(data.facebook && data.facebook !="") &&
+                                {(data.facebook && data.facebook !="") ?
                                 <TouchableOpacity style={styles.badge} onPress={(e) => this.onContactSelected(data.facebook)}>
                                     <Text allowFontScaling={false}style={{marginTop:-em(0.2),backgroundColor:"transparent"}}>
                                         <IconTello style={{ color: "#3c5b9a" }} size={responsiveFontSize(1)} name="hhmm-18" />
                                     </Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity>:null
                                 }
                                 {
-                                    (data.lineid && data.lineid !="") &&  
+                                    (data.lineid && data.lineid !="") ?
                                 <TouchableOpacity style={styles.badge}  onPress={(e) => this.onContactSelected(data.lineid)} >
                                     <Text allowFontScaling={false}style={{marginTop:-em(0.2),backgroundColor:"transparent"}}>
                                         <IconTello style={{ color: "#fff" }} size={responsiveFontSize(1)} name="hhmm-20" />
                                     </Text>
-                                </TouchableOpacity>}
+                                </TouchableOpacity> :null}
                             </ Right>
                         </CardItem>
                         {/* <View style={{marginTop : responsiveHeight(2) , width :responsiveWidth(60)}}>

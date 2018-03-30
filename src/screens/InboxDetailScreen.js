@@ -116,7 +116,7 @@ export default class InboxDetailScreen extends React.Component {
     let DateToday = new Date().toDateString().split(' ');
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
-            <CardHeader title={`${I18n.t('History')}`} goBack={this.goBack}/>
+            <CardHeader title={`${I18n.t('HistoryTime')}`} goBack={this.goBack}/>
             <Loading visible={this.state.isLoading}/>
              <ScrollView style={{flex:1}}>
               <View style={styles.ViewStyle}>

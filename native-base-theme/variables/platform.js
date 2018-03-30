@@ -142,7 +142,7 @@ export default {
   tabActiveBgColor: platform === "ios" ? "#cde1f9" : "#3F51B5",
 
   // Tab
-  tabDefaultBg: platform === "ios" ? "#F8F8F8" : "#3F51B5",
+  tabDefaultBg: platform === "ios" ? "transparent" : "transparent",
   topTabBarTextColor: platform === "ios" ? "#6b6b6b" : "#b3c7f9",
   topTabBarActiveTextColor: platform === "ios" ? "#007aff" : "#fff",
   topTabActiveBgColor: platform === "ios" ? "#cde1f9" : undefined,
@@ -237,7 +237,7 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tabs
-  tabBgColor: "#F8F8F8",
+  tabBgColor: "transparent",
   tabFontSize: 15,
   tabTextColor: "#222222",
 

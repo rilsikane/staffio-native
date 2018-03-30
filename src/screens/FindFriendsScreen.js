@@ -15,6 +15,7 @@ import Loading from '../components/loading';
 import CardHeader from '../components/cardHeader'
 import I18n from '../utils/i18n';
 import {disbackButton} from '../utils/staffioUtils'
+import app from '../stores/app'
 @inject('searchStore')
 @observer
 export default class FindFriendsScreen extends React.Component {
@@ -26,13 +27,16 @@ export default class FindFriendsScreen extends React.Component {
      this.state = {searchtext:"",isLoading:false};
      this.onFindPress = this.onFindPress.bind(this);
      this.handleKeyDown = this.handleKeyDown.bind(this);
+     this.app = app;
+     this.app.isLoading = false;
   }
   static navigationOptions = {
     header: null,
   };
   async onFindPress(){
-      this.setState({isLoading:true});
+      app.isLoading = true;
       const searchData = await this.searchFirends();
+      app.isLoading = false;
       if(searchData){
         this.props.searchStore.searchData = searchData;
          this.props.navigator.push({
@@ -44,7 +48,9 @@ export default class FindFriendsScreen extends React.Component {
             navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
             navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
           });
-        this.setState({isLoading:false});
+          app.isLoading = false;
+      }else{
+        app.isLoading = false;
       }
   }
   async searchFirends(){
@@ -69,7 +75,8 @@ export default class FindFriendsScreen extends React.Component {
     return (
        <View style={{flex:1,backgroundColor:"#fee2c8"}}>
          <CardHeader title={'Find Friends'}/>
-         <Loading visible={this.state.isLoading} text={`${I18n.t('SearchData')}`}/>
+         {app.isLoading && 
+         <Loading visible={app.isLoading} text={`${I18n.t('SearchData')}`}/>}
         <View style={{marginTop:em(2),marginLeft:em(1),marginRight:em(1)}}>
             <FindFriends onPress={this.onFindPress}  value={this.state.searchtext} 
             onChangeText={searchtext => this.setState({ searchtext })}  onSubmitEditing={this.onFindPress.bind(this)}></FindFriends>

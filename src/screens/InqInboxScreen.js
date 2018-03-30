@@ -301,9 +301,10 @@ export default class InboxScreen extends React.Component {
     this.props.punchStore.statusSearch = this.state.statusSelect;
     this.props.punchStore.locationSearch = this.state.locationSelect;
     this.props.punchStore.staffSearch = this.state.empSelect;
-    this.props.punchStore.dateSearch =  this.state.datthis.props.navigator.dismissModal({
+    this.props.punchStore.dateSearch =  this.state.dateSelect;
+    this.props.navigator.dismissModal({
       animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-    });eSelect;
+    });
     
   }
   async clearTags(){
@@ -450,7 +451,7 @@ export default class InboxScreen extends React.Component {
               </ActionButton.Item>
           </ActionButton> */}
           <ActionButton  IconButton={<IconTello name="hhmm-29" size={25} style={{ color: 'white' }} />} size={responsiveWidth(17)} buttonColor="#fbaa3e">
-            <ActionButton.Item marginRight={-(responsiveWidth(1))} marginBottom={-(responsiveHeight(2))} buttonColor='transparent'  onPress={this.openCriteria}>
+            <ActionButton.Item marginRight={-(responsiveWidth(1))} marginBottom={(responsiveHeight(1))} buttonColor='transparent'  onPress={this.openCriteria}>
               <Icon name="search" style={styles.actionButtonIcon} />
              <Text style={{fontFamily: 'Kanit-Medium', color:'white', fontSize:responsiveFontSize(1.5)}}>{I18n.t('search')}</Text>
             </ActionButton.Item>
@@ -503,7 +504,6 @@ const styles = StyleSheet.create({
   },
   actionButtonIcon: {
     fontSize: responsiveFontSize(3),
-    height: 22,
     color: 'white',
   },
 });
